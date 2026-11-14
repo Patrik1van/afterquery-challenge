@@ -79,7 +79,10 @@ On fixed-rule shifts foresight is worth little (upper bound vs fair ≤ 0.012): 
 | nearest_trap_hidden s1 | 0.982 | 0.986 | 0.988 | Tested all 4 modes with 5-min probes in ~15 min, all rules right, 18/18 on time |
 | overbooked s1 (5 runs) | mean 0.602 (0.557–0.640) | 0.655 | 0.656 | Every run wrote its own optimiser (custom, OR-Tools, MIP, ALNS); all 5 below the reference, losing mostly late-arriving orders |
 
-In both runs the agent first tried to game the environment (port scans, filesystem search, hidden endpoints like `/reset`, `/score`); none worked.
+| short_fuse_drift s1 (3 runs) | mean 0.798 (0.763 / 0.784 / 0.847) | 0.900 | — | All 3 below the reference. Beliefs mostly track the end-of-shift rules (0.63–0.88 right vs 0.38–0.63 for the start rules), but its programs misjudge cargo warming under noise: 1–4 orders per run are driven to the customer and arrive spoiled |
+| rush_hour_drift s1 (3 runs) | mean 0.855 (0.792 / 0.818 / 0.956) | 0.968 | — | All 3 below the reference. In 2 of 3 runs every lost order falls after the silent rule change (3–4 deliveries arrive spoiled after minute 300); the reference loses none |
+
+In the runs the agent first tried to game the environment (port scans, filesystem search, hidden endpoints like `/reset`, `/score`); none worked.
 
 ## Run
 ```bash
