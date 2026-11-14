@@ -1,7 +1,7 @@
 schema_version = "1.1"
 
 [task]
-name = "beam-steering-s000"
+name = "afterquery/beam-steering-s000"
 description = "Steer and centre simulated CERN TT20 beamline via MCP tools"
 authors = []
 keywords = []

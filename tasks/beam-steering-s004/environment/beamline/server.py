@@ -70,6 +70,7 @@ async def score_endpoint(request: Request) -> Response:
     traj = get_env_true_trajectory(env)
     res = score_details.to_dict()
     res["true_trajectory"] = traj
+    res["history"] = env.get_history()
     return JSONResponse(res)
 
 

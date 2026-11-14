@@ -14,7 +14,7 @@ from harbor.models.agent.context import AgentContext
 class StopEarlyAgent(BaseAgent):
     """Harbor baseline agent: takes 2 small exploratory shots then calls submit."""
 
-    capabilities = AgentCapabilities(windows=True)
+    capabilities = AgentCapabilities(windows=True, mcp_servers=True)
 
     @staticmethod
     @override
@@ -38,43 +38,78 @@ class StopEarlyAgent(BaseAgent):
     ) -> None:
         """Execute 2 shots against the MCP server from inside the container, then submit."""
         script = """
-import json, urllib.request
+import json, time, urllib.request
 
 URL = "http://beamline:8000/mcp"
 HEADERS = {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"}
-req_id = 1
-session_id = None
 
-def call_mcp(method, params):
+session_id = None
+req_id = 1
+
+for _ in range(15):
+    try:
+        init_body = json.dumps({
+            "jsonrpc": "2.0",
+            "id": req_id,
+            "method": "initialize",
+            "params": {
+                "protocolVersion": "2024-11-05",
+                "capabilities": {},
+                "clientInfo": {"name": "stop-early", "version": "1.0"},
+            },
+        }).encode("utf-8")
+        req = urllib.request.Request(URL, data=init_body, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            session_id = resp.headers.get("mcp-session-id")
+            break
+    except Exception as e:
+        print(f"Waiting for beamline MCP server: {e}")
+        time.sleep(1)
+
+def send_call(tool_name, args):
     global req_id, session_id
     req_id += 1
-    req_body = json.dumps({"jsonrpc": "2.0", "id": req_id, "method": method, "params": params}).encode("utf-8")
+    call_body = json.dumps({
+        "jsonrpc": "2.0",
+        "id": req_id,
+        "method": "tools/call",
+        "params": {"name": tool_name, "arguments": args},
+    }).encode("utf-8")
     hdrs = dict(HEADERS)
     if session_id:
         hdrs["mcp-session-id"] = session_id
-    req = urllib.request.Request(URL, data=req_body, headers=hdrs)
-    with urllib.request.urlopen(req) as resp:
-        if not session_id:
-            session_id = resp.headers.get("mcp-session-id")
-        body = resp.read().decode("utf-8")
-        for line in body.splitlines():
+    req = urllib.request.Request(URL, data=call_body, headers=hdrs)
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        text = resp.read().decode("utf-8")
+        for line in text.splitlines():
             if line.startswith("data: "):
                 data = json.loads(line[6:])
-                return data.get("result", {})
+                res = data.get("result", {})
+                content = res.get("content", [])
+                if content and "text" in content[0]:
+                    return json.loads(content[0]["text"])
+                return res
     return {}
 
-# 1. Initialize
-call_mcp("initialize", {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "stop-early", "version": "1.0"}})
+# 1. Shot 1: zero setting
+s1 = send_call("set_correctors", {"h": [0.0]*10, "v": [0.0]*12})
+print(f"Shot 1 response: {s1}")
 
-# 2. Shot 1: zero setting
-call_mcp("tools/call", {"name": "set_correctors", "arguments": {"h": [0.0]*10, "v": [0.0]*12}})
+# 2. Shot 2: small setting
+s2 = send_call("set_correctors", {"h": [1e-4]*10, "v": [-1e-4]*12})
+print(f"Shot 2 response: {s2}")
 
-# 3. Shot 2: slight kick
-call_mcp("tools/call", {"name": "set_correctors", "arguments": {"h": [1e-4]*10, "v": [-1e-4]*12}})
-
-# 4. Submit
-call_mcp("tools/call", {"name": "submit", "arguments": {}})
-print("StopEarlyAgent completed 2 shots and submitted.")
+# 3. Submit
+sub = send_call("submit", {})
+print(f"Submit response: {sub}")
 """
-        cmd = f"python3 -c {json.dumps(script)}"
-        await self.exec_as_agent(environment, command=cmd)
+        cmd = f"""cat << 'EOF' > /tmp/run_baseline.py
+{script}
+EOF
+python3 /tmp/run_baseline.py
+"""
+        res = await environment.exec(command=cmd)
+        if res.return_code != 0:
+            raise RuntimeError(f"StopEarlyAgent failed with return code {res.return_code}:\nstdout: {res.stdout}\nstderr: {res.stderr}")
+        print("StopEarlyAgent completed:\n", res.stdout)
+

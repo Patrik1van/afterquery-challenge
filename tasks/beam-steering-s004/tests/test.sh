@@ -2,7 +2,7 @@
 set -euo pipefail
 
 mkdir -p /logs/verifier
-curl -s "http://beamline:8000/score?token=3e7dc9a1ff9601598562309fb17533f5" > /logs/verifier/details.json
+curl -s "http://beamline:8000/score?token=54edbe6c59149752f315a602c176a008" > /logs/verifier/details.json
 
 python3 -c "
 import json
