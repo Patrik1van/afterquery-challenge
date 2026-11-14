@@ -1,0 +1,226 @@
+set,trial,operator,true_rule,committed,correct,probed,tested_a<b,tested_a>b,tested_sum>=256,tested_negative_in,tested_n>=3
+fixed,7TXaPaN,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+fixed,7TXaPaN,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+fixed,7TXaPaN,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+fixed,7TXaPaN,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+fixed,7TXaPaN,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+fixed,7TXaPaN,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+fixed,7TXaPaN,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+fixed,7TXaPaN,⊠,a + b + n,a + b + n,True,True,False,True,False,False,False
+fixed,7TXaPaN,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,True,False,True
+fixed,A87tx2A,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+fixed,A87tx2A,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+fixed,A87tx2A,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+fixed,A87tx2A,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+fixed,A87tx2A,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,True
+fixed,A87tx2A,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+fixed,A87tx2A,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+fixed,A87tx2A,⊠,a + b + n,a + b + n,True,True,False,True,False,False,True
+fixed,A87tx2A,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
+fixed,WnfUUTu,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+fixed,WnfUUTu,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+fixed,WnfUUTu,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+fixed,WnfUUTu,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+fixed,WnfUUTu,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+fixed,WnfUUTu,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+fixed,WnfUUTu,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+fixed,WnfUUTu,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+fixed,WnfUUTu,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
+fixed,ivFPn3G,⊕,a + b + 1,,False,True,False,True,False,False,False
+fixed,ivFPn3G,⊗,a * b - 1,,False,True,False,True,False,False,False
+fixed,ivFPn3G,◇,"max(a, b)",,False,True,False,True,False,False,False
+fixed,ivFPn3G,▽,abs(a - b),,False,True,False,True,False,False,False
+fixed,ivFPn3G,⊘,2*a - b,,False,True,False,True,False,False,False
+fixed,ivFPn3G,⊛,a + b**2,,False,True,False,True,False,False,False
+fixed,ivFPn3G,⊞,(a + b) % 256,,False,True,False,True,False,False,False
+fixed,ivFPn3G,⊠,a + b + n,,False,True,False,True,False,False,False
+fixed,ivFPn3G,△,a - b if a >= b else 0,,False,True,False,True,False,False,False
+fixed,qAPtz3S,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+fixed,qAPtz3S,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+fixed,qAPtz3S,◇,"max(a, b)",a,False,True,False,True,False,False,False
+fixed,qAPtz3S,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+fixed,qAPtz3S,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+fixed,qAPtz3S,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+fixed,qAPtz3S,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+fixed,qAPtz3S,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+fixed,qAPtz3S,△,a - b if a >= b else 0,a - b,False,True,False,True,False,False,False
+1,7PboXE7,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+1,7PboXE7,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+1,7PboXE7,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+1,7PboXE7,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+1,7PboXE7,⊘,2*a - b,2 * a - b,True,True,False,True,True,False,True
+1,7PboXE7,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+1,7PboXE7,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+1,7PboXE7,⊠,a + b + n,a + b + n,True,True,False,True,False,False,False
+1,7PboXE7,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False
+1,8E9HcvA,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+1,8E9HcvA,⊗,a * b - 1,a * b - 1,True,True,True,True,False,True,True
+1,8E9HcvA,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+1,8E9HcvA,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+1,8E9HcvA,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
+1,8E9HcvA,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+1,8E9HcvA,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+1,8E9HcvA,⊠,a + b + n,a + b + n,True,True,True,True,False,False,False
+1,8E9HcvA,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False
+1,Da9Wnrc,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+1,Da9Wnrc,⊗,a * b - 1,a * b - 1,True,True,True,True,True,True,True
+1,Da9Wnrc,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+1,Da9Wnrc,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+1,Da9Wnrc,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+1,Da9Wnrc,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+1,Da9Wnrc,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+1,Da9Wnrc,⊠,a + b + n,a + b + n,True,True,False,True,True,False,True
+1,Da9Wnrc,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False
+1,gEsiY4b,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+1,gEsiY4b,⊗,a * b - 1,a * b - 1,True,True,True,True,True,True,True
+1,gEsiY4b,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+1,gEsiY4b,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+1,gEsiY4b,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+1,gEsiY4b,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+1,gEsiY4b,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+1,gEsiY4b,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+1,gEsiY4b,△,a - b if a >= b else 0,(a + b) // 2,False,True,False,True,False,False,False
+1,hEQN8cx,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+1,hEQN8cx,⊗,a * b - 1,a * b - i,False,True,False,True,False,False,False
+1,hEQN8cx,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+1,hEQN8cx,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+1,hEQN8cx,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+1,hEQN8cx,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+1,hEQN8cx,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+1,hEQN8cx,⊠,a + b + n,a + b + n,True,True,False,True,True,False,True
+1,hEQN8cx,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
+2,2djEEyo,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+2,2djEEyo,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+2,2djEEyo,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+2,2djEEyo,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+2,2djEEyo,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+2,2djEEyo,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+2,2djEEyo,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+2,2djEEyo,⊠,a + b + n,a + b + n,True,True,True,True,False,False,False
+2,2djEEyo,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+2,FteLNhe,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+2,FteLNhe,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+2,FteLNhe,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+2,FteLNhe,▽,abs(a - b),b - a,False,True,True,False,False,False,False
+2,FteLNhe,⊘,2*a - b,2 * a - b,True,True,False,True,True,False,True
+2,FteLNhe,⊛,a + b**2,a + b ** 2,True,True,False,True,True,False,True
+2,FteLNhe,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+2,FteLNhe,⊠,a + b + n,a + b + n,True,True,False,True,False,False,True
+2,FteLNhe,△,a - b if a >= b else 0,a - b,False,True,False,True,False,False,False
+2,Pr3yZJS,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+2,Pr3yZJS,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+2,Pr3yZJS,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+2,Pr3yZJS,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+2,Pr3yZJS,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+2,Pr3yZJS,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+2,Pr3yZJS,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+2,Pr3yZJS,⊠,a + b + n,a + b + n,True,True,False,True,False,False,False
+2,Pr3yZJS,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,True,False,True
+2,TGQ77Po,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+2,TGQ77Po,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+2,TGQ77Po,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+2,TGQ77Po,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+2,TGQ77Po,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+2,TGQ77Po,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+2,TGQ77Po,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+2,TGQ77Po,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+2,TGQ77Po,△,a - b if a >= b else 0,a - b,False,True,False,True,False,False,False
+2,U9zVqbz,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+2,U9zVqbz,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+2,U9zVqbz,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+2,U9zVqbz,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+2,U9zVqbz,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+2,U9zVqbz,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,True
+2,U9zVqbz,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+2,U9zVqbz,⊠,a + b + n,a + b + n,True,True,False,True,False,False,False
+2,U9zVqbz,△,a - b if a >= b else 0,a - b,False,True,False,True,False,False,False
+3,Qpuciy9,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+3,Qpuciy9,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+3,Qpuciy9,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+3,Qpuciy9,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+3,Qpuciy9,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+3,Qpuciy9,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,True
+3,Qpuciy9,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+3,Qpuciy9,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
+3,Qpuciy9,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
+3,TrXZ77H,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+3,TrXZ77H,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+3,TrXZ77H,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+3,TrXZ77H,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+3,TrXZ77H,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+3,TrXZ77H,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+3,TrXZ77H,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+3,TrXZ77H,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+3,TrXZ77H,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,True,False,True
+3,Vs7roFJ,⊕,a + b + 1,a + b + i,False,True,True,False,False,False,False
+3,Vs7roFJ,⊗,a * b - 1,a * b - 1,True,True,True,False,False,False,False
+3,Vs7roFJ,◇,"max(a, b)","max(a, b)",True,True,True,False,False,False,False
+3,Vs7roFJ,▽,abs(a - b),abs(a - b),True,True,True,True,True,False,True
+3,Vs7roFJ,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
+3,Vs7roFJ,⊛,a + b**2,a + b ** 2,True,True,True,False,False,False,False
+3,Vs7roFJ,⊞,(a + b) % 256,a + b + d,False,True,True,False,False,False,False
+3,Vs7roFJ,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+3,Vs7roFJ,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
+3,cwXWGgt,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+3,cwXWGgt,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+3,cwXWGgt,◇,"max(a, b)",a,False,True,False,True,False,False,False
+3,cwXWGgt,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+3,cwXWGgt,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+3,cwXWGgt,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+3,cwXWGgt,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+3,cwXWGgt,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+3,cwXWGgt,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False
+3,sAFRcFN,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+3,sAFRcFN,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+3,sAFRcFN,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+3,sAFRcFN,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+3,sAFRcFN,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,True
+3,sAFRcFN,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+3,sAFRcFN,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+3,sAFRcFN,⊠,a + b + n,a + b + n,True,True,True,True,False,False,False
+3,sAFRcFN,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False
+4,9niEtdS,⊕,a + b + 1,a + b + 1,True,True,False,True,False,False,False
+4,9niEtdS,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+4,9niEtdS,◇,"max(a, b)",a,False,True,False,True,False,False,False
+4,9niEtdS,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+4,9niEtdS,⊘,2*a - b,2 * a - b,True,True,False,True,False,False,False
+4,9niEtdS,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,False
+4,9niEtdS,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+4,9niEtdS,⊠,a + b + n,a + b + 2,False,True,False,True,False,False,False
+4,9niEtdS,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
+4,C28Mkaj,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+4,C28Mkaj,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,False
+4,C28Mkaj,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+4,C28Mkaj,▽,abs(a - b),abs(a - b),True,True,True,False,False,False,False
+4,C28Mkaj,⊘,2*a - b,2 * a - b,True,True,True,False,False,False,False
+4,C28Mkaj,⊛,a + b**2,a + b ** 2,True,True,True,False,False,False,True
+4,C28Mkaj,⊞,(a + b) % 256,a + b,False,True,True,False,False,False,False
+4,C28Mkaj,⊠,a + b + n,a + b + n,True,True,True,False,False,False,True
+4,C28Mkaj,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
+4,Li8qwYf,⊕,a + b + 1,a + b + 1,True,True,True,False,False,False,False
+4,Li8qwYf,⊗,a * b - 1,a * b - 1,True,True,True,False,False,False,True
+4,Li8qwYf,◇,"max(a, b)","max(a, b)",True,True,True,False,False,False,False
+4,Li8qwYf,▽,abs(a - b),abs(a - b),True,True,True,False,False,False,False
+4,Li8qwYf,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+4,Li8qwYf,⊛,a + b**2,a + b ** 2,True,True,True,False,False,False,False
+4,Li8qwYf,⊞,(a + b) % 256,a + b,False,True,True,False,False,False,False
+4,Li8qwYf,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+4,Li8qwYf,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+4,QdFQnjM,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+4,QdFQnjM,⊗,a * b - 1,a * b - 1,True,True,True,True,True,True,True
+4,QdFQnjM,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+4,QdFQnjM,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+4,QdFQnjM,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+4,QdFQnjM,⊛,a + b**2,(a - b) ** 2,False,True,False,True,False,False,False
+4,QdFQnjM,⊞,(a + b) % 256,a + b + d,False,True,False,True,False,False,False
+4,QdFQnjM,⊠,a + b + n,a + b + n,True,True,True,True,False,False,False
+4,QdFQnjM,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+4,viUvvia,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+4,viUvvia,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+4,viUvvia,◇,"max(a, b)","max(a, b)",True,True,False,True,False,False,False
+4,viUvvia,▽,abs(a - b),a - b,False,True,False,True,False,False,False
+4,viUvvia,⊘,2*a - b,2 * a - b,True,True,False,True,True,False,True
+4,viUvvia,⊛,a + b**2,a + b ** 2,True,True,False,True,False,False,True
+4,viUvvia,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,False
+4,viUvvia,⊠,a + b + n,a + b + n,True,True,False,True,False,False,False
+4,viUvvia,△,a - b if a >= b else 0,abs(a - b),False,True,False,True,False,False,False

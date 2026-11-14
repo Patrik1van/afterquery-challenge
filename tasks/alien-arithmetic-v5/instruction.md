@@ -24,7 +24,7 @@ evaluate --budget        # free: shows how much budget you have left
 - Without parentheses, expressions are evaluated **strictly left to right**: `a ? b ? c` means `(a ? b) ? c`.
 - Parentheses group sub-expressions and may be nested: `a ? (b ? c)`.
 - Operands are integers from 0 to 1000, at most 4 operands per expression.
-- **You have a budget of 13 points in total.** A successfully evaluated expression costs **one point per operator** in it: `a ? b` costs 1, `a ? b ? c` costs 2, `(a ? b) ? (c ? d)` costs 3. Malformed expressions return an error and cost nothing, and so does an expression that costs more than you have left. When the budget is used up, the lab refuses further queries.
+- **You have a budget of 13 points in total.** A successfully evaluated expression costs **one point per operator** in it: `a ? b` costs 1, `a ? b ? c` costs 2, `(a ? b) ? (c ? d)` costs 3. Malformed expressions return an error and cost nothing, and so does an expression that costs more than you have left. An expression whose value grows out of range (beyond 10^15) returns an error but is still charged. When the budget is used up, the lab refuses further queries.
 
 ## Committing your model
 
@@ -33,12 +33,18 @@ When you are done experimenting, write your model of every operator to
 The format looks like this (the formulas are placeholders, not hints):
 
 ```json
-{"⊕": "a + b", "⊗": "a * b", "◇": "min(a, b)", "▽": "a - b", "⊘": "a", "⊛": "b", "⊞": "b - a", "⊠": "a * n", "△": "max(a, b)"}
+{"⊕": "a + b", "⊗": "a * b", "◇": "min(a, b)", "▽": "a - b", "⊘": "a", "⊛": "b", "⊞": "b - a", "⊠": "a * n", "△": "b * 2"}
 ```
 
-Formulas may use integers, `a`, `b`, `n` (the number of operands in the whole
-expression being evaluated, e.g. 2 for `a ? b` and 4 for `a ? b ? c ? d`),
-`+ - * // % **`, `abs`, `max`, `min`, comparisons, `and`/`or`/`not` and
+Formulas may use integers, the operands `a` and `b`, and three variables that
+describe where the operation sits in the expression being evaluated:
+
+- `n`: the number of operands in the whole expression (2 for `a ? b`, 4 for `a ? b ? c ? d`)
+- `i`: the position of this operator, counting operators from the left, starting at 1
+- `d`: the nesting depth of this operation: 0 for the operation evaluated last,
+  plus 1 for every operation that encloses it
+
+and `+ - * // % **`, `abs`, `max`, `min`, comparisons, `and`/`or`/`not` and
 `x if condition else y`. `%` is the mathematical modulo, so `-7 % 5` is 3.
 
 Then run:

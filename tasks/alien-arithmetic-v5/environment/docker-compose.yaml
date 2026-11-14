@@ -10,6 +10,10 @@ services:
   lab:
     build:
       context: ./lab
+    environment:
+      # ALIEN_SEED=7 uv run harbor run ...  -> generated puzzles; unset -> the fixed v5 puzzles
+      ALIEN_SEED: ${ALIEN_SEED:-}
+      ALIEN_DIFFICULTY: ${ALIEN_DIFFICULTY:-3}
     expose:
       - "8000"
     healthcheck:

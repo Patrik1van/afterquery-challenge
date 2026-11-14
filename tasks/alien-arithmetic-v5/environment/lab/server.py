@@ -27,8 +27,8 @@ Rules
   * A query that costs more than the remaining budget is refused for free,
     before anything is computed.
 
-Every successful query is appended to QUERY_LOG and the committed model is
-written to MODEL_LOG. The verifier collects both as artifacts (the agent
+Every successful query is appended to QUERY_LOG, the committed model is
+written to MODEL_LOG and the posed puzzles to PUZZLES_LOG. The verifier collects both as artifacts (the agent
 cannot write to them).
 """
 
@@ -39,34 +39,26 @@ import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
-from formula import BadFormula, compile_formula
+from formula import BadFormula, apply, compile_formula
+from generator import generate
 
 BUDGET = int(os.environ.get("LAB_BUDGET", "13"))
 QUERY_LOG = os.environ.get("LAB_QUERY_LOG", "/var/log/lab/queries.jsonl")
 MODEL_LOG = os.environ.get("LAB_MODEL_LOG", "/var/log/lab/model.json")
-PUZZLES_PATH = os.environ.get("LAB_PUZZLES", str(Path(__file__).with_name("puzzles.json")))
+PUZZLES_LOG = os.environ.get("LAB_PUZZLES_LOG", "/var/log/lab/puzzles.json")
+# Puzzles: generated from ALIEN_SEED (and ALIEN_DIFFICULTY 1-3), or the fixed set in puzzles.json if no seed is set.
+SEED = os.environ.get("ALIEN_SEED", "")
+DIFFICULTY = int(os.environ.get("ALIEN_DIFFICULTY") or 3)
 PORT = int(os.environ.get("LAB_PORT", "8000"))
 
-# ---- hidden semantics ----
-# Every operator takes (a, b, n), where n is the number of operands in the whole
-# expression being evaluated. Only ⊠ uses n: "a ⊠ b" gives a+b+2, but inside a
-# 4-operand expression every ⊠ adds 4.
-OPS = {
-    "⊕": lambda a, b, n: a + b + 1,
-    "⊗": lambda a, b, n: a * b - 1,
-    "◇": lambda a, b, n: max(a, b),
-    "▽": lambda a, b, n: abs(a - b),
-    "⊘": lambda a, b, n: 2 * a - b,
-    "⊛": lambda a, b, n: a + b * b,
-    "⊞": lambda a, b, n: (a + b) % 256,
-    "⊠": lambda a, b, n: a + b + n,
-    "△": lambda a, b, n: a - b if a >= b else 0,
-}
+# ---- hidden semantics: symbol -> formula in a, b and the context n, i, d ----
+SEMANTICS = json.loads(Path(__file__).with_name("semantics.json").read_text(encoding="utf-8"))
+OPS = {sym: compile_formula(spec["rule"]) for sym, spec in SEMANTICS.items()}
 
 MAX_OPERANDS = 4
 MAX_OPERAND = 1000
 MAX_EXPR_CHARS = 200
-TOKEN_RE = re.compile(r"\s*(\d+|[⊕⊗◇▽⊘⊛⊞⊠△()])")
+TOKEN_RE = re.compile(r"\s*(\d+|[" + "".join(OPS) + "()])")
 SYMBOL_LIST = " ".join(OPS)
 
 _lock = threading.Lock()
@@ -155,12 +147,18 @@ def operands(tree):
 
 
 def compute(tree, n):
-    if isinstance(tree, int):
-        return tree
-    op, left, right = tree
-    return OPS[op](compute(left, n), compute(right, n), n)
+    """Evaluate a parsed query; each operation sees n (operands), i (its position) and d (its depth)."""
+    position = 0
 
-
+    def go(t, depth):
+        nonlocal position
+        if isinstance(t, int):
+            return t
+        a = go(t[1], depth + 1)
+        position += 1
+        i = position
+        return apply(OPS[t[0]], a, go(t[2], depth + 1), n, i, depth)
+    return go(tree, 0)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -200,11 +198,20 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(429, {"error": f"query costs {price} but only {BUDGET - _used} budget left",
                                  "cost": price, **self._budget()})
                 return
-            result = compute(tree, operands(tree))
+            # The expression was evaluated, so it is charged even if a value overflows:
+            # otherwise "does this overflow?" would be free information about the operators.
+            try:
+                result = compute(tree, operands(tree))
+            except ArithmeticError:
+                result = None
             _used += price
             with open(QUERY_LOG, "a", encoding="utf-8") as f:
                 f.write(json.dumps({"expr": expr, "result": result, "cost": price, "budget_used": _used},
                                    ensure_ascii=False) + "\n")
+            if result is None:
+                self._send(400, {"error": "result out of range (charged: the expression was evaluated)",
+                                 "cost": price, **self._budget()})
+                return
             self._send(200, {"expr": expr, "result": result, "cost": price, **self._budget()})
 
     def _reveal(self):
@@ -267,7 +274,9 @@ if __name__ == "__main__":
     open(QUERY_LOG, "a").close()  # exists even if the agent never queries
     with open(MODEL_LOG, "w", encoding="utf-8") as f:
         f.write("null")  # stays null if the agent never reveals
-    _puzzles = json.loads(Path(PUZZLES_PATH).read_text(encoding="utf-8"))
+    _puzzles = (generate(SEMANTICS, int(SEED), DIFFICULTY) if SEED
+                else json.loads(Path(__file__).with_name("puzzles.json").read_text(encoding="utf-8")))
+    Path(PUZZLES_LOG).write_text(json.dumps(_puzzles, ensure_ascii=False))  # the verifier grades exactly these
     # Single-threaded server: requests are handled one at a time, so the
     # budget cannot be raced with parallel requests.
     HTTPServer(("0.0.0.0", PORT), Handler).serve_forever()

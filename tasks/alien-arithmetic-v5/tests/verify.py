@@ -1,10 +1,15 @@
-"""Score an alien-arithmetic v1 run.
+"""Score an alien-arithmetic run (v5 and generated seeds).
 
 Runs in a separate verifier container. It sees only:
   /app/answer.json             the agent's answer (artifact from the agent's container)
   /var/log/lab/queries.jsonl   every query the lab answered (artifact from the lab sidecar)
   /var/log/lab/model.json      the operator model the agent committed before seeing the puzzles
-  /tests/answers.json          the puzzles and reference solutions (baked into this image only)
+  /var/log/lab/puzzles.json    the puzzles the lab posed (fixed or generated from a seed)
+  /tests/semantics.json        the true operators (baked into this image only)
+
+There is no stored answer key: whether a puzzle is solvable, and its solutions,
+are computed here by brute force under the true semantics, so any generated
+puzzle set is graded the same way.
 
 An answer is either a full expression (operators and optional parentheses)
 or "none". An expression is correct if it uses the puzzle's numbers in order
@@ -33,42 +38,14 @@ from formula import BadFormula, apply, compile_formula
 ANSWER = Path(os.environ.get("ANSWER_PATH", "/app/answer.json"))
 QUERY_LOG = Path(os.environ.get("QUERY_LOG_PATH", "/var/log/lab/queries.jsonl"))
 MODEL_LOG = Path(os.environ.get("MODEL_LOG_PATH", "/var/log/lab/model.json"))
-EXPECTED = Path(os.environ.get("EXPECTED_PATH", "/tests/answers.json"))
+PUZZLES = Path(os.environ.get("PUZZLES_PATH", "/var/log/lab/puzzles.json"))
 OUT_DIR = Path(os.environ.get("VERIFIER_OUT", "/logs/verifier"))
 
-# Must match environment/lab/server.py. n is the number of operands in the whole
-# expression; every puzzle answer has 4 operands, so puzzles are graded at n = 4.
-PUZZLE_N = 4
 # A "none" on a puzzle that has a solution costs this much (on top of earning nothing).
 WRONG_NONE_PENALTY = 0.5
-
-
-def true_ops(n):
-    return {
-        "⊕": lambda a, b: a + b + 1,
-        "⊗": lambda a, b: a * b - 1,
-        "◇": lambda a, b: max(a, b),
-        "▽": lambda a, b: abs(a - b),
-        "⊘": lambda a, b: 2 * a - b,
-        "⊛": lambda a, b: a + b * b,
-        "⊞": lambda a, b: (a + b) % 256,
-        "⊠": lambda a, b: a + b + n,
-        "△": lambda a, b: a - b if a >= b else 0,
-    }
-
-
-TRUE = true_ops(PUZZLE_N)
-# Diagnostic semantics: what a model computes if it assumed familiar math for
-# the old symbols, or treated the non-commutative operators as commutative.
-FAMILIAR = {"⊕": lambda a, b: a + b, "⊗": lambda a, b: a * b,
-            "◇": lambda a, b: max(a, b), "▽": lambda a, b: a - b}
-SWAPPED = dict(TRUE, **{"⊘": lambda a, b: 2 * b - a, "⊛": lambda a, b: b + a * a})
-# The naive readings of the three new operators: no mod (only small sums probed),
-# a constant +2 (⊠ only probed as "a ⊠ b"), plain subtraction (△ only probed with a >= b).
-NAIVE_NEW = dict(TRUE, **{"⊞": lambda a, b: a + b, "⊠": lambda a, b: a + b + 2,
-                          "△": lambda a, b: a - b})
-
-TOKEN_RE = re.compile(r"\s*(\d+|[⊕⊗◇▽⊘⊛⊞⊠△()])")
+# symbol -> {"rule": true formula, "naive": what a careless experimenter ends up believing}
+SEMANTICS = json.loads(Path(__file__).with_name("semantics.json").read_text(encoding="utf-8"))
+TOKEN_RE = re.compile(r"\s*(\d+|[" + "".join(SEMANTICS) + "()])")
 
 # Model check: the committed formula must match the true operator on every pair,
 # covering a < b, a > b, a == b, zeros, small and large values, and sums past 256,
@@ -87,48 +64,82 @@ def load_model():
     return data.get("model"), data.get("budget_used_before_reveal")
 
 
-def model_table(model, n=PUZZLE_N):
-    """Turn committed formulas into a semantics table at operand count n; a failing formula yields None."""
+def model_table(model):
+    """Turn committed formulas into {symbol: f(a, b, n, i, d)}; a failing formula yields None."""
     table = {}
     for sym, src in (model or {}).items():
-        if sym not in TRUE:
+        if sym not in SEMANTICS:
             continue
         try:
             node = compile_formula(src)
         except BadFormula:
             continue
 
-        def f(a, b, node=node):
+        def f(a, b, n, i, d, node=node):
             try:
-                return apply(node, a, b, n)
+                return apply(node, a, b, n, i, d)
             except (ArithmeticError, TypeError, ValueError):
                 return None
         table[sym] = f
     return table
 
 
-def score_model(model):
-    ok = {sym: True for sym in TRUE}
+TRUE = model_table({s: v["rule"] for s, v in SEMANTICS.items()})
+NAIVE = model_table({s: v["naive"] for s, v in SEMANTICS.items()})
+
+
+def contexts():
+    """Every (n, i, d) an operation can have in an expression of 2 to 4 operands."""
     for n in N_VALUES:
-        table, truth = model_table(model, n), true_ops(n)
-        for sym in TRUE:
-            ok[sym] = ok[sym] and sym in table and all(
-                table[sym](a, b) == truth[sym](a, b) for a in GRID for b in GRID)
+        for i in range(1, n):
+            for d in range(0, n - 1):
+                yield n, i, d
+
+
+def score_model(model):
+    table = model_table(model)
+    ok = {}
+    for sym in TRUE:
+        ok[sym] = sym in table and all(
+            table[sym](a, b, n, i, d) == TRUE[sym](a, b, n, i, d)
+            for n, i, d in contexts() for a in GRID for b in GRID)
     return ok
 
 
-def solvable_under(table, numbers, target):
-    """Brute force: does any operator choice and bracketing reach the target?"""
-    n = numbers
+def compute_model(tree, mtable, n):
+    """Evaluate a tree under the agent's model, giving each operation its i and d."""
+    position = 0
+
+    def go(t, depth):
+        nonlocal position
+        if isinstance(t, int):
+            return t
+        op, left, right = t
+        a = go(left, depth + 1)
+        position += 1          # in-order: operators are numbered left to right
+        i = position
+        b = go(right, depth + 1)
+        if a is None or b is None or op not in mtable:
+            return None
+        return mtable[op](a, b, n, i, depth)
+    return go(tree, 0)
+
+
+SHAPES = ["{0} {a} {1} {b} {2} {c} {3}", "({0} {a} ({1} {b} {2})) {c} {3}", "({0} {a} {1}) {b} ({2} {c} {3})",
+          "{0} {a} (({1} {b} {2}) {c} {3})", "{0} {a} ({1} {b} ({2} {c} {3}))"]
+
+
+def solutions_under(table, numbers, target):
+    """Brute force: every operator choice and bracketing that reaches the target."""
     for o in itertools.product(list(table), repeat=3):
-        for tree in ((o[2], (o[1], (o[0], n[0], n[1]), n[2]), n[3]),
-                     (o[2], (o[0], n[0], (o[1], n[1], n[2])), n[3]),
-                     (o[1], (o[0], n[0], n[1]), (o[2], n[2], n[3])),
-                     (o[0], n[0], (o[2], (o[1], n[1], n[2]), n[3])),
-                     (o[0], n[0], (o[1], n[1], (o[2], n[2], n[3])))):
-            if compute(tree, table) == target:
-                return True
-    return False
+        for shape in SHAPES:
+            expr = shape.format(*numbers, a=o[0], b=o[1], c=o[2])
+            if compute_model(parse(expr)[0], table, len(numbers)) == target:
+                yield expr
+
+
+def solvable_under(table, numbers, target):
+    return next(solutions_under(table, numbers, target), None) is not None
 
 
 class BadAnswer(ValueError):
@@ -183,19 +194,6 @@ def parse(expr):
     return tree, numbers, n_ops
 
 
-def compute(tree, table):
-    """Evaluate under a semantics table; None if it uses an operator the table lacks."""
-    if isinstance(tree, int):
-        return tree
-    op, left, right = tree
-    if op not in table:
-        return None
-    a, b = compute(left, table), compute(right, table)
-    if a is None or b is None:
-        return None
-    return table[op](a, b)
-
-
 def load_answer():
     """Return (dict, error). Any malformed answer becomes an empty dict."""
     if not ANSWER.exists():
@@ -219,8 +217,7 @@ def grade(given, spec, agent_table=None):
               "reference_solutions": spec["reference_solutions"],
               "correct": False, "error": None, "value": None,
               "false_none": False, "false_solution": False,
-              "anchored_on_familiar": False, "assumed_commutative": False,
-              "naive_on_new_operators": False}
+              "naive_reading": False}
     if given is None:
         result["error"] = "missing"
         return result
@@ -242,20 +239,22 @@ def grade(given, spec, agent_table=None):
     if numbers != spec["numbers"] or n_ops != 3:
         result["error"] = "must use the puzzle's numbers in order with exactly three operators"
         return result
-    value = compute(tree, TRUE)
+    value = compute_model(tree, TRUE, len(numbers))
     result["value"] = value
     if agent_table is not None:
-        result["consistent_with_model"] = compute(tree, agent_table) == spec["target"]
+        result["consistent_with_model"] = compute_model(tree, agent_table, len(spec["numbers"])) == spec["target"]
     result["correct"] = value == spec["target"]
     if not result["correct"]:
-        result["anchored_on_familiar"] = compute(tree, FAMILIAR) == spec["target"]
-        result["assumed_commutative"] = compute(tree, SWAPPED) == spec["target"]
-        result["naive_on_new_operators"] = compute(tree, NAIVE_NEW) == spec["target"]
+        # right only under the naive readings (no mod, a+b+2, untested order, ...)
+        result["naive_reading"] = compute_model(tree, NAIVE, len(numbers)) == spec["target"]
     return result
 
 
 def main():
-    expected = json.loads(EXPECTED.read_text(encoding="utf-8"))
+    expected = {}
+    for pid, p in json.loads(PUZZLES.read_text(encoding="utf-8")).items():
+        refs = list(solutions_under(TRUE, p["numbers"], p["target"]))
+        expected[pid] = {**p, "solvable": bool(refs), "reference_solutions": refs}
     answer, answer_error = load_answer()
 
     queries = []
@@ -277,9 +276,7 @@ def main():
         "queries_used": len(queries),
         "budget_spent": sum(q.get("cost", 1) for q in queries),
         "answer_error": answer_error,
-        "anchored_on_familiar": sum(p["anchored_on_familiar"] for p in per_puzzle.values()),
-        "naive_on_new_operators": sum(p["naive_on_new_operators"] for p in per_puzzle.values()),
-        "assumed_commutative": sum(p["assumed_commutative"] for p in per_puzzle.values()),
+        "naive_reading": sum(p["naive_reading"] for p in per_puzzle.values()),
         "model_committed": model is not None,
         "budget_used_before_reveal": budget_before_reveal,
         "model_operators_correct": sum(model_ok.values()),
@@ -298,8 +295,7 @@ def main():
     (OUT_DIR / "details.json").write_text(json.dumps(details, ensure_ascii=False, indent=2), encoding="utf-8")
     summary_keys = ("reward", "solved", "total", "queries_used", "budget_spent",
                     "model_committed", "model_operators_correct", "answers_inconsistent_with_model",
-                    "false_none", "false_solution", "naive_on_new_operators",
-                    "anchored_on_familiar", "assumed_commutative", "answer_error")
+                    "false_none", "false_solution", "naive_reading", "answer_error")
     print(json.dumps({k: details[k] for k in summary_keys}, ensure_ascii=False))
 
 

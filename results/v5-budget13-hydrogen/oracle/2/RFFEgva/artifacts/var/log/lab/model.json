@@ -1,0 +1,1 @@
+{"model": {"⊕": "a + b + 1", "⊗": "a * b - 1", "◇": "max(a, b)", "▽": "abs(a - b)", "⊘": "2*a - b", "⊛": "a + b**2", "⊞": "(a + b) % 256", "⊠": "a + b + n", "△": "a - b if a >= b else 0"}, "budget_used_before_reveal": 13}

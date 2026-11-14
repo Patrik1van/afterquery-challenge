@@ -30,11 +30,11 @@ It's a worked example of three patterns you can reuse in your own tasks:
 │ /usr/local/bin/evaluate  (client) ───┼───────▶│ 13-point budget, query log    │
 └──────────────────────────────────────┘        │ /var/log/lab/queries.jsonl    │
                                                 └───────────────────────────────┘
-                  │ artifacts: answer.json + queries.jsonl
+                  │ artifacts: answer.json, queries.jsonl, model.json, puzzles.json
                   ▼
 ┌──────────── verifier (separate image) ───────────┐
-│ tests/verify.py + tests/answers.json             │
-│ evaluates each answer with the true semantics    │
+│ tests/verify.py + tests/semantics.json           │
+│ brute-forces the posed puzzles, grades answers   │
 │ → /logs/verifier/reward.txt, details.json        │
 └──────────────────────────────────────────────────┘
 ```
@@ -51,7 +51,8 @@ It's a worked example of three patterns you can reuse in your own tasks:
 | `environment/lab/puzzles.json` | The puzzles (numbers + targets only). They exist only in the lab until `reveal` |
 | `environment/lab/formula.py`, `tests/formula.py` | Safe formula parser (AST whitelist, no `eval`). The two copies must be identical |
 | `tests/verify.py` | Scoring: reward = puzzles answered correctly / 8, plus diagnostics |
-| `tests/answers.json` | Puzzles, which are solvable, reference solutions (verifier image only) |
+| `environment/lab/semantics.json`, `tests/semantics.json` | The operators: each symbol's true rule and its naive reading. The two copies must be identical |
+| `environment/lab/generator.py` | `generate(semantics, seed, difficulty)` draws a puzzle set; see **Generated puzzles** |
 | `solution/solve.py` | Oracle: a scripted experimenter that solves it in 8 queries |
 
 ## Prerequisites
@@ -119,8 +120,8 @@ Or browse everything in the UI: `uv run harbor view jobs`.
 - `false_none`: answered `"none"` on a puzzle that has a solution. Usually a wrong picture of some operator.
 - `false_solution`: gave an expression on a puzzle that has no solution. The model "solved" it under a wrong belief.
 
-- `anchored_on_familiar`: the answer would be right if `⊕ ⊗ ◇ ▽` were ordinary `+ × max −`. The model assumed instead of testing.
-- `assumed_commutative`: the answer would be right if `⊘`/`⊛` had their arguments swapped. The model never checked argument order.
+- `naive_reading`: the answer would be right under the naive readings in `semantics.json` (no mod, a+b+2, untested
+  argument order, ...). The model assumed instead of testing.
 
 ## Design notes (how we got to v2)
 
@@ -141,9 +142,21 @@ Or browse everything in the UI: `uv run harbor view jobs`.
 - `△` behaves like `a − b` until a < b.
 
 Budget 13 is the exact minimum for full verification: 9 base probes, ◇/▽/△ reversed, and ⊠ at a second operand
-count. The oracle shares one 3-point query between ◇, ▽ and ⊠ at n = 4. The formula language gains `n`; documenting
-it is unavoidable, but it is a mild hint. New diagnostic: `naive_on_new_operators`, i.e. the answer only works
-under the naive readings above.
+count. The oracle shares one 3-point query between ◇, ▽ and ⊠ at n = 4. The formula language has three documented context variables:
+`n` (operands in the expression), `i` (operator position) and `d` (nesting depth). Only `n` matters; `i` and `d` are
+decoys. In every 2-operand probe `a+b+n`, `a+b+i+1` and `a+b+d+2` give the same result, so documenting the variables
+does not reveal which one ⊠ uses. Only a multi-operand probe does. The committed model is checked in every
+(n, i, d) context.
+
+**Reward:** `max(0, correct − 0.5 × wrong "none") / 8`. A `"none"` on a solvable puzzle costs half a point (stated in
+the instruction), so answering `"none"` everywhere scores 0. **Agent time limit:** 60 minutes.
+
+**Integrity baselines** (real verifier): do nothing 0 · `"none"` everywhere 0 · stop before `reveal` 0 · random
+operators 0 · guessed model without experiments 0 · lazy 9 probes 0.25 · oracle 1.0. In the real harness, Hydrogen cut
+off at 90 s scored 0.
+
+**Results so far** (5 trials each, 30-minute limit, before the decoy variables): Hydrogen 0.725 and 0.81 (two runs),
+Argon 0.475, Carbon 0.15. 6 of the 10 Carbon/Argon trials timed out, which is why the limit is now 60 minutes.
 
 **Why v4.** In v2/v3 an agent could resolve an untested ambiguity by checking which reading made the puzzles
 work. v4 makes it commit to a model *before* it sees any puzzle, and records that model. Two diagnostics
@@ -205,11 +218,29 @@ the image, so Harbor skips the per-trial Node + npm install. It needs
 `/usr/bin/versions` and Harbor can't find it. **Remove that block, and restore
 `network_mode = "no-network"` in `task.toml`, before you submit.**
 
+## Generated puzzles
+
+Without a seed, the lab poses the fixed v5 puzzles (`environment/lab/puzzles.json`); all reported results use them.
+With a seed, it draws a new set at startup:
+
+```bash
+ALIEN_SEED=7 uv run harbor run -p tasks/alien-arithmetic-v5 -a oracle -e docker                       # difficulty 3
+ALIEN_SEED=7 ALIEN_DIFFICULTY=1 uv run harbor run -p tasks/alien-arithmetic-v5 -a oracle -e docker
+```
+
+| Difficulty | Puzzles |
+|---|---|
+| 1 | 8 solvable, at most 2 solutions each |
+| 2 | 7 solvable + 1 unsolvable; every naive reading of an operator a puzzle uses gives a wrong answer |
+| 3 (default) | 6 solvable + 2 unsolvable, as in 2, and together the puzzles catch every operator's naive reading |
+
+Unsolvable puzzles look solvable under at least two naive readings. The same seed and difficulty always give the same
+puzzles. The lab writes the posed set to `/var/log/lab/puzzles.json`; the verifier grades exactly that set and computes
+solvability and solutions itself by brute force, so there is no answer key to keep in sync. Only the puzzles change; the
+operators, budget, rules and reward stay the same.
+
 ## Make your own variant
 
-1. Copy the folder: `cp -R tasks/alien-arithmetic-v5 tasks/alien-arithmetic-v5`
-2. Change the semantics in `environment/lab/server.py` (`OPS`) **and** in `tests/verify.py` (`TRUE`). The two must match.
-3. Regenerate puzzles that need your new operators, and update `instruction.md` and `tests/answers.json`.
-   Mark each puzzle `"solvable": true/false`, and check solvability by brute force over all operators × all 5 bracketings.
-4. Update `solution/solve.py` so the oracle can still identify the operators within budget.
-5. Run the oracle (must be 1.0) and `nop` (must be 0.0), then a real model.
+1. Change the operators in `semantics.json` (both copies): a `rule` and a `naive` reading per symbol.
+2. Make sure `solution/solve.py` can still identify them within budget (its hypothesis library and follow-up probes).
+3. Run the oracle (must be 1.0) and `nop` (must be 0.0) with and without `ALIEN_SEED`, then a real model.

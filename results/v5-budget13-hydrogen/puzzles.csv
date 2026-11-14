@@ -1,0 +1,201 @@
+set,trial,puzzle,numbers,target,solvable,given,correct,false_none,false_solution,naive_reading,consistent_with_model,error,reference_solutions
+fixed,7TXaPaN,P1,5 3 9 9,154,True,5 ▽ ((3 ⊛ 9) ⊘ 9),True,False,False,False,False,,5 ▽ ((3 ⊛ 9) ⊘ 9)
+fixed,7TXaPaN,P2,3 4 6 8,316,True,3 ▽ ((4 ⊛ 6) ⊗ 8),True,False,False,False,False,,3 ▽ ((4 ⊛ 6) ⊗ 8)
+fixed,7TXaPaN,P3,4 3 5 4,125,False,4 ⊛ (3 ⊕ (5 ⊘ 4)),False,False,True,False,True,,
+fixed,7TXaPaN,P4,2 6 3 8,158,True,(2 ⊛ (6 ⊘ 3)) ⊘ 8,True,False,False,False,True,,(2 ⊛ (6 ⊘ 3)) ⊘ 8 | (2 ⊛ (6 ⊞ 3)) ⊘ 8
+fixed,7TXaPaN,P5,5 4 3 9,58,True,5 ▽ (4 ⊗ (3 ⊠ 9)),True,False,False,False,False,,5 ▽ (4 ⊗ (3 ⊠ 9))
+fixed,7TXaPaN,P6,5 6 2 8,252,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (2 ⊘ 8)
+fixed,7TXaPaN,P7,9 5 4 9,304,True,(9 ⊕ 5) ⊛ (4 ⊠ 9),True,False,False,False,True,,(9 ⊕ 5) ⊛ (4 ⊠ 9) | 9 ⊕ (5 ⊛ (4 ⊠ 9))
+fixed,7TXaPaN,P8,4 4 9 7,182,False,none,True,False,False,False,True,,
+fixed,A87tx2A,P1,5 3 9 9,154,True,5 ▽ ((3 ⊛ 9) ⊘ 9),True,False,False,False,True,,5 ▽ ((3 ⊛ 9) ⊘ 9)
+fixed,A87tx2A,P2,3 4 6 8,316,True,3 ▽ ((4 ⊛ 6) ⊗ 8),True,False,False,False,True,,3 ▽ ((4 ⊛ 6) ⊗ 8)
+fixed,A87tx2A,P3,4 3 5 4,125,False,4 ⊛ (3 ⊕ (5 ⊘ 4)),False,False,True,False,True,,
+fixed,A87tx2A,P4,2 6 3 8,158,True,2 ⊛ (6 ⊘ 3) ⊘ 8,True,False,False,False,True,,(2 ⊛ (6 ⊘ 3)) ⊘ 8 | (2 ⊛ (6 ⊞ 3)) ⊘ 8
+fixed,A87tx2A,P5,5 4 3 9,58,True,5 ▽ (4 ⊗ (3 ⊠ 9)),True,False,False,False,True,,5 ▽ (4 ⊗ (3 ⊠ 9))
+fixed,A87tx2A,P6,5 6 2 8,252,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (2 ⊘ 8)
+fixed,A87tx2A,P7,9 5 4 9,304,True,(9 ⊕ 5) ⊛ (4 ⊠ 9),True,False,False,False,True,,(9 ⊕ 5) ⊛ (4 ⊠ 9) | 9 ⊕ (5 ⊛ (4 ⊠ 9))
+fixed,A87tx2A,P8,4 4 9 7,182,False,none,True,False,False,False,True,,
+fixed,WnfUUTu,P1,5 3 9 9,154,True,5 ▽ ((3 ⊛ 9) ⊘ 9),True,False,False,False,False,,5 ▽ ((3 ⊛ 9) ⊘ 9)
+fixed,WnfUUTu,P2,3 4 6 8,316,True,3 ▽ ((4 ⊛ 6) ⊗ 8),True,False,False,False,False,,3 ▽ ((4 ⊛ 6) ⊗ 8)
+fixed,WnfUUTu,P3,4 3 5 4,125,False,4 ⊛ (3 ⊕ (5 ⊘ 4)),False,False,True,False,True,,
+fixed,WnfUUTu,P4,2 6 3 8,158,True,(2 ⊛ (6 ⊘ 3)) ⊘ 8,True,False,False,False,True,,(2 ⊛ (6 ⊘ 3)) ⊘ 8 | (2 ⊛ (6 ⊞ 3)) ⊘ 8
+fixed,WnfUUTu,P5,5 4 3 9,58,True,5 ▽ (4 ⊗ (3 ⊠ 9)),True,False,False,False,False,,5 ▽ (4 ⊗ (3 ⊠ 9))
+fixed,WnfUUTu,P6,5 6 2 8,252,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (2 ⊘ 8)
+fixed,WnfUUTu,P7,9 5 4 9,304,True,9 ⊕ (5 ⊛ (4 ⊠ 9)),True,False,False,False,True,,(9 ⊕ 5) ⊛ (4 ⊠ 9) | 9 ⊕ (5 ⊛ (4 ⊠ 9))
+fixed,WnfUUTu,P8,4 4 9 7,182,False,none,True,False,False,False,True,,
+fixed,ivFPn3G,P1,5 3 9 9,154,True,,False,False,False,False,,missing,5 ▽ ((3 ⊛ 9) ⊘ 9)
+fixed,ivFPn3G,P2,3 4 6 8,316,True,,False,False,False,False,,missing,3 ▽ ((4 ⊛ 6) ⊗ 8)
+fixed,ivFPn3G,P3,4 3 5 4,125,False,,False,False,False,False,,missing,
+fixed,ivFPn3G,P4,2 6 3 8,158,True,,False,False,False,False,,missing,(2 ⊛ (6 ⊘ 3)) ⊘ 8 | (2 ⊛ (6 ⊞ 3)) ⊘ 8
+fixed,ivFPn3G,P5,5 4 3 9,58,True,,False,False,False,False,,missing,5 ▽ (4 ⊗ (3 ⊠ 9))
+fixed,ivFPn3G,P6,5 6 2 8,252,True,,False,False,False,False,,missing,(5 △ 6) ⊞ (2 ⊘ 8)
+fixed,ivFPn3G,P7,9 5 4 9,304,True,,False,False,False,False,,missing,(9 ⊕ 5) ⊛ (4 ⊠ 9) | 9 ⊕ (5 ⊛ (4 ⊠ 9))
+fixed,ivFPn3G,P8,4 4 9 7,182,False,,False,False,False,False,,missing,
+fixed,qAPtz3S,P1,5 3 9 9,154,True,5 ▽ ((3 ⊛ 9) ⊘ 9),True,False,False,False,True,,5 ▽ ((3 ⊛ 9) ⊘ 9)
+fixed,qAPtz3S,P2,3 4 6 8,316,True,3 ▽ ((4 ⊛ 6) ⊗ 8),True,False,False,False,True,,3 ▽ ((4 ⊛ 6) ⊗ 8)
+fixed,qAPtz3S,P3,4 3 5 4,125,False,4 ⊛ ((3 ◇ 5) ⊗ 4),False,False,True,False,True,,
+fixed,qAPtz3S,P4,2 6 3 8,158,True,(2 ⊛ (6 ⊘ 3)) ⊘ 8,True,False,False,False,True,,(2 ⊛ (6 ⊘ 3)) ⊘ 8 | (2 ⊛ (6 ⊞ 3)) ⊘ 8
+fixed,qAPtz3S,P5,5 4 3 9,58,True,5 ▽ (4 ⊗ (3 ⊠ 9)),True,False,False,False,True,,5 ▽ (4 ⊗ (3 ⊠ 9))
+fixed,qAPtz3S,P6,5 6 2 8,252,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (2 ⊘ 8)
+fixed,qAPtz3S,P7,9 5 4 9,304,True,9 ⊕ (5 ⊛ (4 ⊠ 9)),True,False,False,False,True,,(9 ⊕ 5) ⊛ (4 ⊠ 9) | 9 ⊕ (5 ⊛ (4 ⊠ 9))
+fixed,qAPtz3S,P8,4 4 9 7,182,False,none,True,False,False,False,True,,
+1,7PboXE7,P1,4 6 6 9,169,False,(4 ⊞ 6) ⊗ (6 ⊠ 9),False,False,True,False,False,,
+1,7PboXE7,P2,2 9 8 7,361,True,none,False,True,False,False,True,,(2 △ 9) ⊛ (8 ⊠ 7)
+1,7PboXE7,P3,9 7 8 9,85,True,9 ⊘ 7 ⊛ 8 ⊕ 9,True,False,False,False,False,,9 ⊘ 7 ⊛ 8 ⊕ 9
+1,7PboXE7,P4,2 5 9 8,60,True,2 ◇ 5 ▽ 9 ⊛ 8,False,False,False,False,True,,(2 ⊠ 5) ▽ (9 ⊗ 8)
+1,7PboXE7,P5,5 8 5 6,269,True,(5 ⊕ (8 ⊗ 5)) ⊗ 6,True,False,False,False,True,,(5 ⊕ (8 ⊗ 5)) ⊗ 6 | 5 ⊗ 8 ⊕ 5 ⊗ 6
+1,7PboXE7,P6,4 6 7 5,127,True,4 ⊗ (6 ◇ (7 ⊛ 5)),True,False,False,False,True,,4 ⊗ ((6 ◇ 7) ⊛ 5) | 4 ⊗ (6 ◇ (7 ⊛ 5))
+1,7PboXE7,P7,3 9 7 7,207,True,(3 ⊕ 9) ⊗ (7 ⊠ 7),False,False,False,False,False,,(3 ⊘ (9 ⊗ 7)) ⊞ 7
+1,7PboXE7,P8,2 2 5 6,112,False,none,True,False,False,False,True,,
+1,8E9HcvA,P1,4 6 6 9,169,False,none,True,False,False,False,True,,
+1,8E9HcvA,P2,2 9 8 7,361,True,(2 △ 9) ⊛ (8 ⊠ 7),True,False,False,False,False,,(2 △ 9) ⊛ (8 ⊠ 7)
+1,8E9HcvA,P3,9 7 8 9,85,True,((9 ⊗ 7) ⊕ 8) ⊠ 9,False,False,False,False,True,,9 ⊘ 7 ⊛ 8 ⊕ 9
+1,8E9HcvA,P4,2 5 9 8,60,True,((2 ◇ 5) ▽ 9) ⊛ 8,False,False,False,False,True,,(2 ⊠ 5) ▽ (9 ⊗ 8)
+1,8E9HcvA,P5,5 8 5 6,269,True,(5 ⊕ (8 ⊗ 5)) ⊗ 6,True,False,False,False,True,,(5 ⊕ (8 ⊗ 5)) ⊗ 6 | 5 ⊗ 8 ⊕ 5 ⊗ 6
+1,8E9HcvA,P6,4 6 7 5,127,True,4 ⊗ ((6 ◇ 7) ⊛ 5),True,False,False,False,True,,4 ⊗ ((6 ◇ 7) ⊛ 5) | 4 ⊗ (6 ◇ (7 ⊛ 5))
+1,8E9HcvA,P7,3 9 7 7,207,True,none,False,True,False,False,True,,(3 ⊘ (9 ⊗ 7)) ⊞ 7
+1,8E9HcvA,P8,2 2 5 6,112,False,none,True,False,False,False,True,,
+1,Da9Wnrc,P1,4 6 6 9,169,False,none,True,False,False,False,True,,
+1,Da9Wnrc,P2,2 9 8 7,361,True,none,False,True,False,False,True,,(2 △ 9) ⊛ (8 ⊠ 7)
+1,Da9Wnrc,P3,9 7 8 9,85,True,9 ⊗ 7 ⊕ 8 ⊠ 9,False,False,False,False,True,,9 ⊘ 7 ⊛ 8 ⊕ 9
+1,Da9Wnrc,P4,2 5 9 8,60,True,2 ◇ 5 ▽ 9 ⊛ 8,False,False,False,False,True,,(2 ⊠ 5) ▽ (9 ⊗ 8)
+1,Da9Wnrc,P5,5 8 5 6,269,True,5 ⊗ 8 ⊞ 5 ⊗ 6,False,False,False,False,True,,(5 ⊕ (8 ⊗ 5)) ⊗ 6 | 5 ⊗ 8 ⊕ 5 ⊗ 6
+1,Da9Wnrc,P6,4 6 7 5,127,True,4 ⊗ ((6 ◇ 7) ⊛ 5),True,False,False,False,True,,4 ⊗ ((6 ◇ 7) ⊛ 5) | 4 ⊗ (6 ◇ (7 ⊛ 5))
+1,Da9Wnrc,P7,3 9 7 7,207,True,none,False,True,False,False,True,,(3 ⊘ (9 ⊗ 7)) ⊞ 7
+1,Da9Wnrc,P8,2 2 5 6,112,False,none,True,False,False,False,True,,
+1,gEsiY4b,P1,4 6 6 9,169,False,(4 ⊞ 6) ⊗ (6 ⊠ 9),False,False,True,False,True,,
+1,gEsiY4b,P2,2 9 8 7,361,True,none,False,True,False,False,True,,(2 △ 9) ⊛ (8 ⊠ 7)
+1,gEsiY4b,P3,9 7 8 9,85,True,9 ⊘ 7 ⊛ 8 ⊕ 9,True,False,False,False,True,,9 ⊘ 7 ⊛ 8 ⊕ 9
+1,gEsiY4b,P4,2 5 9 8,60,True,2 ◇ 5 ▽ 9 ⊛ 8,False,False,False,False,True,,(2 ⊠ 5) ▽ (9 ⊗ 8)
+1,gEsiY4b,P5,5 8 5 6,269,True,5 ⊗ 8 ⊕ 5 ⊗ 6,True,False,False,False,True,,(5 ⊕ (8 ⊗ 5)) ⊗ 6 | 5 ⊗ 8 ⊕ 5 ⊗ 6
+1,gEsiY4b,P6,4 6 7 5,127,True,4 ⊗ ((6 ◇ 7) ⊛ 5),True,False,False,False,True,,4 ⊗ ((6 ◇ 7) ⊛ 5) | 4 ⊗ (6 ◇ (7 ⊛ 5))
+1,gEsiY4b,P7,3 9 7 7,207,True,(3 ⊕ 9) ⊗ (7 ⊠ 7),False,False,False,False,True,,(3 ⊘ (9 ⊗ 7)) ⊞ 7
+1,gEsiY4b,P8,2 2 5 6,112,False,none,True,False,False,False,True,,
+1,hEQN8cx,P1,4 6 6 9,169,False,none,True,False,False,False,True,,
+1,hEQN8cx,P2,2 9 8 7,361,True,(2 △ 9) ⊛ (8 ⊠ 7),True,False,False,False,True,,(2 △ 9) ⊛ (8 ⊠ 7)
+1,hEQN8cx,P3,9 7 8 9,85,True,9 ◇ 7 ⊛ 8 ⊕ 9,False,False,False,False,True,,9 ⊘ 7 ⊛ 8 ⊕ 9
+1,hEQN8cx,P4,2 5 9 8,60,True,(2 ⊗ 5) ▽ (9 ⊗ 8),False,False,False,False,True,,(2 ⊠ 5) ▽ (9 ⊗ 8)
+1,hEQN8cx,P5,5 8 5 6,269,True,none,False,True,False,False,True,,(5 ⊕ (8 ⊗ 5)) ⊗ 6 | 5 ⊗ 8 ⊕ 5 ⊗ 6
+1,hEQN8cx,P6,4 6 7 5,127,True,4 ⊗ (6 ◇ (7 ⊛ 5)),True,False,False,False,True,,4 ⊗ ((6 ◇ 7) ⊛ 5) | 4 ⊗ (6 ◇ (7 ⊛ 5))
+1,hEQN8cx,P7,3 9 7 7,207,True,none,False,True,False,False,True,,(3 ⊘ (9 ⊗ 7)) ⊞ 7
+1,hEQN8cx,P8,2 2 5 6,112,False,none,True,False,False,False,True,,
+2,2djEEyo,P1,7 3 5 6,122,True,7 ◇ (3 ⊗ (5 ⊛ 6)),True,False,False,False,True,,7 ◇ (3 ⊗ (5 ⊛ 6))
+2,2djEEyo,P2,4 9 7 3,157,True,4 ⊞ (9 ⊛ (7 ⊞ 3)),False,False,False,False,True,,4 ⊞ (9 ⊛ (7 ⊗ 3))
+2,2djEEyo,P3,5 7 4 7,291,True,5 ⊛ (7 ⊕ 4) ⊘ 7,True,False,False,False,False,,(5 ⊛ (7 ⊕ 4)) ⊘ 7
+2,2djEEyo,P4,9 2 5 2,102,True,9 ⊗ (2 ⊠ 5) ⊛ 2,True,False,False,False,True,,(9 ⊗ (2 ⊠ 5)) ⊛ 2
+2,2djEEyo,P5,3 9 6 3,163,False,3 ⊞ 9 ⊗ 6 ⊘ 3,False,False,True,False,True,,
+2,2djEEyo,P6,8 3 7 4,139,True,8 ▽ (3 ⊛ (7 ⊕ 4)),True,False,False,False,False,,8 ▽ (3 ⊛ (7 ⊕ 4))
+2,2djEEyo,P7,5 6 3 9,253,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (3 ⊘ 9)
+2,2djEEyo,P8,7 6 3 8,93,False,none,True,False,False,False,True,,
+2,FteLNhe,P1,7 3 5 6,122,True,7 ◇ (3 ⊗ (5 ⊛ 6)),True,False,False,False,True,,7 ◇ (3 ⊗ (5 ⊛ 6))
+2,FteLNhe,P2,4 9 7 3,157,True,4 ⊞ (9 ⊛ (7 ⊞ 3)),False,False,False,False,False,,4 ⊞ (9 ⊛ (7 ⊗ 3))
+2,FteLNhe,P3,5 7 4 7,291,True,(5 ⊛ (7 ⊕ 4)) ⊘ 7,True,False,False,False,True,,(5 ⊛ (7 ⊕ 4)) ⊘ 7
+2,FteLNhe,P4,9 2 5 2,102,True,(9 ⊗ (2 ⊠ 5)) ⊛ 2,True,False,False,False,True,,(9 ⊗ (2 ⊠ 5)) ⊛ 2
+2,FteLNhe,P5,3 9 6 3,163,False,(3 △ 9) ⊛ (6 ⊠ 3),False,False,True,False,True,,
+2,FteLNhe,P6,8 3 7 4,139,True,8 ▽ (3 ⊛ (7 ⊕ 4)),True,False,False,False,True,,8 ▽ (3 ⊛ (7 ⊕ 4))
+2,FteLNhe,P7,5 6 3 9,253,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (3 ⊘ 9)
+2,FteLNhe,P8,7 6 3 8,93,False,none,True,False,False,False,True,,
+2,Pr3yZJS,P1,7 3 5 6,122,True,7 ◇ (3 ⊗ (5 ⊛ 6)),True,False,False,False,True,,7 ◇ (3 ⊗ (5 ⊛ 6))
+2,Pr3yZJS,P2,4 9 7 3,157,True,(4 ⊞ 9) ⊛ (7 ⊠ 3),False,False,False,False,False,,4 ⊞ (9 ⊛ (7 ⊗ 3))
+2,Pr3yZJS,P3,5 7 4 7,291,True,(5 ⊛ (7 ⊕ 4)) ⊘ 7,True,False,False,False,False,,(5 ⊛ (7 ⊕ 4)) ⊘ 7
+2,Pr3yZJS,P4,9 2 5 2,102,True,none,False,True,False,False,False,,(9 ⊗ (2 ⊠ 5)) ⊛ 2
+2,Pr3yZJS,P5,3 9 6 3,163,False,(3 ⊗ (9 ⊗ 6)) ⊠ 3,False,False,True,False,False,,
+2,Pr3yZJS,P6,8 3 7 4,139,True,8 ▽ (3 ⊛ (7 ⊕ 4)),True,False,False,False,False,,8 ▽ (3 ⊛ (7 ⊕ 4))
+2,Pr3yZJS,P7,5 6 3 9,253,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (3 ⊘ 9)
+2,Pr3yZJS,P8,7 6 3 8,93,False,7 ⊛ 6 ⊘ 3 ⊠ 8,False,False,True,False,False,,
+2,TGQ77Po,P1,7 3 5 6,122,True,7 ◇ (3 ⊗ (5 ⊛ 6)),True,False,False,False,True,,7 ◇ (3 ⊗ (5 ⊛ 6))
+2,TGQ77Po,P2,4 9 7 3,157,True,4 ⊞ (9 ⊛ (7 ⊠ 3)),False,False,False,False,True,,4 ⊞ (9 ⊛ (7 ⊗ 3))
+2,TGQ77Po,P3,5 7 4 7,291,True,(5 ⊛ (7 ⊕ 4)) ⊘ 7,True,False,False,False,True,,(5 ⊛ (7 ⊕ 4)) ⊘ 7
+2,TGQ77Po,P4,9 2 5 2,102,True,none,False,True,False,False,True,,(9 ⊗ (2 ⊠ 5)) ⊛ 2
+2,TGQ77Po,P5,3 9 6 3,163,False,(3 ⊗ (9 ⊗ 6)) ⊠ 3,False,False,True,False,True,,
+2,TGQ77Po,P6,8 3 7 4,139,True,8 ▽ (3 ⊛ (7 ⊕ 4)),True,False,False,False,True,,8 ▽ (3 ⊛ (7 ⊕ 4))
+2,TGQ77Po,P7,5 6 3 9,253,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (3 ⊘ 9)
+2,TGQ77Po,P8,7 6 3 8,93,False,7 ⊛ 6 ⊘ 3 ⊠ 8,False,False,True,False,True,,
+2,U9zVqbz,P1,7 3 5 6,122,True,7 ◇ (3 ⊗ (5 ⊛ 6)),True,False,False,False,True,,7 ◇ (3 ⊗ (5 ⊛ 6))
+2,U9zVqbz,P2,4 9 7 3,157,True,4 ⊞ (9 ⊛ (7 ⊠ 3)),False,False,False,False,False,,4 ⊞ (9 ⊛ (7 ⊗ 3))
+2,U9zVqbz,P3,5 7 4 7,291,True,(5 ⊛ (7 ⊕ 4)) ⊘ 7,True,False,False,False,False,,(5 ⊛ (7 ⊕ 4)) ⊘ 7
+2,U9zVqbz,P4,9 2 5 2,102,True,none,False,True,False,False,False,,(9 ⊗ (2 ⊠ 5)) ⊛ 2
+2,U9zVqbz,P5,3 9 6 3,163,False,3 ⊠ 9 ⊗ 6 ⊘ 3,False,False,True,False,False,,
+2,U9zVqbz,P6,8 3 7 4,139,True,8 ▽ (3 ⊛ (7 ⊕ 4)),True,False,False,False,False,,8 ▽ (3 ⊛ (7 ⊕ 4))
+2,U9zVqbz,P7,5 6 3 9,253,True,none,False,True,False,False,True,,(5 △ 6) ⊞ (3 ⊘ 9)
+2,U9zVqbz,P8,7 6 3 8,93,False,7 ⊛ 6 ⊘ 3 ⊠ 8,False,False,True,False,False,,
+3,Qpuciy9,P1,7 4 6 7,370,True,7 ⊗ (4 ⊛ (6 ◇ 7)),True,False,False,False,True,,7 ⊗ (4 ⊛ (6 ◇ 7))
+3,Qpuciy9,P2,7 2 8 4,266,True,(7 ⊕ 2) ⊛ (8 ⊠ 4),True,False,False,False,True,,(7 ⊕ 2) ⊛ (8 ⊠ 4) | 7 ⊕ (2 ⊛ (8 ⊠ 4))
+3,Qpuciy9,P3,4 3 9 9,395,True,4 ⊘ 3 ⊗ 9 ⊗ 9,True,False,False,False,True,,4 ⊘ 3 ⊗ 9 ⊗ 9
+3,Qpuciy9,P4,3 5 9 3,243,True,none,False,True,False,False,True,,3 ⊞ (5 ⊘ (9 ⊗ 3))
+3,Qpuciy9,P5,4 7 3 6,365,False,4 ⊛ (7 ⊞ (3 ⊞ 6)),False,False,True,False,True,,
+3,Qpuciy9,P6,8 7 8 6,110,False,8 ⊕ ((7 ⊞ 8) ⊗ 6),False,False,True,False,True,,
+3,Qpuciy9,P7,5 8 7 9,289,True,(5 △ 8) ⊛ (7 ⊞ 9),False,False,False,False,True,,(5 △ 8) ⊛ (7 ⊕ 9)
+3,Qpuciy9,P8,4 7 7 7,100,True,4 ⊞ 7 ⊗ 7 ⊕ 7,False,False,False,False,True,,4 ▽ ((7 ⊕ 7) ⊗ 7) | 4 ▽ (7 ⊗ (7 ⊕ 7))
+3,TrXZ77H,P1,7 4 6 7,370,True,7 ⊗ (4 ⊛ (6 ◇ 7)),True,False,False,False,True,,7 ⊗ (4 ⊛ (6 ◇ 7))
+3,TrXZ77H,P2,7 2 8 4,266,True,(7 ⊕ 2) ⊛ (8 ⊠ 4),True,False,False,False,True,,(7 ⊕ 2) ⊛ (8 ⊠ 4) | 7 ⊕ (2 ⊛ (8 ⊠ 4))
+3,TrXZ77H,P3,4 3 9 9,395,True,4 ⊘ 3 ⊗ 9 ⊗ 9,True,False,False,False,True,,4 ⊘ 3 ⊗ 9 ⊗ 9
+3,TrXZ77H,P4,3 5 9 3,243,True,none,False,True,False,False,True,,3 ⊞ (5 ⊘ (9 ⊗ 3))
+3,TrXZ77H,P5,4 7 3 6,365,False,4 ⊛ (7 ⊞ (3 ⊞ 6)),False,False,True,False,True,,
+3,TrXZ77H,P6,8 7 8 6,110,False,8 ⊕ ((7 ⊕ 8) ⊗ 6),False,False,True,False,True,,
+3,TrXZ77H,P7,5 8 7 9,289,True,(5 △ 8) ⊛ (7 ⊞ 9),False,False,False,False,True,,(5 △ 8) ⊛ (7 ⊕ 9)
+3,TrXZ77H,P8,4 7 7 7,100,True,4 ⊞ 7 ⊗ 7 ⊕ 7,False,False,False,False,True,,4 ▽ ((7 ⊕ 7) ⊗ 7) | 4 ▽ (7 ⊗ (7 ⊕ 7))
+3,Vs7roFJ,P1,7 4 6 7,370,True,7 ⊗ (4 ⊛ (6 ◇ 7)),True,False,False,False,True,,7 ⊗ (4 ⊛ (6 ◇ 7))
+3,Vs7roFJ,P2,7 2 8 4,266,True,7 ⊕ (2 ⊛ (8 ⊠ 4)),True,False,False,False,True,,(7 ⊕ 2) ⊛ (8 ⊠ 4) | 7 ⊕ (2 ⊛ (8 ⊠ 4))
+3,Vs7roFJ,P3,4 3 9 9,395,True,4 ⊘ 3 ⊗ 9 ⊗ 9,True,False,False,False,True,,4 ⊘ 3 ⊗ 9 ⊗ 9
+3,Vs7roFJ,P4,3 5 9 3,243,True,none,False,True,False,False,True,,3 ⊞ (5 ⊘ (9 ⊗ 3))
+3,Vs7roFJ,P5,4 7 3 6,365,False,4 ⊛ ((7 ⊞ 3) ⊞ 6),False,False,True,False,True,,
+3,Vs7roFJ,P6,8 7 8 6,110,False,8 ⊕ ((7 ⊞ 8) ⊗ 6),False,False,True,False,True,,
+3,Vs7roFJ,P7,5 8 7 9,289,True,(5 △ 8) ⊛ (7 ⊞ 9),False,False,False,False,True,,(5 △ 8) ⊛ (7 ⊕ 9)
+3,Vs7roFJ,P8,4 7 7 7,100,True,4 ⊞ 7 ⊗ 7 ⊕ 7,False,False,False,False,True,,4 ▽ ((7 ⊕ 7) ⊗ 7) | 4 ▽ (7 ⊗ (7 ⊕ 7))
+3,cwXWGgt,P1,7 4 6 7,370,True,7 ◇ 4 ⊗ 6 ⊗ 7,False,False,False,False,False,,7 ⊗ (4 ⊛ (6 ◇ 7))
+3,cwXWGgt,P2,7 2 8 4,266,True,(7 ⊕ 2) ⊛ (8 ⊠ 4),True,False,False,False,True,,(7 ⊕ 2) ⊛ (8 ⊠ 4) | 7 ⊕ (2 ⊛ (8 ⊠ 4))
+3,cwXWGgt,P3,4 3 9 9,395,True,4 ⊘ 3 ⊗ 9 ⊗ 9,True,False,False,False,True,,4 ⊘ 3 ⊗ 9 ⊗ 9
+3,cwXWGgt,P4,3 5 9 3,243,True,none,False,True,False,False,True,,3 ⊞ (5 ⊘ (9 ⊗ 3))
+3,cwXWGgt,P5,4 7 3 6,365,False,4 ⊛ ((7 ◇ 3) ⊠ 6),False,False,True,False,False,,
+3,cwXWGgt,P6,8 7 8 6,110,False,8 ◇ 7 ⊛ 8 ⊛ 6,False,False,True,False,False,,
+3,cwXWGgt,P7,5 8 7 9,289,True,5 ⊗ ((8 ⊛ 7) ◇ 9),False,False,False,False,False,,(5 △ 8) ⊛ (7 ⊕ 9)
+3,cwXWGgt,P8,4 7 7 7,100,True,none,False,True,False,False,False,,4 ▽ ((7 ⊕ 7) ⊗ 7) | 4 ▽ (7 ⊗ (7 ⊕ 7))
+3,sAFRcFN,P1,7 4 6 7,370,True,7 ⊗ (4 ⊛ (6 ◇ 7)),True,False,False,False,True,,7 ⊗ (4 ⊛ (6 ◇ 7))
+3,sAFRcFN,P2,7 2 8 4,266,True,(7 ⊕ 2) ⊛ (8 ⊠ 4),True,False,False,False,True,,(7 ⊕ 2) ⊛ (8 ⊠ 4) | 7 ⊕ (2 ⊛ (8 ⊠ 4))
+3,sAFRcFN,P3,4 3 9 9,395,True,4 ⊘ 3 ⊗ 9 ⊗ 9,True,False,False,False,True,,4 ⊘ 3 ⊗ 9 ⊗ 9
+3,sAFRcFN,P4,3 5 9 3,243,True,none,False,True,False,False,True,,3 ⊞ (5 ⊘ (9 ⊗ 3))
+3,sAFRcFN,P5,4 7 3 6,365,False,4 ⊛ ((7 ⊞ 3) ⊞ 6),False,False,True,False,True,,
+3,sAFRcFN,P6,8 7 8 6,110,False,8 ⊕ ((7 ⊞ 8) ⊗ 6),False,False,True,False,True,,
+3,sAFRcFN,P7,5 8 7 9,289,True,none,False,True,False,False,True,,(5 △ 8) ⊛ (7 ⊕ 9)
+3,sAFRcFN,P8,4 7 7 7,100,True,4 ⊞ 7 ⊗ 7 ⊕ 7,False,False,False,False,True,,4 ▽ ((7 ⊕ 7) ⊗ 7) | 4 ▽ (7 ⊗ (7 ⊕ 7))
+4,9niEtdS,P1,4 7 6 9,361,True,(4 △ 7) ⊛ (6 ⊠ 9),True,False,False,False,False,,(4 △ 7) ⊛ (6 ⊠ 9)
+4,9niEtdS,P2,5 7 5 7,221,True,5 ◇ 7 ⊛ 5 ⊗ 7,False,False,False,False,False,,5 ⊞ (7 ⊘ (5 ⊛ 7))
+4,9niEtdS,P3,8 3 6 5,316,False,(8 ⊗ (3 ⊛ 6)) ⊞ 5,False,False,True,False,True,,
+4,9niEtdS,P4,5 6 2 7,120,False,(5 ▽ 6) ⊛ (2 ⊗ 7),False,False,True,False,False,,
+4,9niEtdS,P5,5 2 8 5,91,True,5 ◇ ((2 ⊛ 8) ⊛ 5),True,False,False,False,False,,(5 ◇ (2 ⊛ 8)) ⊛ 5 | 5 ◇ ((2 ⊛ 8) ⊛ 5)
+4,9niEtdS,P6,4 6 5 8,186,True,none,False,True,False,False,True,,(4 ⊕ 6) ⊗ (5 ⊠ 8)
+4,9niEtdS,P7,6 4 8 5,119,True,6 ⊘ 4 ⊗ 8 ⊘ 5,False,False,False,False,False,,(6 ▽ (4 ⊛ 8)) ⊘ 5 | 6 ▽ (4 ⊛ (8 ⊘ 5))
+4,9niEtdS,P8,5 6 3 8,215,True,none,False,True,False,False,True,,5 ⊠ 6 ⊘ 3 ⊗ 8
+4,C28Mkaj,P1,4 7 6 9,361,True,(4 △ 7) ⊛ (6 ⊠ 9),True,False,False,False,True,,(4 △ 7) ⊛ (6 ⊠ 9)
+4,C28Mkaj,P2,5 7 5 7,221,True,none,False,True,False,False,True,,5 ⊞ (7 ⊘ (5 ⊛ 7))
+4,C28Mkaj,P3,8 3 6 5,316,False,(8 ⊗ (3 ⊛ 6)) ⊞ 5,False,False,True,False,True,,
+4,C28Mkaj,P4,5 6 2 7,120,False,none,True,False,False,False,True,,
+4,C28Mkaj,P5,5 2 8 5,91,True,5 ◇ ((2 ⊛ 8) ⊛ 5),True,False,False,False,True,,(5 ◇ (2 ⊛ 8)) ⊛ 5 | 5 ◇ ((2 ⊛ 8) ⊛ 5)
+4,C28Mkaj,P6,4 6 5 8,186,True,(4 ⊕ 6) ⊗ (5 ⊠ 8),True,False,False,False,True,,(4 ⊕ 6) ⊗ (5 ⊠ 8)
+4,C28Mkaj,P7,6 4 8 5,119,True,6 ▽ (4 ⊛ (8 ⊘ 5)),True,False,False,False,True,,(6 ▽ (4 ⊛ 8)) ⊘ 5 | 6 ▽ (4 ⊛ (8 ⊘ 5))
+4,C28Mkaj,P8,5 6 3 8,215,True,5 ⊠ 6 ⊘ 3 ⊗ 8,True,False,False,False,True,,5 ⊠ 6 ⊘ 3 ⊗ 8
+4,Li8qwYf,P1,4 7 6 9,361,True,(4 △ 7) ⊛ (6 ⊠ 9),True,False,False,False,True,,(4 △ 7) ⊛ (6 ⊠ 9)
+4,Li8qwYf,P2,5 7 5 7,221,True,none,False,True,False,False,True,,5 ⊞ (7 ⊘ (5 ⊛ 7))
+4,Li8qwYf,P3,8 3 6 5,316,False,(8 ⊗ (3 ⊛ 6)) ⊞ 5,False,False,True,False,True,,
+4,Li8qwYf,P4,5 6 2 7,120,False,none,True,False,False,False,True,,
+4,Li8qwYf,P5,5 2 8 5,91,True,(5 ◇ (2 ⊛ 8)) ⊛ 5,True,False,False,False,True,,(5 ◇ (2 ⊛ 8)) ⊛ 5 | 5 ◇ ((2 ⊛ 8) ⊛ 5)
+4,Li8qwYf,P6,4 6 5 8,186,True,(4 ⊕ 6) ⊗ (5 ⊠ 8),True,False,False,False,True,,(4 ⊕ 6) ⊗ (5 ⊠ 8)
+4,Li8qwYf,P7,6 4 8 5,119,True,(6 ▽ (4 ⊛ 8)) ⊘ 5,True,False,False,False,True,,(6 ▽ (4 ⊛ 8)) ⊘ 5 | 6 ▽ (4 ⊛ (8 ⊘ 5))
+4,Li8qwYf,P8,5 6 3 8,215,True,5 ⊠ 6 ⊘ 3 ⊗ 8,True,False,False,False,True,,5 ⊠ 6 ⊘ 3 ⊗ 8
+4,QdFQnjM,P1,4 7 6 9,361,True,(4 △ 7) ⊛ (6 ⊠ 9),True,False,False,False,True,,(4 △ 7) ⊛ (6 ⊠ 9)
+4,QdFQnjM,P2,5 7 5 7,221,True,none,False,True,False,False,True,,5 ⊞ (7 ⊘ (5 ⊛ 7))
+4,QdFQnjM,P3,8 3 6 5,316,False,none,True,False,False,False,True,,
+4,QdFQnjM,P4,5 6 2 7,120,False,5 ⊠ ((6 ⊛ 2) ⊗ 7),False,False,True,False,True,,
+4,QdFQnjM,P5,5 2 8 5,91,True,none,False,True,False,False,True,,(5 ◇ (2 ⊛ 8)) ⊛ 5 | 5 ◇ ((2 ⊛ 8) ⊛ 5)
+4,QdFQnjM,P6,4 6 5 8,186,True,(4 ⊕ 6) ⊗ (5 ⊠ 8),True,False,False,False,True,,(4 ⊕ 6) ⊗ (5 ⊠ 8)
+4,QdFQnjM,P7,6 4 8 5,119,True,6 ⊠ 4 ⊕ 8 ⊗ 5,False,False,False,False,True,,(6 ▽ (4 ⊛ 8)) ⊘ 5 | 6 ▽ (4 ⊛ (8 ⊘ 5))
+4,QdFQnjM,P8,5 6 3 8,215,True,5 ⊠ 6 ⊘ 3 ⊗ 8,True,False,False,False,True,,5 ⊠ 6 ⊘ 3 ⊗ 8
+4,viUvvia,P1,4 7 6 9,361,True,none,False,True,False,False,True,,(4 △ 7) ⊛ (6 ⊠ 9)
+4,viUvvia,P2,5 7 5 7,221,True,none,False,True,False,False,True,,5 ⊞ (7 ⊘ (5 ⊛ 7))
+4,viUvvia,P3,8 3 6 5,316,False,(8 ⊗ (3 ⊛ 6)) ⊞ 5,False,False,True,False,True,,
+4,viUvvia,P4,5 6 2 7,120,False,none,True,False,False,False,True,,
+4,viUvvia,P5,5 2 8 5,91,True,5 ◇ ((2 ⊛ 8) ⊛ 5),True,False,False,False,True,,(5 ◇ (2 ⊛ 8)) ⊛ 5 | 5 ◇ ((2 ⊛ 8) ⊛ 5)
+4,viUvvia,P6,4 6 5 8,186,True,(4 ⊕ 6) ⊗ (5 ⊠ 8),True,False,False,False,True,,(4 ⊕ 6) ⊗ (5 ⊠ 8)
+4,viUvvia,P7,6 4 8 5,119,True,6 △ (4 ⊛ (8 ⊘ 5)),False,False,False,False,True,,(6 ▽ (4 ⊛ 8)) ⊘ 5 | 6 ▽ (4 ⊛ (8 ⊘ 5))
+4,viUvvia,P8,5 6 3 8,215,True,5 ⊠ 6 ⊘ 3 ⊗ 8,True,False,False,False,True,,5 ⊠ 6 ⊘ 3 ⊗ 8

@@ -5,8 +5,10 @@ verifier (to score it). The two copies, environment/lab/formula.py and
 tests/formula.py, must stay identical.
 
 Formulas are parsed with `ast` against a whitelist and are never passed to
-eval(). Allowed: integer literals, the variables a, b and n (the number of
-operands in the whole expression), + - * // % **,
+eval(). Allowed: integer literals, the operands a and b, three context
+variables (n = number of operands in the whole expression, i = position of
+this operator counted from the left starting at 1, d = nesting depth with 0
+for the operation evaluated last), + - * // % **,
 unary minus, abs/max/min, comparisons, and/or/not, and "x if cond else y".
 """
 
@@ -29,7 +31,7 @@ CMPOPS = {
 MAX_LEN = 200
 MAX_ABS = 10 ** 15
 MAX_EXPONENT = 12
-SYNTAX_HELP = ("use integers, a, b, n, + - * // % **, abs/max/min, comparisons, "
+SYNTAX_HELP = ("use integers, a, b, n, i, d, + - * // % **, abs/max/min, comparisons, "
                "and/or/not, and 'x if cond else y'")
 
 
@@ -52,7 +54,7 @@ def compile_formula(src):
 def _check(node):
     if isinstance(node, ast.Constant) and type(node.value) is int:
         return
-    if isinstance(node, ast.Name) and node.id in ("a", "b", "n"):
+    if isinstance(node, ast.Name) and node.id in ("a", "b", "n", "i", "d"):
         return
     if isinstance(node, ast.BinOp) and type(node.op) in BINOPS:
         _check(node.left)
@@ -81,9 +83,9 @@ def _check(node):
     raise BadFormula(f"unsupported syntax ({type(node).__name__}); {SYNTAX_HELP}")
 
 
-def apply(node, a, b, n):
+def apply(node, a, b, n, i, d):
     """Evaluate a checked formula. Raises ArithmeticError on /0, huge values, etc."""
-    value = _eval(node, {"a": a, "b": b, "n": n})
+    value = _eval(node, {"a": a, "b": b, "n": n, "i": i, "d": d})
     return int(value)
 
 

@@ -1,0 +1,4137 @@
+[
+ {
+  "trial": "alien-arithmetic-v5__7TXaPaN",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 3,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "19 ⊕ 5",
+  "queries": [
+   "19 ⊕ 5 = 25",
+   "19 ⊗ 5 = 94",
+   "19 ◇ 5 = 19",
+   "19 ▽ 5 = 14",
+   "19 ⊘ 5 = 33",
+   "19 ⊛ 5 = 44",
+   "17 ⊠ 7 = 26",
+   "17 ⊞ 7 = 24",
+   "17 △ 7 = 10",
+   "(5 ▽ 19) △ 1000 = 0",
+   "(7 ⊛ 13) ⊗ 997 = 175471"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 9.5,
+  "minutes_to_reveal": 4.6,
+  "steps": 33,
+  "used_python": true,
+  "cost_usd": 1.278,
+  "puzzles": {
+   "P1": {
+    "given": "5 ▽ ((3 ⊛ 9) ⊘ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P2": {
+    "given": "3 ▽ ((4 ⊛ 6) ⊗ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "4 ⊛ (3 ⊕ (5 ⊘ 4))",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(2 ⊛ (6 ⊘ 3)) ⊘ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ▽ (4 ⊗ (3 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(9 ⊕ 5) ⊛ (4 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "fixed",
+  "job": "jobs/2026-11-14__20-42-42"
+ },
+ {
+  "trial": "alien-arithmetic-v5__A87tx2A",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 7,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 6",
+  "queries": [
+   "17 ⊕ 6 = 24",
+   "17 ⊗ 6 = 101",
+   "17 ◇ 6 = 17",
+   "17 ▽ 6 = 11",
+   "17 ⊘ 6 = 28",
+   "17 ⊛ 6 = 53",
+   "17 ⊞ 6 = 23",
+   "17 ⊠ 6 = 25",
+   "17 △ 6 = 11",
+   "4 △ 19 ▽ 100 = 100",
+   "100 ⊘ 23 ⊠ 10 = 190"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 5.6,
+  "minutes_to_reveal": 4.1,
+  "steps": 26,
+  "used_python": true,
+  "cost_usd": 0.777,
+  "puzzles": {
+   "P1": {
+    "given": "5 ▽ ((3 ⊛ 9) ⊘ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "3 ▽ ((4 ⊛ 6) ⊗ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊛ (3 ⊕ (5 ⊘ 4))",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "2 ⊛ (6 ⊘ 3) ⊘ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ▽ (4 ⊗ (3 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(9 ⊕ 5) ⊛ (4 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "fixed",
+  "job": "jobs/2026-11-14__20-42-42"
+ },
+ {
+  "trial": "alien-arithmetic-v5__WnfUUTu",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 3,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "11 ⊕ 4",
+  "queries": [
+   "11 ⊕ 4 = 16",
+   "11 ⊗ 4 = 43",
+   "11 ◇ 4 = 11",
+   "11 ▽ 4 = 7",
+   "11 ⊘ 4 = 18",
+   "11 ⊛ 4 = 27",
+   "11 ⊞ 4 = 15",
+   "11 ⊠ 4 = 17",
+   "11 △ 4 = 7",
+   "3 △ 10 = 0",
+   "3 ⊛ 10 = 103",
+   "3 ⊠ 10 ⊗ 500 = 7999"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 6.6,
+  "minutes_to_reveal": 3.3,
+  "steps": 35,
+  "used_python": true,
+  "cost_usd": 0.925,
+  "puzzles": {
+   "P1": {
+    "given": "5 ▽ ((3 ⊛ 9) ⊘ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P2": {
+    "given": "3 ▽ ((4 ⊛ 6) ⊗ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "4 ⊛ (3 ⊕ (5 ⊘ 4))",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(2 ⊛ (6 ⊘ 3)) ⊘ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ▽ (4 ⊗ (3 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "9 ⊕ (5 ⊛ (4 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "fixed",
+  "job": "jobs/2026-11-14__20-42-42"
+ },
+ {
+  "trial": "alien-arithmetic-v5__ivFPn3G",
+  "reward": 0.0,
+  "solved": 0,
+  "timeout": false,
+  "error": null,
+  "model_committed": false,
+  "model_ok": 0,
+  "wrong_ops": {},
+  "false_none": 0,
+  "false_solution": 0,
+  "inconsistent": 0,
+  "budget_spent": 9,
+  "n_queries": 9,
+  "multi_op_queries": 0,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "14 ⊗ 3 = 41",
+   "14 ◇ 3 = 14",
+   "14 ▽ 3 = 11",
+   "14 ⊘ 3 = 25",
+   "14 ⊛ 3 = 23",
+   "14 ⊞ 5 = 19",
+   "14 ⊠ 5 = 21",
+   "14 △ 5 = 9"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 1.3,
+  "minutes_to_reveal": null,
+  "steps": 12,
+  "used_python": false,
+  "cost_usd": 0.407,
+  "puzzles": {
+   "P1": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P2": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P3": {
+    "given": null,
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": null
+   },
+   "P4": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P5": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P6": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P7": {
+    "given": null,
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": null
+   },
+   "P8": {
+    "given": null,
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": null
+   }
+  },
+  "set": "fixed",
+  "job": "jobs/2026-11-14__20-42-42"
+ },
+ {
+  "trial": "alien-arithmetic-v5__qAPtz3S",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "◇": "a",
+   "⊞": "a + b",
+   "△": "a - b"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "17 ⊘ 5 = 29",
+   "17 ⊛ 5 = 42",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "(3 ⊛ 10) ⊗ 997 = 102690",
+   "(1 ▽ 20) ⊠ 100 = 122"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 5.2,
+  "minutes_to_reveal": 3.1,
+  "steps": 27,
+  "used_python": true,
+  "cost_usd": 0.74,
+  "puzzles": {
+   "P1": {
+    "given": "5 ▽ ((3 ⊛ 9) ⊘ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "3 ▽ ((4 ⊛ 6) ⊗ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊛ ((3 ◇ 5) ⊗ 4)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(2 ⊛ (6 ⊘ 3)) ⊘ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ▽ (4 ⊗ (3 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "9 ⊕ (5 ⊛ (4 ⊠ 9))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "fixed",
+  "job": "jobs/2026-11-14__20-42-42"
+ },
+ {
+  "trial": "alien-arithmetic-v5__7PboXE7",
+  "reward": 0.4375,
+  "solved": 4,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b",
+   "△": "abs(a - b)"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 3,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "13 ⊘ 5 = 21",
+   "13 ⊛ 5 = 38",
+   "13 ⊞ 5 = 18",
+   "13 ⊠ 5 = 20",
+   "13 △ 5 = 8",
+   "100 ⊛ 3 = 109",
+   "100 ⊠ 3 = 105",
+   "(500 ⊘ 3) ⊗ 100 = 99699"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 14.5,
+  "minutes_to_reveal": 3.7,
+  "steps": 42,
+  "used_python": true,
+  "cost_usd": 1.527,
+  "puzzles": {
+   "P1": {
+    "given": "(4 ⊞ 6) ⊗ (6 ⊠ 9)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "9 ⊘ 7 ⊛ 8 ⊕ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P4": {
+    "given": "2 ◇ 5 ▽ 9 ⊛ 8",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "(5 ⊕ (8 ⊗ 5)) ⊗ 6",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "4 ⊗ (6 ◇ (7 ⊛ 5))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(3 ⊕ 9) ⊗ (7 ⊠ 7)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "1",
+  "job": "jobs/2026-11-14__20-53-25"
+ },
+ {
+  "trial": "alien-arithmetic-v5__8E9HcvA",
+  "reward": 0.5625,
+  "solved": 5,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d",
+   "△": "abs(a - b)"
+  },
+  "false_none": 1,
+  "false_solution": 0,
+  "inconsistent": 1,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "13 ⊘ 5 = 21",
+   "13 ⊛ 5 = 38",
+   "13 ⊞ 5 = 18",
+   "13 ⊠ 5 = 20",
+   "13 △ 5 = 8",
+   "2 ⊠ 10 = 14",
+   "2 ⊛ 10 = 102",
+   "7 ⊘ 300 ⊗ 10 = -2861"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": true,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 8.3,
+  "minutes_to_reveal": 3.0,
+  "steps": 25,
+  "used_python": true,
+  "cost_usd": 1.051,
+  "puzzles": {
+   "P1": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(2 △ 9) ⊛ (8 ⊠ 7)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "((9 ⊗ 7) ⊕ 8) ⊠ 9",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "((2 ◇ 5) ▽ 9) ⊛ 8",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "(5 ⊕ (8 ⊗ 5)) ⊗ 6",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "4 ⊗ ((6 ◇ 7) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "1",
+  "job": "jobs/2026-11-14__20-53-25"
+ },
+ {
+  "trial": "alien-arithmetic-v5__Da9Wnrc",
+  "reward": 0.25,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d",
+   "△": "abs(a - b)"
+  },
+  "false_none": 2,
+  "false_solution": 0,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 6",
+  "queries": [
+   "17 ⊕ 6 = 24",
+   "17 ⊗ 6 = 101",
+   "17 ▽ 6 = 11",
+   "17 ◇ 6 = 17",
+   "17 ⊞ 6 = 23",
+   "17 ⊘ 6 = 28",
+   "17 ⊛ 6 = 53",
+   "17 △ 6 = 11",
+   "17 ⊠ 6 = 25",
+   "7 ⊛ 20 = 407",
+   "(19 ⊘ 53) ⊗ (800 ⊠ 573) = -20656"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": true,
+    "n>=3": true
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 10.9,
+  "minutes_to_reveal": 4.7,
+  "steps": 36,
+  "used_python": true,
+  "cost_usd": 1.453,
+  "puzzles": {
+   "P1": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "9 ⊗ 7 ⊕ 8 ⊠ 9",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "2 ◇ 5 ▽ 9 ⊛ 8",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ⊗ 8 ⊞ 5 ⊗ 6",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "4 ⊗ ((6 ◇ 7) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "1",
+  "job": "jobs/2026-11-14__20-53-25"
+ },
+ {
+  "trial": "alien-arithmetic-v5__gEsiY4b",
+  "reward": 0.4375,
+  "solved": 4,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "▽": "a - b",
+   "⊞": "a + b",
+   "⊠": "a + b + 2",
+   "△": "(a + b) // 2"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "14 ⊕ 5",
+  "queries": [
+   "14 ⊕ 5 = 20",
+   "14 ⊗ 5 = 69",
+   "14 ◇ 5 = 14",
+   "14 ▽ 5 = 9",
+   "14 ⊘ 5 = 23",
+   "14 ⊛ 5 = 39",
+   "14 ⊞ 5 = 19",
+   "14 ⊠ 5 = 21",
+   "14 △ 5 = 9",
+   "3 ⊠ 10 = 15",
+   "3 ⊘ 10 ⊗ 1000 = -4001",
+   "3 ⊛ 10 = 103"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": true,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 8.8,
+  "minutes_to_reveal": 1.9,
+  "steps": 34,
+  "used_python": true,
+  "cost_usd": 1.156,
+  "puzzles": {
+   "P1": {
+    "given": "(4 ⊞ 6) ⊗ (6 ⊠ 9)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "9 ⊘ 7 ⊛ 8 ⊕ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "2 ◇ 5 ▽ 9 ⊛ 8",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ⊗ 8 ⊕ 5 ⊗ 6",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "4 ⊗ ((6 ◇ 7) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(3 ⊕ 9) ⊗ (7 ⊠ 7)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "1",
+  "job": "jobs/2026-11-14__20-53-25"
+ },
+ {
+  "trial": "alien-arithmetic-v5__hEQN8cx",
+  "reward": 0.375,
+  "solved": 4,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "⊗": "a * b - i",
+   "⊞": "a + b + d"
+  },
+  "false_none": 2,
+  "false_solution": 0,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 5",
+  "queries": [
+   "17 ⊕ 5 = 23",
+   "17 ⊗ 5 = 84",
+   "17 ▽ 5 = 12",
+   "17 ◇ 5 = 17",
+   "17 ⊘ 5 = 29",
+   "17 ⊞ 5 = 22",
+   "17 ⊛ 5 = 42",
+   "17 △ 5 = 12",
+   "17 ⊠ 5 = 24",
+   "5 △ 17 ▽ 100 = 100",
+   "6 ⊛ 17 ⊠ 200 = 498"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 7.4,
+  "minutes_to_reveal": 3.9,
+  "steps": 27,
+  "used_python": true,
+  "cost_usd": 0,
+  "puzzles": {
+   "P1": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(2 △ 9) ⊛ (8 ⊠ 7)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "9 ◇ 7 ⊛ 8 ⊕ 9",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(2 ⊗ 5) ▽ (9 ⊗ 8)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "4 ⊗ (6 ◇ (7 ⊛ 5))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "1",
+  "job": "jobs/2026-11-14__20-53-25"
+ },
+ {
+  "trial": "alien-arithmetic-v5__2djEEyo",
+  "reward": 0.5625,
+  "solved": 5,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 2,
+  "budget_spent": 13,
+  "n_queries": 13,
+  "multi_op_queries": 0,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 5",
+  "queries": [
+   "17 ⊕ 5 = 23",
+   "17 ⊗ 5 = 84",
+   "17 ◇ 5 = 17",
+   "17 ▽ 5 = 12",
+   "17 ⊘ 5 = 29",
+   "17 ⊛ 5 = 42",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "4 ⊘ 11 = -3",
+   "3 ⊛ 11 = 124",
+   "4 △ 11 = 0",
+   "4 ⊠ 11 = 17"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 8.5,
+  "minutes_to_reveal": 3.2,
+  "steps": 37,
+  "used_python": true,
+  "cost_usd": 1.168,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ (3 ⊗ (5 ⊛ 6))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "4 ⊞ (9 ⊛ (7 ⊞ 3))",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "5 ⊛ (7 ⊕ 4) ⊘ 7",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P4": {
+    "given": "9 ⊗ (2 ⊠ 5) ⊛ 2",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "3 ⊞ 9 ⊗ 6 ⊘ 3",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ▽ (3 ⊛ (7 ⊕ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "2",
+  "job": "jobs/2026-11-14__21-09-17"
+ },
+ {
+  "trial": "alien-arithmetic-v5__FteLNhe",
+  "reward": 0.5625,
+  "solved": 5,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "▽": "b - a",
+   "⊞": "a + b",
+   "△": "a - b"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 1,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "7 ⊕ 3",
+  "queries": [
+   "7 ⊕ 3 = 11",
+   "23 ⊗ 4 = 91",
+   "23 ◇ 4 = 23",
+   "4 ▽ 23 = 19",
+   "23 ⊘ 4 = 42",
+   "23 ⊛ 4 = 39",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "100 ⊠ 9 ⊗ 1000 = 111999",
+   "500 ⊘ 3 ⊛ 7 = 1046"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 6.8,
+  "minutes_to_reveal": 3.4,
+  "steps": 27,
+  "used_python": true,
+  "cost_usd": 0.97,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ (3 ⊗ (5 ⊛ 6))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "4 ⊞ (9 ⊛ (7 ⊞ 3))",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "(5 ⊛ (7 ⊕ 4)) ⊘ 7",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(9 ⊗ (2 ⊠ 5)) ⊛ 2",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "(3 △ 9) ⊛ (6 ⊠ 3)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ▽ (3 ⊛ (7 ⊕ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "2",
+  "job": "jobs/2026-11-14__21-09-17"
+ },
+ {
+  "trial": "alien-arithmetic-v5__Pr3yZJS",
+  "reward": 0.25,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 6,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "89 ⊕ 7",
+  "queries": [
+   "89 ⊕ 7 = 97",
+   "89 ⊗ 7 = 622",
+   "89 ◇ 7 = 89",
+   "89 ▽ 7 = 82",
+   "89 ⊘ 7 = 171",
+   "89 ⊛ 7 = 138",
+   "89 ⊞ 7 = 96",
+   "89 ⊠ 7 = 98",
+   "89 △ 7 = 82",
+   "10 ▽ 50 △ 300 = 0",
+   "10 ⊞ 20 ⊗ 100 = 2999"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 7.1,
+  "minutes_to_reveal": 2.8,
+  "steps": 37,
+  "used_python": true,
+  "cost_usd": 0.992,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ (3 ⊗ (5 ⊛ 6))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(4 ⊞ 9) ⊛ (7 ⊠ 3)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "(5 ⊛ (7 ⊕ 4)) ⊘ 7",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P5": {
+    "given": "(3 ⊗ (9 ⊗ 6)) ⊠ 3",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "8 ▽ (3 ⊛ (7 ⊕ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "7 ⊛ 6 ⊘ 3 ⊠ 8",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   }
+  },
+  "set": "2",
+  "job": "jobs/2026-11-14__21-09-17"
+ },
+ {
+  "trial": "alien-arithmetic-v5__TGQ77Po",
+  "reward": 0.25,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊞": "a + b",
+   "⊠": "a + b + 2",
+   "△": "a - b"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 13,
+  "multi_op_queries": 0,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "13 ⊘ 5 = 21",
+   "13 ⊛ 5 = 38",
+   "13 ⊞ 5 = 18",
+   "13 ⊠ 5 = 20",
+   "13 △ 5 = 8",
+   "4 ⊘ 17 = -9",
+   "4 ⊠ 17 = 23",
+   "2 ⊛ 100 = 10002",
+   "4 ▽ 17 = 13"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 5.8,
+  "minutes_to_reveal": 3.5,
+  "steps": 23,
+  "used_python": true,
+  "cost_usd": 0.783,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ (3 ⊗ (5 ⊛ 6))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "4 ⊞ (9 ⊛ (7 ⊠ 3))",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "(5 ⊛ (7 ⊕ 4)) ⊘ 7",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "(3 ⊗ (9 ⊗ 6)) ⊠ 3",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ▽ (3 ⊛ (7 ⊕ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "7 ⊛ 6 ⊘ 3 ⊠ 8",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "2",
+  "job": "jobs/2026-11-14__21-09-17"
+ },
+ {
+  "trial": "alien-arithmetic-v5__U9zVqbz",
+  "reward": 0.25,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "⊞": "a + b + d",
+   "△": "a - b"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 6,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 5",
+  "queries": [
+   "17 ⊕ 5 = 23",
+   "17 ⊗ 5 = 84",
+   "17 ◇ 5 = 17",
+   "17 ▽ 5 = 12",
+   "17 ⊘ 5 = 29",
+   "17 ⊛ 5 = 42",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "(5 ◇ 23) ⊘ 41 = 5",
+   "5 ▽ (100 ⊛ 7) = 144"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 10.2,
+  "minutes_to_reveal": 4.2,
+  "steps": 35,
+  "used_python": true,
+  "cost_usd": 1.322,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ (3 ⊗ (5 ⊛ 6))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "4 ⊞ (9 ⊛ (7 ⊠ 3))",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "(5 ⊛ (7 ⊕ 4)) ⊘ 7",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P5": {
+    "given": "3 ⊠ 9 ⊗ 6 ⊘ 3",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "8 ▽ (3 ⊛ (7 ⊕ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "7 ⊛ 6 ⊘ 3 ⊠ 8",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   }
+  },
+  "set": "2",
+  "job": "jobs/2026-11-14__21-09-17"
+ },
+ {
+  "trial": "alien-arithmetic-v5__Qpuciy9",
+  "reward": 0.3125,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 2,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "19 ⊗ 5 = 94",
+   "19 ◇ 5 = 19",
+   "19 ▽ 5 = 14",
+   "19 ⊘ 5 = 33",
+   "19 ⊛ 5 = 44",
+   "19 ⊞ 5 = 24",
+   "19 ⊠ 5 = 26",
+   "19 △ 5 = 14",
+   "(5 ▽ 19) △ 100 = 0",
+   "(100 ⊛ 3) ⊠ 1000 = 1112"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 6.7,
+  "minutes_to_reveal": 4.0,
+  "steps": 23,
+  "used_python": true,
+  "cost_usd": 0.892,
+  "puzzles": {
+   "P1": {
+    "given": "7 ⊗ (4 ⊛ (6 ◇ 7))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(7 ⊕ 2) ⊛ (8 ⊠ 4)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊘ 3 ⊗ 9 ⊗ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "4 ⊛ (7 ⊞ (3 ⊞ 6))",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ⊕ ((7 ⊞ 8) ⊗ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(5 △ 8) ⊛ (7 ⊞ 9)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "4 ⊞ 7 ⊗ 7 ⊕ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "3",
+  "job": "jobs/2026-11-14__21-20-36"
+ },
+ {
+  "trial": "alien-arithmetic-v5__TrXZ77H",
+  "reward": 0.3125,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 2,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "13 ⊘ 5 = 21",
+   "13 ⊛ 5 = 38",
+   "13 ⊞ 5 = 18",
+   "13 ⊠ 5 = 20",
+   "13 △ 5 = 8",
+   "4 ▽ 23 △ 1000 = 0",
+   "1000 ⊗ (4 ⊠ 23) = 29999"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 6.0,
+  "minutes_to_reveal": 3.6,
+  "steps": 29,
+  "used_python": true,
+  "cost_usd": 0.786,
+  "puzzles": {
+   "P1": {
+    "given": "7 ⊗ (4 ⊛ (6 ◇ 7))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(7 ⊕ 2) ⊛ (8 ⊠ 4)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊘ 3 ⊗ 9 ⊗ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "4 ⊛ (7 ⊞ (3 ⊞ 6))",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ⊕ ((7 ⊕ 8) ⊗ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(5 △ 8) ⊛ (7 ⊞ 9)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "4 ⊞ 7 ⊗ 7 ⊕ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "3",
+  "job": "jobs/2026-11-14__21-20-36"
+ },
+ {
+  "trial": "alien-arithmetic-v5__Vs7roFJ",
+  "reward": 0.3125,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 7,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "⊞": "a + b + d"
+  },
+  "false_none": 1,
+  "false_solution": 2,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "5 ⊕ 17",
+  "queries": [
+   "5 ⊕ 17 = 23",
+   "5 ⊗ 17 = 84",
+   "5 ◇ 17 = 17",
+   "5 ▽ 17 = 12",
+   "5 ⊘ 17 = -7",
+   "5 ⊛ 17 = 294",
+   "5 ⊞ 17 = 22",
+   "5 ⊠ 17 = 24",
+   "5 △ 17 = 0",
+   "1000 ⊘ (20 ⊠ 7) = 1970",
+   "200 ▽ (100 △ 7) = 107"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 7.8,
+  "minutes_to_reveal": 2.9,
+  "steps": 19,
+  "used_python": true,
+  "cost_usd": 0.844,
+  "puzzles": {
+   "P1": {
+    "given": "7 ⊗ (4 ⊛ (6 ◇ 7))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "7 ⊕ (2 ⊛ (8 ⊠ 4))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊘ 3 ⊗ 9 ⊗ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "4 ⊛ ((7 ⊞ 3) ⊞ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ⊕ ((7 ⊞ 8) ⊗ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(5 △ 8) ⊛ (7 ⊞ 9)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "4 ⊞ 7 ⊗ 7 ⊕ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "3",
+  "job": "jobs/2026-11-14__21-20-36"
+ },
+ {
+  "trial": "alien-arithmetic-v5__cwXWGgt",
+  "reward": 0.125,
+  "solved": 2,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "◇": "a",
+   "▽": "a - b",
+   "⊞": "a + b",
+   "△": "abs(a - b)"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 5,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "13 ⊕ 5",
+  "queries": [
+   "13 ⊕ 5 = 19",
+   "13 ⊗ 5 = 64",
+   "13 ◇ 5 = 13",
+   "13 ▽ 5 = 8",
+   "13 ⊘ 5 = 21",
+   "13 ⊛ 5 = 38",
+   "13 ⊞ 5 = 18",
+   "13 ⊠ 5 = 20",
+   "13 △ 5 = 8",
+   "4 ⊛ 17 = 293",
+   "4 ⊘ 17 = -9",
+   "(6 ⊠ 19) ⊗ 1000 = 27999"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 8.5,
+  "minutes_to_reveal": 3.8,
+  "steps": 34,
+  "used_python": true,
+  "cost_usd": 0,
+  "puzzles": {
+   "P1": {
+    "given": "7 ◇ 4 ⊗ 6 ⊗ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P2": {
+    "given": "(7 ⊕ 2) ⊛ (8 ⊠ 4)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊘ 3 ⊗ 9 ⊗ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "4 ⊛ ((7 ◇ 3) ⊠ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "8 ◇ 7 ⊛ 8 ⊛ 6",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P7": {
+    "given": "5 ⊗ ((8 ⊛ 7) ◇ 9)",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P8": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   }
+  },
+  "set": "3",
+  "job": "jobs/2026-11-14__21-20-36"
+ },
+ {
+  "trial": "alien-arithmetic-v5__sAFRcFN",
+  "reward": 0.25,
+  "solved": 3,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊞": "a + b + d",
+   "△": "abs(a - b)"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 5",
+  "queries": [
+   "17 ⊕ 5 = 23",
+   "17 ⊗ 5 = 84",
+   "17 ◇ 5 = 17",
+   "17 ▽ 5 = 12",
+   "17 ⊘ 5 = 29",
+   "17 ⊛ 5 = 42",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "(100 ⊘ 3) ⊗ 1000 = 196999",
+   "100 ⊛ 3 = 109",
+   "3 ⊠ 100 = 105"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 7.1,
+  "minutes_to_reveal": 4.0,
+  "steps": 33,
+  "used_python": true,
+  "cost_usd": 0.939,
+  "puzzles": {
+   "P1": {
+    "given": "7 ⊗ (4 ⊛ (6 ◇ 7))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "(7 ⊕ 2) ⊛ (8 ⊠ 4)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "4 ⊘ 3 ⊗ 9 ⊗ 9",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "4 ⊛ ((7 ⊞ 3) ⊞ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "8 ⊕ ((7 ⊞ 8) ⊗ 6)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "4 ⊞ 7 ⊗ 7 ⊕ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "3",
+  "job": "jobs/2026-11-14__21-20-36"
+ },
+ {
+  "trial": "alien-arithmetic-v5__9niEtdS",
+  "reward": 0.125,
+  "solved": 2,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "◇": "a",
+   "▽": "a - b",
+   "⊞": "a + b",
+   "⊠": "a + b + 2"
+  },
+  "false_none": 2,
+  "false_solution": 2,
+  "inconsistent": 5,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "17 ⊕ 5",
+  "queries": [
+   "17 ⊕ 5 = 23",
+   "17 ⊗ 5 = 84",
+   "17 ◇ 5 = 17",
+   "17 ▽ 5 = 12",
+   "17 ⊘ 5 = 29",
+   "17 ⊛ 5 = 42",
+   "17 ⊞ 5 = 22",
+   "17 ⊠ 5 = 24",
+   "17 △ 5 = 12",
+   "100 ⊛ 3 = 109",
+   "100 ⊠ 3 = 105",
+   "5 ▽ 17 △ 20 = 0"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 12.8,
+  "minutes_to_reveal": 4.2,
+  "steps": 50,
+  "used_python": true,
+  "cost_usd": 1.774,
+  "puzzles": {
+   "P1": {
+    "given": "(4 △ 7) ⊛ (6 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P2": {
+    "given": "5 ◇ 7 ⊛ 5 ⊗ 7",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P3": {
+    "given": "(8 ⊗ (3 ⊛ 6)) ⊞ 5",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "(5 ▽ 6) ⊛ (2 ⊗ 7)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": false
+   },
+   "P5": {
+    "given": "5 ◇ ((2 ⊛ 8) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P6": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "6 ⊘ 4 ⊗ 8 ⊘ 5",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": false
+   },
+   "P8": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "4",
+  "job": "jobs/2026-11-14__21-30-18"
+ },
+ {
+  "trial": "alien-arithmetic-v5__C28Mkaj",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 7,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "⊞": "a + b"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "11 ⊕ 5",
+  "queries": [
+   "11 ⊕ 5 = 17",
+   "11 ⊗ 5 = 54",
+   "17 ◇ 5 = 17",
+   "5 ▽ 17 = 12",
+   "5 ⊘ 17 = -7",
+   "5 ⊛ 17 = 294",
+   "5 ⊞ 17 = 22",
+   "5 ⊠ 17 = 24",
+   "5 △ 17 = 0",
+   "(17 △ 5) ⊛ (20 ⊠ 200) = 50188",
+   "5 ◇ 17 = 17"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "◇": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   }
+  },
+  "minutes_total": 6.1,
+  "minutes_to_reveal": 3.7,
+  "steps": 27,
+  "used_python": true,
+  "cost_usd": 0.797,
+  "puzzles": {
+   "P1": {
+    "given": "(4 △ 7) ⊛ (6 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "(8 ⊗ (3 ⊛ 6)) ⊞ 5",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ◇ ((2 ⊛ 8) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "(4 ⊕ 6) ⊗ (5 ⊠ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "6 ▽ (4 ⊛ (8 ⊘ 5))",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "5 ⊠ 6 ⊘ 3 ⊗ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "4",
+  "job": "jobs/2026-11-14__21-30-18"
+ },
+ {
+  "trial": "alien-arithmetic-v5__Li8qwYf",
+  "reward": 0.6875,
+  "solved": 6,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 8,
+  "wrong_ops": {
+   "⊞": "a + b"
+  },
+  "false_none": 1,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "5 ⊕ 13",
+  "queries": [
+   "5 ⊕ 13 = 19",
+   "5 ⊗ 13 = 64",
+   "5 ◇ 13 = 13",
+   "5 ▽ 13 = 8",
+   "5 ⊘ 13 = -3",
+   "5 ⊞ 13 = 18",
+   "5 ⊛ 13 = 174",
+   "5 ⊠ 13 = 20",
+   "5 △ 13 = 0",
+   "17 ⊘ 6 = 28",
+   "(17 ⊠ 6) ⊗ 100 = 2599",
+   "17 △ 6 = 11"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊛": {
+    "a<b": true,
+    "a>b": false,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 4.5,
+  "minutes_to_reveal": 3.5,
+  "steps": 24,
+  "used_python": true,
+  "cost_usd": 0.556,
+  "puzzles": {
+   "P1": {
+    "given": "(4 △ 7) ⊛ (6 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "(8 ⊗ (3 ⊛ 6)) ⊞ 5",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "(5 ◇ (2 ⊛ 8)) ⊛ 5",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "(4 ⊕ 6) ⊗ (5 ⊠ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "(6 ▽ (4 ⊛ 8)) ⊘ 5",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "5 ⊠ 6 ⊘ 3 ⊗ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "4",
+  "job": "jobs/2026-11-14__21-30-18"
+ },
+ {
+  "trial": "alien-arithmetic-v5__QdFQnjM",
+  "reward": 0.375,
+  "solved": 4,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 5,
+  "wrong_ops": {
+   "⊕": "a + b + i",
+   "▽": "a - b",
+   "⊛": "(a - b) ** 2",
+   "⊞": "a + b + d"
+  },
+  "false_none": 2,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 12,
+  "multi_op_queries": 1,
+  "overflow_queries": 0,
+  "first_probe": "11 ⊕ 5",
+  "queries": [
+   "11 ⊕ 5 = 17",
+   "11 ⊗ 5 = 54",
+   "11 ◇ 5 = 11",
+   "11 ▽ 5 = 6",
+   "11 ⊘ 5 = 17",
+   "11 ⊛ 5 = 36",
+   "11 ⊞ 5 = 16",
+   "11 ⊠ 5 = 18",
+   "11 △ 5 = 6",
+   "(3 ⊘ 20) ⊗ 1000 = -14001",
+   "3 ⊠ 20 = 25",
+   "3 △ 20 = 0"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊗": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": true,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 5.3,
+  "minutes_to_reveal": 2.8,
+  "steps": 23,
+  "used_python": true,
+  "cost_usd": 0,
+  "puzzles": {
+   "P1": {
+    "given": "(4 △ 7) ⊛ (6 ⊠ 9)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "5 ⊠ ((6 ⊛ 2) ⊗ 7)",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "(4 ⊕ 6) ⊗ (5 ⊠ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "6 ⊠ 4 ⊕ 8 ⊗ 5",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "5 ⊠ 6 ⊘ 3 ⊗ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "4",
+  "job": "jobs/2026-11-14__21-30-18"
+ },
+ {
+  "trial": "alien-arithmetic-v5__viUvvia",
+  "reward": 0.375,
+  "solved": 4,
+  "timeout": false,
+  "error": null,
+  "model_committed": true,
+  "model_ok": 6,
+  "wrong_ops": {
+   "▽": "a - b",
+   "⊞": "a + b",
+   "△": "abs(a - b)"
+  },
+  "false_none": 2,
+  "false_solution": 1,
+  "inconsistent": 0,
+  "budget_spent": 13,
+  "n_queries": 11,
+  "multi_op_queries": 2,
+  "overflow_queries": 0,
+  "first_probe": "19 ⊕ 5",
+  "queries": [
+   "19 ⊕ 5 = 25",
+   "19 ⊗ 5 = 94",
+   "19 ◇ 5 = 19",
+   "19 ▽ 5 = 14",
+   "19 ⊘ 5 = 33",
+   "19 ⊛ 5 = 44",
+   "19 ⊞ 5 = 24",
+   "19 ⊠ 5 = 26",
+   "19 △ 5 = 14",
+   "1000 ⊗ (17 ⊛ 6) = 52999",
+   "500 ⊘ (6 ⊕ 17) = 976"
+  ],
+  "probe": {
+   "⊕": {
+    "a<b": true,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊗": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "◇": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "▽": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊘": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": true,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊛": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": true
+   },
+   "⊞": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "⊠": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   },
+   "△": {
+    "a<b": false,
+    "a>b": true,
+    "sum>=256": false,
+    "negative_in": false,
+    "n>=3": false
+   }
+  },
+  "minutes_total": 6.6,
+  "minutes_to_reveal": 4.0,
+  "steps": 24,
+  "used_python": true,
+  "cost_usd": 0.871,
+  "puzzles": {
+   "P1": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P2": {
+    "given": "none",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P3": {
+    "given": "(8 ⊗ (3 ⊛ 6)) ⊞ 5",
+    "correct": false,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P4": {
+    "given": "none",
+    "correct": true,
+    "solvable": false,
+    "naive": false,
+    "consistent": true
+   },
+   "P5": {
+    "given": "5 ◇ ((2 ⊛ 8) ⊛ 5)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P6": {
+    "given": "(4 ⊕ 6) ⊗ (5 ⊠ 8)",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P7": {
+    "given": "6 △ (4 ⊛ (8 ⊘ 5))",
+    "correct": false,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   },
+   "P8": {
+    "given": "5 ⊠ 6 ⊘ 3 ⊗ 8",
+    "correct": true,
+    "solvable": true,
+    "naive": false,
+    "consistent": true
+   }
+  },
+  "set": "4",
+  "job": "jobs/2026-11-14__21-30-18"
+ }
+]

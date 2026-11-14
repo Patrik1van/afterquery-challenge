@@ -6,7 +6,7 @@ Usage:
 
 The model file maps every operator symbol to a formula in a and b. Format only
 (these formulas are placeholders, not hints):
-  {"⊕": "a + b", "⊗": "a * b", "◇": "min(a, b)", "▽": "a - b", "⊘": "a", "⊛": "b", "⊞": "b - a", "⊠": "a * n", "△": "max(a, b)"}
+  {"⊕": "a + b", "⊗": "a * b", "◇": "min(a, b)", "▽": "a - b", "⊘": "a", "⊛": "b", "⊞": "b - a", "⊠": "a * n", "△": "b * 2"}
 
 This is final. The lab checks the model; if it is valid, the lab stores it,
 locks itself (evaluate stops working) and returns the puzzles, which are also

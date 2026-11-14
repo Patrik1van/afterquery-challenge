@@ -1,0 +1,11 @@
+{"expr": "900 ⊕ 13", "result": 914, "cost": 1, "budget_used": 1}
+{"expr": "900 ⊗ 13", "result": 11699, "cost": 1, "budget_used": 2}
+{"expr": "900 ◇ 13", "result": 900, "cost": 1, "budget_used": 3}
+{"expr": "900 ▽ 13", "result": 887, "cost": 1, "budget_used": 4}
+{"expr": "900 ⊘ 13", "result": 1787, "cost": 1, "budget_used": 5}
+{"expr": "900 ⊛ 13", "result": 1069, "cost": 1, "budget_used": 6}
+{"expr": "900 ⊞ 13", "result": 145, "cost": 1, "budget_used": 7}
+{"expr": "900 ⊠ 13", "result": 915, "cost": 1, "budget_used": 8}
+{"expr": "900 △ 13", "result": 887, "cost": 1, "budget_used": 9}
+{"expr": "(13 ◇ 900) ⊠ (20 ▽ 500)", "result": 1384, "cost": 3, "budget_used": 12}
+{"expr": "13 △ 900", "result": 0, "cost": 1, "budget_used": 13}
