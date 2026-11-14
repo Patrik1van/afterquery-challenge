@@ -4,6 +4,7 @@
   dispatch state                       show clock, vehicles and visible orders (JSON)
   dispatch route <vehicle> <stop> ...  replace a vehicle's remaining stops (order ids or DEPOT)
   dispatch route <vehicle>             clear a vehicle's route (it stops where it is)
+  dispatch route <vehicle> --mode <m> <stop> ...   also set the driving mode (shifts that have modes)
   dispatch wait <minutes>              advance the clock 1-120 min; vehicles drive, new orders may appear
   dispatch finish                      end the shift (remaining time still elapses)
 """
@@ -28,7 +29,13 @@ def main(argv):
     if cmd == "state":
         out = call("GET", "/state")
     elif cmd == "route" and rest:
-        out = call("POST", "/route", {"vehicle": rest[0], "stops": rest[1:]})
+        body, stops = {"vehicle": rest[0]}, rest[1:]
+        if stops[:1] == ["--mode"]:
+            if len(stops) < 2:
+                print(__doc__); return 2
+            body["mode"], stops = stops[1], stops[2:]
+        body["stops"] = stops
+        out = call("POST", "/route", body)
     elif cmd == "wait" and len(rest) == 1:
         try:
             out = call("POST", "/wait", {"minutes": float(rest[0])})

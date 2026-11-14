@@ -41,7 +41,12 @@ Each recipe targets one habit we expect frontier agents to show. `scripts/probe_
 | `breakdown` | not reacting when a van breaks down mid-shift | 0.92 | plan once, ignore events 0.62 |
 | `overbooked` | refusing to triage when demand exceeds the fleet | 0.52 | serve everything 0.24 |
 
+| `nearest_trap_hidden` | **not experimenting**: vans have 4 unlabeled modes with hidden effects on speed and cargo temperature, shuffled per seed | 0.91 (oracle 0.97) | never experiments 0.34–0.58 |
+| `short_fuse_hidden` | same hidden modes on the short-fuse shift | 0.85 (oracle 0.93) | never experiments 0.45–0.61 |
+
 `overbooked` can't reach 1 by design; compare agents against the reference, not against 1.
+
+**Hidden-rule recipes** turn the shift into a hypothesis-testing problem, like an equation puzzle with unknown operators. The mode labels are fixed, what each one does is hidden and shuffled per seed, and every experiment costs real shift time. The agent writes its inferred rules to `/app/beliefs.json`, and reward = 0.7 × delivery + 0.3 × rules right. The reference rotates modes across vans for up to the first two hours, measures clean driving intervals (distance moved, reefer temperature), gets all 8 labels right, then exploits. The oracle knows the rules from the start, so oracle minus reference is the price of learning.
 
 ## Run
 ```bash

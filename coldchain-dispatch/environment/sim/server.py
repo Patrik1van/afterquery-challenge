@@ -56,7 +56,7 @@ class H(BaseHTTPRequestHandler):
                 if not env.done:            # agent stopped early: the shift still plays out
                     env._advance(env.horizon)
                 r = env.reward()
-                r.update(level=LEVEL, seed=SEED, tool_calls=env.calls, log=env.log)
+                r.update(level=LEVEL, seed=SEED, tool_calls=env.calls, truth=env.truth(), log=env.log)
                 return self._send(200, r)
         tool = {"/route": "set_route", "/wait": "wait", "/finish": "finish"}.get(self.path)
         if tool is None:

@@ -13,6 +13,8 @@ waiting_game      ignoring time windows: nearby orders that open late make vans 
 heavy_load        capacity arithmetic: big orders need depot reloads planned into routes
 breakdown         not reading state changes: a van breaks down mid-shift, its stops need rescue
 overbooked        no triage: more work than the fleet can do; trying to serve all spoils more
+*_hidden          no hypothesis testing: vans have unlabeled driving modes with hidden effects on
+                  speed and cargo temperature; the agent must experiment, infer, then exploit
 """
 from __future__ import annotations
 import math, random
@@ -115,8 +117,29 @@ def overbooked(rng, Order):
         orders.append(_order(Order, i, x, y, rng.randint(3, 8), rel, op, cl, cl + rng.uniform(3, 8)))
     return dict(orders=orders, k=2, cap=40, events=[])
 
+# ---- hidden-rule layer: unlabeled driving modes ---------------------------------------------
+# Like operators in an equation puzzle: the labels are fixed for the shift, the meaning behind each
+# label is shuffled per seed, and the agent has to infer it from evidence that costs shift time.
+MODE_FAMILY = [
+    {"speed": 1.0, "shelf_rate": 0.0},    # plain
+    {"speed": 1.6, "shelf_rate": -0.6},   # express: fast, but the reefer can't keep up
+    {"speed": 0.7, "shelf_rate": 0.5},    # eco-cold: slow, cargo lasts longer
+    {"speed": 0.8, "shelf_rate": -1.2},   # lemon: slower AND cooks the cargo
+]
+MODE_LABELS = ["amber", "cobalt", "jade", "slate"]
+
+def with_hidden_modes(base):
+    def recipe(rng, Order):
+        inst = base(rng, Order)
+        fam = MODE_FAMILY[:]; rng.shuffle(fam)
+        inst["modes"] = dict(zip(MODE_LABELS, fam))
+        return inst
+    recipe.__name__ = base.__name__ + "_hidden"
+    return recipe
+
 RECIPES = {f.__name__: f for f in
-           [nearest_trap, short_fuse, rush_hour, waiting_game, heavy_load, breakdown, overbooked]}
+           [nearest_trap, short_fuse, rush_hour, waiting_game, heavy_load, breakdown, overbooked,
+            with_hidden_modes(nearest_trap), with_hidden_modes(short_fuse)]}
 
 def build(name, seed, Order):
     inst = RECIPES[name](random.Random(f"{name}:{seed}"), Order)

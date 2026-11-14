@@ -66,6 +66,8 @@ class Vehicle:
     busy_until: float = 0.0                      # serving / waiting for a window
     distance: float = 0.0
     status: str = "ok"                           # ok | broken
+    mode: str | None = None                      # hidden-rule recipes: unlabeled driving mode
+    shelf_adj: float = 0.0                       # minutes of shelf life gained (+) / lost (-) by cargo
 
 class ColdChainEnv:
     def __init__(self, level="medium", seed=0, max_tool_calls=1500):
@@ -77,6 +79,7 @@ class ColdChainEnv:
         self.calls, self.max_calls, self.done = 0, max_tool_calls, False
         self.log: list[dict] = []          # ground truth for reward — agent cannot write to it
         self.events = sorted(inst.get("events", []), key=lambda e: e["t"])
+        self.modes = inst.get("modes")               # {label: {"speed": x, "shelf_rate": y}} or None
         self.event_log: list[str] = []
 
     # -- visibility: the agent only sees released orders
@@ -114,20 +117,25 @@ class ColdChainEnv:
             tgt = v.route[0]
             tx, ty = (0.0, 0.0) if tgt == DEPOT else (self.orders[tgt].x, self.orders[tgt].y)
             d = math.hypot(tx - v.x, ty - v.y)
-            if now + d > until:                          # partial move (speed = 1 unit/min)
-                f = (until - now) / d if d else 1
+            m = self.modes[v.mode] if self.modes and v.mode else {"speed": 1.0, "shelf_rate": 0.0}
+            dt = d / m["speed"]
+            if now + dt > until:                         # partial move
+                f = (until - now) / dt if dt else 1
                 v.x += (tx - v.x) * f; v.y += (ty - v.y) * f
-                v.distance += until - now
+                v.distance += d * f
+                v.shelf_adj += m["shelf_rate"] * (until - now)
                 return
-            v.x, v.y, v.distance, now = tx, ty, v.distance + d, now + d
+            v.x, v.y, v.distance, now = tx, ty, v.distance + d, now + dt
+            v.shelf_adj += m["shelf_rate"] * dt
             v.route.pop(0)
             if tgt == DEPOT:
                 v.load = v.cap; v.busy_until = now + 10   # reload time
+                v.shelf_adj = 0.0                          # fresh cargo
                 continue
             o = self.orders[tgt]
             start = max(now, o.tw_open)                   # early: wait for window
             o.delivered_at = start
-            o.status = "spoiled" if start > o.spoil_at else ("late" if start > o.tw_close else "delivered")
+            o.status = "spoiled" if start > o.spoil_at + v.shelf_adj else ("late" if start > o.tw_close else "delivered")
             v.load -= o.demand
             v.busy_until = start + o.service
             self.log.append(dict(order=o.id, vehicle=v.id, t=round(start, 1), status=o.status))
@@ -188,18 +196,30 @@ class ColdChainEnv:
             if v.status != "ok":
                 return {"error": f"{v.id} is {v.status} and cannot drive"}
             stops = list(args.get("stops", []))
+            mode = args.get("mode")
+            if self.modes is not None:
+                if mode is None and v.mode is None:
+                    return {"error": f"choose a driving mode: one of {sorted(self.modes)}"}
+                if mode is not None and mode not in self.modes:
+                    return {"error": f"unknown mode {mode}; modes are {sorted(self.modes)}"}
+            elif mode is not None:
+                return {"error": "this shift has no driving modes"}
             if (err := self._check_route(v, stops)):
                 return {"error": err}
             v.route = stops
+            if mode is not None:
+                v.mode = mode
             return {"ok": True}
         if tool == "wait":
             m = float(args.get("minutes", 0))
             if not 1 <= m <= 120:
                 return {"error": "minutes must be 1..120"}
-            before, n_ev = {o.id for o in self._visible()}, len(self.event_log)
+            before, n_ev, n_log = {o.id for o in self._visible()}, len(self.event_log), len(self.log)
             self._advance(m)
             new = [o.id for o in self._visible() if o.id not in before]
             out = {"t": round(self.t, 1), "new_orders": new, "done": self.done}
+            if len(self.log) > n_log:
+                out["deliveries"] = self.log[n_log:]
             if len(self.event_log) > n_ev:
                 out["events"] = self.event_log[n_ev:]
             return out
@@ -208,12 +228,28 @@ class ColdChainEnv:
             return {"done": True}
         return {"error": f"unknown tool {tool}"}
 
+    def _vehicle_view(self, v):
+        out = dict(id=v.id, status=v.status, x=round(v.x, 1), y=round(v.y, 1), load=v.load, cap=v.cap,
+                   route=v.route, busy_until=round(v.busy_until, 1))
+        if self.modes is not None:                   # reefer telemetry: warmer cargo spoils sooner
+            out.update(mode=v.mode, cargo_temp_c=round(4.0 - v.shelf_adj / 10.0, 1))
+        return out
+
+    def truth(self) -> dict | None:
+        """Ground truth for belief scoring: coarse labels per hidden mode."""
+        if self.modes is None:
+            return None
+        lab = lambda x, lo, hi, a, b, c: a if x > hi else (c if x < lo else b)
+        return {k: {"speed": lab(m["speed"], 0.95, 1.05, "faster", "same", "slower"),
+                    "cargo": lab(m["shelf_rate"], -0.05, 0.05, "cooler", "same", "warmer")}
+                for k, m in self.modes.items()}
+
     def observe(self) -> dict:
         assigned = self._assigned()
         return {
             "t": round(self.t, 1), "horizon": self.horizon,
-            "vehicles": [dict(id=v.id, status=v.status, x=round(v.x, 1), y=round(v.y, 1), load=v.load, cap=v.cap,
-                              route=v.route, busy_until=round(v.busy_until, 1)) for v in self.vehicles.values()],
+            **({"modes": sorted(self.modes)} if self.modes is not None else {}),
+            "vehicles": [self._vehicle_view(v) for v in self.vehicles.values()],
             "orders": [dict(id=o.id, x=o.x, y=o.y, demand=o.demand, tw=[o.tw_open, o.tw_close],
                             spoil_at=o.spoil_at, status=o.status, assigned=o.id in assigned)
                        for o in self._visible()],

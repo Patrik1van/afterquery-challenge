@@ -2,7 +2,10 @@ version = "1.0"
 
 # Score is computed inside the sim sidecar (which the agent cannot access) and handed to a
 # separate verifier container as an artifact.
-artifacts = [{ source = "/sim/out/result.json", service = "sim" }]
+artifacts = [
+  { source = "/sim/out/result.json", service = "sim" },
+  { source = "/app/beliefs.json" },   # agent's inferred rules (hidden-mode shifts only)
+]
 
 [metadata]
 author_name = "Team (Junction 2026)"
