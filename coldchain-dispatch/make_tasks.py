@@ -8,7 +8,7 @@
 Recipes are listed in environment/sim/recipes.py.
 Then run:  harbor run -p tasks/coldchain-medium-s1 -a opencode -m <provider/model>
 """
-import secrets, shutil, sys
+import json, secrets, shutil, sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -46,6 +46,11 @@ def make(level, seed):
     if level.endswith("_hidden"):
         ins = out / "instruction.md"
         ins.write_text(ins.read_text() + HIDDEN_NOTE)
+    # privileged reference: the oracle rebuilds this exact shift (solution/ is only used for -a oracle)
+    (out / "solution" / "params.json").write_text(json.dumps({"level": level, "seed": seed}))
+    (out / "solution" / "sim").mkdir(exist_ok=True)
+    for f in ["coldchain.py", "recipes.py"]:
+        shutil.copy(ROOT / "environment" / "sim" / f, out / "solution" / "sim" / f)
     token = secrets.token_hex(16)
     compose = out / "environment" / "docker-compose.yaml"
     compose.write_text(compose.read_text()
