@@ -37,7 +37,7 @@ class BayesAgent:
         alpha: float = 0.1,
         beta: float = 0.6,
         target_s_mean: float = 0.97,
-        roughening: float = 0.5,
+        roughening: float = 0.02,
         seed: int = 0,
     ) -> None:
         self.n_particles = int(n_particles)
@@ -96,6 +96,8 @@ class BayesAgent:
 
         particles = self.rng.uniform(-theta_max, theta_max, size=(self.n_particles, 22)).astype(np.float32)
         agent_logs: list[dict[str, Any]] = []
+        latest_obs_h: list[dict[str, Any]] | None = None
+        latest_obs_v: list[dict[str, Any]] | None = None
 
         for shot_idx in range(1, budget + 1):
             mean_delta = np.mean(particles, axis=0)
@@ -122,11 +124,24 @@ class BayesAgent:
             if on_shot_callback is not None:
                 on_shot_callback(shot_idx, mean_delta, p_lost)
 
+            # Check measured symmetry from latest noisy readings (>= 0.85 at every monitor)
+            measured_all_ge_085 = False
+            if latest_obs_h is not None and latest_obs_v is not None:
+                meas_s_h = [
+                    np.sqrt(max(0.0, 1.0 - abs(2.0 * o["ratio"] - 1.0))) * min(1.0, o["level"])
+                    for o in latest_obs_h
+                ]
+                meas_s_v = [
+                    np.sqrt(max(0.0, 1.0 - abs(2.0 * o["ratio"] - 1.0))) * min(1.0, o["level"])
+                    for o in latest_obs_v
+                ]
+                all_meas = meas_s_h + meas_s_v
+                measured_all_ge_085 = bool(all(s >= 0.85 for s in all_meas))
 
-            is_confident = (pred_s_mean >= self.target_s_mean)
+            can_submit_early = (pred_s_mean >= self.target_s_mean) and measured_all_ge_085
             is_last_shot = (shot_idx == budget)
 
-            if is_confident or is_last_shot:
+            if can_submit_early or is_last_shot:
                 action = np.clip(mean_delta, -theta_max, theta_max)
                 act_h = action[:10]
                 act_v = action[10:]
@@ -142,7 +157,7 @@ class BayesAgent:
                     "posterior_mean_v": mean_delta[10:].tolist(),
                     "p_lost": float(p_lost),
                     "predicted_s_mean": float(pred_s_mean),
-                    "action_type": "submit_mean" if is_confident else "last_shot_mean",
+                    "action_type": "submit_mean" if can_submit_early else "last_shot_mean",
                 }
                 agent_logs.append(shot_log)
                 env.submit()
@@ -158,6 +173,9 @@ class BayesAgent:
             act_v = command_theta[10:]
 
             obs = env.set_correctors(act_h, act_v)
+            latest_obs_h = obs["h"]
+            latest_obs_v = obs["v"]
+
 
             shot_log = {
                 "shot": shot_idx,

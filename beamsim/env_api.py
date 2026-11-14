@@ -22,7 +22,7 @@ class BeamlineEnv:
     def __init__(
         self,
         seed: int = 42,
-        budget: int = 40,
+        budget: int = 60,
         randomization: str = "medium",
         lattice: Lattice | None = None,
         theta_max: float | None = None,
