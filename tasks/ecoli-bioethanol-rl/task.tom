@@ -1,0 +1,19 @@
+version = "1.0"
+
+[metadata]
+author_name = "hackathon-team"
+difficulty = "hard"
+category = "bioprocess-control"
+tags = ["rl", "control-theory", "biotechnology", "ode", "multi-step"]
+
+[verifier]
+timeout_sec = 120.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+build_timeout_sec = 300.0
+cpus = 2
+memory = "2G"
+storage = "5G"
