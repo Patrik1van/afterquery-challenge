@@ -67,6 +67,9 @@ class Vehicle:
     distance: float = 0.0
     status: str = "ok"                           # ok | broken
     mode: str | None = None                      # hidden-rule recipes: unlabeled driving mode
+    leg_key: str | None = None                   # noisy-travel recipes: current leg and its factor
+    leg_factor: float = 1.0
+    legs: int = 0
     shelf_adj: float = 0.0                       # minutes of shelf life gained (+) / lost (-) by cargo
 
 class ColdChainEnv:
@@ -80,6 +83,7 @@ class ColdChainEnv:
         self.log: list[dict] = []          # ground truth for reward — agent cannot write to it
         self.events = sorted(inst.get("events", []), key=lambda e: e["t"])
         self.modes = inst.get("modes")               # {label: {"speed": x, "shelf_rate": y}} or None
+        self.noise = inst.get("noise") or {}         # {"travel": sigma, "temp": sigma_c}
         self.event_log: list[str] = []
 
     # -- visibility: the agent only sees released orders
@@ -118,7 +122,12 @@ class ColdChainEnv:
             tx, ty = (0.0, 0.0) if tgt == DEPOT else (self.orders[tgt].x, self.orders[tgt].y)
             d = math.hypot(tx - v.x, ty - v.y)
             m = self.modes[v.mode] if self.modes and v.mode else {"speed": 1.0, "shelf_rate": 0.0}
-            dt = d / m["speed"]
+            if tgt != v.leg_key:                         # new leg: draw this leg's traffic factor
+                v.leg_key, v.legs = tgt, v.legs + 1
+                sig = self.noise.get("travel", 0.0)
+                v.leg_factor = (math.exp(random.Random(f"{self.seed}:{v.id}:{v.legs}").gauss(0, sig))
+                                if sig else 1.0)
+            dt = d / (m["speed"] * v.leg_factor)
             if now + dt > until:                         # partial move
                 f = (until - now) / dt if dt else 1
                 v.x += (tx - v.x) * f; v.y += (ty - v.y) * f
@@ -141,6 +150,11 @@ class ColdChainEnv:
             self.log.append(dict(order=o.id, vehicle=v.id, t=round(start, 1), status=o.status))
 
     def _apply(self, e):
+        if e["type"] == "mode_drift":                # silent: no event message on purpose
+            old = dict(self.modes)
+            for label, src in e["perm"].items():     # label now behaves like src did
+                self.modes[label] = old[src]
+            return
         if e["type"] == "breakdown":
             v = self.vehicles[e["vehicle"]]
             lost = [s for s in v.route if s != DEPOT]
@@ -232,7 +246,11 @@ class ColdChainEnv:
         out = dict(id=v.id, status=v.status, x=round(v.x, 1), y=round(v.y, 1), load=v.load, cap=v.cap,
                    route=v.route, busy_until=round(v.busy_until, 1))
         if self.modes is not None:                   # reefer telemetry: warmer cargo spoils sooner
-            out.update(mode=v.mode, cargo_temp_c=round(4.0 - v.shelf_adj / 10.0, 1))
+            temp = 4.0 - v.shelf_adj / 10.0
+            sig = self.noise.get("temp", 0.0)
+            if sig:                                  # noisy reefer sensor, reproducible per reading
+                temp += random.Random(f"{self.seed}:{v.id}:{round(self.t, 1)}:temp").gauss(0, sig)
+            out.update(mode=v.mode, cargo_temp_c=round(temp, 1))
         return out
 
     def truth(self) -> dict | None:

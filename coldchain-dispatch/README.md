@@ -42,7 +42,9 @@ Each recipe targets one habit we expect frontier agents to show. `scripts/probe_
 | `overbooked` | refusing to triage when demand exceeds the fleet | 0.52 | serve everything 0.24 |
 
 | `nearest_trap_hidden` | **not experimenting**: vans have 4 unlabeled modes with hidden effects on speed and cargo temperature, shuffled per seed | 0.91 (oracle 0.97) | never experiments 0.34–0.58 |
-| `short_fuse_hidden` | same hidden modes on the short-fuse shift | 0.85 (oracle 0.93) | never experiments 0.45–0.61 |
+| `short_fuse_hidden` | same hidden modes on the short-fuse shift | 0.97 (upper bound 0.98) | never experiments 0.45–0.61 |
+| `short_fuse_drift` | **not re-checking beliefs**: hidden modes + noisy travel times and reefer sensor, and at a hidden time mid-shift every mode's effect is silently reshuffled | 0.84 (upper bound 0.97) | learns once, never re-checks 0.71 |
+| `rush_hour_drift` | same drift + noise on the rush-hour shift | 0.94 (upper bound 0.97) | learns once, never re-checks 0.77 |
 
 `overbooked` can't reach 1 by design; compare agents against the reference, not against 1.
 
@@ -66,14 +68,16 @@ Mean of seeds 1–3 (`python scripts/probe_recipes.py`):
 | overbooked | 0.601 | 0.589 | 0.517 |
 | nearest_trap_hidden | 0.985 | 0.983 | 0.970 |
 | short_fuse_hidden | 0.981 | 0.970 | 0.913 |
+| short_fuse_drift | 0.973 | 0.841 | 0.721 |
+| rush_hour_drift | 0.969 | 0.939 | 0.761 |
 
-Foresight is worth little here (upper bound vs fair ≤ 0.012): what separates good and bad play is decision quality, not information.
+On fixed-rule shifts foresight is worth little (upper bound vs fair ≤ 0.012): what separates good and bad play is decision quality, not information. On **drift** shifts the gap opens (0.03–0.13): even a careful learner pays to notice that the rules changed and to re-learn them under noise. The fair reference keeps measuring the mode it drives; when its last 4 samples disagree with what it learned, it resets and re-probes. Turning that off ("learns once") costs 0.13–0.17.
 
 ## First frontier runs (Harbor + OpenCode on Modal)
 | Task | Gemini 3.8 Flash | Fair reference | Upper bound | What happened |
 |---|---|---|---|---|
 | nearest_trap_hidden s1 | 0.982 | 0.986 | 0.988 | Tested all 4 modes with 5-min probes in ~15 min, all rules right, 18/18 on time |
-| overbooked s1 | 0.582 | 0.655 | 0.656 | Wrote its own 20 KB rolling-horizon optimiser with triage; still 12 of 34 orders lost |
+| overbooked s1 (5 runs) | mean 0.602 (0.557–0.640) | 0.655 | 0.656 | Every run wrote its own optimiser (custom, OR-Tools, MIP, ALNS); all 5 below the reference, losing mostly late-arriving orders |
 
 In both runs the agent first tried to game the environment (port scans, filesystem search, hidden endpoints like `/reset`, `/score`); none worked.
 

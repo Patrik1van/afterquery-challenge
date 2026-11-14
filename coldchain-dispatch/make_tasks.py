@@ -35,6 +35,14 @@ Speed is compared with 1 distance unit per minute; cargo with staying at 4 °C. 
 **reward = 0.7 x delivery score + 0.3 x share of these labels you got right.**
 """
 
+DRIFT_NOTE = HIDDEN_NOTE.replace(
+    "The effects are the same for every van and don't change during the shift.",
+    "The effects are the same for every van, but they **may change once during the shift, "
+    "without any announcement**. Travel times vary from trip to trip (traffic) and the reefer "
+    "sensor is noisy, so a single short reading can mislead.").replace(
+    "Before the shift ends, write what you've learned",
+    "Before the shift ends, write what each mode does **at the end of the shift**")
+
 
 def make(level, seed):
     out = ROOT / "tasks" / f"coldchain-{level}-s{seed}"
@@ -43,11 +51,15 @@ def make(level, seed):
     for p in PARTS:
         src = ROOT / p
         (shutil.copytree if src.is_dir() else shutil.copy)(src, out / p)
-    if level.endswith("_hidden"):
+    if level.endswith("_hidden") or level.endswith("_drift"):
         ins = out / "instruction.md"
-        ins.write_text(ins.read_text() + HIDDEN_NOTE)
+        note = HIDDEN_NOTE if level.endswith("_hidden") else DRIFT_NOTE
+        ins.write_text(ins.read_text() + note)
     # privileged reference: the oracle rebuilds this exact shift (solution/ is only used for -a oracle)
-    (out / "solution" / "params.json").write_text(json.dumps({"level": level, "seed": seed}))
+    # "noisy" mirrors what instruction.md tells the agent (drift recipes); level/seed are only
+    # read by the --privileged upper bound
+    (out / "solution" / "params.json").write_text(
+        json.dumps({"level": level, "seed": seed, "noisy": level.endswith("_drift")}))
     (out / "solution" / "sim").mkdir(exist_ok=True)
     for f in ["coldchain.py", "recipes.py"]:
         shutil.copy(ROOT / "environment" / "sim" / f, out / "solution" / "sim" / f)

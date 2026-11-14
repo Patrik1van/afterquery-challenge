@@ -61,7 +61,7 @@ class ModeLearner:
                 continue
             speed = path / drive
             shelf_rate = -10.0 * (v["cargo_temp_c"] - p["cargo_temp_c"]) / drive
-            self.samples[p["mode"]].append((speed, shelf_rate))
+            self.samples[p["mode"]].append((speed, shelf_rate, t1))
 
     def snapshot(self, state):
         """Call right after routes/modes are set, so the next interval is attributed correctly."""
@@ -74,7 +74,20 @@ class ModeLearner:
         s = self.samples[m]
         if not s:
             return {"speed": 1.0, "shelf_rate": 0.0}
-        return {"speed": sum(a for a, _ in s) / len(s), "shelf_rate": sum(b for _, b in s) / len(s)}
+        return {"speed": sum(x[0] for x in s) / len(s), "shelf_rate": sum(x[1] for x in s) / len(s)}
+
+    def changed(self, m, recent=4, older=4, d_speed=0.2, d_rate=0.6):
+        """Do the latest samples of mode m disagree with what we learned earlier?"""
+        s = self.samples.get(m) or []
+        if len(s) < recent + older:
+            return False
+        new, old = s[-recent:], s[:-recent]
+        mean = lambda xs, i: sum(x[i] for x in xs) / len(xs)
+        return (abs(mean(new, 0) - mean(old, 0)) > d_speed or
+                abs(mean(new, 1) - mean(old, 1)) > d_rate)
+
+    def reset(self):
+        self.samples = {m: [] for m in self.labels}
 
     def best(self):
         est = {m: self.estimate(m) for m in self.labels if self.samples[m]}
@@ -86,8 +99,9 @@ class ModeLearner:
         for m in self.labels:
             e = self.estimate(m)
             sp, sr = e["speed"], e["shelf_rate"]
-            out[m] = {"speed": "faster" if sp > 1.05 else ("slower" if sp < 0.95 else "same"),
-                      "cargo": "cooler" if sr > 0.05 else ("warmer" if sr < -0.05 else "same")}
+            # bands are wide on purpose: measurements are noisy, real effects are not subtle
+            out[m] = {"speed": "faster" if sp > 1.12 else ("slower" if sp < 0.9 else "same"),
+                      "cargo": "cooler" if sr > 0.25 else ("warmer" if sr < -0.3 else "same")}
         return out
 
 # ---------------------------------------------------------------- planning

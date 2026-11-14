@@ -13,6 +13,8 @@ waiting_game      ignoring time windows: nearby orders that open late make vans 
 heavy_load        capacity arithmetic: big orders need depot reloads planned into routes
 breakdown         not reading state changes: a van breaks down mid-shift, its stops need rescue
 overbooked        no triage: more work than the fleet can do; trying to serve all spoils more
+*_drift           not re-checking beliefs: hidden modes + noisy travel times and reefer sensor,
+                  and at a hidden time mid-shift the best mode silently swaps with the trap mode
 *_hidden          no hypothesis testing: vans have unlabeled driving modes with hidden effects on
                   speed and cargo temperature; the agent must experiment, infer, then exploit
 """
@@ -137,9 +139,28 @@ def with_hidden_modes(base):
     recipe.__name__ = base.__name__ + "_hidden"
     return recipe
 
+def with_drift(base):
+    """Hidden modes + noise + one silent mid-shift reshuffle: every label gets a different
+    effect (a derangement), so whichever mode the agent relies on changes under it. An agent
+    that stops checking keeps acting on rules that are no longer true."""
+    def recipe(rng, Order):
+        inst = with_hidden_modes(base)(rng, Order)
+        labels = sorted(inst["modes"])
+        while True:
+            src = labels[:]; rng.shuffle(src)
+            if all(a != b for a, b in zip(labels, src)):
+                break
+        inst["events"] = inst["events"] + [dict(t=round(rng.uniform(170, 260), 1),
+                                                type="mode_drift", perm=dict(zip(labels, src)))]
+        inst["noise"] = {"travel": 0.15, "temp": 0.15}
+        return inst
+    recipe.__name__ = base.__name__ + "_drift"
+    return recipe
+
 RECIPES = {f.__name__: f for f in
            [nearest_trap, short_fuse, rush_hour, waiting_game, heavy_load, breakdown, overbooked,
-            with_hidden_modes(nearest_trap), with_hidden_modes(short_fuse)]}
+            with_hidden_modes(nearest_trap), with_hidden_modes(short_fuse),
+            with_drift(short_fuse), with_drift(rush_hour)]}
 
 def build(name, seed, Order):
     inst = RECIPES[name](random.Random(f"{name}:{seed}"), Order)

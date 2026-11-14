@@ -59,7 +59,7 @@ def run(env, decide, wait=10):
 def _planner(env, privileged):
     b = planner.run(lambda: env.step("get_state"), lambda m: env.step("wait", {"minutes": m}),
                     caller(env), lambda: env.step("finish"), env.level, env.seed,
-                    privileged=privileged)
+                    privileged=privileged, noisy=bool(env.noise))
     return final(env, b)
 
 def p_reference(env):          # FAIR reference (solve.sh): agent's information only, strong optimiser
@@ -67,6 +67,12 @@ def p_reference(env):          # FAIR reference (solve.sh): agent's information 
 
 def p_oracle(env):             # upper bound: knows future orders and true hidden rules
     return _planner(env, privileged=True)
+
+def p_learn_once(env):         # fair reference that never re-checks what it learned
+    b = planner.run(lambda: env.step("get_state"), lambda m: env.step("wait", {"minutes": m}),
+                    caller(env), lambda: env.step("finish"), env.level, env.seed, recheck=False,
+                    noisy=bool(env.noise))
+    return final(env, b)
 
 def p_simple_ref(env):         # first reference: one insertion pass, slow mode rotation
     b = reference.run(lambda: env.step("get_state"), lambda m: env.step("wait", {"minutes": m}),
@@ -135,7 +141,8 @@ def p_no_reload_plan(env):     # plans by urgency but only reloads when the van 
             e.step("set_route", {"vehicle": v["id"], "stops": stops or [DEPOT]})
     return run(env, decide)
 
-POLICIES = {"oracle": p_oracle, "reference": p_reference, "simple_ref": p_simple_ref, "greedy": lambda env: (fix_first_mode(env), greedy_agent(env), final(env))[-1], "nearest_first": p_nearest_first,
+POLICIES = {"oracle": p_oracle, "reference": p_reference, "learn_once": p_learn_once,
+            "simple_ref": p_simple_ref, "greedy": lambda env: (fix_first_mode(env), greedy_agent(env), final(env))[-1], "nearest_first": p_nearest_first,
             "coarse_wait_60": p_coarse_wait, "plan_once": p_plan_once, "serve_all": p_serve_all,
             "no_reload_plan": p_no_reload_plan}
 

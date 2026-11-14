@@ -27,19 +27,33 @@ def load_instance(level, seed):
     sys.path.insert(0, str(HERE.parent / "environment" / "sim"))   # when run from the repo
     from coldchain import ColdChainEnv
     env = ColdChainEnv(level, seed)
+    drifts = [e for e in env.events if e["type"] == "mode_drift"]
+    init_modes = dict(env.modes) if env.modes else None
+    final_modes = dict(env.modes or {})
+    for e in drifts:
+        old = dict(final_modes)
+        final_modes.update({k: old[v] for k, v in e["perm"].items()})
     orders = {o.id: dict(id=o.id, x=o.x, y=o.y, demand=o.demand, release=o.release,
                          tw=[o.tw_open, o.tw_close], spoil_at=o.spoil_at) for o in env.orders.values()}
-    return orders, env.modes, env.truth()
+    if drifts:                                       # truth at the END of the shift
+        env.modes = final_modes
+    return orders, init_modes, env.truth(), drifts
 
 # ---------------------------------------------------------------- route model
-def simulate(v, t, seq, orders, mode):
-    """Insert DEPOT reloads as needed, simulate; return (value, dist, stops) or None if infeasible."""
+def simulate(v, t, seq, orders, mode, fresh_first=False):
+    """Insert DEPOT reloads as needed, simulate; return (value, dist, stops) or None if infeasible.
+    fresh_first: start with a depot visit to swap warm cargo for fresh cargo."""
     sp, rate = mode
     x, y, now = v["x"], v["y"], max(t, v["busy_until"])
     load, cap = v["load"], v["cap"]
     shelf = -10.0 * (v.get("cargo_temp_c", 4.0) - 4.0)
     value = dist = 0.0
     stops = []
+    if fresh_first:
+        leg = math.hypot(x, y)
+        x, y, dist, now = 0.0, 0.0, leg, now + leg / sp + RELOAD
+        load, shelf = cap, 0.0
+        stops.append("DEPOT")
     for oid in seq:
         o = orders[oid]
         if o["demand"] > cap:
@@ -66,8 +80,11 @@ def route_cost(v, t, seq, orders, modes):
     if v["id"] in modes and isinstance(modes[v["id"]], dict):
         modes = modes[v["id"]]
     best = None
-    for label, m in modes.items():
-        r = simulate(v, t, seq, orders, m)
+    warm = v.get("cargo_temp_c", 4.0) > 4.5
+    options = [(label, m, fresh) for label, m in modes.items()
+               for fresh in ((False, True) if warm and seq else (False,))]
+    for label, m, fresh in options:
+        r = simulate(v, t, seq, orders, m, fresh_first=fresh)
         if r is None:
             continue
         val, dist, stops = r
@@ -174,20 +191,27 @@ def probe_assignment(state, learner, rnd):
     return {v["id"]: need[(i + rnd) % len(need)] for i, v in enumerate(vans)}
 
 def run(state_fn, wait_fn, call, finish_fn, level=None, seed=0, write_beliefs=None,
-        privileged=False):
+        privileged=False, recheck=True, noisy=False):
+    """noisy: the instructions say readings are noisy and rules may change (drift recipes) -
+    the same information the agent gets. Then: two samples per mode, and keep re-checking."""
     MEMORY.clear()
     rng = random.Random(seed)
     s = state_fn()
     if privileged:
-        orders, modes, truth = load_instance(level, seed)
+        orders, modes0, truth, drifts = load_instance(level, seed)
         learner = None
     else:
         from reference import ModeLearner
         orders, modes, truth = None, None, None
         learner = ModeLearner(s["modes"]) if "modes" in s else None
-    r, rnd = {}, 0
+    r, rnd, probe_until, changes = {}, 0, 60.0, 0
     while not s.get("error") and s["t"] < s["horizon"]:
         if privileged:
+            modes = dict(modes0) if modes0 else None    # knows when the rules change
+            for e in drifts:
+                if s["t"] >= e["t"]:
+                    old = dict(modes)
+                    modes.update({k: old[v] for k, v in e["perm"].items()})
             plan(s, orders, modes, call, rng)
         else:
             vis = visible_orders(s)
@@ -195,7 +219,11 @@ def run(state_fn, wait_fn, call, finish_fn, level=None, seed=0, write_beliefs=No
                 plan(s, vis, None, call, rng)
             else:
                 learner.observe(s, r)
-                if learner.done(min_samples=1) or s["t"] >= 60:
+                in_use = {v["mode"] for v in s["vehicles"] if v["status"] == "ok" and v["mode"]}
+                if recheck and noisy and s["t"] > probe_until and any(learner.changed(m) for m in in_use):
+                    learner.reset(); changes += 1          # the world changed: learn again
+                    probe_until = s["t"] + 60
+                if learner.done(min_samples=2 if noisy else 1) or s["t"] >= probe_until:
                     est = {m: learner.estimate(m) for m in learner.labels}
                     plan(s, vis, est, call, rng)
                 else:
@@ -228,7 +256,8 @@ def main():
         except OSError:
             pass
     run(lambda: d(["state"]), lambda m: d(["wait", str(m)]), d, lambda: d(["finish"]),
-        p.get("level"), int(p.get("seed", 0)), write, privileged="--privileged" in sys.argv)
+        p.get("level"), int(p.get("seed", 0)), write, privileged="--privileged" in sys.argv,
+        noisy=bool(p.get("noisy")))
 
 if __name__ == "__main__":
     main()
