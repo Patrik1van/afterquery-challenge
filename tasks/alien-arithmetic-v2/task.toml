@@ -1,0 +1,46 @@
+schema_version = "1.3"
+
+# Evidence for scoring, copied into the separate verifier:
+#   - the agent's answer from its own container
+#   - the lab's query log from the sidecar (the agent cannot write to it)
+artifacts = [
+    { source = "/app/answer.json" },
+    { source = "/var/log/lab/queries.jsonl", service = "lab" },
+]
+
+[task]
+name = "afterquery-challenge/alien-arithmetic-v2"
+description = "Identify six hidden binary operators (two non-commutative) with a budget of 8 experiments, then solve operator-and-parenthesis placement puzzles, some of which have no solution."
+authors = []
+keywords = ["hypothesis-testing", "experimental-design", "arithmetic", "sidecar"]
+
+[metadata]
+difficulty = "medium"
+category = "reasoning"
+tags = ["experiment-design", "hidden-rules", "budget", "non-commutative", "parentheses", "unsolvable-puzzles", "calibration", "v2"]
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+
+[verifier.environment]
+#network_mode = "no-network"
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 1024
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

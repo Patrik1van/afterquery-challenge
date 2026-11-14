@@ -1,0 +1,8 @@
+{
+  "P1": {"solution": "⊕⊗⊕", "familiar_solutions": []},
+  "P2": {"solution": "⊗⊗⊕", "familiar_solutions": ["⊕⊗⊕"]},
+  "P3": {"solution": "⊕⊕◇", "familiar_solutions": []},
+  "P4": {"solution": "⊕◇◇", "familiar_solutions": ["◇⊕⊕"]},
+  "P5": {"solution": "◇⊗▽", "familiar_solutions": []},
+  "P6": {"solution": "⊗◇▽", "familiar_solutions": ["⊗▽◇"]}
+}

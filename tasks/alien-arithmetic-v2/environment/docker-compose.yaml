@@ -1,0 +1,20 @@
+# Merged on top of Harbor's base compose config. Harbor configures `main`
+# (the agent's container); we only add the `lab` sidecar that holds the
+# hidden operator semantics.
+services:
+  main:
+    depends_on:
+      lab:
+        condition: service_healthy
+
+  lab:
+    build:
+      context: ./lab
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/budget', timeout=2)"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 3s
