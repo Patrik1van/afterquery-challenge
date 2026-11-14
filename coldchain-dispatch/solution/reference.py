@@ -45,10 +45,11 @@ def evaluate(v, t, stops, orders):
         now = start + SERVICE
     return value, dist
 
-def plan(state):
+def plan(state, call=None, allow_loss=False):
+    call = call or d
     t = state["t"]
     orders = {o["id"]: o for o in state["orders"] if o["status"] == "pending"}
-    vehicles = state["vehicles"]
+    vehicles = [v for v in state["vehicles"] if v.get("status", "ok") == "ok"]
     seqs = {v["id"]: [] for v in vehicles}
     for oid in sorted(orders, key=lambda i: orders[i]["spoil_at"]):
         best = None
@@ -62,14 +63,14 @@ def plan(state):
                     continue
                 val, dist = evaluate(v, t, stops, orders)
                 gain = (val - b_val) * 1000 - (dist - b_dist)
-                if val - b_val > 0 and (best is None or gain > best[0]):
+                if (allow_loss or val - b_val > 0) and (best is None or gain > best[0]):
                     best = (gain, v["id"], cand)
         if best:
             seqs[best[1]] = best[2]
     for v in vehicles:
         stops = with_reloads(seqs[v["id"]], orders, v["load"], v["cap"]) or []
         if stops != v["route"]:
-            d(["route", v["id"], *stops])
+            call(["route", v["id"], *stops])
 
 def main():
     while True:

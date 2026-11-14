@@ -14,7 +14,7 @@ Control the fleet with the `dispatch` command (run `dispatch help`):
 - The depot is at (0, 0). Vehicles travel 1 distance unit per minute in straight lines.
 - Each order has a delivery window `tw = [open, close]`. Arriving before `open` means waiting. Service takes 5 minutes.
 - Each order has a `spoil_at` time. A delivery starting after it is worthless, and so is an order nobody delivers by then.
-- **New orders appear during the shift.** You only see an order once it has been released.
+- **Things change during the shift.** New orders appear, and you only see an order once it has been released. A vehicle can also break down: it shows `status: "broken"`, loses its cargo and can't be routed again. `dispatch wait` reports such events.
 
 ## Scoring
 

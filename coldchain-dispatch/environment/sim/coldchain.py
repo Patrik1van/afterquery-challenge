@@ -37,6 +37,9 @@ class Order:
     delivered_at: float | None = None
 
 def make_instance(level: str, seed: int) -> dict:
+    if level not in LEVELS:                      # named failure-mode scenario
+        from recipes import build
+        return build(level, seed, Order)
     p, rng = LEVELS[level], random.Random(seed)
     orders = []
     for i in range(p["n"]):
@@ -50,7 +53,7 @@ def make_instance(level: str, seed: int) -> dict:
         orders.append(Order(f"o{i}", round(x, 1), round(y, 1), rng.randint(3, 12),
                             round(release, 1), round(tw_open, 1), round(tw_close, 1),
                             round(spoil_at, 1)))
-    return dict(level=level, seed=seed, orders=orders, k=p["k"], cap=p["cap"], horizon=p["horizon"])
+    return dict(level=level, seed=seed, orders=orders, k=p["k"], cap=p["cap"], horizon=p["horizon"], events=[])
 
 # ---------------------------------------------------------------- 2. simulator
 @dataclass
@@ -62,6 +65,7 @@ class Vehicle:
     route: list = field(default_factory=list)   # remaining stops: order ids or DEPOT
     busy_until: float = 0.0                      # serving / waiting for a window
     distance: float = 0.0
+    status: str = "ok"                           # ok | broken
 
 class ColdChainEnv:
     def __init__(self, level="medium", seed=0, max_tool_calls=1500):
@@ -72,6 +76,8 @@ class ColdChainEnv:
         self.horizon, self.t = inst["horizon"], 0.0
         self.calls, self.max_calls, self.done = 0, max_tool_calls, False
         self.log: list[dict] = []          # ground truth for reward — agent cannot write to it
+        self.events = sorted(inst.get("events", []), key=lambda e: e["t"])
+        self.event_log: list[str] = []
 
     # -- visibility: the agent only sees released orders
     def _visible(self):
@@ -126,8 +132,22 @@ class ColdChainEnv:
             v.busy_until = start + o.service
             self.log.append(dict(order=o.id, vehicle=v.id, t=round(start, 1), status=o.status))
 
+    def _apply(self, e):
+        if e["type"] == "breakdown":
+            v = self.vehicles[e["vehicle"]]
+            lost = [s for s in v.route if s != DEPOT]
+            v.status, v.route, v.load = "broken", [], 0
+            self.event_log.append(f"t={e['t']:.0f}: {v.id} broke down at ({v.x:.1f}, {v.y:.1f}); "
+                                  f"its cargo is lost and these stops are now unassigned: {lost}")
+
     def _advance(self, minutes: float):
         until = min(self.t + minutes, self.horizon)
+        while self.events and self.events[0]["t"] <= until:   # stop the world at each event
+            e = self.events.pop(0)
+            for v in self.vehicles.values():
+                self._advance_vehicle(v, e["t"])
+            self.t = max(self.t, e["t"])
+            self._apply(e)
         for v in self.vehicles.values():
             self._advance_vehicle(v, until)
         self.t = until
@@ -165,6 +185,8 @@ class ColdChainEnv:
             v = self.vehicles.get(args.get("vehicle"))
             if v is None:
                 return {"error": "unknown vehicle"}
+            if v.status != "ok":
+                return {"error": f"{v.id} is {v.status} and cannot drive"}
             stops = list(args.get("stops", []))
             if (err := self._check_route(v, stops)):
                 return {"error": err}
@@ -174,10 +196,13 @@ class ColdChainEnv:
             m = float(args.get("minutes", 0))
             if not 1 <= m <= 120:
                 return {"error": "minutes must be 1..120"}
-            before = {o.id for o in self._visible()}
+            before, n_ev = {o.id for o in self._visible()}, len(self.event_log)
             self._advance(m)
             new = [o.id for o in self._visible() if o.id not in before]
-            return {"t": round(self.t, 1), "new_orders": new, "done": self.done}
+            out = {"t": round(self.t, 1), "new_orders": new, "done": self.done}
+            if len(self.event_log) > n_ev:
+                out["events"] = self.event_log[n_ev:]
+            return out
         if tool == "finish":
             self._advance(self.horizon)                  # time still runs out; no early-exit loophole
             return {"done": True}
@@ -187,7 +212,7 @@ class ColdChainEnv:
         assigned = self._assigned()
         return {
             "t": round(self.t, 1), "horizon": self.horizon,
-            "vehicles": [dict(id=v.id, x=round(v.x, 1), y=round(v.y, 1), load=v.load, cap=v.cap,
+            "vehicles": [dict(id=v.id, status=v.status, x=round(v.x, 1), y=round(v.y, 1), load=v.load, cap=v.cap,
                               route=v.route, busy_until=round(v.busy_until, 1)) for v in self.vehicles.values()],
             "orders": [dict(id=o.id, x=o.x, y=o.y, demand=o.demand, tw=[o.tw_open, o.tw_close],
                             spoil_at=o.spoil_at, status=o.status, assigned=o.id in assigned)
@@ -214,7 +239,7 @@ def greedy_agent(env: ColdChainEnv):
         s = env.step("get_state")
         free = [o for o in s["orders"] if o["status"] == "pending" and not o["assigned"]]
         for v in s["vehicles"]:
-            if v["route"] or not free:
+            if v["status"] != "ok" or v["route"] or not free:
                 continue
             free.sort(key=lambda o: (o["spoil_at"], math.hypot(o["x"] - v["x"], o["y"] - v["y"])))
             stops, load = [], v["load"]

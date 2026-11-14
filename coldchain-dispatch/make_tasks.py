@@ -3,6 +3,9 @@
 
   python make_tasks.py                 -> tasks/coldchain-{easy,medium,hard}-s1
   python make_tasks.py hard 1 2 3      -> tasks/coldchain-hard-s1 .. s3
+  python make_tasks.py recipes         -> one task per failure-mode recipe (seed 1)
+  python make_tasks.py short_fuse 1 2  -> a recipe with chosen seeds
+Recipes are listed in environment/sim/recipes.py.
 Then run:  harbor run -p tasks/coldchain-medium-s1 -a opencode -m <provider/model>
 """
 import secrets, shutil, sys
@@ -30,7 +33,12 @@ def make(level, seed):
 
 if __name__ == "__main__":
     a = sys.argv[1:]
-    if not a:
+    if a and a[0] == "recipes":
+        sys.path.insert(0, str(ROOT / "environment" / "sim"))
+        from recipes import RECIPES
+        for name in RECIPES:
+            make(name, 1)
+    elif not a:
         for lvl in ["easy", "medium", "hard"]:
             make(lvl, 1)
     else:

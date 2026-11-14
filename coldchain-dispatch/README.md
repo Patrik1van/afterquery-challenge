@@ -28,9 +28,26 @@ The agent dispatches a small refrigerated delivery fleet through one 480-minute 
 | medium | 0.28–0.45 | 0.76–0.77 |
 | hard | 0.11–0.20 | 0.65–0.72 |
 
+## Failure-mode recipes
+Each recipe targets one habit we expect frontier agents to show. `scripts/probe_recipes.py` plays the reference and an "LLM-like" proxy for each habit offline (mean of seeds 1–3):
+
+| Recipe | What it punishes | Reference | Proxy with that habit |
+|---|---|---|---|
+| `nearest_trap` | serving the closest orders first while far, urgent ones spoil | 0.97 | nearest-first 0.68 |
+| `short_fuse` | checking in rarely; orders spoil ~30 min after appearing | 0.92 | waits 60 min 0.62 |
+| `rush_hour` | not replanning when a surge of orders lands mid-shift | 0.92 | plan once, append 0.38 |
+| `waiting_game` | ignoring time windows; nearby orders open hours later | 0.89 | nearest-first 0.37 |
+| `heavy_load` | not planning depot reloads into routes | 0.80 | reload only when empty 0.63 |
+| `breakdown` | not reacting when a van breaks down mid-shift | 0.92 | plan once, ignore events 0.62 |
+| `overbooked` | refusing to triage when demand exceeds the fleet | 0.52 | serve everything 0.24 |
+
+`overbooked` can't reach 1 by design; compare agents against the reference, not against 1.
+
 ## Run
 ```bash
 python make_tasks.py                      # tasks/coldchain-{easy,medium,hard}-s1
+python make_tasks.py recipes              # one task per failure-mode recipe
+python scripts/probe_recipes.py           # offline check of every recipe
 harbor run -p tasks/coldchain-medium-s1 -a oracle                       # reference run
 harbor run -p tasks/coldchain-medium-s1 -a opencode -m <provider/model> # frontier agent
 harbor view ./jobs
