@@ -2,7 +2,6 @@ import os
 import json
 import pandas as pd
 import streamlit as st
-from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
 from ecoli_bioreactor_v2 import CoupledEColiBioreactorEnv, solve_reference_policy
@@ -16,18 +15,25 @@ st.caption("Testing frontier LLM multi-step control against a closed-loop SciPy 
 with st.sidebar:
     st.header("Experiment Configuration")
     difficulty = st.slider("Difficulty Tier", min_value=1, max_value=5, value=3)
-    model_id = st.selectbox("Gemini Model", ["gemini-2.5-flash", "gemini-2.5-pro"])
-    
-    # Uses Streamlit Cloud secret if set, otherwise lets user/judge paste a key
-    default_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    model_id = st.selectbox(
+        "Gemini Model",
+        ["gemini-3.8-flash", "gemini-4-argon", "gemini-3.5-flash-lite"],
+        index=0,
+    )
+
+    # Safe fallback for Docker (where .streamlit/secrets.toml does not exist)
+    try:
+        default_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+    except Exception:
+        default_key = os.environ.get("GEMINI_API_KEY", "")
+
     api_key = st.text_input("Gemini API Key", value=default_key, type="password")
-    
     run_btn = st.button("🚀 Run Live Benchmark", type="primary", use_container_width=True)
 
 # --- Main Execution ---
 if run_btn:
     if not api_key:
-        st.error("Please enter a Gemini API key in the sidebar (or configure GEMINI_API_KEY in Streamlit Secrets).")
+        st.error("Please enter a Gemini API key in the sidebar (or pass -e GEMINI_API_KEY=... to Docker).")
         st.stop()
 
     col1, col2 = st.columns(2)
@@ -70,8 +76,13 @@ if run_btn:
         while not obs["terminated"]:
             status_text.text(f"Simulating Hour {obs['step']} / {env.cfg.max_steps}...")
             prompt = f"Current Bioreactor Observation:\n{json.dumps(obs, indent=2)}\n\nProvide your next control action."
-            response = chat.send_message(prompt)
-            action_dict = response.parsed.model_dump()
+            try:
+                response = chat.send_message(prompt)
+                action_dict = response.parsed.model_dump()
+            except Exception as e:
+                status_text.empty()
+                st.error(f"Gemini API error at step {obs['step']}: {e}")
+                break
 
             next_obs, reward, done, _ = env.step(action_dict)
             trajectory.append({
@@ -86,6 +97,9 @@ if run_btn:
             progress_bar.progress(min(1.0, obs["step"] / env.cfg.max_steps))
 
         status_text.empty()
+        if not trajectory:
+            st.stop()
+
         outcome = classify_failure(trajectory, obs["crash_reason"])
         final_st = obs["state"]
 
@@ -116,7 +130,7 @@ if run_btn:
         st.line_chart(chart_etoh)
 
     with c2:
-        st.markdown("**Culture Viability & Dissolved O2**")
+        st.markdown("**Culture Viability**")
         chart_health = pd.DataFrame({
             "Agent Viability": agent_df.set_index("step")["viability"],
             "Ref Viability": ref_df.set_index("step")["viability"],
@@ -124,7 +138,7 @@ if run_btn:
         st.line_chart(chart_health)
 
     with c3:
-        st.markdown("**Agent Temperature (°C) & pH**")
+        st.markdown("**Agent Temperature (°C) & pH (x5 scaled)**")
         chart_phys = pd.DataFrame({
             "Temp (°C)": agent_df.set_index("step")["temperature_C"],
             "pH x 5": agent_df.set_index("step")["pH"] * 5.0,
