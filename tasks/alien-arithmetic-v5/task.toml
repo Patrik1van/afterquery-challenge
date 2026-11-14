@@ -1,0 +1,47 @@
+schema_version = "1.3"
+
+# Evidence for scoring, copied into the separate verifier:
+#   - the agent's answer from its own container
+#   - the lab's query log and the committed model from the sidecar (the agent cannot write to them)
+artifacts = [
+    { source = "/app/answer.json" },
+    { source = "/var/log/lab/queries.jsonl", service = "lab" },
+    { source = "/var/log/lab/model.json", service = "lab" },
+]
+
+[task]
+name = "afterquery-challenge/alien-arithmetic-v5"
+description = "Two phases: identify nine hidden binary operators (incl. modulo, operand-count-dependent and truncated subtraction) with a budget of 13 points and commit a model of them, then the lab locks and reveals operator-and-parenthesis puzzles, some of which have no solution."
+authors = []
+keywords = ["hypothesis-testing", "experimental-design", "arithmetic", "sidecar"]
+
+[metadata]
+difficulty = "medium"
+category = "reasoning"
+tags = ["experiment-design", "hidden-rules", "budget", "non-commutative", "parentheses", "unsolvable-puzzles", "calibration", "query-cost", "two-phase", "committed-model", "context-dependent", "v5"]
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+
+[verifier.environment]
+#network_mode = "no-network"
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 1024
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

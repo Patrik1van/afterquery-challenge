@@ -1,0 +1,111 @@
+{
+  "P1": {
+    "numbers": [
+      5,
+      3,
+      9,
+      9
+    ],
+    "target": 154,
+    "solvable": true,
+    "reference_solutions": [
+      "5 ▽ ((3 ⊛ 9) ⊘ 9)"
+    ]
+  },
+  "P2": {
+    "numbers": [
+      3,
+      4,
+      6,
+      8
+    ],
+    "target": 316,
+    "solvable": true,
+    "reference_solutions": [
+      "3 ▽ ((4 ⊛ 6) ⊗ 8)"
+    ]
+  },
+  "P3": {
+    "numbers": [
+      4,
+      3,
+      5,
+      4
+    ],
+    "target": 125,
+    "solvable": false,
+    "reference_solutions": [],
+    "traps": [
+      "familiar",
+      "swapped",
+      "diam_a"
+    ]
+  },
+  "P4": {
+    "numbers": [
+      2,
+      6,
+      3,
+      8
+    ],
+    "target": 158,
+    "solvable": true,
+    "reference_solutions": [
+      "(2 ⊛ (6 ⊘ 3)) ⊘ 8"
+    ]
+  },
+  "P5": {
+    "numbers": [
+      2,
+      3,
+      9,
+      3
+    ],
+    "target": 248,
+    "solvable": true,
+    "reference_solutions": [
+      "(2 ⊛ (3 ◇ 9)) ⊗ 3"
+    ]
+  },
+  "P6": {
+    "numbers": [
+      5,
+      5,
+      2,
+      5
+    ],
+    "target": 79,
+    "solvable": false,
+    "reference_solutions": [],
+    "traps": [
+      "familiar",
+      "star3"
+    ]
+  },
+  "P7": {
+    "numbers": [
+      5,
+      5,
+      7,
+      7
+    ],
+    "target": 243,
+    "solvable": true,
+    "reference_solutions": [
+      "5 ⊕ ((5 ⊗ 7) ⊗ 7)"
+    ]
+  },
+  "P8": {
+    "numbers": [
+      6,
+      2,
+      7,
+      9
+    ],
+    "target": 291,
+    "solvable": true,
+    "reference_solutions": [
+      "6 ◇ (2 ⊛ (7 ⊕ 9))"
+    ]
+  }
+}
