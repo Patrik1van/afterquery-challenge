@@ -1,0 +1,37 @@
+schema_version = "1.1"
+
+[task]
+name = "beam-steering-s002"
+description = "Steer and centre simulated CERN TT20 beamline via MCP tools"
+authors = []
+keywords = []
+
+[metadata]
+seed = 2
+budget = 60
+randomization = "medium"
+
+[verifier]
+timeout_sec = 600.0
+
+[agent]
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+gpus = 0
+
+[[environment.mcp_servers]]
+name = "beamline"
+transport = "streamable-http"
+url = "http://beamline:8000/mcp"
+args = []
+
+[verifier.env]
+
+[environment.env]
+
+[solution.env]

@@ -1,0 +1,18 @@
+# Multi-container Compose configuration for Harbor beamline task
+services:
+  main:
+    depends_on:
+      beamline:
+        condition: service_healthy
+
+  beamline:
+    build:
+      context: ./beamline
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; s=socket.create_connection(('localhost',8000),timeout=2); s.close()"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 5s
