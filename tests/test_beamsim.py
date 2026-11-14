@@ -147,3 +147,60 @@ def test_same_seed_gives_identical_readings():
     score1 = compute_reward(s0=sim1.initial_result.s_mean, sf=sim1.last_result.s_mean, shots_used=sim1.shots_used, budget=40)
     score2 = compute_reward(s0=sim2.initial_result.s_mean, sf=sim2.last_result.s_mean, shots_used=sim2.shots_used, budget=40)
     assert score1.reward == score2.reward
+
+
+
+def test_env_api_isolation_and_rules():
+    """BeamlineEnv isolates hidden state and enforces budget, NaN rejection, and submit rules."""
+    from beamsim.env_api import BeamlineEnv, evaluate_env
+
+    env = BeamlineEnv(seed=77, budget=3, randomization="medium")
+    info = env.get_machine_info()
+
+    # Verify no hidden state leaked in machine info
+    assert "delta_theta" not in info
+    assert "corrector_gains" not in info
+    assert "perturbed" not in info
+    assert info["budget"] == 3
+    assert info["shots_used"] == 0
+    assert info["shots_remaining"] == 3
+    assert info["submitted"] is False
+
+    # NaN / Inf rejection
+    with pytest.raises(ValueError, match="NaN or Inf"):
+        env.set_correctors([np.nan] * 10, [0.0] * 12)
+    with pytest.raises(ValueError, match="NaN or Inf"):
+        env.set_correctors([0.0] * 10, [np.inf] * 12)
+
+    # Invalid dimension rejection
+    with pytest.raises(ValueError, match="Expected 10 horizontal"):
+        env.set_correctors([0.0] * 9, [0.0] * 12)
+    with pytest.raises(ValueError, match="Expected 12 vertical"):
+        env.set_correctors([0.0] * 10, [0.0] * 11)
+
+    # Command valid step
+    step1 = env.set_correctors([0.0] * 10, [0.0] * 12)
+    assert len(step1["h"]) == 11
+    assert len(step1["v"]) == 10
+    assert step1["shots_used"] == 1
+    assert step1["shots_remaining"] == 2
+
+    # Step 2 & 3
+    env.set_correctors([0.0] * 10, [0.0] * 12)
+    env.set_correctors([0.0] * 10, [0.0] * 12)
+
+    # Budget exhaustion
+    with pytest.raises(RuntimeError, match="budget.*exhausted"):
+        env.set_correctors([0.0] * 10, [0.0] * 12)
+
+    # Submit freeze
+    sub = env.submit()
+    assert sub["submitted"] is True
+    with pytest.raises(RuntimeError, match="already submitted"):
+        env.set_correctors([0.0] * 10, [0.0] * 12)
+
+    # Evaluator score
+    score = evaluate_env(env)
+    assert score.shots_used == 3
+    assert score.budget == 3
+
