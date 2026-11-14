@@ -1,0 +1,6 @@
+numpy
+scipy
+pytest
+google-genai
+python-dotenv
+matplotlib

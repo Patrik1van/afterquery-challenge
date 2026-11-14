@@ -57,20 +57,22 @@ as `lattice_tt20.csv` and everything else stays the same.
 - Aperture half-widths a_h, a_v per element (~20–40 mm), plus a dense set of aperture
   check points (e.g. every few metres) for loss detection.
 - Emittance: εn = 2 µm, βγ = 427.35 → ε = εn/βγ; σ_i = sqrt(β_i ε).
-- Foil length L per SEM (start with L = 3σ_i; tune).
+- Foil length L per SEM (default L = 10σ_i; parameterized).
 
-**Physics (`sim.py`), per plane independently:**
-- R_ij = sqrt(β_i β_j) sin(2π(μ_i − μ_j)) if μ_i > μ_j else 0 (eq. 1), for all aperture points
-  and monitors.
-- Hidden offsets Δθ ~ U[−θmax, θmax]^n. Agent commands θ. Trajectory x = R(Δθ − θ) (eq. 10).
-- Loss: first aperture point with |x| > a → beam lost; all monitors downstream read background only.
+**Physics (`sim.py`):**
+- Optics per plane independently: R_ij = sqrt(β_i β_j) sin(2π(μ_i − μ_j)) if μ_i > μ_j else 0 (eq. 1),
+  for all aperture points and monitors.
+- Hidden offsets Δθ ~ U[−θmax, θmax]^n. Agent commands θ with corrector gains g: x = R(Δθ − g⊙θ) (eq. 10).
+- Joint beam loss (report §1.1.1): common aperture checkpoint grid for both planes. The beam is lost at
+  the first checkpoint where |x_h| > a_h or |x_v| > a_v; ALL monitors in BOTH planes at or after that s
+  read background only.
 - Foils (eq. 2): I1 = Φ(−x/σ) − Φ((−L−x)/σ), I2 = Φ((L−x)/σ) − Φ(−x/σ).
 - Noise (eq. 3): each foil += U[0, ν], ν = 0.25 default, seeded RNG.
 - Observation per SEM (eq. 4/11): ratio r = Ĩ1/(Ĩ1+Ĩ2), level ℓ = (Ĩ1+Ĩ2)/Imax.
 - Truth (noise-free) for scoring: S = sqrt(1 − |I1−I2|/(I1+I2)), Ŝ = S·(I1+I2)/Imax (eq. 5–6);
   Ŝ = 0 at lost monitors. `S_mean` = mean Ŝ over all 21 monitors. Solved ⇔ S_mean ≥ 0.95.
-- Tune θmax so a random start typically loses the beam within the first ~3 monitors
-  (print a histogram of loss positions over 1000 seeds).
+- Tune θmax so a random start typically loses the beam within the first ~1–4 monitors
+  (print a histogram of loss positions over seeds).
 
 **Randomization (`randomize.py`).** Table 1 "medium" spreads: corrector gain ±2 %, βx₀ ±50 %,
 βy₀ ±10 %, emittance ±20 %, background ±40 % (log-normal). The agent and the Bayes reference

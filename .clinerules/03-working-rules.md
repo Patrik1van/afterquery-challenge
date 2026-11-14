@@ -20,6 +20,7 @@
 - Keep the single eval command (`scripts/run_eval.sh`) working at all times.
 
 ## Code
+- Dev machine is Windows + PowerShell, venv in .venv; use Windows-compatible commands and pathlib.
 - Python 3.11+, NumPy/SciPy only in the simulator. Type hints, small functions, docstrings that
   cite the report's equation numbers (e.g. `# eq. (2)`).
 - Every simulator change comes with a pytest. Run `pytest -q` before saying a task is done.

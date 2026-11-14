@@ -28,3 +28,9 @@ beam through all monitors within a limited number of shots.
   **only the MCP tools** — never the hidden state.
 - Frontier run = OpenCode + Gemini. Evals run locally with Docker (multi-container tasks don't
   work on Modal).
+
+## Project boundaries & bioreactor leftovers
+- Branch was created from main where earlier bioreactor work was started (`experiments/`, `tasks/our-env/`, etc.). Those files are leftovers from another idea and have nothing to do with our project.
+- Do not delete or change any leftover bioreactor files.
+- Our project lives strictly in `beamsim/`, `agents/`, `scripts/`, `tasks/`, `tests/`, `docs/`, and `.clinerules/`. Ignore everything else unless instructed otherwise.
+
