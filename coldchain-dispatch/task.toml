@@ -1,0 +1,26 @@
+version = "1.0"
+
+# Score is computed inside the sim sidecar (which the agent cannot access) and handed to a
+# separate verifier container as an artifact.
+artifacts = [{ source = "/sim/out/result.json", service = "sim" }]
+
+[metadata]
+author_name = "Team (Junction 2026)"
+difficulty_explanation = "Dynamic vehicle routing with time windows, capacity and spoilage deadlines; orders arrive mid-shift so the agent must replan."
+category = "planning"
+tags = ["vehicle-routing", "planning", "dynamic", "resource-management"]
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+
+[[verifier.collect]]
+service = "sim"
+command = "python /sim/finalize.py"
+timeout_sec = 60.0
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+build_timeout_sec = 600.0
