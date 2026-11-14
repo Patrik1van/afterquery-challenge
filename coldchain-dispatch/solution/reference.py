@@ -29,29 +29,46 @@ class ModeLearner:
         self.prev = None
 
     def observe(self, state, wait_result):
-        """Keep only clean samples: van drove the whole interval (no stop, no service, no reload)."""
-        busy = {x["vehicle"] for x in wait_result.get("deliveries", [])}
-        if self.prev:
-            dt = state["t"] - self.prev["t"]
-            before = {v["id"]: v for v in self.prev["vehicles"]}
-            for v in state["vehicles"]:
-                p = before.get(v["id"])
-                if not p or v["status"] != "ok" or not p["mode"] or p["mode"] != v["mode"]:
-                    continue
-                moved = math.hypot(v["x"] - p["x"], v["y"] - p["y"])
-                clean = (v["id"] not in busy and p["busy_until"] <= self.prev["t"]
-                         and v["load"] == p["load"] and p["route"] and v["route"] and moved > 2)
-                if clean and dt > 0:
-                    speed = moved / dt
-                    shelf_rate = -10.0 * (v["cargo_temp_c"] - p["cargo_temp_c"]) / dt
-                    self.samples[p["mode"]].append((speed, shelf_rate))
+        """Turn the last interval into a (speed, shelf_rate) sample per van. Stops are allowed:
+        the path is rebuilt through the orders the van served, and their 5-minute service time
+        is subtracted. Intervals with a depot reload or a wait for a delivery window are skipped."""
+        if not self.prev:
+            return
+        t0, t1 = self.prev["t"], state["t"]
+        dt = t1 - t0
+        before = {v["id"]: v for v in self.prev["vehicles"]}
+        where = {o["id"]: o for o in state["orders"]}
+        by_van = {}
+        for x in wait_result.get("deliveries", []):
+            by_van.setdefault(x["vehicle"], []).append(x)
+        for v in state["vehicles"]:
+            p = before.get(v["id"])
+            if not p or v["status"] != "ok" or not p["mode"] or p["mode"] != v["mode"] or dt <= 0:
+                continue
+            if v["load"] > p["load"]:                       # reloaded: cargo temperature reset
+                continue
+            busy = max(0.0, min(p["busy_until"], t1) - t0)  # service carried over from before
+            path, x, y, clean = 0.0, p["x"], p["y"], True
+            for d in sorted(by_van.get(v["id"], []), key=lambda d: d["t"]):
+                o = where.get(d["order"])
+                if not o or abs(d["t"] - o["tw"][0]) < 1e-6:  # waited for the window: unclear
+                    clean = False; break
+                path += math.hypot(o["x"] - x, o["y"] - y); x, y = o["x"], o["y"]
+                busy += max(0.0, min(d["t"] + SERVICE, t1) - max(d["t"], t0))
+            path += math.hypot(v["x"] - x, v["y"] - y)
+            drive = dt - busy
+            if not clean or drive < 2 or path < 2:
+                continue
+            speed = path / drive
+            shelf_rate = -10.0 * (v["cargo_temp_c"] - p["cargo_temp_c"]) / drive
+            self.samples[p["mode"]].append((speed, shelf_rate))
 
     def snapshot(self, state):
         """Call right after routes/modes are set, so the next interval is attributed correctly."""
         self.prev = state
 
-    def done(self):
-        return all(len(s) >= 2 for s in self.samples.values())
+    def done(self, min_samples=2):
+        return all(len(s) >= min_samples for s in self.samples.values())
 
     def estimate(self, m):
         s = self.samples[m]

@@ -1,11 +1,6 @@
 #!/bin/bash
-# Reference run: privileged "clairvoyant" oracle. It rebuilds the exact shift from params.json
-# (written by make_tasks.py), so it knows future orders and the true hidden rules, and plans with
-# insertion + local search. It still acts only through the same dispatch CLI as the agent.
-# Fallback: the non-privileged reference (learns hidden modes by experimenting).
-DIR="$(dirname "$0")"
-if [ -f "$DIR/params.json" ]; then
-  python3 "$DIR/oracle.py" dispatch
-else
-  python3 "$DIR/reference.py" dispatch
-fi
+# Reference run: FAIR planner with exactly the agent's information (released orders only; hidden
+# modes learned by short probes), plus insertion + local search + restarts every 5 minutes.
+# It acts only through the same dispatch CLI as the agent.
+# Upper bound instead (knows future orders + true rules):  python3 planner.py dispatch --privileged
+python3 "$(dirname "$0")/planner.py" dispatch

@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "environment" / "sim"), str(ROOT / "solution")]
 from coldchain import ColdChainEnv, DEPOT, greedy_agent   # noqa: E402
 from recipes import RECIPES                                # noqa: E402
-import reference                                           # noqa: E402
+import reference, planner                                  # noqa: E402
 
 def caller(env):
     def call(cmd):
@@ -56,24 +56,26 @@ def run(env, decide, wait=10):
     return final(env)
 
 # ---- policies -------------------------------------------------------------------------------
-def p_reference(env):          # replans every 10 min; on hidden-mode shifts experiments first
+def _planner(env, privileged):
+    b = planner.run(lambda: env.step("get_state"), lambda m: env.step("wait", {"minutes": m}),
+                    caller(env), lambda: env.step("finish"), env.level, env.seed,
+                    privileged=privileged)
+    return final(env, b)
+
+def p_reference(env):          # FAIR reference (solve.sh): agent's information only, strong optimiser
+    return _planner(env, privileged=False)
+
+def p_oracle(env):             # upper bound: knows future orders and true hidden rules
+    return _planner(env, privileged=True)
+
+def p_simple_ref(env):         # first reference: one insertion pass, slow mode rotation
     b = reference.run(lambda: env.step("get_state"), lambda m: env.step("wait", {"minutes": m}),
                       caller(env), lambda: env.step("finish"))
     return final(env, b)
 
-def p_oracle(env):             # knows the hidden rules (upper bound); same as reference otherwise
-    if not env.modes:
-        return p_reference(env)
-    best = max((m for m, x in env.modes.items() if x["shelf_rate"] >= 0) , key=lambda m: env.modes[m]["speed"])
-    plan_modes = lambda s: {v["id"]: (best, env.modes[best]) for v in s["vehicles"]}
-    while not env.done:
-        s = env.step("get_state")
-        reference.plan(s, caller(env), modes=plan_modes(s))
-        env.step("wait", {"minutes": 10})
-    return final(env, env.truth())
-
 def p_coarse_wait(env):        # same planner, but checks in only once an hour
     return run(env, lambda e, s: reference.plan(s, caller(e)), wait=60)
+
 
 def p_nearest_first(env):      # serves whatever is closest; ignores deadlines
     def decide(e, s):
@@ -133,17 +135,24 @@ def p_no_reload_plan(env):     # plans by urgency but only reloads when the van 
             e.step("set_route", {"vehicle": v["id"], "stops": stops or [DEPOT]})
     return run(env, decide)
 
-POLICIES = {"oracle": p_oracle, "reference": p_reference, "greedy": lambda env: (fix_first_mode(env), greedy_agent(env), final(env))[-1], "nearest_first": p_nearest_first,
+POLICIES = {"oracle": p_oracle, "reference": p_reference, "simple_ref": p_simple_ref, "greedy": lambda env: (fix_first_mode(env), greedy_agent(env), final(env))[-1], "nearest_first": p_nearest_first,
             "coarse_wait_60": p_coarse_wait, "plan_once": p_plan_once, "serve_all": p_serve_all,
             "no_reload_plan": p_no_reload_plan}
 
+def _cell(args):
+    n, p, s = args
+    return n, p, POLICIES[p](ColdChainEnv(n, s, max_tool_calls=10_000_000))
+
 if __name__ == "__main__":
+    from multiprocessing import Pool
     names = [sys.argv[1]] if len(sys.argv) > 1 else list(RECIPES)
     seeds = [int(x) for x in sys.argv[2:]] or [1, 2, 3]
+    jobs = [(n, p, s) for n in names for p in POLICIES for s in seeds]
+    with Pool() as pool:
+        res = pool.map(_cell, jobs)
+    agg = {}
+    for n, p, sc in res:
+        agg.setdefault((n, p), []).append(sc)
     print(f"{'recipe':20s}" + "".join(f"{p:>15s}" for p in POLICIES))
     for n in names:
-        row = []
-        for p, f in POLICIES.items():
-            sc = [f(ColdChainEnv(n, s, max_tool_calls=10_000)) for s in seeds]
-            row.append(sum(sc) / len(sc))
-        print(f"{n:20s}" + "".join(f"{x:15.3f}" for x in row))
+        print(f"{n:20s}" + "".join(f"{sum(agg[n, p]) / len(agg[n, p]):15.3f}" for p in POLICIES))

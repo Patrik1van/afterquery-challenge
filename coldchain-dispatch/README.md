@@ -49,23 +49,31 @@ Each recipe targets one habit we expect frontier agents to show. `scripts/probe_
 **Hidden-rule recipes** turn the shift into a hypothesis-testing problem, like an equation puzzle with unknown operators. The mode labels are fixed, what each one does is hidden and shuffled per seed, and every experiment costs real shift time. The agent writes its inferred rules to `/app/beliefs.json`, and reward = 0.7 × delivery + 0.3 × rules right. The reference rotates modes across vans for up to the first two hours, measures clean driving intervals (distance moved, reefer temperature), gets all 8 labels right, then exploits. The oracle knows the rules from the start, so oracle minus reference is the price of learning.
 
 ## Reference runs
-`-a oracle` runs `solution/solve.sh`, a **privileged oracle**: it rebuilds the exact shift from the task's level + seed, so it knows future orders and the true hidden rules, and re-plans every 5 minutes with insertion + local search. It still acts only through the same `dispatch` CLI. `solution/reference.py` is the honest, non-privileged reference (learns hidden modes by experimenting).
+`-a oracle` runs `solution/solve.sh`: a **fair reference** with exactly the agent's information. It only sees orders once they are released, and on hidden-mode shifts it learns the modes by probing (each van tries a different mode for 5 minutes; distance along the served path and reefer temperature give speed and cargo effect). Every 5 minutes it re-plans with insertion + local search + random restarts, warm-started from its last plan, and drops orders that no longer pay for themselves. It acts only through the `dispatch` CLI.
 
-Oracle vs honest reference, seeds 1–3:
+`python3 solution/planner.py dispatch --privileged` is an **upper bound**, not a fair competitor: it rebuilds the exact shift from `params.json`, so it also knows future orders and the true hidden rules.
 
-| Recipe | Oracle | Honest reference |
-|---|---|---|
-| overbooked | 0.66 / 0.60 / 0.55 | 0.56 / 0.45 / 0.55 |
-| rush_hour | 0.96 / 0.96 / 0.97 | 0.93 / 0.94 / 0.91 |
-| heavy_load | 0.82 / 0.90 / 0.85 | 0.73 / 0.87 / 0.79 |
-| nearest_trap_hidden | 0.99 / 0.98 / 0.98 | 0.95 / 0.91 / 0.87 |
-| short_fuse_hidden | 0.98 / 0.98 / 0.98 | 0.81 / 0.95 / 0.80 |
+Mean of seeds 1–3 (`python scripts/probe_recipes.py`):
+
+| Recipe | Upper bound (privileged) | **Fair reference** | First simple reference |
+|---|---|---|---|
+| nearest_trap | 0.969 | 0.969 | 0.968 |
+| short_fuse | 0.952 | 0.958 | 0.921 |
+| rush_hour | 0.961 | 0.955 | 0.923 |
+| waiting_game | 0.945 | 0.945 | 0.888 |
+| heavy_load | 0.858 | 0.858 | 0.797 |
+| breakdown | 0.948 | 0.941 | 0.920 |
+| overbooked | 0.601 | 0.589 | 0.517 |
+| nearest_trap_hidden | 0.985 | 0.983 | 0.970 |
+| short_fuse_hidden | 0.981 | 0.970 | 0.913 |
+
+Foresight is worth little here (upper bound vs fair ≤ 0.012): what separates good and bad play is decision quality, not information.
 
 ## First frontier runs (Harbor + OpenCode on Modal)
-| Task | Gemini 3.8 Flash | Oracle | What happened |
-|---|---|---|---|
-| nearest_trap_hidden s1 | 0.982 | 0.988 | Tested all 4 modes with 5-min probes in ~15 min, all rules right, 18/18 on time |
-| overbooked s1 | 0.582 | 0.656 | Wrote its own 20 KB rolling-horizon optimiser with triage; still 12 of 34 orders lost |
+| Task | Gemini 3.8 Flash | Fair reference | Upper bound | What happened |
+|---|---|---|---|---|
+| nearest_trap_hidden s1 | 0.982 | 0.986 | 0.988 | Tested all 4 modes with 5-min probes in ~15 min, all rules right, 18/18 on time |
+| overbooked s1 | 0.582 | 0.655 | 0.656 | Wrote its own 20 KB rolling-horizon optimiser with triage; still 12 of 34 orders lost |
 
 In both runs the agent first tried to game the environment (port scans, filesystem search, hidden endpoints like `/reset`, `/score`); none worked.
 
