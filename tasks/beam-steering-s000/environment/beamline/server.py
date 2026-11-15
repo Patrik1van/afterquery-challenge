@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import secrets
 from typing import Any
 
 from fastmcp import FastMCP
@@ -24,17 +25,14 @@ from starlette.responses import JSONResponse, Response
 from beamsim.env_api import BeamlineEnv, evaluate_env, get_env_true_trajectory
 
 seed = int(os.environ.get("BEAMLINE_SEED", "0"))
-salt = os.environ.get("BEAMLINE_SALT", "")
+salt = secrets.token_hex(16)
 budget = int(os.environ.get("BEAMLINE_BUDGET", "60"))
 randomization = os.environ.get("BEAMLINE_RANDOMIZATION", "medium")
 score_token = os.environ.get("BEAMLINE_SCORE_TOKEN", "")
 
-if salt:
-    combined = f"{seed}:{salt}".encode("utf-8")
-    digest = hashlib.sha256(combined).digest()
-    effective_seed = int.from_bytes(digest[:8], byteorder="big") % (2**31 - 1)
-else:
-    effective_seed = seed
+combined = f"{seed}:{salt}".encode("utf-8")
+digest = hashlib.sha256(combined).digest()
+effective_seed = int.from_bytes(digest[:8], byteorder="big") % (2**31 - 1)
 
 env = BeamlineEnv(
     seed=effective_seed,

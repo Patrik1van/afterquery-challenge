@@ -50,8 +50,8 @@ reward   = 0.8 · progress + 0.2 · solved · (1 − shots_used / budget)
 ### Reward integrity
 
 - **Zero Simulator Access in Agent Container**: The simulator, true offsets, perturbed optics, and score token live exclusively in the `beamline` sidecar container. The agent container contains only Python and NumPy with no simulator code.
-- **Seed Leak Discovery & Fix**: In an earlier development version of the reference, an identical RNG stream (`agent_seed = env_seed`) leaked the true offsets into particle 0. Coupled with an artificially small roughening (0.02), this yielded an inflated score (~0.70), while an honest independent seed scored ~0.05 due to particle depletion. We resolved this by decoupling the agent RNG seed (`env_seed + 1_000_003`), tuning roughening to `0.2` with 100k particles (honest score: 0.443 on Modal, 0.469 locally), and verifying against an independently written scripted threading operator baseline (`agents/threading.py`, scoring 0.392).
-- **Anti-Exploit Secret Salt**: To prevent agents from guessing the hidden offsets from the seed in the task name, each task generates a random secret 128-bit salt (`BEAMLINE_SALT`) baked strictly into the sidecar image. The simulator derives its effective seed from `hash(seed, salt)`. Neither the salt nor the seed is exposed in `instruction.md` or the agent container.
+- **Seed Leak Discovery & Fix**: In an earlier development version of the reference, an identical RNG stream (`agent_seed = env_seed`) leaked the true offsets into particle 0. Coupled with an artificially small roughening (0.02), this yielded an inflated score (~0.70), while an honest independent seed scored ~0.05 due to particle depletion. We resolved this by decoupling the agent RNG seed (`env_seed + 1_000_003`), tuning roughening to `0.2` with 100k particles (honest score: 0.504 on Modal, 0.469 locally), and verifying against an independently written scripted threading operator baseline (`agents/threading.py`, scoring 0.392).
+- **Anti-Exploit In-Memory Startup Salt**: To prevent agents from guessing hidden offsets from the nominal seed in the task name, the sidecar server generates a fresh cryptographically random 128-bit secret salt (`secrets.token_hex(16)`) at process startup. The salt is **kept strictly in process memory** and is never written to disk, Dockerfiles, environment variables, logs, or responses. The simulator derives its effective seed from `hash(seed, salt)`. Each trial is therefore a **fresh random puzzle from the same distribution**.
 - **Token-Protected Verifier Endpoint**: `/score` requires a per-task token that only the verifier container holds (mounted after the agent finishes).
 - **Server-Side Guardrails**: Budget (60 shots), clipping to ±θmax, NaN/Inf rejection, and freeze-after-submit are enforced server-side.
 
@@ -61,13 +61,13 @@ Medium randomisation, budget 60, tasks `beam-steering-s000 … s004`, evaluated 
 
 | Agent | Task s000 | Task s001 | Task s002 | Task s003 | Task s004 | Overall (Mean ± Std) | Solved % |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Reference: Bayes particle filter (`oracle`, r=0.2)** | 0.518 | 0.390 | 0.379 | 0.485 | 0.444 | **0.443 ± 0.054** | 0.0% |
-| **Gemini 3.8 Flash via OpenCode (3 runs/task)\*** | 0.231 ± 0.139 | 0.259 ± 0.087 | 0.299 ± 0.034 | 0.194 ± 0.034 | 0.314 ± 0.132 | **0.259 ± 0.106** | 0.0% |
+| **Reference: Bayes particle filter (`oracle`, r=0.2)** | 0.392 | 0.394 | 0.657 | 0.452 | 0.624 | **0.504 ± 0.114** | 0.0% |
+| **Gemini 3.8 Flash via OpenCode (3 runs/task)\*** | 0.133 ± 0.016 | 0.198 ± 0.016 | 0.310 ± 0.037 | 0.173 ± 0.021 | 0.407 ± 0.011 | **0.244 ± 0.103** | 0.0% |
 | **Stop-early (1–2 shots, submit)** | 0.001 | 0.026 | 0.000 | 0.000 | 0.000 | **0.005 ± 0.010** | 0.0% |
 | **Do-nothing (`nop`)** | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | **0.000 ± 0.000** | 0.0% |
 | **Random search (local baseline)** | 0.020 | 0.015 | 0.025 | 0.018 | 0.022 | **0.020 ± 0.004** | 0.0% |
 
-*\*Note: The 15 Gemini runs (3 attempts across 5 seeds, mean 0.259) were conducted on an earlier task build with the identical machine, noise, and perturbation distribution.*
+*\*Note: Earlier Gemini pilot runs scored a mean of 0.259 (~0.26). Each trial is now a fresh random puzzle from the same medium randomization distribution.*
 
 ---
 

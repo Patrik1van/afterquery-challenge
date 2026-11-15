@@ -169,7 +169,6 @@ COPY beamsim/ /app/beamsim/
 COPY server.py /app/server.py
 
 ENV BEAMLINE_SEED={seed}
-ENV BEAMLINE_SALT={salt}
 ENV BEAMLINE_BUDGET={budget}
 ENV BEAMLINE_RANDOMIZATION={randomization}
 ENV BEAMLINE_SCORE_TOKEN={score_token}
@@ -284,7 +283,6 @@ def write_file(path: Path, text: str) -> None:
 def generate_task(seed: int, budget: int = 60, randomization: str = "medium") -> Path:
     task_dir = REPO_ROOT / "tasks" / f"beam-steering-s{seed:03d}"
     score_token = secrets.token_hex(16)
-    salt = secrets.token_hex(16)
     existing_test = task_dir / "tests" / "test.sh"
     if existing_test.exists():
         import re
@@ -319,7 +317,7 @@ def generate_task(seed: int, budget: int = 60, randomization: str = "medium") ->
     write_file(
         beamline_dir / "Dockerfile",
         BEAMLINE_DOCKERFILE_TEMPLATE.format(
-            seed=seed, salt=salt, budget=budget, randomization=randomization, score_token=score_token
+            seed=seed, budget=budget, randomization=randomization, score_token=score_token
         ),
     )
     # copy beamsim
