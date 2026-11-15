@@ -17,7 +17,7 @@
       --text-muted: #8fa2be;
       --accent: #F2994A;       /* Beam orange */
       --cyan: #5CC8E6;         /* Secondary cyan */
-      --green: #27AE60;        /* Sensor balanced foil */
+      --green: #27AE60;        /* Sensor balanced green */
       --danger: #FF5C5C;       /* Lost beam red */
       --gold: #F2C94C;
     }
@@ -31,9 +31,10 @@
       flex-direction: column;
       -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3, h4, .brand h1, .canvas-title, .side-title {
+    h1, h2, h3, h4, .brand h1, .tab-btn, .db-card-title, .canvas-title {
       font-family: 'Space Grotesk', sans-serif;
     }
+
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
@@ -42,18 +43,18 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
     .brand { display: flex; align-items: center; gap: 14px; }
     .brand-logo {
-      width: 42px; height: 42px; border-radius: 10px;
+      width: 44px; height: 44px; border-radius: 10px;
       background: linear-gradient(135deg, var(--accent), #e07a22);
       display: flex; align-items: center; justify-content: center;
       font-weight: 700; font-size: 16px; font-family: 'Space Grotesk', sans-serif;
-      color: #fff; box-shadow: 0 4px 12px rgba(242, 153, 74, 0.3);
+      color: #fff; box-shadow: 0 4px 14px rgba(242, 153, 74, 0.35);
     }
-    .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
-    .brand p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .brand h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+    .brand p { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
     .ws-status {
       display: flex; align-items: center; gap: 6px;
       font-size: 12px; font-family: 'JetBrains Mono', monospace;
@@ -66,269 +67,155 @@
     }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 
-    /* Collapsible Info Boxes */
-    .collapsible-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin: 12px 28px 0 28px;
-      overflow: hidden;
-    }
-    .collapsible-header {
-      padding: 10px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      user-select: none;
-      background: rgba(255,255,255,0.02);
-    }
-    .collapsible-header:hover { background: rgba(255,255,255,0.04); }
-    .collapsible-content {
-      padding: 12px 16px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-    }
-    .steps-row {
+    /* 3 Benchmark Dashboard Cards */
+    .dashboard-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-    }
-    .step-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 12px;
-    }
-    .step-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; border-radius: 50%; background: var(--accent);
-      color: #fff; font-size: 12px; font-weight: 700; margin-right: 6px;
-    }
-    .step-title { font-weight: 600; color: var(--text); font-size: 13px; }
-    .step-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-
-    /* Controls Bar */
-    .controls-bar {
-      background: var(--card-bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 28px;
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
+      padding: 14px 28px 0 28px;
     }
-    .btn-group { display: flex; align-items: center; gap: 6px; }
-    .label-badge { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
-    button, .btn {
-      background: var(--panel-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 7px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-      font-family: inherit;
+    @media (max-width: 800px) {
+      .dashboard-cards { grid-template-columns: 1fr; }
     }
-    button:hover { background: #243b61; border-color: #3b5682; }
-    button.active {
-      background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
-    }
-    button.btn-primary {
-      background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
-    }
-    button.btn-primary:hover { background: #e07a22; }
-    button.btn-success { background: #219653; border-color: var(--green); color: #fff; }
-    button.btn-danger { background: #d32f2f; border-color: var(--danger); color: #fff; }
-    button:disabled { opacity: 0.45; cursor: not-allowed; }
-
-    /* Submode Toggle: Sandbox vs Challenge */
-    .sandbox-toggle {
-      background: #111e33;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3px;
-      display: inline-flex;
-      gap: 2px;
-    }
-    .sandbox-toggle button {
-      border: none; background: transparent; padding: 5px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
-    }
-    .sandbox-toggle button.active {
-      background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    }
-
-    .toggle-god {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(242, 201, 76, 0.1); border: 1px solid rgba(242, 201, 76, 0.3);
-      color: var(--gold); padding: 6px 12px; border-radius: 6px; cursor: pointer;
-      font-size: 12px; font-weight: 600; user-select: none;
-    }
-    .toggle-god input { cursor: pointer; accent-color: var(--gold); }
-
-    /* KPI Cards */
-    .kpi-container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .kpi-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 14px;
-      display: flex;
-      flex-direction: column;
-      min-width: 90px;
-    }
-    .kpi-title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
-    .kpi-value {
-      font-size: 16px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
-      color: #fff; display: flex; align-items: baseline; gap: 4px;
-    }
-    .kpi-value .sub { font-size: 11px; color: var(--text-muted); font-weight: 400; }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 390px;
-      flex: 1;
-      gap: 16px;
-      padding: 16px 28px;
-    }
-    @media (max-width: 1240px) {
-      .main-grid { grid-template-columns: 1fr; }
-    }
-
-
-    .viz-col { display: flex; flex-direction: column; gap: 16px; }
-    .canvas-panel {
+    .db-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 14px 18px;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .db-card.active-db { border-color: var(--accent); background: rgba(242, 153, 74, 0.06); }
+    .db-card-left { display: flex; flex-direction: column; gap: 3px; }
+    .db-card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+    .db-card-sub { font-size: 11px; color: var(--text-muted); }
+    .db-card-val { font-size: 22px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
+
+    /* 3 Big Tabs */
+    .tabs-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px 0 28px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover { background: #223757; color: var(--text); }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(242, 153, 74, 0.35);
+    }
+
+    /* Sub-bar / Controls */
+    .sub-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 28px;
+      margin-top: 12px;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .kpi-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .kpi-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--panel-bg); border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    }
+    .kpi-badge .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-right: 4px; }
+    .btn-action {
+      background: var(--panel-bg); color: var(--text); border: 1px solid var(--border);
+      padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
+    }
+    .btn-action:hover { background: #243b61; border-color: #3b5682; }
+    .btn-action.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn-action.btn-accent:hover { background: #e07a22; }
+
+    /* Content Area */
+    .content-area {
+      padding: 16px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+    .canvas-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
     }
     .canvas-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
     }
-    .canvas-title {
-      font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px;
-    }
-    .plane-tag {
-      font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px;
-      font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.04em;
-    }
-    .plane-h { background: rgba(92, 200, 230, 0.15); color: var(--cyan); border: 1px solid rgba(92, 200, 230, 0.3); }
-    .plane-v { background: rgba(242, 153, 74, 0.15); color: var(--accent); border: 1px solid rgba(242, 153, 74, 0.3); }
+    .canvas-title { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     canvas {
       width: 100%;
-      height: 200px;
       display: block;
       background: #091220;
       border: 1px solid #1a2a44;
       border-radius: 6px;
     }
 
-    .legend {
-      display: flex; align-items: center; gap: 16px; margin-top: 6px;
+    /* Minimal Legend: ONLY beam, sensors, lost beam x, pipe wall, magnets */
+    .legend-mini {
+      display: flex; align-items: center; gap: 16px; margin-top: 8px;
       font-size: 12px; color: var(--text-muted); flex-wrap: wrap;
     }
     .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-color { width: 12px; height: 8px; border-radius: 2px; }
+    .legend-box { width: 12px; height: 8px; border-radius: 2px; }
 
-    /* Sliders Grid */
-    .sliders-panel {
+    /* Magnet Sliders Grid */
+    .sliders-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 14px 18px;
     }
-    .sliders-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;
-    }
-    .slider-tabs { display: flex; gap: 6px; }
-    .sliders-grid {
+    .sliders-grid-12 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 10px 16px;
+      margin-top: 10px;
     }
     .slider-row {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      background: #111f36;
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      border-radius: 6px;
-      transition: border-color 0.15s ease, background 0.15s ease;
+      display: flex; flex-direction: column; gap: 4px;
+      background: #111f36; border: 1px solid var(--border);
+      padding: 8px 10px; border-radius: 6px;
     }
-    .slider-row.pending {
-      border-color: var(--accent);
-      background: rgba(242, 153, 74, 0.08);
+    .slider-top {
+      display: flex; justify-content: space-between; align-items: center; font-size: 11px;
     }
-    .slider-row-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-    }
-    .slider-name {
-      font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; color: #fff;
-    }
-    .pending-badge {
-      font-size: 10px; font-weight: 600; color: var(--accent);
-      background: rgba(242, 153, 74, 0.15); padding: 1px 6px; border-radius: 4px;
-      display: none;
-    }
-    .slider-row.pending .pending-badge {
-      display: inline-block;
-    }
-    .slider-val {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: right;
-      color: var(--cyan);
-    }
-    .slider-row.pending .slider-val {
-      color: var(--accent);
-      font-weight: 700;
-    }
+    .slider-name { font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; color: #fff; }
+    .slider-val { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--cyan); text-align: right; }
     input[type=range] {
-      width: 100%;
-      height: 5px;
-      background: #243b61;
-      border-radius: 3px;
-      outline: none;
-      cursor: pointer;
-      accent-color: var(--accent);
+      width: 100%; height: 5px; background: #243b61; border-radius: 3px; outline: none; cursor: pointer; accent-color: var(--accent);
     }
 
-    /* Side Panel */
-    .side-col { display: flex; flex-direction: column; gap: 16px; }
-    .side-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .side-title {
-      font-size: 13px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.04em; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;
-    }
-    .transcript-box {
-      height: 260px;
-      overflow-y: auto;
+    /* Gemini Reasoning Box */
+    .gemini-reasoning-box {
       background: #091220;
       border: 1px solid #1a2a44;
       border-radius: 6px;
@@ -337,38 +224,31 @@
       font-size: 11px;
       line-height: 1.5;
       color: #cbd5e1;
+      height: 140px;
+      overflow-y: auto;
       white-space: pre-wrap;
+      margin-top: 10px;
     }
 
-    /* Scoreboard 3-Card Layout */
-    .scoreboard-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .sb-card {
-      background: #111f36;
+    /* Collapsible Physicist Box */
+    .physicist-box {
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: center;
+      margin-top: auto;
+      overflow: hidden;
     }
-    .sb-card.active-sb {
-      border-color: var(--accent);
-      background: rgba(242, 153, 74, 0.06);
+    .physicist-header {
+      padding: 10px 16px; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text-muted); user-select: none;
     }
-    .sb-name { font-size: 12px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: var(--text); }
-    .sb-score { font-size: 20px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
-    .sb-sub { font-size: 10px; color: var(--text-muted); }
-    .sb-table-mini {
-      width: 100%; border-collapse: collapse; font-size: 10px; font-family: 'JetBrains Mono', monospace; margin-top: 4px;
+    .physicist-header:hover { background: rgba(255,255,255,0.02); color: var(--text); }
+    .physicist-content {
+      padding: 12px 16px; font-size: 12px; line-height: 1.6; color: var(--text-muted); border-top: 1px solid var(--border);
     }
-    .sb-table-mini td { padding: 3px 2px; border-top: 1px solid #1e3252; }
   </style>
 </head>
+
 <body>
   <header>
     <div class="brand">
@@ -378,302 +258,186 @@
         <p>CERN fires protons down a 900 m tube. 22 magnets aim them. Can you thread the beam better than an AI?</p>
       </div>
     </div>
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div id="wsStatus" class="ws-status disconnected">
-        <span class="dot"></span>
-        <span id="wsStatusText">Connecting...</span>
-      </div>
+    <div id="wsStatus" class="ws-status disconnected">
+      <span class="dot"></span>
+      <span id="wsStatusText">Connecting...</span>
     </div>
   </header>
 
-  <!-- Collapsible How to play -->
-  <div class="collapsible-box">
-    <div class="collapsible-header" onclick="toggleCollapsible('howToPlayContent', 'howToPlayArrow')">
-      <span>📖 <strong>How to play</strong> (3 simple steps)</span>
-      <span id="howToPlayArrow">▼</span>
-    </div>
-    <div id="howToPlayContent" class="collapsible-content">
-      <div class="steps-row">
-        <div class="step-card">
-          <span class="step-num">1</span>
-          <span class="step-title">Move the magnet sliders</span>
-          <div class="step-desc">Adjust the 22 steering dipole magnets (10 horizontal, 12 vertical) to guide the proton beam.</div>
-        </div>
-        <div class="step-card">
-          <span class="step-num">2</span>
-          <span class="step-title">Fire a shot &amp; watch sensors</span>
-          <div class="step-desc">Sensors show cyan/green bars when beam passes. If it hits the pipe, a red ✗ marks where it died!</div>
-        </div>
-        <div class="step-card">
-          <span class="step-num">3</span>
-          <span class="step-title">Get centred in 60 shots</span>
-          <div class="step-desc">Keep the beam centered through all 21 sensors to reach &ge; 95% centring and beat the AI!</div>
-        </div>
+  <!-- 3 Benchmark Dashboard Cards -->
+  <div class="dashboard-cards">
+    <div class="db-card active-db" id="cardYou">
+      <div class="db-card-left">
+        <span class="db-card-title">🧑 You: best centring</span>
+        <span class="db-card-sub">your best in Play mode</span>
       </div>
+      <span class="db-card-val" id="valYouBest">—</span>
+    </div>
+    <div class="db-card" id="cardBayes">
+      <div class="db-card-left">
+        <span class="db-card-title">🧠 Algorithm: 0.50 avg</span>
+        <span class="db-card-sub">average over our evaluation</span>
+      </div>
+      <span class="db-card-val">0.50</span>
+    </div>
+    <div class="db-card" id="cardGemini">
+      <div class="db-card-left">
+        <span class="db-card-title">🤖 Gemini AI: 0.26 avg</span>
+        <span class="db-card-sub">average over our evaluation</span>
+      </div>
+      <span class="db-card-val">0.26</span>
     </div>
   </div>
 
-  <div class="controls-bar">
-    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-      <div class="btn-group">
-        <span class="label-badge">Mode</span>
-        <button id="btnModeHuman" class="active" onclick="setMode('human')">🧑 You</button>
-        <button id="btnModeBayes" onclick="setMode('bayes')">🧠 Algorithm (Bayes)</button>
-        <button id="btnModeGemini" onclick="setMode('gemini')">🤖 Gemini AI (replay)</button>
+  <!-- 3 Big Tabs -->
+  <div class="tabs-bar">
+    <button class="tab-btn active" id="tabPlay" onclick="switchTab('play')">🎮 Play</button>
+    <button class="tab-btn" id="tabBayes" onclick="switchTab('bayes')">🧠 Watch the algorithm</button>
+    <button class="tab-btn" id="tabGemini" onclick="switchTab('gemini')">🤖 Watch Gemini</button>
+  </div>
+
+  <!-- Sub-bar Controls -->
+  <div class="sub-bar">
+    <div class="kpi-row">
+      <div class="kpi-badge">
+        <span class="label">Centring</span>
+        <span id="lblLiveCentring" style="color:var(--gold);">0.0%</span>
       </div>
-
-      <!-- Sandbox vs Challenge toggle for You mode -->
-      <div id="sandboxToggleGroup" class="sandbox-toggle">
-        <button id="btnSubSandbox" onclick="setSubmode('sandbox')">🎮 Sandbox</button>
-        <button id="btnSubChallenge" class="active" onclick="setSubmode('challenge')">🏆 Challenge</button>
+      <div class="kpi-badge" id="boxShot" style="display:none;">
+        <span class="label">Shot</span>
+        <span id="lblLiveShot">0 / 60</span>
       </div>
-
-      <div class="btn-group">
-        <span class="label-badge">Seed</span>
-        <button class="btn-seed active" data-seed="0" onclick="setSeed(0)">0</button>
-        <button class="btn-seed" data-seed="1" onclick="setSeed(1)">1</button>
-        <button class="btn-seed" data-seed="2" onclick="setSeed(2)">2</button>
-        <button class="btn-seed" data-seed="3" onclick="setSeed(3)">3</button>
-        <button class="btn-seed" data-seed="4" onclick="setSeed(4)">4</button>
-      </div>
-
-      <label class="toggle-god" title="Reveal true beam trajectory ±3σ">
-        <input type="checkbox" id="chkGodView" onchange="toggleGodView()">
-        <span>👁 Show true beam</span>
-      </label>
-
-      <div id="speedControlGroup" style="display:none; align-items:center; gap:8px;">
-        <span class="label-badge">Speed</span>
-        <input type="range" id="speedSlider" min="0.5" max="10" step="0.5" value="1" style="width:70px;" oninput="updateSpeed(this.value)">
-        <span id="speedVal" style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--cyan); min-width:35px;">1.0/s</span>
+      <div class="kpi-badge">
+        <span class="label">Beam</span>
+        <span id="lblLiveStatus" style="color:var(--green);">Alive</span>
       </div>
     </div>
 
-    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-      <div class="kpi-container">
-        <div class="kpi-card" id="cardShot">
-          <span class="kpi-title">Shots</span>
-          <span class="kpi-value"><span id="lblShot">0</span><span class="sub" id="lblBudgetSub">/60</span></span>
-        </div>
-        <div class="kpi-card" id="cardCentring">
-          <span class="kpi-title">Centring</span>
-          <span class="kpi-value"><span id="lblCentring">0.0%</span><span class="sub">(goal 95%)</span></span>
-        </div>
-        <div class="kpi-card" id="cardReward">
-          <span class="kpi-title">Score</span>
-          <span class="kpi-value" id="lblReward" style="color:var(--gold);">0.000</span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Beam Status</span>
-          <span class="kpi-value" id="lblStatus" style="font-size:12px; color:var(--green);">Ready</span>
-        </div>
-      </div>
-
-      <div class="btn-group" id="actionButtons">
-        <button id="btnFire" class="btn-primary" onclick="fireShot()">🔥 Fire Shot</button>
-        <button id="btnSubmit" class="btn-success" onclick="submitEpisode()">🏁 Submit</button>
-        <button id="btnPlayPause" class="btn-primary" style="display:none;" onclick="togglePlayPause()">▶ Play</button>
-        <button id="btnReset" onclick="resetEpisode()">↺ Reset</button>
-      </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button id="btnPlayPause" class="btn-action btn-accent" style="display:none;" onclick="togglePlayPause()">▶ Play</button>
+      <button class="btn-action" onclick="newPuzzle()">🔀 New puzzle</button>
+      <button id="btnZero" class="btn-action" onclick="zeroMagnets()">↺ Zero magnets</button>
     </div>
   </div>
 
-
-  <div class="main-grid">
-    <div class="viz-col">
-      <!-- Horizontal Canvas Panel: Left-right view -->
-      <div class="canvas-panel">
-        <div class="canvas-header">
-          <div class="canvas-title">
-            <span class="plane-tag plane-h">LEFT–RIGHT VIEW</span>
-            <span>Horizontal Plane (10 Magnets, 11 Sensors)</span>
-          </div>
-          <span id="hStatusBadge" style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">Initial</span>
+  <div class="content-area">
+    <!-- Horizontal View: hidden in Play tab, visible in Watch tabs -->
+    <div class="canvas-card" id="cardCanvasH" style="display:none;">
+      <div class="canvas-header">
+        <div class="canvas-title">
+          <span style="color:var(--cyan);">&#9654;</span>
+          <span>Left–Right View (Horizontal Plane)</span>
         </div>
-        <canvas id="canvasH" width="1000" height="190"></canvas>
       </div>
+      <canvas id="canvasH" width="1000" height="190"></canvas>
+    </div>
 
-      <!-- Vertical Canvas Panel: Up-down view -->
-      <div class="canvas-panel">
-        <div class="canvas-header">
-          <div class="canvas-title">
-            <span class="plane-tag plane-v">UP–DOWN VIEW</span>
-            <span>Vertical Plane (12 Magnets, 10 Sensors)</span>
-          </div>
-          <span id="vStatusBadge" style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">Initial</span>
+    <!-- Vertical View: large in Play tab, standard in Watch tabs -->
+    <div class="canvas-card" id="cardCanvasV">
+      <div class="canvas-header">
+        <div class="canvas-title">
+          <span style="color:var(--accent);">&#9654;</span>
+          <span>Up–Down View (Vertical Plane)</span>
         </div>
-        <canvas id="canvasV" width="1000" height="190"></canvas>
       </div>
+      <canvas id="canvasV" width="1000" height="280"></canvas>
 
-      <!-- Legend -->
-      <div class="legend">
-        <div class="legend-item"><div class="legend-color" style="background:var(--danger);"></div><span>Vacuum Pipe (&plusmn;a)</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:var(--cyan);"></div><span>Sensor Left/Top</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:var(--green);"></div><span>Sensor Right/Bottom</span></div>
-        <div class="legend-item" title="beam lost before here"><span style="color:var(--danger); font-weight:900;">&#10007;</span><span>Lost beam (beam lost before here)</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:var(--gold);"></div><span>True Beam &plusmn;3&sigma; (Show true beam / End)</span></div>
-        <div class="legend-item"><span style="color:var(--text-muted); font-weight:700;">&#9650;</span><span>Steering Magnets</span></div>
-      </div>
-
-      <!-- Magnet Sliders Panel -->
-      <div class="sliders-panel">
-        <div class="sliders-header">
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-            <span style="font-size:14px; font-weight:700;">22 Steering Magnets (&plusmn;0.45 mrad)</span>
-            <div class="slider-tabs">
-              <button id="tabH" class="active" onclick="switchSliderTab('h')" style="padding:4px 10px; font-size:12px;">Left–Right Magnets (H1–H10)</button>
-              <button id="tabV" onclick="switchSliderTab('v')" style="padding:4px 10px; font-size:12px;">Up–Down Magnets (V1–V12)</button>
-            </div>
-          </div>
-          <div style="display:flex; gap:6px;">
-            <button onclick="zeroSliders()" style="padding:4px 10px; font-size:11px;">Zero Plane</button>
-            <button onclick="zeroAllSliders()" style="padding:4px 10px; font-size:11px;">Zero All (22)</button>
-          </div>
-        </div>
-
-        <div id="slidersGridH" class="sliders-grid"></div>
-        <div id="slidersGridV" class="sliders-grid" style="display:none;"></div>
-      </div>
-
-      <!-- Collapsible Details for physicists -->
-      <div class="collapsible-box" style="margin: 0;">
-        <div class="collapsible-header" onclick="toggleCollapsible('physicistDetailsContent', 'physicistDetailsArrow')">
-          <span>🔬 <strong>Details for physicists &amp; accelerator operators</strong></span>
-          <span id="physicistDetailsArrow">▶</span>
-        </div>
-        <div id="physicistDetailsContent" class="collapsible-content" style="display:none;">
-          <p><strong>CERN TT20 Transfer Line:</strong> Extracts 400 GeV/c slow-extracted protons from the Super Proton Synchrotron (SPS) to North Area fixed targets over 900 meters.</p>
-          <p style="margin-top:6px;"><strong>Beam Optics &amp; Measurements:</strong> Linear uncoupled FODO optics with 10 horizontal / 12 vertical corrector dipoles and 11 horizontal / 10 vertical Secondary Emission Monitors (SEMs). Each SEM reports noisy foil ratios $r = I_1 / (I_1 + I_2)$ and intensity levels $\ell = (I_1 + I_2) / I_{\max}$ under uniform background noise $\nu = 0.25$. Collision checks are evaluated on checkpoints along rectangular vacuum chambers.</p>
-          <p style="margin-top:6px;"><strong>Algorithm &amp; Reference:</strong> Based on Adam Štafa's CERN report (2026). The Bayesian reference runs a 100,000-particle filter with roughening 0.2 and Thompson-posterior-mean action interpolation.</p>
-        </div>
+      <!-- Minimal Legend: ONLY beam, sensors, lost beam x, pipe wall, magnets -->
+      <div class="legend-mini">
+        <div class="legend-item"><div class="legend-box" style="background:var(--accent);"></div><span>beam</span></div>
+        <div class="legend-item"><div class="legend-box" style="background:var(--green);"></div><span>sensors</span></div>
+        <div class="legend-item"><span style="color:var(--danger); font-weight:900;">&#10007;</span><span>lost beam</span></div>
+        <div class="legend-item"><div class="legend-box" style="background:var(--danger);"></div><span>pipe wall</span></div>
+        <div class="legend-item"><span style="color:var(--text-muted); font-size:10px;">&#9650;</span><span>magnets</span></div>
       </div>
     </div>
 
-    <!-- Right Side Panel -->
-    <div class="side-col">
-      <div class="side-card">
-        <div class="side-title">
-          <span id="sideTitle">AI Reasoning &amp; Telemetry</span>
-          <span id="sideSub" style="font-size:10px; font-family:'JetBrains Mono',monospace;">Logs</span>
-        </div>
-        <div id="transcriptBox" class="transcript-box">Ready. Pick a mode or move magnets to start!</div>
+    <!-- Sliders Card -->
+    <div class="sliders-card" id="cardSliders">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:13px; font-weight:700;" id="slidersTitle">12 Aiming Magnets (Up–Down)</span>
+        <span style="font-size:11px; color:var(--text-muted);">Adjust to center the beam live</span>
       </div>
+      <div id="slidersGrid" class="sliders-grid-12"></div>
+    </div>
 
-      <!-- Scoreboard Cards -->
-      <div class="side-card">
-        <div class="side-title">
-          <span>Scoreboard</span>
-          <span style="font-size:11px; color:var(--accent);">Goal: 95% Centring</span>
-        </div>
-        <div class="scoreboard-cards">
-          <div class="sb-card" id="sbCardYou">
-            <span class="sb-name">🧑 You</span>
-            <span class="sb-score" id="sbScoreYou">—</span>
-            <span class="sb-sub" id="sbSubYou">Best: —</span>
-            <table class="sb-table-mini" id="sbMiniYou"></table>
-          </div>
-          <div class="sb-card" id="sbCardBayes">
-            <span class="sb-name">🧠 Algorithm</span>
-            <span class="sb-score">0.504</span>
-            <span class="sb-sub">Bayes Ref (~0.50)</span>
-            <table class="sb-table-mini" id="sbMiniBayes"></table>
-          </div>
-          <div class="sb-card" id="sbCardGemini">
-            <span class="sb-name">🤖 Gemini AI</span>
-            <span class="sb-score">0.259</span>
-            <span class="sb-sub">3.8 Flash (Pilot)</span>
-            <table class="sb-table-mini" id="sbMiniGemini"></table>
-          </div>
-        </div>
+    <!-- Gemini Reasoning Card -->
+    <div class="canvas-card" id="cardGeminiReasoning" style="display:none;">
+      <div class="canvas-title">
+        <span>Gemini Reasoning Transcript</span>
+      </div>
+      <div id="geminiBox" class="gemini-reasoning-box">Gemini thoughts and actions will stream here during replay...</div>
+    </div>
+
+    <!-- Collapsible Details for physicists -->
+    <div class="physicist-box">
+      <div class="physicist-header" onclick="togglePhysicist()">
+        <span>🔬 <strong>Details for physicists</strong></span>
+        <span id="physicistArrow">▶</span>
+      </div>
+      <div id="physicistContent" class="physicist-content" style="display:none;">
+        <p><strong>CERN TT20 Transfer Line:</strong> 400 GeV/c slow-extracted proton beam from SPS to North Area target over 900 meters. Uncoupled linear optics with 10 horizontal / 12 vertical corrector dipoles and 11 horizontal / 10 vertical split-foil secondary emission monitors (SEMs). Uniform background noise &nu; = 0.25, Table 1 medium optics randomization. The Bayesian benchmark uses a 100k-particle filter (Adam Štafa CERN report, 2026).</p>
       </div>
     </div>
   </div>
 
   <script>
-    // Application State
     const state = {
-      mode: 'human',        // 'human' | 'bayes' | 'gemini'
-      submode: 'challenge', // 'challenge' | 'sandbox'
+      tab: "play",
       seed: 0,
       shot: 0,
-      budget: 60,
-      done: false,
-      speed: 1.0,
-      godView: false,
       playing: false,
-      theta_h: new Array(10).fill(0),
+      done: false,
       theta_v: new Array(12).fill(0),
-      applied_h: new Array(10).fill(0),
-      applied_v: new Array(12).fill(0),
-      obs_h: [],
+      theta_h: new Array(10).fill(0),
       obs_v: [],
-      score: { reward: 0, s0: 0, sf: 0, progress: 0, solved: false, is_lost: false, loss_s: null },
-      god_view: { x_sem_h: [], x_sem_v: [], is_lost: false, loss_s: null, first_lost_sem_h: null, first_lost_sem_v: null, s_mean: 0, distance_d: 0 },
+      obs_h: [],
+      score: { centring_v: 0, centring_all: 0, sf: 0, reward: 0, is_lost: false, loss_s: null, solved: false },
+      god_view: { x_sem_h: [], x_sem_v: [], is_lost: false, loss_s: null, first_lost_sem_h: null, first_lost_sem_v: null },
       machine_info: null,
-      transcript: '',
-      activeSliderTab: 'h',
-      scores: {
-        human: {},
-        bayes: { 0: 0.431, 1: 0.627, 2: 0.385, 3: 0.744, 4: 0.646 },
-        gemini: { 0: 0.149, 1: 0.214, 2: 0.348, 3: 0.194, 4: 0.418 }
-      }
+      bestCentring: 0.0,
+      agent_text: ""
     };
 
     let ws = null;
-    let wsReconnectTimer = null;
-    let sandboxTimer = null;
+    let wsTimer = null;
+    let dragDebounce = null;
 
-    function toggleCollapsible(contentId, arrowId) {
-      const el = document.getElementById(contentId);
-      const arr = document.getElementById(arrowId);
-      if (!el) return;
-      const isHidden = el.style.display === 'none';
-      el.style.display = isHidden ? 'block' : 'none';
-      if (arr) arr.textContent = isHidden ? '▼' : '▶';
+    function togglePhysicist() {
+      const el = document.getElementById("physicistContent");
+      const arr = document.getElementById("physicistArrow");
+      const isHidden = el.style.display === "none";
+      el.style.display = isHidden ? "block" : "none";
+      arr.textContent = isHidden ? "▼" : "▶";
     }
 
     function connectWS() {
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const wsUrl = `${protocol}//${window.location.host}/ws`;
       ws = new WebSocket(wsUrl);
 
       ws.onopen = () => {
-        document.getElementById('wsStatus').className = 'ws-status';
-        document.getElementById('wsStatusText').textContent = 'Connected';
-        if (wsReconnectTimer) { clearTimeout(wsReconnectTimer); wsReconnectTimer = null; }
-        sendWS({
-          type: 'init',
-          mode: state.mode,
-          seed: state.seed,
-          speed: state.speed,
-          sandbox: (state.mode === 'human' && state.submode === 'sandbox')
-        });
+        document.getElementById("wsStatus").className = "ws-status";
+        document.getElementById("wsStatusText").textContent = "Connected";
+        if (wsTimer) { clearTimeout(wsTimer); wsTimer = null; }
+        sendInit();
       };
 
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
-          if (data.type === 'state') {
-            handleServerState(data);
-          } else if (data.type === 'error') {
-            logTranscript(`[ERROR]: ${data.message}`);
+          if (data.type === "state") {
+            handleState(data);
           }
         } catch (e) {
-          console.error('Failed to parse WS message:', e);
+          console.error(e);
         }
       };
 
       ws.onclose = () => {
-        document.getElementById('wsStatus').className = 'ws-status disconnected';
-        document.getElementById('wsStatusText').textContent = 'Disconnected';
-        if (!wsReconnectTimer) {
-          wsReconnectTimer = setTimeout(connectWS, 2000);
-        }
-      };
-
-      ws.onerror = () => {
-        document.getElementById('wsStatus').className = 'ws-status disconnected';
-        document.getElementById('wsStatusText').textContent = 'Error';
+        document.getElementById("wsStatus").className = "ws-status disconnected";
+        document.getElementById("wsStatusText").textContent = "Disconnected";
+        if (!wsTimer) wsTimer = setTimeout(connectWS, 2000);
       };
     }
 
@@ -683,384 +447,199 @@
       }
     }
 
-    function handleServerState(data) {
+    function sendInit() {
+      sendWS({
+        type: "init",
+        mode: state.tab,
+        seed: state.seed,
+        speed: 3.0
+      });
+    }
+
+    function handleState(data) {
       state.shot = data.shot;
-      state.budget = data.budget;
       state.done = data.done;
-      state.theta_h = data.theta_h || state.theta_h;
       state.theta_v = data.theta_v || state.theta_v;
-      state.obs_h = data.obs_h || state.obs_h;
+      state.theta_h = data.theta_h || state.theta_h;
       state.obs_v = data.obs_v || state.obs_v;
+      state.obs_h = data.obs_h || state.obs_h;
       state.score = data.score || state.score;
       state.god_view = data.god_view || state.god_view;
       if (data.machine_info) state.machine_info = data.machine_info;
 
-      if (state.mode === 'human' && !data.sandbox) {
-        state.applied_h = [...state.theta_h];
-        state.applied_v = [...state.theta_v];
+      const centringVal = state.tab === "play"
+        ? (data.score.centring_v || (data.score.sf * 100))
+        : (data.score.centring_all || (data.score.sf * 100));
+
+      if (state.tab === "play" && centringVal > state.bestCentring) {
+        state.bestCentring = centringVal;
+        document.getElementById("valYouBest").textContent = state.bestCentring.toFixed(1) + "%";
       }
 
-      // Update transcript
-      if (data.agent_text) {
-        state.transcript = data.agent_text;
-        const box = document.getElementById('transcriptBox');
-        box.textContent = state.transcript;
+      if (data.agent_text && state.tab === "gemini") {
+        state.agent_text = data.agent_text;
+        const box = document.getElementById("geminiBox");
+        box.textContent = state.agent_text;
         box.scrollTop = box.scrollHeight;
       }
 
-      // Record score if done and in challenge mode
-      if (state.done && state.submode !== 'sandbox') {
-        if (!state.scores[state.mode]) state.scores[state.mode] = {};
-        state.scores[state.mode][state.seed] = state.score.reward;
-        renderScoreboard();
-      }
-
-      updateUI();
+      updateUI(centringVal);
       renderCanvases();
     }
 
-    function updateUI() {
-      const isSandbox = (state.mode === 'human' && state.submode === 'sandbox');
+    function updateUI(centringVal) {
+      document.getElementById("lblLiveCentring").textContent = centringVal.toFixed(1) + "%";
+      document.getElementById("lblLiveShot").textContent = `${state.shot} / 60`;
 
-      document.getElementById('lblShot').textContent = state.shot;
-      document.getElementById('lblBudgetSub').textContent = isSandbox ? ' (unlimited)' : '/60';
-      document.getElementById('lblReward').textContent = isSandbox ? 'unscored' : state.score.reward.toFixed(3);
-      document.getElementById('lblCentring').textContent = (state.score.sf * 100).toFixed(1) + '%';
-
-      const statusEl = document.getElementById('lblStatus');
-      if (isSandbox) {
-        statusEl.textContent = 'Sandbox: unlimited, unscored';
-        statusEl.style.color = 'var(--cyan)';
-      } else if (state.score.solved) {
-        statusEl.textContent = 'GOAL MET (≥95%)!';
-        statusEl.style.color = 'var(--gold)';
-      } else if (state.done) {
-        statusEl.textContent = 'Completed';
-        statusEl.style.color = 'var(--text-muted)';
-      } else if (state.score.is_lost) {
-        statusEl.textContent = `Lost @ ${state.score.loss_s ? state.score.loss_s.toFixed(0) + 'm' : ''}`;
-        statusEl.style.color = 'var(--danger)';
+      const statusEl = document.getElementById("lblLiveStatus");
+      if (state.score.is_lost) {
+        statusEl.textContent = `Lost @ ${state.score.loss_s ? state.score.loss_s.toFixed(0) + "m" : "pipe"}`;
+        statusEl.style.color = "var(--danger)";
+      } else if (centringVal >= 95.0) {
+        statusEl.textContent = "Goal reached (≥95%)!";
+        statusEl.style.color = "var(--gold)";
       } else {
-        statusEl.textContent = state.shot > 0 ? 'Beam Alive' : 'Ready';
-        statusEl.style.color = 'var(--green)';
+        statusEl.textContent = "Alive";
+        statusEl.style.color = "var(--green)";
       }
 
-      // Sync slider UI values
       syncSliders();
-      markPendingSliders();
 
-      // Button states
-      const isYou = state.mode === 'human';
-      document.getElementById('sandboxToggleGroup').style.display = isYou ? 'inline-flex' : 'none';
-      document.getElementById('btnFire').style.display = (isYou && !isSandbox) ? 'inline-flex' : 'none';
-      document.getElementById('btnSubmit').style.display = (isYou && !isSandbox) ? 'inline-flex' : 'none';
-      document.getElementById('btnPlayPause').style.display = !isYou ? 'inline-flex' : 'none';
-      document.getElementById('speedControlGroup').style.display = !isYou ? 'flex' : 'none';
-
-      if (isYou) {
-        document.getElementById('btnFire').disabled = state.done;
-        document.getElementById('btnSubmit').disabled = state.done;
-      } else {
-        document.getElementById('btnPlayPause').textContent = state.playing ? '⏸ Pause' : '▶ Play';
-        document.getElementById('btnPlayPause').className = state.playing ? 'btn-danger' : 'btn-primary';
+      if (state.tab !== "play") {
+        document.getElementById("btnPlayPause").textContent = state.playing ? "⏸ Pause" : "▶ Play";
+        document.getElementById("btnPlayPause").className = state.playing ? "btn-action" : "btn-action btn-accent";
       }
     }
 
     function syncSliders() {
-      for (let i = 0; i < 10; i++) {
-        const val = state.theta_h[i] || 0;
-        const slider = document.getElementById(`sl_h_${i}`);
-        const text = document.getElementById(`val_h_${i}`);
-        if (slider && text) {
-          slider.value = (val * 1000).toFixed(3);
-          text.textContent = (val * 1000 >= 0 ? '+' : '') + (val * 1000).toFixed(2) + ' mrad';
-        }
-      }
       for (let i = 0; i < 12; i++) {
         const val = state.theta_v[i] || 0;
         const slider = document.getElementById(`sl_v_${i}`);
         const text = document.getElementById(`val_v_${i}`);
         if (slider && text) {
           slider.value = (val * 1000).toFixed(3);
-          text.textContent = (val * 1000 >= 0 ? '+' : '') + (val * 1000).toFixed(2) + ' mrad';
-        }
-      }
-    }
-
-    function markPendingSliders() {
-      const isChallenge = (state.mode === 'human' && state.submode === 'challenge' && !state.done);
-      for (let i = 0; i < 10; i++) {
-        const row = document.getElementById(`row_h_${i}`);
-        if (row) {
-          const diff = Math.abs((state.theta_h[i] || 0) - (state.applied_h[i] || 0));
-          if (isChallenge && diff > 1e-5) row.classList.add('pending'); else row.classList.remove('pending');
-        }
-      }
-      for (let i = 0; i < 12; i++) {
-        const row = document.getElementById(`row_v_${i}`);
-        if (row) {
-          const diff = Math.abs((state.theta_v[i] || 0) - (state.applied_v[i] || 0));
-          if (isChallenge && diff > 1e-5) row.classList.add('pending'); else row.classList.remove('pending');
+          text.textContent = (val * 1000 >= 0 ? "+" : "") + (val * 1000).toFixed(2) + " mrad";
+          slider.disabled = (state.tab !== "play");
         }
       }
     }
 
     function initSliders() {
-      const gridH = document.getElementById('slidersGridH');
-      gridH.innerHTML = '';
-      for (let i = 0; i < 10; i++) {
-        const row = document.createElement('div');
-        row.className = 'slider-row';
-        row.id = `row_h_${i}`;
-        row.innerHTML = `
-          <div class="slider-row-top">
-            <span class="slider-name">Magnet H${i+1}</span>
-            <span class="pending-badge">takes effect on next shot</span>
-            <span class="slider-val" id="val_h_${i}">+0.00 mrad</span>
-          </div>
-          <input type="range" id="sl_h_${i}" min="-0.45" max="0.45" step="0.005" value="0" oninput="onSliderChange('h', ${i}, this.value)">
-        `;
-        gridH.appendChild(row);
-      }
-
-      const gridV = document.getElementById('slidersGridV');
-      gridV.innerHTML = '';
+      const grid = document.getElementById("slidersGrid");
+      grid.innerHTML = "";
       for (let i = 0; i < 12; i++) {
-        const row = document.createElement('div');
-        row.className = 'slider-row';
-        row.id = `row_v_${i}`;
+        const row = document.createElement("div");
+        row.className = "slider-row";
         row.innerHTML = `
-          <div class="slider-row-top">
+          <div class="slider-top">
             <span class="slider-name">Magnet V${i+1}</span>
-            <span class="pending-badge">takes effect on next shot</span>
             <span class="slider-val" id="val_v_${i}">+0.00 mrad</span>
           </div>
-          <input type="range" id="sl_v_${i}" min="-0.45" max="0.45" step="0.005" value="0" oninput="onSliderChange('v', ${i}, this.value)">
+          <input type="range" id="sl_v_${i}" min="-0.45" max="0.45" step="0.005" value="0" oninput="onSliderMove(${i}, this.value)">
         `;
-        gridV.appendChild(row);
+        grid.appendChild(row);
       }
     }
 
-    function onSliderChange(plane, index, valueMrad) {
-      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
+    function onSliderMove(index, valueMrad) {
+      if (state.tab !== "play") return;
       const rad = parseFloat(valueMrad) / 1000;
-      if (plane === 'h') {
-        state.theta_h[index] = rad;
-        const text = document.getElementById(`val_h_${index}`);
-        if (text) text.textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
-      } else {
-        state.theta_v[index] = rad;
-        const text = document.getElementById(`val_v_${index}`);
-        if (text) text.textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
-      }
+      state.theta_v[index] = rad;
+      const text = document.getElementById(`val_v_${index}`);
+      if (text) text.textContent = (parseFloat(valueMrad) >= 0 ? "+" : "") + parseFloat(valueMrad).toFixed(2) + " mrad";
 
-      if (state.submode === 'sandbox') {
-        if (sandboxTimer) clearTimeout(sandboxTimer);
-        sandboxTimer = setTimeout(() => {
-          sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
-        }, 100);
-      } else {
-        markPendingSliders();
-      }
+      if (dragDebounce) clearTimeout(dragDebounce);
+      dragDebounce = setTimeout(() => {
+        sendWS({ type: "fire", theta_v: state.theta_v });
+      }, 100);
     }
 
-    function switchSliderTab(plane) {
-      state.activeSliderTab = plane;
-      document.getElementById('tabH').className = plane === 'h' ? 'active' : '';
-      document.getElementById('tabV').className = plane === 'v' ? 'active' : '';
-      document.getElementById('slidersGridH').style.display = plane === 'h' ? 'grid' : 'none';
-      document.getElementById('slidersGridV').style.display = plane === 'v' ? 'grid' : 'none';
-    }
-
-    function zeroSliders() {
-      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
-      if (state.activeSliderTab === 'h') {
-        state.theta_h.fill(0);
-      } else {
-        state.theta_v.fill(0);
-      }
-      syncSliders();
-      if (state.submode === 'sandbox') {
-        sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
-      } else {
-        markPendingSliders();
-      }
-    }
-
-    function zeroAllSliders() {
-      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
-      state.theta_h.fill(0);
+    function zeroMagnets() {
+      if (state.tab !== "play") return;
       state.theta_v.fill(0);
       syncSliders();
-      if (state.submode === 'sandbox') {
-        sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
-      } else {
-        markPendingSliders();
-      }
+      sendWS({ type: "fire", theta_v: state.theta_v });
     }
 
-    function setSubmode(sub) {
-      state.submode = sub;
-      document.getElementById('btnSubSandbox').className = sub === 'sandbox' ? 'active' : '';
-      document.getElementById('btnSubChallenge').className = sub === 'challenge' ? 'active' : '';
-      logTranscript(`Switched You mode to: ${sub.toUpperCase()}`);
-      resetEpisode();
-    }
-
-    function setMode(newMode) {
-      if (state.mode === newMode) return;
-      state.mode = newMode;
+    function newPuzzle() {
+      state.seed = Math.floor(Math.random() * 5);
       state.playing = false;
-      document.getElementById('btnModeHuman').className = newMode === 'human' ? 'active' : '';
-      document.getElementById('btnModeBayes').className = newMode === 'bayes' ? 'active' : '';
-      document.getElementById('btnModeGemini').className = newMode === 'gemini' ? 'active' : '';
-
-      document.getElementById('sideTitle').textContent =
-        newMode === 'gemini' ? "Gemini AI Reasoning Trace" : (newMode === 'bayes' ? "Bayes Algorithm Telemetry" : "Operator Actions & Telemetry");
-
-      const speedVal = newMode === 'gemini' ? 2.0 : 1.0;
-      state.speed = speedVal;
-      document.getElementById('speedSlider').value = speedVal;
-      document.getElementById('speedVal').textContent = `${speedVal.toFixed(1)}/s`;
-
-      logTranscript(`Mode: ${newMode === 'human' ? 'YOU' : (newMode === 'bayes' ? 'BAYES ALGORITHM' : 'GEMINI AI')}`);
-      resetEpisode();
+      sendInit();
     }
 
-    function setSeed(s) {
-      state.seed = parseInt(s);
+    function switchTab(t) {
+      if (state.tab === t) return;
+      state.tab = t;
       state.playing = false;
-      document.querySelectorAll('.btn-seed').forEach(btn => {
-        btn.className = parseInt(btn.dataset.seed) === state.seed ? 'btn-seed active' : 'btn-seed';
-      });
-      logTranscript(`Set puzzle SEED to ${state.seed}`);
-      resetEpisode();
-    }
 
-    function toggleGodView() {
-      state.godView = document.getElementById('chkGodView').checked;
-      renderCanvases();
-    }
+      document.getElementById("tabPlay").className = t === "play" ? "tab-btn active" : "tab-btn";
+      document.getElementById("tabBayes").className = t === "bayes" ? "tab-btn active" : "tab-btn";
+      document.getElementById("tabGemini").className = t === "gemini" ? "tab-btn active" : "tab-btn";
 
-    function updateSpeed(val) {
-      state.speed = parseFloat(val);
-      document.getElementById('speedVal').textContent = `${state.speed.toFixed(1)}/s`;
-      sendWS({ type: 'set_speed', speed: state.speed });
-    }
+      document.getElementById("cardYou").className = t === "play" ? "db-card active-db" : "db-card";
+      document.getElementById("cardBayes").className = t === "bayes" ? "db-card active-db" : "db-card";
+      document.getElementById("cardGemini").className = t === "gemini" ? "db-card active-db" : "db-card";
 
-    function fireShot() {
-      if (state.mode !== 'human' || state.done) return;
-      state.applied_h = [...state.theta_h];
-      state.applied_v = [...state.theta_v];
-      markPendingSliders();
-      sendWS({ type: 'fire', sandbox: false, theta_h: state.theta_h, theta_v: state.theta_v });
-    }
+      const isPlay = (t === "play");
+      document.getElementById("cardCanvasH").style.display = isPlay ? "none" : "block";
+      document.getElementById("boxShot").style.display = isPlay ? "none" : "inline-flex";
+      document.getElementById("btnPlayPause").style.display = isPlay ? "none" : "inline-flex";
+      document.getElementById("btnZero").style.display = isPlay ? "inline-flex" : "none";
+      document.getElementById("cardGeminiReasoning").style.display = (t === "gemini") ? "block" : "none";
 
-    function submitEpisode() {
-      sendWS({ type: 'submit' });
+      const canvasV = document.getElementById("canvasV");
+      canvasV.height = isPlay ? 280 : 190;
+
+      sendInit();
     }
 
     function togglePlayPause() {
       if (state.playing) {
         state.playing = false;
-        sendWS({ type: 'stop' });
-        updateUI();
+        sendWS({ type: "stop" });
+        updateUI(state.score.centring_all || 0);
       } else {
         state.playing = true;
-        updateUI();
-        if (state.mode === 'bayes') {
-          sendWS({ type: 'start_bayes', seed: state.seed, speed: state.speed });
-        } else if (state.mode === 'gemini') {
-          sendWS({ type: 'start_gemini', seed: state.seed, speed: state.speed });
+        updateUI(state.score.centring_all || 0);
+        if (state.tab === "bayes") {
+          sendWS({ type: "start_bayes", seed: state.seed, speed: 3.0 });
+        } else if (state.tab === "gemini") {
+          sendWS({ type: "start_gemini", seed: state.seed, speed: 3.0 });
         }
       }
     }
 
-    function resetEpisode() {
-      state.playing = false;
-      sendWS({
-        type: 'init',
-        mode: state.mode,
-        seed: state.seed,
-        speed: state.speed,
-        sandbox: (state.mode === 'human' && state.submode === 'sandbox')
-      });
-    }
-
-    function logTranscript(msg) {
-      state.transcript += (state.transcript ? '\n\n' : '') + msg;
-      const box = document.getElementById('transcriptBox');
-      box.textContent = state.transcript;
-      box.scrollTop = box.scrollHeight;
-    }
-
-    function renderScoreboard() {
-      // You card
-      const uScores = Object.values(state.scores.human);
-      const uAvg = uScores.length > 0 ? (uScores.reduce((a, b) => a + b, 0) / uScores.length).toFixed(3) : '—';
-      const curUScore = state.scores.human[state.seed] !== undefined ? state.scores.human[state.seed].toFixed(3) : '—';
-      document.getElementById('sbScoreYou').textContent = curUScore;
-      document.getElementById('sbSubYou').textContent = `Avg: ${uAvg} (${uScores.length}/5)`;
-      document.getElementById('sbCardYou').className = state.mode === 'human' ? 'sb-card active-sb' : 'sb-card';
-
-      let uRows = '';
-      for (let s = 0; s < 5; s++) {
-        const val = state.scores.human[s] !== undefined ? state.scores.human[s].toFixed(3) : '—';
-        const isCur = (state.mode === 'human' && state.seed === s);
-        uRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
-      }
-      document.getElementById('sbMiniYou').innerHTML = uRows;
-
-      // Bayes card
-      document.getElementById('sbCardBayes').className = state.mode === 'bayes' ? 'sb-card active-sb' : 'sb-card';
-      let bRows = '';
-      for (let s = 0; s < 5; s++) {
-        const val = state.scores.bayes[s] !== undefined ? state.scores.bayes[s].toFixed(3) : '—';
-        const isCur = (state.mode === 'bayes' && state.seed === s);
-        bRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
-      }
-      document.getElementById('sbMiniBayes').innerHTML = bRows;
-
-      // Gemini card
-      document.getElementById('sbCardGemini').className = state.mode === 'gemini' ? 'sb-card active-sb' : 'sb-card';
-      let gRows = '';
-      for (let s = 0; s < 5; s++) {
-        const val = state.scores.gemini[s] !== undefined ? state.scores.gemini[s].toFixed(3) : '—';
-        const isCur = (state.mode === 'gemini' && state.seed === s);
-        gRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
-      }
-      document.getElementById('sbMiniGemini').innerHTML = gRows;
-    }
-
     function renderCanvases() {
-      renderPlaneCanvas('canvasH', 'h');
-      renderPlaneCanvas('canvasV', 'v');
+      if (state.tab !== "play") {
+        renderPlane("canvasH", "h");
+      }
+      renderPlane("canvasV", "v");
     }
 
-    function renderPlaneCanvas(canvasId, plane) {
+    function renderPlane(canvasId, plane) {
       const canvas = document.getElementById(canvasId);
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       const w = canvas.width;
       const h = canvas.height;
 
       ctx.clearRect(0, 0, w, h);
 
-      const padL = 45;
-      const padR = 25;
-      const padT = 18;
-      const padB = 24;
+      const padL = 40;
+      const padR = 20;
+      const padT = 16;
+      const padB = 22;
       const plotW = w - padL - padR;
       const plotH = h - padT - padB;
 
       const toX = (s) => padL + (s / 900.0) * plotW;
       const toY = (yMm) => padT + plotH * (0.5 - yMm / 80.0);
 
-      // Background grid
-      ctx.strokeStyle = '#1b2b46';
+      // Background grid lines
+      ctx.strokeStyle = "#172740";
       ctx.lineWidth = 1;
       ctx.font = '9px "JetBrains Mono", monospace';
-      ctx.fillStyle = '#6d84a3';
+      ctx.fillStyle = "#6d84a3";
 
       for (let s = 0; s <= 900; s += 100) {
         const x = toX(s);
@@ -1068,8 +647,8 @@
         ctx.moveTo(x, padT);
         ctx.lineTo(x, padT + plotH);
         ctx.stroke();
-        ctx.textAlign = 'center';
-        ctx.fillText(`${s}m`, x, h - 7);
+        ctx.textAlign = "center";
+        ctx.fillText(`${s}m`, x, h - 6);
       }
 
       for (let y = -30; y <= 30; y += 15) {
@@ -1078,27 +657,18 @@
         ctx.moveTo(padL, py);
         ctx.lineTo(padL + plotW, py);
         ctx.stroke();
-        ctx.textAlign = 'right';
-        ctx.fillText(`${y > 0 ? '+' : ''}${y}`, padL - 6, py + 3);
+        ctx.textAlign = "right";
+        ctx.fillText(`${y > 0 ? "+" : ""}${y}`, padL - 5, py + 3);
       }
 
-      // Centerline y=0
-      ctx.strokeStyle = '#2c4366';
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(padL, toY(0));
-      ctx.lineTo(padL + plotW, toY(0));
-      ctx.stroke();
-      ctx.setLineDash([]);
-
+      // Pipe wall outline
       const minfo = state.machine_info;
       const sAp = minfo ? minfo.s_ap : [];
-      const aAp = minfo ? (plane === 'h' ? minfo.a_h_ap : minfo.a_v_ap) : [];
+      const aAp = minfo ? (plane === "h" ? minfo.a_h_ap : minfo.a_v_ap) : [];
 
-      // Vacuum pipe wall outline (+- a)
       if (sAp.length > 0 && aAp.length > 0) {
-        ctx.strokeStyle = '#FF5C5C';
-        ctx.lineWidth = 1.8;
+        ctx.strokeStyle = "#FF5C5C";
+        ctx.lineWidth = 1.6;
 
         ctx.beginPath();
         for (let i = 0; i < sAp.length; i++) {
@@ -1117,9 +687,9 @@
         ctx.stroke();
       }
 
-      // Magnet locations (s_corr)
-      const sCorr = minfo ? (plane === 'h' ? minfo.s_corr_h : minfo.s_corr_v) : [];
-      ctx.fillStyle = '#8fa2be';
+      // Magnets
+      const sCorr = minfo ? (plane === "h" ? minfo.s_corr_h : minfo.s_corr_v) : [];
+      ctx.fillStyle = "#8fa2be";
       for (let j = 0; j < sCorr.length; j++) {
         const cx = toX(sCorr[j]);
         ctx.beginPath();
@@ -1130,18 +700,17 @@
         ctx.fill();
       }
 
-      // Sensors (SEMs) with foil readings as bars
-      const sSem = minfo ? (plane === 'h' ? minfo.s_sem_h : minfo.s_sem_v) : [];
-      const obsList = plane === 'h' ? state.obs_h : state.obs_v;
-      const firstLost = plane === 'h' ? state.god_view.first_lost_sem_h : state.god_view.first_lost_sem_v;
+      // Sensors with foil readings
+      const sSem = minfo ? (plane === "h" ? minfo.s_sem_h : minfo.s_sem_v) : [];
+      const obsList = plane === "h" ? state.obs_h : state.obs_v;
+      const firstLost = plane === "h" ? state.god_view.first_lost_sem_h : state.god_view.first_lost_sem_v;
 
       for (let i = 0; i < sSem.length; i++) {
         const mx = toX(sSem[i]);
         const obs = obsList[i] || { ratio: 0.5, level: 0 };
         const isLostHere = (firstLost !== null && firstLost !== undefined && i >= firstLost);
 
-        // Sensor vertical slot line
-        ctx.strokeStyle = '#324769';
+        ctx.strokeStyle = "#263b5c";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(mx, padT + 4);
@@ -1153,54 +722,46 @@
         const i1 = r * l;
         const i2 = (1.0 - r) * l;
 
-        const maxBarH = 24;
+        const maxBarH = 26;
         const bar1H = Math.min(maxBarH, i1 * maxBarH);
         const bar2H = Math.min(maxBarH, i2 * maxBarH);
         const y0 = toY(0);
 
         if (!isLostHere) {
-          ctx.fillStyle = '#5CC8E6'; // Cyan Left/Top
+          ctx.fillStyle = "#5CC8E6";
           ctx.fillRect(mx - 4, y0, 3, bar1H);
-          ctx.fillStyle = '#27AE60'; // Green Right/Bottom
+          ctx.fillStyle = "#27AE60";
           ctx.fillRect(mx + 1, y0 - bar2H, 3, bar2H);
         }
 
         if (isLostHere) {
-          ctx.strokeStyle = '#FF5C5C';
+          ctx.strokeStyle = "#FF5C5C";
           ctx.lineWidth = 2.5;
           ctx.beginPath();
-          ctx.moveTo(mx - 6, y0 - 8);
-          ctx.lineTo(mx + 6, y0 + 8);
-          ctx.moveTo(mx - 6, y0 + 8);
-          ctx.lineTo(mx + 6, y0 - 8);
+          ctx.moveTo(mx - 5, y0 - 7);
+          ctx.lineTo(mx + 5, y0 + 7);
+          ctx.moveTo(mx - 5, y0 + 7);
+          ctx.lineTo(mx + 5, y0 - 7);
           ctx.stroke();
-
-          // Tooltip/label at first lost sensor: "beam lost before here"
-          if (i === firstLost) {
-            ctx.fillStyle = '#FF5C5C';
-            ctx.font = 'bold 9px "Space Grotesk", sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('beam lost before here', mx, toY(34));
-          }
         }
 
-        // Sensor label: S1..S11
-        ctx.fillStyle = isLostHere ? '#FF5C5C' : '#8fa2be';
+        ctx.fillStyle = isLostHere ? "#FF5C5C" : "#8fa2be";
         ctx.font = '8px "JetBrains Mono", monospace';
-        ctx.textAlign = 'center';
+        ctx.textAlign = "center";
         ctx.fillText(`S${i+1}`, mx, padT + plotH + 11);
       }
 
-      // True Trajectory +- 3sigma (God View toggle or Game Over)
-      const showGod = state.godView || state.done;
-      if (showGod && state.god_view.x_sem_h && state.god_view.x_sem_h.length > 0) {
-        const xSem = plane === 'h' ? state.god_view.x_sem_h : state.god_view.x_sem_v;
-        const sigSem = minfo ? (plane === 'h' ? minfo.sigma_sem_h : minfo.sigma_sem_v) : [];
+      // Beam trajectory:
+      // Live in Play mode, and automatic at the end of Watch mode!
+      const shouldShowBeam = (state.tab === "play") || (state.done);
+      if (shouldShowBeam && state.god_view.x_sem_h && state.god_view.x_sem_h.length > 0) {
+        const xSem = plane === "h" ? state.god_view.x_sem_h : state.god_view.x_sem_v;
+        const sigSem = minfo ? (plane === "h" ? minfo.sigma_sem_h : minfo.sigma_sem_v) : [];
         const isBeamLost = state.god_view.is_lost;
         const lossS = state.god_view.loss_s;
 
         const points = [];
-        points.push({ s: 0, x: 0, sig: sigSem[0] || 0.001 });
+        points.push({ s: 0, x: 0, sig: (sigSem[0] || 0.001) * 1000 });
 
         for (let i = 0; i < sSem.length; i++) {
           if (isBeamLost && lossS && sSem[i] > lossS) break;
@@ -1208,12 +769,12 @@
         }
 
         if (isBeamLost && lossS) {
-          const aLoss = plane === 'h' ? (minfo ? minfo.a_h_ap[0]*1000 : 25) : 25;
+          const aLoss = plane === "h" ? (minfo ? minfo.a_h_ap[0]*1000 : 25) : 25;
           points.push({ s: lossS, x: (xSem[0] >= 0 ? aLoss : -aLoss), sig: 1.5 });
         }
 
         if (points.length > 1) {
-          ctx.fillStyle = 'rgba(242, 153, 74, 0.2)';
+          ctx.fillStyle = "rgba(242, 153, 74, 0.22)";
           ctx.beginPath();
           for (let i = 0; i < points.length; i++) {
             const px = toX(points[i].s);
@@ -1228,7 +789,7 @@
           ctx.closePath();
           ctx.fill();
 
-          ctx.strokeStyle = '#F2994A';
+          ctx.strokeStyle = "#F2994A";
           ctx.lineWidth = 2.2;
           ctx.beginPath();
           for (let i = 0; i < points.length; i++) {
@@ -1241,49 +802,37 @@
           if (isBeamLost && lossS) {
             const lx = toX(lossS);
             const ly = toY(points[points.length - 1].x);
-            ctx.fillStyle = '#FF5C5C';
+            ctx.fillStyle = "#FF5C5C";
             ctx.beginPath();
             ctx.arc(lx, ly, 5, 0, Math.PI * 2);
             ctx.fill();
-            ctx.strokeStyle = '#fff';
+            ctx.strokeStyle = "#fff";
             ctx.lineWidth = 1.5;
             ctx.stroke();
-
-            ctx.fillStyle = '#FF5C5C';
-            ctx.font = 'bold 9px "Space Grotesk", sans-serif';
-            ctx.textAlign = 'left';
-            ctx.fillText(`BEAM LOST @ ${lossS.toFixed(0)}m`, lx + 7, ly + 3);
           }
         }
       }
     }
 
-    window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT') return;
-      if (e.code === 'Space' || e.code === 'Enter') {
-        e.preventDefault();
-        if (state.mode === 'human') fireShot();
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      const c1 = document.getElementById('canvasH');
-      const c2 = document.getElementById('canvasV');
-      if (c1 && c2 && c1.parentElement) {
-        c1.width = c1.parentElement.clientWidth - 36;
-        c2.width = c2.parentElement.clientWidth - 36;
+    window.addEventListener("resize", () => {
+      const c1 = document.getElementById("canvasH");
+      const c2 = document.getElementById("canvasV");
+      if (c1 && c2 && c2.parentElement) {
+        const w = c2.parentElement.clientWidth - 36;
+        c1.width = w;
+        c2.width = w;
         renderCanvases();
       }
     });
 
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener("DOMContentLoaded", () => {
       initSliders();
-      renderScoreboard();
-      const c1 = document.getElementById('canvasH');
-      const c2 = document.getElementById('canvasV');
-      if (c1 && c2 && c1.parentElement) {
-        c1.width = c1.parentElement.clientWidth - 36;
-        c2.width = c2.parentElement.clientWidth - 36;
+      const c1 = document.getElementById("canvasH");
+      const c2 = document.getElementById("canvasV");
+      if (c1 && c2 && c2.parentElement) {
+        const w = c2.parentElement.clientWidth - 36;
+        c1.width = w;
+        c2.width = w;
       }
       connectWS();
       renderCanvases();
@@ -1291,4 +840,3 @@
   </script>
 </body>
 </html>
-

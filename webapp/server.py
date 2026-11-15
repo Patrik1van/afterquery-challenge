@@ -40,7 +40,14 @@ if STATIC_DIR.exists():
 async def get_index():
     index_file = STATIC_DIR / "index.html"
     if index_file.exists():
-        return FileResponse(index_file)
+        return FileResponse(
+            index_file,
+            headers={
+                "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+                "Pragma": "no-cache",
+                "Expires": "0",
+            },
+        )
     return JSONResponse({"status": "ok", "message": "Demo webapp running"})
 
 
@@ -80,6 +87,14 @@ async def get_nominal_machine_info():
     env = BeamlineEnv(seed=0)
     info = env.get_machine_info()
     return JSONResponse(info)
+
+PREALIGNED_H = {
+    0: [0.000123, -0.000208, -0.000408, -0.000434, 0.000285, 0.000369, 9.4e-05, 0.000203, 4e-05, 0.000402],
+    1: [1.1e-05, 0.000399, -0.000318, 0.000414, -0.000166, -6.8e-05, 0.000298, -8.1e-05, 4.4e-05, -0.000423],
+    2: [-0.000214, -0.000183, 0.000285, -0.000386, 8.7e-05, 0.000201, -0.000283, -0.000394, -0.000201, 0.000143],
+    3: [-0.000358, -0.000249, 0.000269, 7.5e-05, -0.000369, -6e-05, -2e-05, -0.000308, 0.000215, -0.000325],
+    4: [0.000404, 1e-05, 0.000415, -0.000372, 0.0001, -0.000111, 0.000275, -0.000292, 0.000345, 3.9e-05],
+}
 
 
 def format_state_payload(
@@ -123,6 +138,8 @@ def format_state_payload(
             "reward": float(score_details.reward),
             "s0": float(score_details.s0),
             "sf": float(score_details.sf),
+            "centring_v": float(sum(traj.get("s_hat_v", [])) / len(traj.get("s_hat_v", []))) * 100 if traj.get("s_hat_v") else 0.0,
+            "centring_all": float(traj.get("s_mean", 0.0)) * 100,
             "progress": float(score_details.progress),
             "solved": bool(score_details.solved),
             "is_lost": bool(score_details.is_lost),
@@ -201,17 +218,22 @@ async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     session = SessionManager(websocket)
 
-    env = session.reset_env(seed=0)
+    env = session.reset_env(seed=0, budget=100000)
+    session.mode = "play"
+    session.sandbox = True
+    th_h = PREALIGNED_H.get(0, [0.0] * 10)
+    obs = env.set_correctors(th_h, [0.0] * 12)
     init_payload = format_state_payload(
         env=env,
-        mode="human",
+        mode="play",
         seed=0,
         shot=0,
-        theta_h=[0.0] * 10,
+        theta_h=th_h,
         theta_v=[0.0] * 12,
-        obs_h=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_h],
-        obs_v=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_v],
+        obs_h=obs["h"],
+        obs_v=obs["v"],
         done=False,
+        sandbox=True,
     )
     await session.send_state(init_payload)
 
@@ -227,22 +249,37 @@ async def websocket_endpoint(websocket: WebSocket):
 
             if msg_type == "init":
                 session.cancel_active_task()
-                session.mode = msg.get("mode", "human")
+                session.mode = msg.get("mode", "play")
                 session.seed = int(msg.get("seed", 0))
-                session.speed = float(msg.get("speed", 1.0))
-                session.sandbox = bool(msg.get("sandbox", False))
-                budget = 100000 if session.sandbox else 60
-                env = session.reset_env(session.seed, budget=budget)
+                session.speed = float(msg.get("speed", 3.0))
+
+                if session.mode == "play":
+                    session.sandbox = True
+                    budget = 100000
+                    env = session.reset_env(session.seed, budget=budget)
+                    th_h = PREALIGNED_H.get(session.seed, [0.0] * 10)
+                    th_v = [0.0] * 12
+                    obs = env.set_correctors(th_h, th_v)
+                    obs_h = obs["h"]
+                    obs_v = obs["v"]
+                else:
+                    session.sandbox = bool(msg.get("sandbox", False))
+                    budget = 100000 if session.sandbox else 60
+                    env = session.reset_env(session.seed, budget=budget)
+                    th_h = [0.0] * 10
+                    th_v = [0.0] * 12
+                    obs_h = [{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_h]
+                    obs_v = [{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_v]
 
                 payload = format_state_payload(
                     env=env,
                     mode=session.mode,
                     seed=session.seed,
                     shot=0,
-                    theta_h=[0.0] * 10,
-                    theta_v=[0.0] * 12,
-                    obs_h=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_h],
-                    obs_v=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_v],
+                    theta_h=th_h,
+                    theta_v=th_v,
+                    obs_h=obs_h,
+                    obs_v=obs_v,
                     done=False,
                     sandbox=session.sandbox,
                 )
@@ -253,8 +290,12 @@ async def websocket_endpoint(websocket: WebSocket):
                     continue
                 if not session.sandbox and (session.env._submitted or session.env._sim.shots_used >= 60):
                     continue
-                th_h = msg.get("theta_h", [0.0] * 10)
-                th_v = msg.get("theta_v", [0.0] * 12)
+                if session.mode == "play":
+                    th_h = PREALIGNED_H.get(session.seed, [0.0] * 10)
+                    th_v = msg.get("theta_v", [0.0] * 12)
+                else:
+                    th_h = msg.get("theta_h", [0.0] * 10)
+                    th_v = msg.get("theta_v", [0.0] * 12)
                 try:
                     obs = session.env.set_correctors(th_h, th_v)
                 except Exception as e:
@@ -264,7 +305,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 is_done = False if session.sandbox else (session.env._sim.shots_used >= 60)
                 payload = format_state_payload(
                     env=session.env,
-                    mode="human",
+                    mode=session.mode,
                     seed=session.seed,
                     shot=session.env._sim.shots_used,
                     theta_h=th_h,
@@ -298,7 +339,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 session.cancel_active_task()
                 session.mode = "bayes"
                 session.seed = int(msg.get("seed", session.seed))
-                session.speed = max(0.1, float(msg.get("speed", 1.0)))
+                session.speed = max(0.1, float(msg.get("speed", 3.0)))
                 env = session.reset_env(session.seed)
 
                 init_p = format_state_payload(
@@ -384,7 +425,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 session.cancel_active_task()
                 session.mode = "gemini"
                 session.seed = int(msg.get("seed", session.seed))
-                session.speed = max(0.1, float(msg.get("speed", 2.0)))
+                session.speed = max(0.1, float(msg.get("speed", 3.0)))
                 trial_num = int(msg.get("trial", 2))
                 env = session.reset_env(session.seed)
 
