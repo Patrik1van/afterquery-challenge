@@ -1,0 +1,222 @@
+[
+  {
+    "seed": 1,
+    "roughening": 0.2,
+    "reward": 0.6273103073118179,
+    "sf": 0.7506899004540072,
+    "s0": 0.02667865316836074,
+    "progress": 0.7841378841397724,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 127.38
+  },
+  {
+    "seed": 0,
+    "roughening": 0.2,
+    "reward": 0.43080964520069387,
+    "sf": 0.5115866279281718,
+    "s0": 3.7758808295738235e-07,
+    "progress": 0.5385120565008673,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 132.87
+  },
+  {
+    "seed": 2,
+    "roughening": 0.2,
+    "reward": 0.38508223203170056,
+    "sf": 0.45728515644655454,
+    "s0": 1.1392927772818648e-08,
+    "progress": 0.48135279003962567,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 134.15
+  },
+  {
+    "seed": 3,
+    "roughening": 0.2,
+    "reward": 0.7438879971094976,
+    "sf": 0.8833698734697794,
+    "s0": 4.101656833221662e-05,
+    "progress": 0.929859996386872,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 94.5
+  },
+  {
+    "seed": 4,
+    "roughening": 0.2,
+    "reward": 0.6459619985259825,
+    "sf": 0.767079873249604,
+    "s0": 0.0,
+    "progress": 0.807452498157478,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 95.33
+  },
+  {
+    "seed": 5,
+    "roughening": 0.2,
+    "reward": 0.35514264894217396,
+    "sf": 0.4217318956188315,
+    "s0": 0.0,
+    "progress": 0.4439283111777174,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 96.06
+  },
+  {
+    "seed": 6,
+    "roughening": 0.2,
+    "reward": 0.3890897505290733,
+    "sf": 0.46388939627437464,
+    "s0": 0.003592643451412838,
+    "progress": 0.4863621881613416,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 87.0
+  },
+  {
+    "seed": 7,
+    "roughening": 0.2,
+    "reward": 0.3943567576306668,
+    "sf": 0.4724688054867553,
+    "s0": 0.008224282551299837,
+    "progress": 0.4929459470383335,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 87.01
+  },
+  {
+    "seed": 8,
+    "roughening": 0.2,
+    "reward": 0.36106935813688046,
+    "sf": 0.4287698627875455,
+    "s0": 0.0,
+    "progress": 0.4513366976711005,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 88.21
+  },
+  {
+    "seed": 9,
+    "roughening": 0.2,
+    "reward": 0.35391807275590514,
+    "sf": 0.42961102476104335,
+    "s0": 0.0167382945479409,
+    "progress": 0.4423975909448814,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 88.54
+  },
+  {
+    "seed": 0,
+    "roughening": 0.5,
+    "reward": 0.1586355803088861,
+    "sf": 0.18838005433125438,
+    "s0": 3.7758808295738235e-07,
+    "progress": 0.19829447538610762,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 89.29
+  },
+  {
+    "seed": 1,
+    "roughening": 0.5,
+    "reward": 0.18085097359496027,
+    "sf": 0.23540810881275068,
+    "s0": 0.02667865316836074,
+    "progress": 0.22606371699370034,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 89.42
+  },
+  {
+    "seed": 2,
+    "roughening": 0.5,
+    "reward": 0.00067175646608895,
+    "sf": 0.0007977221868418098,
+    "s0": 1.1392927772818648e-08,
+    "progress": 0.0008396955826111875,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 96.38
+  },
+  {
+    "seed": 3,
+    "roughening": 0.5,
+    "reward": 0.15854627697181,
+    "sf": 0.18830659169210257,
+    "s0": 4.101656833221662e-05,
+    "progress": 0.1981828462147625,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 102.56
+  },
+  {
+    "seed": 4,
+    "roughening": 0.5,
+    "reward": 0.3915812836452682,
+    "sf": 0.4650027743287559,
+    "s0": 0.0,
+    "progress": 0.4894766045565852,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 108.14
+  },
+  {
+    "seed": 5,
+    "roughening": 0.5,
+    "reward": 0.16024599293111264,
+    "sf": 0.19029211660569625,
+    "s0": 0.0,
+    "progress": 0.2003074911638908,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 175.78
+  },
+  {
+    "seed": 6,
+    "roughening": 0.5,
+    "reward": 0.38487367550857027,
+    "sf": 0.4589017407554187,
+    "s0": 0.003592643451412838,
+    "progress": 0.4810920943857128,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 165.17
+  },
+  {
+    "seed": 7,
+    "roughening": 0.5,
+    "reward": 0.20402698752534143,
+    "sf": 0.24840886074576907,
+    "s0": 0.008224282551299837,
+    "progress": 0.25503373440667676,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 159.79
+  },
+  {
+    "seed": 8,
+    "roughening": 0.5,
+    "reward": 0.05008542159699042,
+    "sf": 0.05947643814642613,
+    "s0": 0.0,
+    "progress": 0.06260677699623803,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 74.23
+  },
+  {
+    "seed": 9,
+    "roughening": 0.5,
+    "reward": 0.27155931127741273,
+    "sf": 0.33353317701562185,
+    "s0": 0.0167382945479409,
+    "progress": 0.3394491390967659,
+    "shots_used": 60,
+    "solved": false,
+    "elapsed_sec": 72.28
+  }
+]

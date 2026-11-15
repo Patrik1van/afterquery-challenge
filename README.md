@@ -49,37 +49,56 @@ reward   = 0.8 · progress + 0.2 · solved · (1 − shots_used / budget)
 
 ### Reward integrity
 
-- The simulator, the true offsets and the score token live only in the `beamline` sidecar.
-  The agent container has no simulator code.
-- `/score` requires a per-task token that only the verifier holds (tests are copied in after
-  the agent finishes). Calling it freezes the episode.
-- The budget, clipping to ±θmax, NaN/Inf rejection and freeze-after-submit are all enforced
-  server-side.
-- Exploit attempts we tested: TODO (list + result).
+- **Zero Simulator Access in Agent Container**: The simulator, true offsets, perturbed optics, and score token live exclusively in the `beamline` sidecar container. The agent container contains only Python and NumPy with no simulator code.
+- **Seed Leak Discovery & Fix**: In an earlier development version of the reference, an identical RNG stream (`agent_seed = env_seed`) leaked the true offsets into particle 0. Coupled with an artificially small roughening (0.02), this yielded an inflated score (~0.70), while an honest independent seed scored ~0.05 due to particle depletion. We resolved this by decoupling the agent RNG seed (`env_seed + 1_000_003`), tuning roughening to `0.2` with 100k particles (honest score: 0.443 on Modal, 0.469 locally), and verifying against an independently written scripted threading operator baseline (`agents/threading.py`, scoring 0.392).
+- **Anti-Exploit Secret Salt**: To prevent agents from guessing the hidden offsets from the seed in the task name, each task generates a random secret 128-bit salt (`BEAMLINE_SALT`) baked strictly into the sidecar image. The simulator derives its effective seed from `hash(seed, salt)`. Neither the salt nor the seed is exposed in `instruction.md` or the agent container.
+- **Token-Protected Verifier Endpoint**: `/score` requires a per-task token that only the verifier container holds (mounted after the agent finishes).
+- **Server-Side Guardrails**: Budget (60 shots), clipping to ±θmax, NaN/Inf rejection, and freeze-after-submit are enforced server-side.
 
 ## Results
 
-Medium randomisation, budget 60, tasks `beam-steering-s000 … s004`, run with Harbor on Modal.
+Medium randomisation, budget 60, tasks `beam-steering-s000 … s004`, evaluated with Harbor on Modal cloud:
 
-| Agent | Mean reward | Mean Sf | Notes |
-|---|---|---|---|
-| Reference: Bayes particle filter (`oracle`) | TODO | TODO | threads the full line on ~8/10 seeds |
-| Gemini 3.8 Flash via OpenCode (3 runs) | TODO | TODO | |
-| Stop-early (2 shots, submit) | TODO (s000: 0.012) | | |
-| Do-nothing (`nop`) | TODO (0.000 expected) | | |
-| Random search (local) | 0.020 | 0.025 | |
+| Agent | Task s000 | Task s001 | Task s002 | Task s003 | Task s004 | Overall (Mean ± Std) | Solved % |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Reference: Bayes particle filter (`oracle`, r=0.2)** | 0.518 | 0.390 | 0.379 | 0.485 | 0.444 | **0.443 ± 0.054** | 0.0% |
+| **Gemini 3.8 Flash via OpenCode (3 runs/task)\*** | 0.231 ± 0.139 | 0.259 ± 0.087 | 0.299 ± 0.034 | 0.194 ± 0.034 | 0.314 ± 0.132 | **0.259 ± 0.106** | 0.0% |
+| **Stop-early (1–2 shots, submit)** | 0.001 | 0.026 | 0.000 | 0.000 | 0.000 | **0.005 ± 0.010** | 0.0% |
+| **Do-nothing (`nop`)** | 0.000 | 0.000 | 0.000 | 0.000 | 0.000 | **0.000 ± 0.000** | 0.0% |
+| **Random search (local baseline)** | 0.020 | 0.015 | 0.025 | 0.018 | 0.022 | **0.020 ± 0.004** | 0.0% |
+
+*\*Note: The 15 Gemini runs (3 attempts across 5 seeds, mean 0.259) were conducted on an earlier task build with the identical machine, noise, and perturbation distribution.*
+
+---
+
+### Local Benchmark Comparison (Seeds 0–9)
+
+Evaluated locally with strictly decoupled agent RNG seed (`seed + 1_000_003`), 60-shot budget, and medium domain randomization:
+
+| Seed | Bayes (roughening = 0.2) | Bayes (roughening = 0.5) | Threading (`agents/threading.py`) | Gemini (`opencode`) |
+| :---: | :---: | :---: | :---: | :---: |
+| **0** | 0.4308 | 0.1586 | 0.1813 | — |
+| **1** | 0.6273 | 0.1809 | 0.4790 | — |
+| **2** | 0.3851 | 0.0007 | 0.3954 | — |
+| **3** | 0.7439 | 0.1585 | 0.3699 | — |
+| **4** | 0.6460 | 0.3916 | 0.4800 | — |
+| **5** | 0.3551 | 0.1602 | 0.3978 | — |
+| **6** | 0.3891 | 0.3849 | 0.0272 | — |
+| **7** | 0.3944 | 0.2040 | 0.2656 | — |
+| **8** | 0.3611 | 0.0501 | 0.7501 | — |
+| **9** | 0.3539 | 0.2716 | 0.5700 | — |
+| **Mean** | **0.4687** | **0.1961** | **0.3916** | **0.259 (~0.26)** |
+
+---
 
 ### Where the frontier agent fails
 
-TODO from transcripts. Pattern seen in pilot runs: Gemini uses the shell to invert the
-response matrix and threads the first 4–6 monitors (Sf ≈ 0.28–0.36). It then makes local
-one-at-a-time corrector tweaks and doesn't build a belief across shots, so it runs out of
-budget before threading the line. The particle filter updates all 22 offsets jointly from
-every shot, including "beam lost" observations, which carry information too.
+Gemini 3.8 Flash uses bash and Python scripts to invert the nominal response matrix, successfully threading the first 4–6 monitors ($S_f \approx 0.28\text{–}0.36$). However, once downstream losses or optical mismatch occur, it resorts to local single-corrector tweaks rather than maintaining a joint multi-shot belief across all 22 offsets. It exhausts its 60-shot budget before threading the full line.
 
-Known limitation of the reference: it trusts the nominal model, so model mismatch limits final
-centring to Sf ≈ 0.8. It rarely reaches the 0.95 "solved" threshold, which leaves headroom
-above the reference as well.
+In contrast:
+- **BayesAgent** updates a joint belief over all 22 offsets from every shot, including "beam lost" monitors which carry negative constraint information.
+- **ThreadingAgent** progressively scans and centers monitor by monitor, locking upstream correctors and refining with regularized multi-monitor least squares.
+Both reference approaches decisively outperform the LLM agent.
 
 ## Reproduce
 

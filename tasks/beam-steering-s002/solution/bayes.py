@@ -32,12 +32,12 @@ class BayesAgent:
 
     def __init__(
         self,
-        n_particles: int = 50_000,
-        chunk_size: int = 10_000,
+        n_particles: int = 100_000,
+        chunk_size: int = 25_000,
         alpha: float = 0.1,
         beta: float = 0.6,
         target_s_mean: float = 0.97,
-        roughening: float = 0.02,
+        roughening: float = 0.2,
         seed: int = 0,
     ) -> None:
         self.n_particles = int(n_particles)

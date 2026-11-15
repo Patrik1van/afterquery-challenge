@@ -61,7 +61,7 @@ class SyncMCPBeamlineClient:
 
 def main():
     client = SyncMCPBeamlineClient()
-    agent = BayesAgent(n_particles=40_000, roughening=0.02, seed=4)
+    agent = BayesAgent(n_particles=100_000, chunk_size=25_000, roughening=0.2, seed=4 + 1_000_003)
     agent.solve(client)
     print("Bayes Oracle finished episode.")
 
