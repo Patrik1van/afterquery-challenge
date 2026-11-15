@@ -201,7 +201,7 @@ pip install --no-cache-dir --break-system-packages scipy
 python3 /solution/solve.py
 """
 
-SOLVE_PY = """import json
+SOLVE_PY_TEMPLATE = """import json
 import urllib.request
 from bayes import BayesAgent
 
@@ -264,7 +264,7 @@ class SyncMCPBeamlineClient:
 
 def main():
     client = SyncMCPBeamlineClient()
-    agent = BayesAgent(n_particles=25_000, roughening=0.02, seed=0)
+    agent = BayesAgent(n_particles=40_000, roughening=0.02, seed={seed})
     agent.solve(client)
     print("Bayes Oracle finished episode.")
 
@@ -282,11 +282,17 @@ def write_file(path: Path, text: str) -> None:
 
 def generate_task(seed: int, budget: int = 60, randomization: str = "medium") -> Path:
     task_dir = REPO_ROOT / "tasks" / f"beam-steering-s{seed:03d}"
+    score_token = secrets.token_hex(16)
+    existing_test = task_dir / "tests" / "test.sh"
+    if existing_test.exists():
+        import re
+        m = re.search(r"token=([0-9a-fA-F]+)", existing_test.read_text())
+        if m:
+            score_token = m.group(1)
+
     if task_dir.exists():
         shutil.rmtree(task_dir)
     task_dir.mkdir(parents=True, exist_ok=True)
-
-    score_token = secrets.token_hex(16)
 
     # 1. task.toml
     write_file(
@@ -333,7 +339,7 @@ def generate_task(seed: int, budget: int = 60, randomization: str = "medium") ->
     solve_sh_path = solution_dir / "solve.sh"
     write_file(solve_sh_path, SOLVE_SH)
     os.chmod(solve_sh_path, 0o755)
-    write_file(solution_dir / "solve.py", SOLVE_PY)
+    write_file(solution_dir / "solve.py", SOLVE_PY_TEMPLATE.replace("{seed}", str(seed)))
 
     # Copy bayes.py to solution/bayes.py with env_api dependency removed
     bayes_src = (REPO_ROOT / "agents" / "bayes.py").read_text(encoding="utf-8")

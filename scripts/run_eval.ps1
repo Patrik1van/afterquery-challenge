@@ -1,4 +1,4 @@
-# Run full judge evaluation over tasks/beam-steering-s000..s004 on Modal
+﻿# Run full judge evaluation over tasks/beam-steering-s000..s004 on Modal
 # Runs oracle, nop, stop-early, and 3x opencode (Gemini 3.8-Flash), then prints summary table.
 
 $ErrorActionPreference = "Stop"

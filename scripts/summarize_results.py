@@ -40,8 +40,8 @@ def summarize(runs_dir: Path, output_file: Path | None = None) -> str:
             except Exception:
                 continue
 
-    # Order agents: defined order first, then any extra
-    all_agents = [a for a in agents_order if a in data] + [a for a in data if a not in agents_order]
+    # Order agents: defined order first, then any extra (exclude unknown)
+    all_agents = [a for a in agents_order if a in data]
 
     lines = []
     lines.append("# CERN TT20 Beam Steering Benchmark — Harbor Evaluation Summary\n")
