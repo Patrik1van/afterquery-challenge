@@ -386,6 +386,3 @@ if __name__ == "__main__":
             f"Temp: {st['temperature_C']}°C | pH: {st['pH']} | DO: {st['dissolved_o2_pct']}% | "
             f"Viab: {st['viability']}"
         )
-
-pip install google-genai pydantic numpy scipy
-export GEMINI_API_KEY='AQ.Ab8RN6K7RTcur4SXXtJVNZBDgFJHNbPIF8NWLJZnezdiOQft2w'
