@@ -1,170 +1,384 @@
 set,trial,order,expr,result,cost,budget_used
-reference,PiibwEB,1,700 ⊕ 900,1601,1,1
-reference,PiibwEB,2,700 ⊗ 900,629999,1,2
-reference,PiibwEB,3,700 ◇ 900,900,1,3
-reference,PiibwEB,4,700 ▽ 900,200,1,4
-reference,PiibwEB,5,700 ⊘ 900,500,1,5
-reference,PiibwEB,6,700 ⊛ 900,810700,1,6
-reference,PiibwEB,7,700 ⊞ 900,64,1,7
-reference,PiibwEB,8,700 ⊠ 900,1602,1,8
-reference,PiibwEB,9,700 △ 900,0,1,9
-reference,PiibwEB,10,7 ⊞ 1,8,1,10
-reference,PiibwEB,11,300 ▽ 0,300,1,11
-reference,PiibwEB,12,0 ⊞ 1000,232,1,12
-reference,PiibwEB,13,1000 ⊘ 0,2000,1,13
-reference,PiibwEB,14,100 ⊠ (5 ⊘ 500),-387,2,15
-reference,PiibwEB,15,1 △ 1,0,1,16
-reference,PiibwEB,16,13 ◇ 0,13,1,17
-reference,PiibwEB,17,(13 △ 2) ⊗ 7,76,2,19
-reference,PiibwEB,18,300 △ 3,297,1,20
-hydrogen,4M9jGPV,1,17 ⊕ 6,24,1,1
-hydrogen,4M9jGPV,2,17 ⊗ 6,101,1,2
-hydrogen,4M9jGPV,3,17 ◇ 6,17,1,3
-hydrogen,4M9jGPV,4,17 ▽ 6,11,1,4
-hydrogen,4M9jGPV,5,17 ⊘ 6,28,1,5
-hydrogen,4M9jGPV,6,17 ⊛ 6,53,1,6
-hydrogen,4M9jGPV,7,17 ⊞ 6,23,1,7
-hydrogen,4M9jGPV,8,17 ⊠ 6,25,1,8
-hydrogen,4M9jGPV,9,17 △ 6,11,1,9
-hydrogen,4M9jGPV,10,5 ▽ 11,6,1,10
-hydrogen,4M9jGPV,11,5 △ 11,0,1,11
-hydrogen,4M9jGPV,12,5 ◇ 11,11,1,12
-hydrogen,4M9jGPV,13,5 ⊘ 11,-1,1,13
-hydrogen,4M9jGPV,14,5 ⊛ 11,126,1,14
-hydrogen,4M9jGPV,15,1000 ⊗ (3 ⊕ 10),13999,2,16
-hydrogen,4M9jGPV,16,3 ⊛ (10 ⊠ 20),1092,2,18
-hydrogen,4M9jGPV,17,3 ⊞ 10 ⊗ 1000,12999,2,20
-hydrogen,5AZjdXY,1,17 ⊕ 5,23,1,1
-hydrogen,5AZjdXY,2,11 ⊕ 4,16,1,2
-hydrogen,5AZjdXY,3,11 ⊗ 4,43,1,3
-hydrogen,5AZjdXY,4,11 ◇ 4,11,1,4
-hydrogen,5AZjdXY,5,11 ▽ 4,7,1,5
-hydrogen,5AZjdXY,6,11 ⊘ 4,18,1,6
-hydrogen,5AZjdXY,7,11 ⊛ 4,27,1,7
-hydrogen,5AZjdXY,8,11 ⊞ 4,15,1,8
-hydrogen,5AZjdXY,9,11 ⊠ 4,17,1,9
-hydrogen,5AZjdXY,10,11 △ 4,7,1,10
-hydrogen,5AZjdXY,11,3 ⊗ 29,86,1,11
-hydrogen,5AZjdXY,12,3 ◇ 29,29,1,12
-hydrogen,5AZjdXY,13,3 ▽ 29,26,1,13
-hydrogen,5AZjdXY,14,3 △ 29,0,1,14
-hydrogen,5AZjdXY,15,3 ⊘ 29,-23,1,15
-hydrogen,5AZjdXY,16,3 ⊛ 29,844,1,16
-hydrogen,5AZjdXY,17,3 ⊞ 29,32,1,17
-hydrogen,5AZjdXY,18,3 ⊠ 29,34,1,18
-hydrogen,5AZjdXY,19,10 ⊠ 20 ⊗ 1000,32999,2,20
-hydrogen,QUW7rrM,1,19 ⊕ 5,25,1,1
-hydrogen,QUW7rrM,2,19 ⊗ 5,94,1,2
-hydrogen,QUW7rrM,3,19 ◇ 5,19,1,3
-hydrogen,QUW7rrM,4,19 ▽ 5,14,1,4
-hydrogen,QUW7rrM,5,19 ⊘ 5,33,1,5
-hydrogen,QUW7rrM,6,19 ⊛ 5,44,1,6
-hydrogen,QUW7rrM,7,19 ⊞ 5,24,1,7
-hydrogen,QUW7rrM,8,19 ⊠ 5,26,1,8
-hydrogen,QUW7rrM,9,19 △ 5,14,1,9
-hydrogen,QUW7rrM,10,4 ◇ 11,11,1,10
-hydrogen,QUW7rrM,11,4 ⊘ 11,-3,1,11
-hydrogen,QUW7rrM,12,4 ⊛ 11,125,1,12
-hydrogen,QUW7rrM,13,4 ▽ 11,7,1,13
-hydrogen,QUW7rrM,14,4 △ 11,0,1,14
-hydrogen,QUW7rrM,15,100 ⊗ (3 ⊕ 4),799,2,16
-hydrogen,QUW7rrM,16,1000 ⊛ (2 ⊠ 3),1064,2,18
-hydrogen,QUW7rrM,17,100 ⊘ (2 ⊞ 5),193,2,20
-hydrogen,hyarm73,1,13 ⊕ 6,20,1,1
-hydrogen,hyarm73,2,13 ⊗ 6,77,1,2
-hydrogen,hyarm73,3,13 ◇ 6,13,1,3
-hydrogen,hyarm73,4,13 ▽ 6,7,1,4
-hydrogen,hyarm73,5,13 △ 6,7,1,5
-hydrogen,hyarm73,6,13 ⊘ 6,20,1,6
-hydrogen,hyarm73,7,13 ⊠ 6,21,1,7
-hydrogen,hyarm73,8,13 ⊛ 6,49,1,8
-hydrogen,hyarm73,9,13 ⊞ 6,19,1,9
-hydrogen,hyarm73,10,4 ⊘ 13,-5,1,10
-hydrogen,hyarm73,11,(300 ⊠ 503) ⊗ (61 ⊞ 90),121856,3,13
-hydrogen,hyarm73,12,(211 ◇ 827) ⊗ (4 ⊛ 13),143070,3,16
-hydrogen,hyarm73,13,4 ⊕ 13 ⊕ 100,119,2,18
-hydrogen,hyarm73,14,(4 ▽ 13) △ 107,0,2,20
-hydrogen,v6JxQ6v,1,11 ⊕ 4,16,1,1
-hydrogen,v6JxQ6v,2,11 ⊗ 4,43,1,2
-hydrogen,v6JxQ6v,3,11 ◇ 4,11,1,3
-hydrogen,v6JxQ6v,4,11 ▽ 4,7,1,4
-hydrogen,v6JxQ6v,5,11 ⊘ 4,18,1,5
-hydrogen,v6JxQ6v,6,11 ⊛ 4,27,1,6
-hydrogen,v6JxQ6v,7,11 ⊞ 4,15,1,7
-hydrogen,v6JxQ6v,8,11 ⊠ 4,17,1,8
-hydrogen,v6JxQ6v,9,11 △ 4,7,1,9
-hydrogen,v6JxQ6v,10,8 ⊘ 13,3,1,10
-hydrogen,v6JxQ6v,11,8 ⊛ 13,177,1,11
-hydrogen,v6JxQ6v,12,8 ▽ 13,5,1,12
-hydrogen,v6JxQ6v,13,8 △ 13,0,1,13
-hydrogen,v6JxQ6v,14,8 ◇ 13,13,1,14
-hydrogen,v6JxQ6v,15,(8 ⊕ 13) ⊗ 1000,21999,2,16
-hydrogen,v6JxQ6v,16,10 ⊛ (8 ⊠ 13),586,2,18
-hydrogen,v6JxQ6v,17,(8 ⊞ 13) ⊕ 100,122,2,20
-carbon,6HpSKEk,1,19 ⊕ 5,25,1,1
-carbon,6HpSKEk,2,19 ⊗ 5,94,1,2
-carbon,6HpSKEk,3,19 ◇ 5,19,1,3
-carbon,6HpSKEk,4,23 ▽ 4,19,1,4
-carbon,6HpSKEk,5,23 ⊘ 4,42,1,5
-carbon,6HpSKEk,6,23 ⊛ 4,39,1,6
-carbon,6HpSKEk,7,23 ⊞ 4,27,1,7
-carbon,6HpSKEk,8,23 ⊠ 4,29,1,8
-carbon,6HpSKEk,9,23 △ 4,19,1,9
-carbon,6HpSKEk,10,(4 ⊛ 7) ⊗ (29 ⊘ 42),847,3,12
-carbon,6HpSKEk,11,(6 ◇ 25) ⊕ 40,66,2,14
-carbon,6HpSKEk,12,103 ▽ (14 ⊞ 125),36,2,16
-carbon,6HpSKEk,13,79 △ (83 ⊠ 125),0,2,18
-carbon,6HpSKEk,14,(43 ◇ 9) ⊠ 127,173,2,20
-carbon,N2rHaxc,1,38 ⊕ 7,46,1,1
-carbon,N2rHaxc,2,38 ⊗ 7,265,1,2
-carbon,N2rHaxc,3,38 ◇ 7,38,1,3
-carbon,N2rHaxc,4,38 ▽ 7,31,1,4
-carbon,N2rHaxc,5,38 ⊘ 7,69,1,5
-carbon,N2rHaxc,6,38 ⊛ 7,87,1,6
-carbon,N2rHaxc,7,38 ⊞ 7,45,1,7
-carbon,N2rHaxc,8,38 ⊠ 7,47,1,8
-carbon,N2rHaxc,9,38 △ 7,31,1,9
-carbon,N2rHaxc,10,(601 ⊠ 721) ⊗ (14 ◇ 50),66299,3,12
-carbon,N2rHaxc,11,(12 ▽ 60) ⊛ (120 ⊕ 200),103089,3,15
-carbon,N2rHaxc,12,20 △ (410 ⊘ (181 ⊞ 319)),0,3,18
-carbon,N2rHaxc,13,(61 ⊞ 147) ⊘ 537,-121,2,20
-carbon,NV4ZmDi,1,37 ⊕ 8,46,1,1
-carbon,NV4ZmDi,2,37 ⊗ 8,295,1,2
-carbon,NV4ZmDi,3,37 ◇ 8,37,1,3
-carbon,NV4ZmDi,4,37 ▽ 8,29,1,4
-carbon,NV4ZmDi,5,37 ⊘ 8,66,1,5
-carbon,NV4ZmDi,6,37 ⊛ 8,101,1,6
-carbon,NV4ZmDi,7,37 ⊞ 8,45,1,7
-carbon,NV4ZmDi,8,37 ⊠ 8,47,1,8
-carbon,NV4ZmDi,9,37 △ 8,29,1,9
-carbon,NV4ZmDi,10,(6 ▽ 25) ⊗ 500,9499,2,11
-carbon,NV4ZmDi,11,(4 △ 15) ⊛ (34 ⊘ 47),441,3,14
-carbon,NV4ZmDi,12,(7 ◇ 200) ⊛ (140 ⊕ 301),195564,3,17
-carbon,NV4ZmDi,13,(16 ⊠ 28) ⊛ (410 ⊞ 504),21364,3,20
-carbon,QxfCsTw,1,19 ⊕ 6,26,1,1
-carbon,QxfCsTw,2,19 ⊗ 6,113,1,2
-carbon,QxfCsTw,3,19 ◇ 6,19,1,3
-carbon,QxfCsTw,4,23 ▽ 4,19,1,4
-carbon,QxfCsTw,5,23 ⊘ 4,42,1,5
-carbon,QxfCsTw,6,23 ⊛ 4,39,1,6
-carbon,QxfCsTw,7,23 ⊞ 4,27,1,7
-carbon,QxfCsTw,8,23 ⊠ 4,29,1,8
-carbon,QxfCsTw,9,23 △ 4,19,1,9
-carbon,QxfCsTw,10,210 ⊘ ((6 ⊕ 15) ⊗ 31),-261,3,12
-carbon,QxfCsTw,11,6 ⊛ (14 ◇ 17),295,2,14
-carbon,QxfCsTw,12,(8 ▽ 21) ⊛ (60 ⊠ 45),11894,3,17
-carbon,QxfCsTw,13,7 ◇ ((14 △ 53) ⊞ 601),89,3,20
-carbon,VPQ5329,1,19 ⊕ 5,25,1,1
-carbon,VPQ5329,2,19 ⊗ 5,94,1,2
-carbon,VPQ5329,3,19 ◇ 5,19,1,3
-carbon,VPQ5329,4,26 ▽ 3,23,1,4
-carbon,VPQ5329,5,26 ⊘ 3,49,1,5
-carbon,VPQ5329,6,26 ⊛ 3,35,1,6
-carbon,VPQ5329,7,26 ⊞ 3,29,1,7
-carbon,VPQ5329,8,26 ⊠ 3,31,1,8
-carbon,VPQ5329,9,26 △ 3,23,1,9
-carbon,VPQ5329,10,(6 ⊞ 16) ⊗ 100,2199,2,11
-carbon,VPQ5329,11,9 ⊛ (6 ⊕ 10),298,2,13
-carbon,VPQ5329,12,17 ⊘ (89 ⊠ 14),-72,2,15
-carbon,VPQ5329,13,(11 ◇ 34) ▽ 103,69,2,17
-carbon,VPQ5329,14,500 ⊠ ((12 △ 49) ⊗ 100),503,3,20
+reference_seed42,PiibwEB,1,700 ⊕ 900,1601,1,1
+reference_seed42,PiibwEB,2,700 ⊗ 900,629999,1,2
+reference_seed42,PiibwEB,3,700 ◇ 900,900,1,3
+reference_seed42,PiibwEB,4,700 ▽ 900,200,1,4
+reference_seed42,PiibwEB,5,700 ⊘ 900,500,1,5
+reference_seed42,PiibwEB,6,700 ⊛ 900,810700,1,6
+reference_seed42,PiibwEB,7,700 ⊞ 900,64,1,7
+reference_seed42,PiibwEB,8,700 ⊠ 900,1602,1,8
+reference_seed42,PiibwEB,9,700 △ 900,0,1,9
+reference_seed42,PiibwEB,10,7 ⊞ 1,8,1,10
+reference_seed42,PiibwEB,11,300 ▽ 0,300,1,11
+reference_seed42,PiibwEB,12,0 ⊞ 1000,232,1,12
+reference_seed42,PiibwEB,13,1000 ⊘ 0,2000,1,13
+reference_seed42,PiibwEB,14,100 ⊠ (5 ⊘ 500),-387,2,15
+reference_seed42,PiibwEB,15,1 △ 1,0,1,16
+reference_seed42,PiibwEB,16,13 ◇ 0,13,1,17
+reference_seed42,PiibwEB,17,(13 △ 2) ⊗ 7,76,2,19
+reference_seed42,PiibwEB,18,300 △ 3,297,1,20
+hydrogen_seed42,4M9jGPV,1,17 ⊕ 6,24,1,1
+hydrogen_seed42,4M9jGPV,2,17 ⊗ 6,101,1,2
+hydrogen_seed42,4M9jGPV,3,17 ◇ 6,17,1,3
+hydrogen_seed42,4M9jGPV,4,17 ▽ 6,11,1,4
+hydrogen_seed42,4M9jGPV,5,17 ⊘ 6,28,1,5
+hydrogen_seed42,4M9jGPV,6,17 ⊛ 6,53,1,6
+hydrogen_seed42,4M9jGPV,7,17 ⊞ 6,23,1,7
+hydrogen_seed42,4M9jGPV,8,17 ⊠ 6,25,1,8
+hydrogen_seed42,4M9jGPV,9,17 △ 6,11,1,9
+hydrogen_seed42,4M9jGPV,10,5 ▽ 11,6,1,10
+hydrogen_seed42,4M9jGPV,11,5 △ 11,0,1,11
+hydrogen_seed42,4M9jGPV,12,5 ◇ 11,11,1,12
+hydrogen_seed42,4M9jGPV,13,5 ⊘ 11,-1,1,13
+hydrogen_seed42,4M9jGPV,14,5 ⊛ 11,126,1,14
+hydrogen_seed42,4M9jGPV,15,1000 ⊗ (3 ⊕ 10),13999,2,16
+hydrogen_seed42,4M9jGPV,16,3 ⊛ (10 ⊠ 20),1092,2,18
+hydrogen_seed42,4M9jGPV,17,3 ⊞ 10 ⊗ 1000,12999,2,20
+hydrogen_seed42,5AZjdXY,1,17 ⊕ 5,23,1,1
+hydrogen_seed42,5AZjdXY,2,11 ⊕ 4,16,1,2
+hydrogen_seed42,5AZjdXY,3,11 ⊗ 4,43,1,3
+hydrogen_seed42,5AZjdXY,4,11 ◇ 4,11,1,4
+hydrogen_seed42,5AZjdXY,5,11 ▽ 4,7,1,5
+hydrogen_seed42,5AZjdXY,6,11 ⊘ 4,18,1,6
+hydrogen_seed42,5AZjdXY,7,11 ⊛ 4,27,1,7
+hydrogen_seed42,5AZjdXY,8,11 ⊞ 4,15,1,8
+hydrogen_seed42,5AZjdXY,9,11 ⊠ 4,17,1,9
+hydrogen_seed42,5AZjdXY,10,11 △ 4,7,1,10
+hydrogen_seed42,5AZjdXY,11,3 ⊗ 29,86,1,11
+hydrogen_seed42,5AZjdXY,12,3 ◇ 29,29,1,12
+hydrogen_seed42,5AZjdXY,13,3 ▽ 29,26,1,13
+hydrogen_seed42,5AZjdXY,14,3 △ 29,0,1,14
+hydrogen_seed42,5AZjdXY,15,3 ⊘ 29,-23,1,15
+hydrogen_seed42,5AZjdXY,16,3 ⊛ 29,844,1,16
+hydrogen_seed42,5AZjdXY,17,3 ⊞ 29,32,1,17
+hydrogen_seed42,5AZjdXY,18,3 ⊠ 29,34,1,18
+hydrogen_seed42,5AZjdXY,19,10 ⊠ 20 ⊗ 1000,32999,2,20
+hydrogen_seed42,QUW7rrM,1,19 ⊕ 5,25,1,1
+hydrogen_seed42,QUW7rrM,2,19 ⊗ 5,94,1,2
+hydrogen_seed42,QUW7rrM,3,19 ◇ 5,19,1,3
+hydrogen_seed42,QUW7rrM,4,19 ▽ 5,14,1,4
+hydrogen_seed42,QUW7rrM,5,19 ⊘ 5,33,1,5
+hydrogen_seed42,QUW7rrM,6,19 ⊛ 5,44,1,6
+hydrogen_seed42,QUW7rrM,7,19 ⊞ 5,24,1,7
+hydrogen_seed42,QUW7rrM,8,19 ⊠ 5,26,1,8
+hydrogen_seed42,QUW7rrM,9,19 △ 5,14,1,9
+hydrogen_seed42,QUW7rrM,10,4 ◇ 11,11,1,10
+hydrogen_seed42,QUW7rrM,11,4 ⊘ 11,-3,1,11
+hydrogen_seed42,QUW7rrM,12,4 ⊛ 11,125,1,12
+hydrogen_seed42,QUW7rrM,13,4 ▽ 11,7,1,13
+hydrogen_seed42,QUW7rrM,14,4 △ 11,0,1,14
+hydrogen_seed42,QUW7rrM,15,100 ⊗ (3 ⊕ 4),799,2,16
+hydrogen_seed42,QUW7rrM,16,1000 ⊛ (2 ⊠ 3),1064,2,18
+hydrogen_seed42,QUW7rrM,17,100 ⊘ (2 ⊞ 5),193,2,20
+hydrogen_seed42,hyarm73,1,13 ⊕ 6,20,1,1
+hydrogen_seed42,hyarm73,2,13 ⊗ 6,77,1,2
+hydrogen_seed42,hyarm73,3,13 ◇ 6,13,1,3
+hydrogen_seed42,hyarm73,4,13 ▽ 6,7,1,4
+hydrogen_seed42,hyarm73,5,13 △ 6,7,1,5
+hydrogen_seed42,hyarm73,6,13 ⊘ 6,20,1,6
+hydrogen_seed42,hyarm73,7,13 ⊠ 6,21,1,7
+hydrogen_seed42,hyarm73,8,13 ⊛ 6,49,1,8
+hydrogen_seed42,hyarm73,9,13 ⊞ 6,19,1,9
+hydrogen_seed42,hyarm73,10,4 ⊘ 13,-5,1,10
+hydrogen_seed42,hyarm73,11,(300 ⊠ 503) ⊗ (61 ⊞ 90),121856,3,13
+hydrogen_seed42,hyarm73,12,(211 ◇ 827) ⊗ (4 ⊛ 13),143070,3,16
+hydrogen_seed42,hyarm73,13,4 ⊕ 13 ⊕ 100,119,2,18
+hydrogen_seed42,hyarm73,14,(4 ▽ 13) △ 107,0,2,20
+hydrogen_seed42,v6JxQ6v,1,11 ⊕ 4,16,1,1
+hydrogen_seed42,v6JxQ6v,2,11 ⊗ 4,43,1,2
+hydrogen_seed42,v6JxQ6v,3,11 ◇ 4,11,1,3
+hydrogen_seed42,v6JxQ6v,4,11 ▽ 4,7,1,4
+hydrogen_seed42,v6JxQ6v,5,11 ⊘ 4,18,1,5
+hydrogen_seed42,v6JxQ6v,6,11 ⊛ 4,27,1,6
+hydrogen_seed42,v6JxQ6v,7,11 ⊞ 4,15,1,7
+hydrogen_seed42,v6JxQ6v,8,11 ⊠ 4,17,1,8
+hydrogen_seed42,v6JxQ6v,9,11 △ 4,7,1,9
+hydrogen_seed42,v6JxQ6v,10,8 ⊘ 13,3,1,10
+hydrogen_seed42,v6JxQ6v,11,8 ⊛ 13,177,1,11
+hydrogen_seed42,v6JxQ6v,12,8 ▽ 13,5,1,12
+hydrogen_seed42,v6JxQ6v,13,8 △ 13,0,1,13
+hydrogen_seed42,v6JxQ6v,14,8 ◇ 13,13,1,14
+hydrogen_seed42,v6JxQ6v,15,(8 ⊕ 13) ⊗ 1000,21999,2,16
+hydrogen_seed42,v6JxQ6v,16,10 ⊛ (8 ⊠ 13),586,2,18
+hydrogen_seed42,v6JxQ6v,17,(8 ⊞ 13) ⊕ 100,122,2,20
+carbon_seed42,6HpSKEk,1,19 ⊕ 5,25,1,1
+carbon_seed42,6HpSKEk,2,19 ⊗ 5,94,1,2
+carbon_seed42,6HpSKEk,3,19 ◇ 5,19,1,3
+carbon_seed42,6HpSKEk,4,23 ▽ 4,19,1,4
+carbon_seed42,6HpSKEk,5,23 ⊘ 4,42,1,5
+carbon_seed42,6HpSKEk,6,23 ⊛ 4,39,1,6
+carbon_seed42,6HpSKEk,7,23 ⊞ 4,27,1,7
+carbon_seed42,6HpSKEk,8,23 ⊠ 4,29,1,8
+carbon_seed42,6HpSKEk,9,23 △ 4,19,1,9
+carbon_seed42,6HpSKEk,10,(4 ⊛ 7) ⊗ (29 ⊘ 42),847,3,12
+carbon_seed42,6HpSKEk,11,(6 ◇ 25) ⊕ 40,66,2,14
+carbon_seed42,6HpSKEk,12,103 ▽ (14 ⊞ 125),36,2,16
+carbon_seed42,6HpSKEk,13,79 △ (83 ⊠ 125),0,2,18
+carbon_seed42,6HpSKEk,14,(43 ◇ 9) ⊠ 127,173,2,20
+carbon_seed42,N2rHaxc,1,38 ⊕ 7,46,1,1
+carbon_seed42,N2rHaxc,2,38 ⊗ 7,265,1,2
+carbon_seed42,N2rHaxc,3,38 ◇ 7,38,1,3
+carbon_seed42,N2rHaxc,4,38 ▽ 7,31,1,4
+carbon_seed42,N2rHaxc,5,38 ⊘ 7,69,1,5
+carbon_seed42,N2rHaxc,6,38 ⊛ 7,87,1,6
+carbon_seed42,N2rHaxc,7,38 ⊞ 7,45,1,7
+carbon_seed42,N2rHaxc,8,38 ⊠ 7,47,1,8
+carbon_seed42,N2rHaxc,9,38 △ 7,31,1,9
+carbon_seed42,N2rHaxc,10,(601 ⊠ 721) ⊗ (14 ◇ 50),66299,3,12
+carbon_seed42,N2rHaxc,11,(12 ▽ 60) ⊛ (120 ⊕ 200),103089,3,15
+carbon_seed42,N2rHaxc,12,20 △ (410 ⊘ (181 ⊞ 319)),0,3,18
+carbon_seed42,N2rHaxc,13,(61 ⊞ 147) ⊘ 537,-121,2,20
+carbon_seed42,NV4ZmDi,1,37 ⊕ 8,46,1,1
+carbon_seed42,NV4ZmDi,2,37 ⊗ 8,295,1,2
+carbon_seed42,NV4ZmDi,3,37 ◇ 8,37,1,3
+carbon_seed42,NV4ZmDi,4,37 ▽ 8,29,1,4
+carbon_seed42,NV4ZmDi,5,37 ⊘ 8,66,1,5
+carbon_seed42,NV4ZmDi,6,37 ⊛ 8,101,1,6
+carbon_seed42,NV4ZmDi,7,37 ⊞ 8,45,1,7
+carbon_seed42,NV4ZmDi,8,37 ⊠ 8,47,1,8
+carbon_seed42,NV4ZmDi,9,37 △ 8,29,1,9
+carbon_seed42,NV4ZmDi,10,(6 ▽ 25) ⊗ 500,9499,2,11
+carbon_seed42,NV4ZmDi,11,(4 △ 15) ⊛ (34 ⊘ 47),441,3,14
+carbon_seed42,NV4ZmDi,12,(7 ◇ 200) ⊛ (140 ⊕ 301),195564,3,17
+carbon_seed42,NV4ZmDi,13,(16 ⊠ 28) ⊛ (410 ⊞ 504),21364,3,20
+carbon_seed42,QxfCsTw,1,19 ⊕ 6,26,1,1
+carbon_seed42,QxfCsTw,2,19 ⊗ 6,113,1,2
+carbon_seed42,QxfCsTw,3,19 ◇ 6,19,1,3
+carbon_seed42,QxfCsTw,4,23 ▽ 4,19,1,4
+carbon_seed42,QxfCsTw,5,23 ⊘ 4,42,1,5
+carbon_seed42,QxfCsTw,6,23 ⊛ 4,39,1,6
+carbon_seed42,QxfCsTw,7,23 ⊞ 4,27,1,7
+carbon_seed42,QxfCsTw,8,23 ⊠ 4,29,1,8
+carbon_seed42,QxfCsTw,9,23 △ 4,19,1,9
+carbon_seed42,QxfCsTw,10,210 ⊘ ((6 ⊕ 15) ⊗ 31),-261,3,12
+carbon_seed42,QxfCsTw,11,6 ⊛ (14 ◇ 17),295,2,14
+carbon_seed42,QxfCsTw,12,(8 ▽ 21) ⊛ (60 ⊠ 45),11894,3,17
+carbon_seed42,QxfCsTw,13,7 ◇ ((14 △ 53) ⊞ 601),89,3,20
+carbon_seed42,VPQ5329,1,19 ⊕ 5,25,1,1
+carbon_seed42,VPQ5329,2,19 ⊗ 5,94,1,2
+carbon_seed42,VPQ5329,3,19 ◇ 5,19,1,3
+carbon_seed42,VPQ5329,4,26 ▽ 3,23,1,4
+carbon_seed42,VPQ5329,5,26 ⊘ 3,49,1,5
+carbon_seed42,VPQ5329,6,26 ⊛ 3,35,1,6
+carbon_seed42,VPQ5329,7,26 ⊞ 3,29,1,7
+carbon_seed42,VPQ5329,8,26 ⊠ 3,31,1,8
+carbon_seed42,VPQ5329,9,26 △ 3,23,1,9
+carbon_seed42,VPQ5329,10,(6 ⊞ 16) ⊗ 100,2199,2,11
+carbon_seed42,VPQ5329,11,9 ⊛ (6 ⊕ 10),298,2,13
+carbon_seed42,VPQ5329,12,17 ⊘ (89 ⊠ 14),-72,2,15
+carbon_seed42,VPQ5329,13,(11 ◇ 34) ▽ 103,69,2,17
+carbon_seed42,VPQ5329,14,500 ⊠ ((12 △ 49) ⊗ 100),503,3,20
+reference_seed7,z5G9PvV,1,700 ⊕ 900,1601,1,1
+reference_seed7,z5G9PvV,2,700 ⊗ 900,629999,1,2
+reference_seed7,z5G9PvV,3,700 ◇ 900,900,1,3
+reference_seed7,z5G9PvV,4,700 ▽ 900,200,1,4
+reference_seed7,z5G9PvV,5,700 ⊘ 900,500,1,5
+reference_seed7,z5G9PvV,6,700 ⊛ 900,810700,1,6
+reference_seed7,z5G9PvV,7,700 ⊞ 900,64,1,7
+reference_seed7,z5G9PvV,8,700 ⊠ 900,1602,1,8
+reference_seed7,z5G9PvV,9,700 △ 900,0,1,9
+reference_seed7,z5G9PvV,10,7 ⊞ 1,8,1,10
+reference_seed7,z5G9PvV,11,300 ▽ 0,300,1,11
+reference_seed7,z5G9PvV,12,0 ⊞ 1000,232,1,12
+reference_seed7,z5G9PvV,13,1000 ⊘ 0,2000,1,13
+reference_seed7,z5G9PvV,14,100 ⊠ (5 ⊘ 500),-387,2,15
+reference_seed7,z5G9PvV,15,1 △ 1,0,1,16
+reference_seed7,z5G9PvV,16,13 ◇ 0,13,1,17
+reference_seed7,z5G9PvV,17,(13 △ 2) ⊗ 7,76,2,19
+reference_seed7,z5G9PvV,18,300 △ 3,297,1,20
+hydrogen_seed7,AJGyETy,1,13 ⊕ 5,19,1,1
+hydrogen_seed7,AJGyETy,2,13 ⊗ 5,64,1,2
+hydrogen_seed7,AJGyETy,3,13 ◇ 5,13,1,3
+hydrogen_seed7,AJGyETy,4,13 ▽ 5,8,1,4
+hydrogen_seed7,AJGyETy,5,13 ⊘ 5,21,1,5
+hydrogen_seed7,AJGyETy,6,13 ⊛ 5,38,1,6
+hydrogen_seed7,AJGyETy,7,13 ⊞ 5,18,1,7
+hydrogen_seed7,AJGyETy,8,13 ⊠ 5,20,1,8
+hydrogen_seed7,AJGyETy,9,13 △ 5,8,1,9
+hydrogen_seed7,AJGyETy,10,4 ⊕ 11,16,1,10
+hydrogen_seed7,AJGyETy,11,4 ⊗ 11,43,1,11
+hydrogen_seed7,AJGyETy,12,4 ◇ 11,11,1,12
+hydrogen_seed7,AJGyETy,13,6 ▽ 16,10,1,13
+hydrogen_seed7,AJGyETy,14,6 ⊘ 16,-4,1,14
+hydrogen_seed7,AJGyETy,15,6 ⊛ 16,262,1,15
+hydrogen_seed7,AJGyETy,16,7 ⊞ 16,23,1,16
+hydrogen_seed7,AJGyETy,17,7 ⊠ 16,25,1,17
+hydrogen_seed7,AJGyETy,18,7 △ 16,0,1,18
+hydrogen_seed7,AJGyETy,19,(10 ⊠ 20) ⊗ 100,3299,2,20
+hydrogen_seed7,GcLof75,1,13 ⊕ 5,19,1,1
+hydrogen_seed7,GcLof75,2,13 ⊗ 5,64,1,2
+hydrogen_seed7,GcLof75,3,13 ◇ 5,13,1,3
+hydrogen_seed7,GcLof75,4,13 ▽ 5,8,1,4
+hydrogen_seed7,GcLof75,5,13 ⊘ 5,21,1,5
+hydrogen_seed7,GcLof75,6,13 ⊛ 5,38,1,6
+hydrogen_seed7,GcLof75,7,13 ⊞ 5,18,1,7
+hydrogen_seed7,GcLof75,8,13 ⊠ 5,20,1,8
+hydrogen_seed7,GcLof75,9,13 △ 5,8,1,9
+hydrogen_seed7,GcLof75,10,4 ⊕ 11,16,1,10
+hydrogen_seed7,GcLof75,11,4 ⊗ 11,43,1,11
+hydrogen_seed7,GcLof75,12,4 ⊞ 11,15,1,12
+hydrogen_seed7,GcLof75,13,4 ⊠ 11,17,1,13
+hydrogen_seed7,GcLof75,14,4 ◇ 11,11,1,14
+hydrogen_seed7,GcLof75,15,4 ▽ 11,7,1,15
+hydrogen_seed7,GcLof75,16,4 ⊘ 11,-3,1,16
+hydrogen_seed7,GcLof75,17,4 ⊛ 11,125,1,17
+hydrogen_seed7,GcLof75,18,4 △ 11,0,1,18
+hydrogen_seed7,GcLof75,19,100 ⊗ (10 ⊕ 20),3099,2,20
+hydrogen_seed7,RuVVAiJ,1,14 ⊕ 5,20,1,1
+hydrogen_seed7,RuVVAiJ,2,14 ⊗ 5,69,1,2
+hydrogen_seed7,RuVVAiJ,3,14 ◇ 5,14,1,3
+hydrogen_seed7,RuVVAiJ,4,14 ▽ 5,9,1,4
+hydrogen_seed7,RuVVAiJ,5,14 ⊘ 5,23,1,5
+hydrogen_seed7,RuVVAiJ,6,14 ⊛ 5,39,1,6
+hydrogen_seed7,RuVVAiJ,7,14 ⊞ 5,19,1,7
+hydrogen_seed7,RuVVAiJ,8,14 ⊠ 5,21,1,8
+hydrogen_seed7,RuVVAiJ,9,14 △ 5,9,1,9
+hydrogen_seed7,RuVVAiJ,10,3 ▽ 10 △ 1000,0,2,11
+hydrogen_seed7,RuVVAiJ,11,3 ▽ 10,7,1,12
+hydrogen_seed7,RuVVAiJ,12,3 ◇ 10,10,1,13
+hydrogen_seed7,RuVVAiJ,13,3 ⊘ 10,-4,1,14
+hydrogen_seed7,RuVVAiJ,14,3 ⊛ 10,103,1,15
+hydrogen_seed7,RuVVAiJ,15,(4 ⊞ 13) ⊗ (200 ⊕ 700),15316,3,18
+hydrogen_seed7,RuVVAiJ,16,3 ⊠ 10,15,1,19
+hydrogen_seed7,XsUZC4M,1,13 ⊕ 6,20,1,1
+hydrogen_seed7,XsUZC4M,2,13 ⊗ 6,77,1,2
+hydrogen_seed7,XsUZC4M,3,13 ◇ 6,13,1,3
+hydrogen_seed7,XsUZC4M,4,13 ▽ 6,7,1,4
+hydrogen_seed7,XsUZC4M,5,13 ⊘ 6,20,1,5
+hydrogen_seed7,XsUZC4M,6,13 ⊛ 6,49,1,6
+hydrogen_seed7,XsUZC4M,7,13 ⊞ 6,19,1,7
+hydrogen_seed7,XsUZC4M,8,13 ⊠ 6,21,1,8
+hydrogen_seed7,XsUZC4M,9,13 △ 6,7,1,9
+hydrogen_seed7,XsUZC4M,10,4 ⊕ 13,18,1,10
+hydrogen_seed7,XsUZC4M,11,4 ⊘ 13,-5,1,11
+hydrogen_seed7,XsUZC4M,12,4 ⊞ 13,17,1,12
+hydrogen_seed7,XsUZC4M,13,4 ⊠ 13,19,1,13
+hydrogen_seed7,XsUZC4M,14,4 ◇ 13,13,1,14
+hydrogen_seed7,XsUZC4M,15,4 ▽ 13,9,1,15
+hydrogen_seed7,XsUZC4M,16,4 ⊛ 13,173,1,16
+hydrogen_seed7,XsUZC4M,17,4 △ 13,0,1,17
+hydrogen_seed7,XsUZC4M,18,4 ⊗ 13,51,1,18
+hydrogen_seed7,XsUZC4M,19,10 ⊞ 20 ⊕ 100,131,2,20
+hydrogen_seed7,wSNSo6T,1,13 ⊕ 6,20,1,1
+hydrogen_seed7,wSNSo6T,2,13 ⊗ 6,77,1,2
+hydrogen_seed7,wSNSo6T,3,13 ◇ 6,13,1,3
+hydrogen_seed7,wSNSo6T,4,13 ⊘ 6,20,1,4
+hydrogen_seed7,wSNSo6T,5,13 ▽ 6,7,1,5
+hydrogen_seed7,wSNSo6T,6,13 ⊠ 6,21,1,6
+hydrogen_seed7,wSNSo6T,7,13 ⊞ 6,19,1,7
+hydrogen_seed7,wSNSo6T,8,13 ⊛ 6,49,1,8
+hydrogen_seed7,wSNSo6T,9,13 △ 6,7,1,9
+hydrogen_seed7,wSNSo6T,10,3 ▽ 8,5,1,10
+hydrogen_seed7,wSNSo6T,11,3 △ 8,0,1,11
+hydrogen_seed7,wSNSo6T,12,3 ◇ 8,8,1,12
+hydrogen_seed7,wSNSo6T,13,3 ⊛ 8,67,1,13
+hydrogen_seed7,wSNSo6T,14,4 ⊘ 9,-1,1,14
+hydrogen_seed7,wSNSo6T,15,4 ⊕ 9,14,1,15
+hydrogen_seed7,wSNSo6T,16,4 ⊗ 9,35,1,16
+hydrogen_seed7,wSNSo6T,17,4 ⊠ 9,15,1,17
+hydrogen_seed7,wSNSo6T,18,(14 ⊞ 19) ⊗ (401 ⊕ 600),33065,3,20
+reference_seed2026,FimaVhb,1,700 ⊕ 900,1601,1,1
+reference_seed2026,FimaVhb,2,700 ⊗ 900,629999,1,2
+reference_seed2026,FimaVhb,3,700 ◇ 900,900,1,3
+reference_seed2026,FimaVhb,4,700 ▽ 900,200,1,4
+reference_seed2026,FimaVhb,5,700 ⊘ 900,500,1,5
+reference_seed2026,FimaVhb,6,700 ⊛ 900,810700,1,6
+reference_seed2026,FimaVhb,7,700 ⊞ 900,64,1,7
+reference_seed2026,FimaVhb,8,700 ⊠ 900,1602,1,8
+reference_seed2026,FimaVhb,9,700 △ 900,0,1,9
+reference_seed2026,FimaVhb,10,7 ⊞ 1,8,1,10
+reference_seed2026,FimaVhb,11,300 ▽ 0,300,1,11
+reference_seed2026,FimaVhb,12,0 ⊞ 1000,232,1,12
+reference_seed2026,FimaVhb,13,1000 ⊘ 0,2000,1,13
+reference_seed2026,FimaVhb,14,100 ⊠ (5 ⊘ 500),-387,2,15
+reference_seed2026,FimaVhb,15,1 △ 1,0,1,16
+reference_seed2026,FimaVhb,16,13 ◇ 0,13,1,17
+reference_seed2026,FimaVhb,17,(13 △ 2) ⊗ 7,76,2,19
+reference_seed2026,FimaVhb,18,300 △ 3,297,1,20
+hydrogen_seed2026,ECePTgt,1,19 ⊕ 5,25,1,1
+hydrogen_seed2026,ECePTgt,2,19 ⊗ 5,94,1,2
+hydrogen_seed2026,ECePTgt,3,19 ◇ 5,19,1,3
+hydrogen_seed2026,ECePTgt,4,19 ▽ 5,14,1,4
+hydrogen_seed2026,ECePTgt,5,19 ⊘ 5,33,1,5
+hydrogen_seed2026,ECePTgt,6,19 ⊛ 5,44,1,6
+hydrogen_seed2026,ECePTgt,7,19 ⊞ 5,24,1,7
+hydrogen_seed2026,ECePTgt,8,19 ⊠ 5,26,1,8
+hydrogen_seed2026,ECePTgt,9,19 △ 5,14,1,9
+hydrogen_seed2026,ECePTgt,10,8 ⊘ 13,3,1,10
+hydrogen_seed2026,ECePTgt,11,8 ⊛ 13,177,1,11
+hydrogen_seed2026,ECePTgt,12,8 ◇ 13,13,1,12
+hydrogen_seed2026,ECePTgt,13,8 ▽ 13,5,1,13
+hydrogen_seed2026,ECePTgt,14,8 △ 13,0,1,14
+hydrogen_seed2026,ECePTgt,15,(500 ⊛ 20) ⊗ (15 ⊞ 15),26999,3,17
+hydrogen_seed2026,ECePTgt,16,(398 ⊠ 603) ⊗ (4 ⊕ 9),14069,3,20
+hydrogen_seed2026,KMj6xT9,1,14 ⊕ 5,20,1,1
+hydrogen_seed2026,KMj6xT9,2,14 ⊗ 5,69,1,2
+hydrogen_seed2026,KMj6xT9,3,14 ◇ 5,14,1,3
+hydrogen_seed2026,KMj6xT9,4,14 ▽ 5,9,1,4
+hydrogen_seed2026,KMj6xT9,5,14 ⊘ 5,23,1,5
+hydrogen_seed2026,KMj6xT9,6,14 ⊛ 5,39,1,6
+hydrogen_seed2026,KMj6xT9,7,14 ⊞ 5,19,1,7
+hydrogen_seed2026,KMj6xT9,8,14 ⊠ 5,21,1,8
+hydrogen_seed2026,KMj6xT9,9,14 △ 5,9,1,9
+hydrogen_seed2026,KMj6xT9,10,3 ⊘ 10,-4,1,10
+hydrogen_seed2026,KMj6xT9,11,3 ⊛ 10,103,1,11
+hydrogen_seed2026,KMj6xT9,12,3 ◇ 10,10,1,12
+hydrogen_seed2026,KMj6xT9,13,3 ▽ 10,7,1,13
+hydrogen_seed2026,KMj6xT9,14,3 △ 10,0,1,14
+hydrogen_seed2026,KMj6xT9,15,3 ⊠ 10 ⊗ 1000 ⊗ 100,1699899,3,17
+hydrogen_seed2026,KMj6xT9,16,(3 ⊞ 10) ⊗ (19 ⊕ 1000),13259,3,20
+hydrogen_seed2026,YKZiHoF,1,13 ⊕ 5,19,1,1
+hydrogen_seed2026,YKZiHoF,2,13 ⊗ 5,64,1,2
+hydrogen_seed2026,YKZiHoF,3,13 ◇ 5,13,1,3
+hydrogen_seed2026,YKZiHoF,4,13 ▽ 5,8,1,4
+hydrogen_seed2026,YKZiHoF,5,13 ⊘ 5,21,1,5
+hydrogen_seed2026,YKZiHoF,6,13 ⊛ 5,38,1,6
+hydrogen_seed2026,YKZiHoF,7,13 ⊞ 5,18,1,7
+hydrogen_seed2026,YKZiHoF,8,13 ⊠ 5,20,1,8
+hydrogen_seed2026,YKZiHoF,9,13 △ 5,8,1,9
+hydrogen_seed2026,YKZiHoF,10,6 ⊞ 11 ⊞ 100,117,2,11
+hydrogen_seed2026,YKZiHoF,11,6 ◇ 11,11,1,12
+hydrogen_seed2026,YKZiHoF,12,6 ▽ 11,5,1,13
+hydrogen_seed2026,YKZiHoF,13,6 △ 11,0,1,14
+hydrogen_seed2026,YKZiHoF,14,6 ⊗ 11,65,1,15
+hydrogen_seed2026,YKZiHoF,15,6 ⊛ 11,127,1,16
+hydrogen_seed2026,YKZiHoF,16,6 ⊘ 11,1,1,17
+hydrogen_seed2026,YKZiHoF,17,6 ⊠ 11,19,1,18
+hydrogen_seed2026,YKZiHoF,18,6 ⊕ 11 ⊗ 1000,17999,2,20
+hydrogen_seed2026,hD2t9UV,1,11 ⊕ 4,16,1,1
+hydrogen_seed2026,hD2t9UV,2,11 ⊗ 4,43,1,2
+hydrogen_seed2026,hD2t9UV,3,11 ◇ 4,11,1,3
+hydrogen_seed2026,hD2t9UV,4,11 ▽ 4,7,1,4
+hydrogen_seed2026,hD2t9UV,5,11 ⊘ 4,18,1,5
+hydrogen_seed2026,hD2t9UV,6,11 ⊛ 4,27,1,6
+hydrogen_seed2026,hD2t9UV,7,11 ⊞ 4,15,1,7
+hydrogen_seed2026,hD2t9UV,8,11 ⊠ 4,17,1,8
+hydrogen_seed2026,hD2t9UV,9,11 △ 4,7,1,9
+hydrogen_seed2026,hD2t9UV,10,2 ⊞ 9,11,1,10
+hydrogen_seed2026,hD2t9UV,11,2 ▽ 9,7,1,11
+hydrogen_seed2026,hD2t9UV,12,2 △ 9,0,1,12
+hydrogen_seed2026,hD2t9UV,13,2 ◇ 9,9,1,13
+hydrogen_seed2026,hD2t9UV,14,2 ⊗ 9,17,1,14
+hydrogen_seed2026,hD2t9UV,15,4 ⊕ 17,22,1,15
+hydrogen_seed2026,hD2t9UV,16,4 ⊘ 17,-9,1,16
+hydrogen_seed2026,hD2t9UV,17,4 ⊛ 17,293,1,17
+hydrogen_seed2026,hD2t9UV,18,4 ⊠ 17,23,1,18
+hydrogen_seed2026,hD2t9UV,19,100 ⊗ (1 ⊠ 2),599,2,20
+hydrogen_seed2026,tULN6oq,1,13 ⊕ 5,19,1,1
+hydrogen_seed2026,tULN6oq,2,13 ⊗ 5,64,1,2
+hydrogen_seed2026,tULN6oq,3,13 ◇ 5,13,1,3
+hydrogen_seed2026,tULN6oq,4,13 ▽ 5,8,1,4
+hydrogen_seed2026,tULN6oq,5,13 ⊘ 5,21,1,5
+hydrogen_seed2026,tULN6oq,6,13 ⊛ 5,38,1,6
+hydrogen_seed2026,tULN6oq,7,13 ⊞ 5,18,1,7
+hydrogen_seed2026,tULN6oq,8,13 ⊠ 5,20,1,8
+hydrogen_seed2026,tULN6oq,9,13 △ 5,8,1,9
+hydrogen_seed2026,tULN6oq,10,(7 ⊞ 19) ⊞ 3,29,2,11
+hydrogen_seed2026,tULN6oq,11,7 ◇ 19,19,1,12
+hydrogen_seed2026,tULN6oq,12,7 ▽ 19,12,1,13
+hydrogen_seed2026,tULN6oq,13,7 ⊘ 19,-5,1,14
+hydrogen_seed2026,tULN6oq,14,7 ⊛ 19,368,1,15
+hydrogen_seed2026,tULN6oq,15,7 △ 19,0,1,16
+hydrogen_seed2026,tULN6oq,16,7 ⊗ 19,132,1,17
+hydrogen_seed2026,tULN6oq,17,7 ⊠ 19,28,1,18
+hydrogen_seed2026,tULN6oq,18,1000 ⊗ (7 ⊕ 19),26999,2,20

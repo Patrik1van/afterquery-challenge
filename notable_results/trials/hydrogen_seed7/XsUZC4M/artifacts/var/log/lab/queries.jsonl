@@ -1,0 +1,19 @@
+{"expr": "13 ⊕ 6", "result": 20, "cost": 1, "budget_used": 1}
+{"expr": "13 ⊗ 6", "result": 77, "cost": 1, "budget_used": 2}
+{"expr": "13 ◇ 6", "result": 13, "cost": 1, "budget_used": 3}
+{"expr": "13 ▽ 6", "result": 7, "cost": 1, "budget_used": 4}
+{"expr": "13 ⊘ 6", "result": 20, "cost": 1, "budget_used": 5}
+{"expr": "13 ⊛ 6", "result": 49, "cost": 1, "budget_used": 6}
+{"expr": "13 ⊞ 6", "result": 19, "cost": 1, "budget_used": 7}
+{"expr": "13 ⊠ 6", "result": 21, "cost": 1, "budget_used": 8}
+{"expr": "13 △ 6", "result": 7, "cost": 1, "budget_used": 9}
+{"expr": "4 ⊕ 13", "result": 18, "cost": 1, "budget_used": 10}
+{"expr": "4 ⊘ 13", "result": -5, "cost": 1, "budget_used": 11}
+{"expr": "4 ⊞ 13", "result": 17, "cost": 1, "budget_used": 12}
+{"expr": "4 ⊠ 13", "result": 19, "cost": 1, "budget_used": 13}
+{"expr": "4 ◇ 13", "result": 13, "cost": 1, "budget_used": 14}
+{"expr": "4 ▽ 13", "result": 9, "cost": 1, "budget_used": 15}
+{"expr": "4 ⊛ 13", "result": 173, "cost": 1, "budget_used": 16}
+{"expr": "4 △ 13", "result": 0, "cost": 1, "budget_used": 17}
+{"expr": "4 ⊗ 13", "result": 51, "cost": 1, "budget_used": 18}
+{"expr": "10 ⊞ 20 ⊕ 100", "result": 131, "cost": 2, "budget_used": 20}

@@ -1,100 +1,208 @@
 set,trial,operator,true_rule,committed,correct,probed,tested_a<b,tested_a>b,tested_sum>=256,tested_negative_in,tested_n>=3
-reference,PiibwEB,⊕,a + b + 1,(a + (1 + b)),True,True,True,False,True,False,False
-reference,PiibwEB,⊗,a * b - 1,((a * b) - 1),True,True,True,True,True,False,True
-reference,PiibwEB,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,False
-reference,PiibwEB,▽,abs(a - b),abs((a - b)),True,True,True,True,True,False,False
-reference,PiibwEB,⊘,2*a - b,(a + (a - b)),True,True,True,True,True,False,True
-reference,PiibwEB,⊛,a + b**2,(a + (b * b)),True,True,True,False,True,False,False
-reference,PiibwEB,⊞,(a + b) % 256,((a + b) % 256),True,True,True,True,True,False,False
-reference,PiibwEB,⊠,a + b + n,(a + (b + n)),True,True,True,True,True,True,True
-reference,PiibwEB,△,a - b if a >= b else 0,"(a - min(a, b))",True,True,True,True,True,False,True
-hydrogen,4M9jGPV,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-hydrogen,4M9jGPV,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
-hydrogen,4M9jGPV,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
-hydrogen,4M9jGPV,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
-hydrogen,4M9jGPV,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
-hydrogen,4M9jGPV,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
-hydrogen,4M9jGPV,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-hydrogen,4M9jGPV,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-hydrogen,4M9jGPV,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
-hydrogen,5AZjdXY,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
-hydrogen,5AZjdXY,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
-hydrogen,5AZjdXY,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
-hydrogen,5AZjdXY,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
-hydrogen,5AZjdXY,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
-hydrogen,5AZjdXY,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
-hydrogen,5AZjdXY,⊞,(a + b) % 256,a + b + d,False,True,True,True,False,False,False
-hydrogen,5AZjdXY,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-hydrogen,5AZjdXY,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
-hydrogen,QUW7rrM,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-hydrogen,QUW7rrM,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,True
-hydrogen,QUW7rrM,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
-hydrogen,QUW7rrM,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
-hydrogen,QUW7rrM,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
-hydrogen,QUW7rrM,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
-hydrogen,QUW7rrM,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-hydrogen,QUW7rrM,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-hydrogen,QUW7rrM,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
-hydrogen,hyarm73,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-hydrogen,hyarm73,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
-hydrogen,hyarm73,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,True
-hydrogen,hyarm73,▽,abs(a - b),a - b,False,True,True,True,False,False,True
-hydrogen,hyarm73,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
-hydrogen,hyarm73,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
-hydrogen,hyarm73,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-hydrogen,hyarm73,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
-hydrogen,hyarm73,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
-hydrogen,v6JxQ6v,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-hydrogen,v6JxQ6v,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
-hydrogen,v6JxQ6v,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
-hydrogen,v6JxQ6v,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
-hydrogen,v6JxQ6v,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
-hydrogen,v6JxQ6v,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
-hydrogen,v6JxQ6v,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-hydrogen,v6JxQ6v,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-hydrogen,v6JxQ6v,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
-carbon,6HpSKEk,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-carbon,6HpSKEk,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,True
-carbon,6HpSKEk,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
-carbon,6HpSKEk,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
-carbon,6HpSKEk,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
-carbon,6HpSKEk,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
-carbon,6HpSKEk,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-carbon,6HpSKEk,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-carbon,6HpSKEk,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,True,False,True
-carbon,N2rHaxc,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
-carbon,N2rHaxc,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
-carbon,N2rHaxc,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
-carbon,N2rHaxc,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
-carbon,N2rHaxc,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
-carbon,N2rHaxc,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
-carbon,N2rHaxc,⊞,(a + b) % 256,a + b,False,True,True,True,True,False,True
-carbon,N2rHaxc,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
-carbon,N2rHaxc,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,True,False,True
-carbon,NV4ZmDi,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
-carbon,NV4ZmDi,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
-carbon,NV4ZmDi,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
-carbon,NV4ZmDi,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
-carbon,NV4ZmDi,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
-carbon,NV4ZmDi,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
-carbon,NV4ZmDi,⊞,(a + b) % 256,(a + b) % 256,True,True,True,True,True,False,True
-carbon,NV4ZmDi,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
-carbon,NV4ZmDi,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
-carbon,QxfCsTw,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-carbon,QxfCsTw,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
-carbon,QxfCsTw,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
-carbon,QxfCsTw,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
-carbon,QxfCsTw,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
-carbon,QxfCsTw,⊛,a + b**2,a + b * b,True,True,True,True,False,False,True
-carbon,QxfCsTw,⊞,(a + b) % 256,a * i + b // i,False,True,True,True,True,False,True
-carbon,QxfCsTw,⊠,a + b + n,a + b + n,True,True,False,True,False,False,True
-carbon,QxfCsTw,△,a - b if a >= b else 0,a - b + d,False,True,True,True,False,False,True
-carbon,VPQ5329,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
-carbon,VPQ5329,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
-carbon,VPQ5329,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
-carbon,VPQ5329,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
-carbon,VPQ5329,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
-carbon,VPQ5329,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
-carbon,VPQ5329,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
-carbon,VPQ5329,⊠,a + b + n,a + b + n,True,True,False,True,True,True,True
-carbon,VPQ5329,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
+reference_seed42,PiibwEB,⊕,a + b + 1,(a + (1 + b)),True,True,True,False,True,False,False
+reference_seed42,PiibwEB,⊗,a * b - 1,((a * b) - 1),True,True,True,True,True,False,True
+reference_seed42,PiibwEB,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,False
+reference_seed42,PiibwEB,▽,abs(a - b),abs((a - b)),True,True,True,True,True,False,False
+reference_seed42,PiibwEB,⊘,2*a - b,(a + (a - b)),True,True,True,True,True,False,True
+reference_seed42,PiibwEB,⊛,a + b**2,(a + (b * b)),True,True,True,False,True,False,False
+reference_seed42,PiibwEB,⊞,(a + b) % 256,((a + b) % 256),True,True,True,True,True,False,False
+reference_seed42,PiibwEB,⊠,a + b + n,(a + (b + n)),True,True,True,True,True,True,True
+reference_seed42,PiibwEB,△,a - b if a >= b else 0,"(a - min(a, b))",True,True,True,True,True,False,True
+hydrogen_seed42,4M9jGPV,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed42,4M9jGPV,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed42,4M9jGPV,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed42,4M9jGPV,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed42,4M9jGPV,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed42,4M9jGPV,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+hydrogen_seed42,4M9jGPV,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed42,4M9jGPV,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed42,4M9jGPV,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊕,a + b + 1,a + b + i,False,True,False,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed42,5AZjdXY,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊞,(a + b) % 256,a + b + d,False,True,True,True,False,False,False
+hydrogen_seed42,5AZjdXY,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed42,5AZjdXY,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
+hydrogen_seed42,QUW7rrM,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed42,QUW7rrM,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,True
+hydrogen_seed42,QUW7rrM,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed42,QUW7rrM,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed42,QUW7rrM,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+hydrogen_seed42,QUW7rrM,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
+hydrogen_seed42,QUW7rrM,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed42,QUW7rrM,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed42,QUW7rrM,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed42,hyarm73,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed42,hyarm73,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+hydrogen_seed42,hyarm73,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,True
+hydrogen_seed42,hyarm73,▽,abs(a - b),a - b,False,True,True,True,False,False,True
+hydrogen_seed42,hyarm73,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed42,hyarm73,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+hydrogen_seed42,hyarm73,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed42,hyarm73,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
+hydrogen_seed42,hyarm73,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,True
+hydrogen_seed42,v6JxQ6v,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed42,v6JxQ6v,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed42,v6JxQ6v,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed42,v6JxQ6v,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed42,v6JxQ6v,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed42,v6JxQ6v,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+hydrogen_seed42,v6JxQ6v,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed42,v6JxQ6v,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed42,v6JxQ6v,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+carbon_seed42,6HpSKEk,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,⊗,a * b - 1,a * b - 1,True,True,False,True,False,False,True
+carbon_seed42,6HpSKEk,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+carbon_seed42,6HpSKEk,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+carbon_seed42,N2rHaxc,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+carbon_seed42,N2rHaxc,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+carbon_seed42,N2rHaxc,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,⊞,(a + b) % 256,a + b,False,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
+carbon_seed42,N2rHaxc,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,True,False,True
+carbon_seed42,NV4ZmDi,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
+carbon_seed42,NV4ZmDi,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+carbon_seed42,NV4ZmDi,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+carbon_seed42,NV4ZmDi,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+carbon_seed42,NV4ZmDi,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+carbon_seed42,NV4ZmDi,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
+carbon_seed42,NV4ZmDi,⊞,(a + b) % 256,(a + b) % 256,True,True,True,True,True,False,True
+carbon_seed42,NV4ZmDi,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+carbon_seed42,NV4ZmDi,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,⊘,2*a - b,2 * a - b,True,True,True,True,True,False,True
+carbon_seed42,QxfCsTw,⊛,a + b**2,a + b * b,True,True,True,True,False,False,True
+carbon_seed42,QxfCsTw,⊞,(a + b) % 256,a * i + b // i,False,True,True,True,True,False,True
+carbon_seed42,QxfCsTw,⊠,a + b + n,a + b + n,True,True,False,True,False,False,True
+carbon_seed42,QxfCsTw,△,a - b if a >= b else 0,a - b + d,False,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+carbon_seed42,VPQ5329,⊠,a + b + n,a + b + n,True,True,False,True,True,True,True
+carbon_seed42,VPQ5329,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,True
+reference_seed7,z5G9PvV,⊕,a + b + 1,(a + (1 + b)),True,True,True,False,True,False,False
+reference_seed7,z5G9PvV,⊗,a * b - 1,((a * b) - 1),True,True,True,True,True,False,True
+reference_seed7,z5G9PvV,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,False
+reference_seed7,z5G9PvV,▽,abs(a - b),abs((a - b)),True,True,True,True,True,False,False
+reference_seed7,z5G9PvV,⊘,2*a - b,(a + (a - b)),True,True,True,True,True,False,True
+reference_seed7,z5G9PvV,⊛,a + b**2,(a + (b * b)),True,True,True,False,True,False,False
+reference_seed7,z5G9PvV,⊞,(a + b) % 256,((a + b) % 256),True,True,True,True,True,False,False
+reference_seed7,z5G9PvV,⊠,a + b + n,(a + (b + n)),True,True,True,True,True,True,True
+reference_seed7,z5G9PvV,△,a - b if a >= b else 0,"(a - min(a, b))",True,True,True,True,True,False,True
+hydrogen_seed7,AJGyETy,⊕,a + b + 1,a + b + i,False,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+hydrogen_seed7,AJGyETy,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,⊞,(a + b) % 256,a + b + d,False,True,True,True,False,False,False
+hydrogen_seed7,AJGyETy,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed7,AJGyETy,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed7,GcLof75,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+hydrogen_seed7,GcLof75,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed7,GcLof75,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed7,RuVVAiJ,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
+hydrogen_seed7,RuVVAiJ,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed7,RuVVAiJ,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed7,RuVVAiJ,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,True
+hydrogen_seed7,RuVVAiJ,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed7,RuVVAiJ,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed7,RuVVAiJ,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed7,RuVVAiJ,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed7,RuVVAiJ,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,True,False,True
+hydrogen_seed7,XsUZC4M,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed7,XsUZC4M,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed7,XsUZC4M,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed7,XsUZC4M,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
+hydrogen_seed7,wSNSo6T,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed7,wSNSo6T,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed7,wSNSo6T,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed7,wSNSo6T,△,a - b if a >= b else 0,"max(a - b, 0)",True,True,True,True,False,False,False
+reference_seed2026,FimaVhb,⊕,a + b + 1,(a + (1 + b)),True,True,True,False,True,False,False
+reference_seed2026,FimaVhb,⊗,a * b - 1,((a * b) - 1),True,True,True,True,True,False,True
+reference_seed2026,FimaVhb,◇,"max(a, b)","max(a, b)",True,True,True,True,True,False,False
+reference_seed2026,FimaVhb,▽,abs(a - b),abs((a - b)),True,True,True,True,True,False,False
+reference_seed2026,FimaVhb,⊘,2*a - b,(a + (a - b)),True,True,True,True,True,False,True
+reference_seed2026,FimaVhb,⊛,a + b**2,(a + (b * b)),True,True,True,False,True,False,False
+reference_seed2026,FimaVhb,⊞,(a + b) % 256,((a + b) % 256),True,True,True,True,True,False,False
+reference_seed2026,FimaVhb,⊠,a + b + n,(a + (b + n)),True,True,True,True,True,True,True
+reference_seed2026,FimaVhb,△,a - b if a >= b else 0,"(a - min(a, b))",True,True,True,True,True,False,True
+hydrogen_seed2026,ECePTgt,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed2026,ECePTgt,⊗,a * b - 1,a * b - 1,True,True,False,True,True,False,True
+hydrogen_seed2026,ECePTgt,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed2026,ECePTgt,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed2026,ECePTgt,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed2026,ECePTgt,⊛,a + b**2,a + b ** 2,True,True,True,True,True,False,True
+hydrogen_seed2026,ECePTgt,⊞,(a + b) % 256,a + b,False,True,False,True,False,False,True
+hydrogen_seed2026,ECePTgt,⊠,a + b + n,a + b + n,True,True,True,True,True,False,True
+hydrogen_seed2026,ECePTgt,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed2026,KMj6xT9,⊕,a + b + 1,a + b + 1,True,True,True,True,True,False,True
+hydrogen_seed2026,KMj6xT9,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed2026,KMj6xT9,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed2026,KMj6xT9,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed2026,KMj6xT9,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed2026,KMj6xT9,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed2026,KMj6xT9,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed2026,KMj6xT9,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed2026,KMj6xT9,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed2026,YKZiHoF,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed2026,YKZiHoF,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed2026,YKZiHoF,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed2026,YKZiHoF,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊗,a * b - 1,a * b - 1,True,True,True,True,False,False,True
+hydrogen_seed2026,hD2t9UV,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,False
+hydrogen_seed2026,hD2t9UV,⊠,a + b + n,a + b + n,True,True,True,True,False,False,True
+hydrogen_seed2026,hD2t9UV,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,⊕,a + b + 1,a + b + 1,True,True,True,True,False,False,True
+hydrogen_seed2026,tULN6oq,⊗,a * b - 1,a * b - 1,True,True,True,True,True,False,True
+hydrogen_seed2026,tULN6oq,◇,"max(a, b)","max(a, b)",True,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,▽,abs(a - b),abs(a - b),True,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,⊘,2*a - b,2 * a - b,True,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,⊛,a + b**2,a + b ** 2,True,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,⊞,(a + b) % 256,a + b,False,True,True,True,False,False,True
+hydrogen_seed2026,tULN6oq,⊠,a + b + n,a + b + 2,False,True,True,True,False,False,False
+hydrogen_seed2026,tULN6oq,△,a - b if a >= b else 0,"max(0, a - b)",True,True,True,True,False,False,False

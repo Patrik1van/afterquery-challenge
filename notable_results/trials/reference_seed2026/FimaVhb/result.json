@@ -1,0 +1,124 @@
+{
+    "schema_version": 1,
+    "id": "0a101658-6e96-4299-87c6-6c634ebeecba",
+    "task_name": "afterquery-challenge/falsify",
+    "trial_name": "falsify__FimaVhb",
+    "trial_uri": "file://jobs/falsify-seed2026-reference-20261115-081011/falsify__FimaVhb",
+    "task_id": {
+        "path": "tasks/falsify"
+    },
+    "source": null,
+    "task_checksum": "c80491489b15eefd9d06558cf2d87f399c1949a8e3ddde5db015f35a73c6e7e0",
+    "config": {
+        "schema_version": 1,
+        "task": {
+            "path": "tasks/falsify",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "falsify__FimaVhb",
+        "trials_dir": "jobs/falsify-seed2026-reference-20261115-081011",
+        "install_only": false,
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "base_url": null,
+            "model_api_key_name": null,
+            "model_api_format": null,
+            "skip_model_parsing": false,
+            "n_concurrent": null,
+            "concurrency_group": null,
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "resume_trajectory": false,
+            "load_trajectory": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {},
+            "mcp_servers": []
+        },
+        "user_agent": null,
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "stream": false,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "override_error_policy": {},
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "extra_instructions": [],
+        "job_id": "df9c4474-0d82-46c8-a5d9-90502dd15d05",
+        "source_trial": null
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "model_usage": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "verifier_environment_mode": "separate",
+    "exception_info": null,
+    "started_at": "2026-11-15T06:10:12.750210Z",
+    "finished_at": "2026-11-15T06:12:36.471914Z",
+    "environment_setup": {
+        "started_at": "2026-11-15T06:10:12.944202Z",
+        "finished_at": "2026-11-15T06:10:21.492377Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-11-15T06:10:21.492667Z",
+        "finished_at": "2026-11-15T06:10:21.492831Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-11-15T06:10:21.493210Z",
+        "finished_at": "2026-11-15T06:12:25.968902Z"
+    },
+    "verifier": {
+        "started_at": "2026-11-15T06:12:29.585028Z",
+        "finished_at": "2026-11-15T06:12:36.471794Z"
+    },
+    "step_results": null,
+    "reward_valid": true
+}

@@ -1,6 +1,19 @@
 # Notable results: reference vs Gemini 4 Hydrogen vs Gemini 4 Carbon
 
-Falsify, budget 20, puzzle set `FALSIFY_SEED=42`, 5 trials per model, 60-minute limit per trial.
+Falsify, budget 20, 5 trials per model, 60-minute limit per trial.
+
+## Across seeds: Hydrogen is consistently below the reference
+
+| Seed | Reference | Gemini 4 Hydrogen (5 trials) | Hydrogen mean |
+|---|---|---|---|
+| 42 (default) | 1.00 | 0.81 · 0.38 · 0.81 · 0.81 · 0.81 | 0.73 |
+| 7 | 1.00 | 0.81 · 0.50 · 0.50 · 0.50 · 0.50 | 0.56 |
+| 2026 | 1.00 | 0.81 · 0.81 · 0.44 · 0.69 · 0.44 | 0.64 |
+| **All** | **1.00** | **0 of 15 perfect, best 0.81** | **0.64** |
+
+The reference solved every seed perfectly. Hydrogen got `⊞` wrong in all 15 trials, which caps it at 0.81.
+
+## Seed 42: reference vs Hydrogen vs Carbon
 
 | Run | Mean reward | Perfect | Operators right | Time / trial |
 |---|---|---|---|---|
@@ -12,7 +25,7 @@ Falsify, budget 20, puzzle set `FALSIFY_SEED=42`, 5 trials per model, 60-minute 
 
 ## Where the models fail
 
-Each pitfall is labelled with the data it comes from. **[seed 42]** is the runs in this folder. **[budget 13]** is an earlier set of 25 Hydrogen trials on five puzzle sets with 13 points, which is not included here.
+Each pitfall is labelled with the data it comes from. **[seed 42]** is the seed-42 runs in this folder. **[budget 13]** is an earlier set of 25 Hydrogen trials on five puzzle sets with 13 points, which is not included here.
 
 1. **Stays in the comfort zone: tries small, typical inputs and never pushes to the edges.** **[seed 42]**
    - Every first probe used operands of 38 or less.
@@ -37,7 +50,7 @@ Each pitfall is labelled with the data it comes from. **[seed 42]** is the runs 
 
 ## Contents
 
-- `trials/<run>/<trial>/`: the full model transcript (`agent/trajectory.json`, or `agent/oracle.txt` for the reference), the query log, the committed model, the answers and `verifier/details.json`.
+- `trials/<run>_seed<N>/<trial>/`: the full model transcript (`agent/trajectory.json`, or `agent/oracle.txt` for the reference), the query log, the committed model, the answers and `verifier/details.json`.
 - `trials.csv`: one row per trial.
 - `queries.csv`: every lab query.
 - `puzzles.csv`: every graded answer.

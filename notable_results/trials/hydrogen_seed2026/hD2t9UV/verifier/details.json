@@ -1,0 +1,255 @@
+{
+  "reward": 0.6875,
+  "solved": 6,
+  "total": 8,
+  "queries_used": 19,
+  "budget_spent": 20,
+  "answer_error": null,
+  "naive_reading": 0,
+  "model_committed": true,
+  "budget_used_before_reveal": 20,
+  "model_operators_correct": 8,
+  "model_wrong_operators": [
+    "⊞"
+  ],
+  "model": {
+    "⊕": "a + b + 1",
+    "⊗": "a * b - 1",
+    "◇": "max(a, b)",
+    "▽": "abs(a - b)",
+    "⊘": "2 * a - b",
+    "⊛": "a + b ** 2",
+    "⊞": "a + b",
+    "⊠": "a + b + n",
+    "△": "max(0, a - b)"
+  },
+  "answers_inconsistent_with_model": 1,
+  "false_none": 1,
+  "false_solution": 1,
+  "puzzles": {
+    "P1": {
+      "given": "none",
+      "solvable": false,
+      "reference_solutions": [],
+      "correct": true,
+      "error": null,
+      "value": null,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P2": {
+      "given": "(5 ⊛ 8) ⊘ (3 ▽ 5)",
+      "solvable": true,
+      "reference_solutions": [
+        "(5 ⊛ 8) ⊘ (3 ▽ 5)"
+      ],
+      "correct": true,
+      "error": null,
+      "value": 136,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P3": {
+      "given": "none",
+      "solvable": true,
+      "reference_solutions": [
+        "(2 ⊘ (7 ⊗ 7)) ⊞ 6"
+      ],
+      "correct": false,
+      "error": null,
+      "value": null,
+      "false_none": true,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P4": {
+      "given": "6 ⊛ 8 ⊘ 6 ⊠ 9",
+      "solvable": true,
+      "reference_solutions": [
+        "6 ⊛ 8 ⊘ 6 ⊠ 9"
+      ],
+      "correct": true,
+      "error": null,
+      "value": 147,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P5": {
+      "given": "5 ⊗ ((7 △ 9) ⊛ 7)",
+      "solvable": true,
+      "reference_solutions": [
+        "5 ⊗ ((7 △ 9) ⊛ 7)"
+      ],
+      "correct": true,
+      "error": null,
+      "value": 244,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P6": {
+      "given": "(8 ⊗ (3 ⊕ 5)) ⊛ 7",
+      "solvable": true,
+      "reference_solutions": [
+        "(8 ⊗ (3 ⊕ 5)) ⊛ 7"
+      ],
+      "correct": true,
+      "error": null,
+      "value": 120,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    },
+    "P7": {
+      "given": "8 ▽ (6 ⊗ (8 ⊞ 8))",
+      "solvable": false,
+      "reference_solutions": [],
+      "correct": false,
+      "error": null,
+      "value": 87,
+      "false_none": false,
+      "false_solution": true,
+      "naive_reading": false,
+      "consistent_with_model": false
+    },
+    "P8": {
+      "given": "9 ◇ (8 ⊛ (7 ⊕ 8))",
+      "solvable": true,
+      "reference_solutions": [
+        "9 ◇ (8 ⊛ (7 ⊕ 8))"
+      ],
+      "correct": true,
+      "error": null,
+      "value": 264,
+      "false_none": false,
+      "false_solution": false,
+      "naive_reading": false,
+      "consistent_with_model": true
+    }
+  },
+  "queries": [
+    {
+      "expr": "11 ⊕ 4",
+      "result": 16,
+      "cost": 1,
+      "budget_used": 1
+    },
+    {
+      "expr": "11 ⊗ 4",
+      "result": 43,
+      "cost": 1,
+      "budget_used": 2
+    },
+    {
+      "expr": "11 ◇ 4",
+      "result": 11,
+      "cost": 1,
+      "budget_used": 3
+    },
+    {
+      "expr": "11 ▽ 4",
+      "result": 7,
+      "cost": 1,
+      "budget_used": 4
+    },
+    {
+      "expr": "11 ⊘ 4",
+      "result": 18,
+      "cost": 1,
+      "budget_used": 5
+    },
+    {
+      "expr": "11 ⊛ 4",
+      "result": 27,
+      "cost": 1,
+      "budget_used": 6
+    },
+    {
+      "expr": "11 ⊞ 4",
+      "result": 15,
+      "cost": 1,
+      "budget_used": 7
+    },
+    {
+      "expr": "11 ⊠ 4",
+      "result": 17,
+      "cost": 1,
+      "budget_used": 8
+    },
+    {
+      "expr": "11 △ 4",
+      "result": 7,
+      "cost": 1,
+      "budget_used": 9
+    },
+    {
+      "expr": "2 ⊞ 9",
+      "result": 11,
+      "cost": 1,
+      "budget_used": 10
+    },
+    {
+      "expr": "2 ▽ 9",
+      "result": 7,
+      "cost": 1,
+      "budget_used": 11
+    },
+    {
+      "expr": "2 △ 9",
+      "result": 0,
+      "cost": 1,
+      "budget_used": 12
+    },
+    {
+      "expr": "2 ◇ 9",
+      "result": 9,
+      "cost": 1,
+      "budget_used": 13
+    },
+    {
+      "expr": "2 ⊗ 9",
+      "result": 17,
+      "cost": 1,
+      "budget_used": 14
+    },
+    {
+      "expr": "4 ⊕ 17",
+      "result": 22,
+      "cost": 1,
+      "budget_used": 15
+    },
+    {
+      "expr": "4 ⊘ 17",
+      "result": -9,
+      "cost": 1,
+      "budget_used": 16
+    },
+    {
+      "expr": "4 ⊛ 17",
+      "result": 293,
+      "cost": 1,
+      "budget_used": 17
+    },
+    {
+      "expr": "4 ⊠ 17",
+      "result": 23,
+      "cost": 1,
+      "budget_used": 18
+    },
+    {
+      "expr": "100 ⊗ (1 ⊠ 2)",
+      "result": 599,
+      "cost": 2,
+      "budget_used": 20
+    }
+  ]
+}
