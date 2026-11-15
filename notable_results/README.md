@@ -8,16 +8,35 @@ Falsify, budget 20, puzzle set `FALSIFY_SEED=42`, 5 trials per model, 60-minute 
 | Gemini 4 Carbon | **0.78** | 1/5 | 7–9 | 28–35 min |
 | Gemini 4 Hydrogen | **0.73** | 0/5 | 7–8 | 3–7 min |
 
-**Key findings**
-- **`⊞ = (a + b) mod 256` decides the gap.** It was wrong in 9 of 10 model trials, and every 0.81 is "all correct except `⊞`". The failures took three forms:
-  - **Never probed a sum ≥ 256:** all 5 Hydrogen trials and 2 Carbon trials.
-  - **Probed it, but hid the result:** `20 △ (410 ⊘ (181 ⊞ 319)) = 0`, where the outer `△` returns 0 either way.
-  - **Explained the wraparound with a wrong rule:** after `… ⊞ 601 → 89`, the agent committed `a * i + b // i` instead of modulo.
-- **Only one model trial found the modulo** (Carbon, via `(16 ⊠ 28) ⊛ (410 ⊞ 504)`), and it scored 1.0.
-- **The reference knows only the instruction's grammar,** with no candidate list. It needs at least **19 points** to identify all nine operators (`reference_budget_sweep/`), so budget 20 is fair.
+`⊞ = (a + b) mod 256` decides the gap: it was wrong in 9 of 10 model trials, and every 0.81 is "all correct except `⊞`". The only model trial that found the modulo (Carbon, via `(16 ⊠ 28) ⊛ (410 ⊞ 504)`) scored 1.0.
+
+## Where the models fail
+
+Each pitfall is labelled with the data it comes from. **[seed 42]** is the runs in this folder. **[budget 13]** is an earlier set of 25 Hydrogen trials on five puzzle sets with 13 points, which is not included here.
+
+1. **Stays in the comfort zone: tries small, typical inputs and never pushes to the edges.** **[seed 42]**
+   - Every first probe used operands of 38 or less.
+   - 7 of 10 trials never tested `⊞` with a sum ≥ 256 (Hydrogen 0 of 5), although operands up to 1000 are allowed.
+2. **Stops at the first fit: a pattern that looks right is accepted without a test.** **[seed 42]**
+   - 7 trials committed `⊞ = a + b` after seeing only small sums such as `17 ⊞ 6 = 23`.
+   - One Carbon trial saw `… ⊞ 601 → 89` (601 mod 256) and committed the first rule that fit, `a * i + b // i`, without testing it.
+3. **Wastes experiments: runs checks whose outcome can't change its mind.** **[seed 42]**
+   - `20 △ (410 ⊘ (181 ⊞ 319)) = 0`: the outer `△` returns 0 whatever `⊞` does.
+   - In those 7 trials, the second `⊞` probe again used a small sum (e.g. `3 ⊞ 29`), so it couldn't reveal the wraparound either.
+4. **Trusts the task over its data: bends its own model to make a puzzle solvable.**
+   - **[seed 42]** Hydrogen hyarm73 committed `▽ = a − b`. After the reveal it switched to `abs(a − b)` because only that made P2 solvable: *"This observation provides strong evidence that the `▽` operator is likely `abs(a - b)`."*
+   - **[budget 13]** 10 of 25 trials submitted answers that contradict their own committed model. One example: *"`⊘ = n*a - b` yielded 8/8 solutions but `⊘ = 2*a - b` only 6/8."*
+5. **Makes up answers to avoid the penalty: a wrong `"none"` costs ½ and a wrong expression costs nothing, so it invents a solution instead of saying there is none.**
+   - **[budget 13]** 8 answers in 5 of 25 trials gave an expression for an unsolvable puzzle that even the agent's own model says doesn't reach the target. The reasoning behind them reads like *"comparing the expected values of `"none"` versus an expression"*. All 8 scored 0.
+   - **[seed 42]** Not observed. hyarm73 noticed the asymmetry (*"There's no penalty for incorrect expressions, but a half-point penalty for 'none'"*) but still answered `"none"` where its model found no solution.
+
+## Other findings
+
+- **The reference is fair.** It knows only the instruction's grammar, with no candidate list, and needs at least **19 points** to identify all nine operators (`reference_budget_sweep/`). Budget 20 leaves one point of slack.
 - **Carbon probes more carefully than Hydrogen but gains little.** It probed `⊞` beyond 256 in 3 of 5 trials against 0 of 5, yet scored only +0.05 higher, while taking about 5× longer.
 
-**Contents**
+## Contents
+
 - `trials/<run>/<trial>/`: the full model transcript (`agent/trajectory.json`, or `agent/oracle.txt` for the reference), the query log, the committed model, the answers and `verifier/details.json`.
 - `trials.csv`: one row per trial.
 - `queries.csv`: every lab query.
