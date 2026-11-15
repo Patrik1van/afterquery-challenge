@@ -1,0 +1,6 @@
+.venv/
+jobs/
+trials/
+.env
+__pycache__/
+.DS_Store

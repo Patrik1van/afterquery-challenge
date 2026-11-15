@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""Query the lab.
+
+Usage:
+  evaluate "2 ⊕ 3"         evaluate an expression (costs 1 budget point per operator)
+  evaluate "2 ⊕ (3 ⊘ 1)"   parentheses group sub-expressions (this one costs 2)
+  evaluate --budget        show remaining budget (free)
+"""
+
+import json
+import os
+import sys
+import urllib.error
+import urllib.request
+
+LAB_URL = os.environ.get("LAB_URL", "http://lab:8000")
+
+
+def call(method, path, payload=None):
+    """Send a request to the lab.
+
+    Args:
+        method: "GET" or "POST".
+        path: The endpoint, e.g. "/evaluate".
+        payload: JSON-serializable request body, or None.
+
+    Returns:
+        A (status code, decoded JSON body) tuple.
+    """
+    data = json.dumps(payload).encode("utf-8") if payload is not None else None
+    req = urllib.request.Request(LAB_URL + path, data=data, method=method,
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as r:
+            return r.status, json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        return e.code, json.loads(e.read())
+
+
+def main():
+    """Run the command line interface and return the exit code."""
+    args = sys.argv[1:]
+    if not args or args[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0
+    if args[0] == "--budget":
+        _, body = call("GET", "/budget")
+        print(f"budget used: {body['budget_used']}/{body['budget']}, left: {body['budget_left']}")
+        return 0
+    status, body = call("POST", "/evaluate", {"expr": " ".join(args)})
+    if status == 200:
+        print(f"{body['expr']} = {body['result']}    (cost: {body['cost']}, budget left: {body['budget_left']})")
+        return 0
+    print(f"error: {body.get('error')}", file=sys.stderr)
+    if "budget_left" in body:
+        print(f"(budget left: {body['budget_left']})", file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

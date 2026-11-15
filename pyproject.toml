@@ -1,0 +1,9 @@
+[project]
+name = "afterquery-challenge"
+version = "0.1.0"
+description = "Falsify: a two-phase hypothesis-testing environment for Harbor"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "harbor==0.26.0",
+]

@@ -1,0 +1,11 @@
+{
+  "⊕": {"rule": "a + b + 1", "naive": "a + b"},
+  "⊗": {"rule": "a * b - 1", "naive": "a * b"},
+  "◇": {"rule": "max(a, b)", "naive": "a"},
+  "▽": {"rule": "abs(a - b)", "naive": "a - b"},
+  "⊘": {"rule": "2*a - b", "naive": "2*b - a"},
+  "⊛": {"rule": "a + b**2", "naive": "b + a**2"},
+  "⊞": {"rule": "(a + b) % 256", "naive": "a + b"},
+  "⊠": {"rule": "a + b + n", "naive": "a + b + 2"},
+  "△": {"rule": "a - b if a >= b else 0", "naive": "a - b"}
+}

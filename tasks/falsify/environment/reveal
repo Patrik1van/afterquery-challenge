@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Commit your model of the operators, lock the lab, and reveal the puzzles.
+
+Usage:
+  reveal /app/model.json
+
+The model file maps every operator symbol to a formula in a and b. Format only
+(these formulas are placeholders, not hints):
+  {"⊕": "a + b", "⊗": "a * b", "◇": "min(a, b)", "▽": "a - b", "⊘": "a", "⊛": "b", "⊞": "b - a", "⊠": "a * n", "△": "b * 2"}
+
+This is final. The lab checks the model; if it is valid, the lab stores it,
+locks itself (evaluate stops working) and returns the puzzles, which are also
+saved to /app/puzzles.json. An invalid model is rejected and the lab stays open.
+"""
+
+import json
+import os
+import sys
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+LAB_URL = os.environ.get("LAB_URL", "http://lab:8000")
+PUZZLES_OUT = Path(os.environ.get("PUZZLES_OUT", "/app/puzzles.json"))
+
+
+def main():
+    """Run the command line interface and return the exit code."""
+    args = sys.argv[1:]
+    if len(args) != 1 or args[0] in ("-h", "--help"):
+        print(__doc__.strip())
+        return 0 if args and args[0] in ("-h", "--help") else 2
+    try:
+        model = json.loads(Path(args[0]).read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"error: cannot read the model file: {e}", file=sys.stderr)
+        return 1
+    req = urllib.request.Request(
+        LAB_URL + "/reveal", method="POST",
+        data=json.dumps({"model": model}, ensure_ascii=False).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as r:
+            body = json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        body = json.loads(e.read())
+        print(f"error: {body.get('error')}", file=sys.stderr)
+        for problem in body.get("problems", []):
+            print(f"  - {problem}", file=sys.stderr)
+        return 1
+    if body.get("note"):
+        print("The lab was already locked; your committed model is unchanged.\n\nPuzzles:")
+    else:
+        print("Model committed. The lab is now locked.\n\nPuzzles:")
+    for pid, p in body["puzzles"].items():
+        print(f"{pid}:  {' ? '.join(str(n) for n in p['numbers'])}  = {p['target']}")
+    PUZZLES_OUT.write_text(json.dumps(body["puzzles"], ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"\n(also saved to {PUZZLES_OUT})")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

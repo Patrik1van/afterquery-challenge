@@ -1,0 +1,22 @@
+# Adds the lab sidecar next to Harbor's main (agent) service.
+services:
+  main:
+    depends_on:
+      lab:
+        condition: service_healthy
+
+  lab:
+    build:
+      context: ./lab
+    environment:
+      # Unset: the fixed puzzles in lab/puzzles.json. Set: a generated puzzle set.
+      FALSIFY_SEED: ${FALSIFY_SEED:-}
+      FALSIFY_DIFFICULTY: ${FALSIFY_DIFFICULTY:-3}
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/budget', timeout=2)"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 3s
