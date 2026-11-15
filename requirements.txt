@@ -4,3 +4,6 @@ pytest
 google-genai
 python-dotenv
 matplotlib
+fastapi
+uvicorn[standard]
+websockets
