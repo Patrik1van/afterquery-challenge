@@ -335,6 +335,9 @@ async def websocket_endpoint(websocket: WebSocket):
                 await session.send_state(payload)
 
 
+            elif msg_type == "set_speed":
+                session.speed = max(0.1, float(msg.get("speed", 3.0)))
+
             elif msg_type == "start_bayes":
                 session.cancel_active_task()
                 session.mode = "bayes"

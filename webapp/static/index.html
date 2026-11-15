@@ -314,6 +314,12 @@
     </div>
 
     <div style="display:flex; align-items:center; gap:8px;">
+      <div id="speedButtonsGroup" style="display:none; align-items:center; gap:4px; margin-right:4px;">
+        <span style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase;">Speed:</span>
+        <button class="btn-action" id="spd1" style="padding:4px 9px; font-size:12px;" onclick="setSpeed(1.0)">1×</button>
+        <button class="btn-action btn-accent" id="spd3" style="padding:4px 9px; font-size:12px;" onclick="setSpeed(3.0)">3×</button>
+        <button class="btn-action" id="spd10" style="padding:4px 9px; font-size:12px;" onclick="setSpeed(10.0)">10×</button>
+      </div>
       <button id="btnPlayPause" class="btn-action btn-accent" style="display:none;" onclick="togglePlayPause()">▶ Play</button>
       <button class="btn-action" onclick="newPuzzle()">🔀 New puzzle</button>
       <button id="btnZero" class="btn-action" onclick="zeroMagnets()">↺ Zero magnets</button>
@@ -396,6 +402,7 @@
       god_view: { x_sem_h: [], x_sem_v: [], is_lost: false, loss_s: null, first_lost_sem_h: null, first_lost_sem_v: null },
       machine_info: null,
       bestCentring: 0.0,
+      speed: 3.0,
       agent_text: ""
     };
 
@@ -567,6 +574,14 @@
       sendInit();
     }
 
+    function setSpeed(s) {
+      state.speed = s;
+      document.getElementById("spd1").className = s === 1.0 ? "btn-action btn-accent" : "btn-action";
+      document.getElementById("spd3").className = s === 3.0 ? "btn-action btn-accent" : "btn-action";
+      document.getElementById("spd10").className = s === 10.0 ? "btn-action btn-accent" : "btn-action";
+      sendWS({ type: "set_speed", speed: state.speed });
+    }
+
     function switchTab(t) {
       if (state.tab === t) return;
       state.tab = t;
@@ -583,6 +598,7 @@
       const isPlay = (t === "play");
       document.getElementById("cardCanvasH").style.display = isPlay ? "none" : "block";
       document.getElementById("boxShot").style.display = isPlay ? "none" : "inline-flex";
+      document.getElementById("speedButtonsGroup").style.display = isPlay ? "none" : "inline-flex";
       document.getElementById("btnPlayPause").style.display = isPlay ? "none" : "inline-flex";
       document.getElementById("btnZero").style.display = isPlay ? "inline-flex" : "none";
       document.getElementById("cardGeminiReasoning").style.display = (t === "gemini") ? "block" : "none";
@@ -602,9 +618,9 @@
         state.playing = true;
         updateUI(state.score.centring_all || 0);
         if (state.tab === "bayes") {
-          sendWS({ type: "start_bayes", seed: state.seed, speed: 3.0 });
+          sendWS({ type: "start_bayes", seed: state.seed, speed: state.speed });
         } else if (state.tab === "gemini") {
-          sendWS({ type: "start_gemini", seed: state.seed, speed: 3.0 });
+          sendWS({ type: "start_gemini", seed: state.seed, speed: state.speed });
         }
       }
     }
@@ -752,9 +768,8 @@
       }
 
       // Beam trajectory:
-      // Live in Play mode, and automatic at the end of Watch mode!
-      const shouldShowBeam = (state.tab === "play") || (state.done);
-      if (shouldShowBeam && state.god_view.x_sem_h && state.god_view.x_sem_h.length > 0) {
+      // Always drawn continuously after every shot in all tabs!
+      if (state.god_view.x_sem_h && state.god_view.x_sem_h.length > 0) {
         const xSem = plane === "h" ? state.god_view.x_sem_h : state.god_view.x_sem_v;
         const sigSem = minfo ? (plane === "h" ? minfo.sigma_sem_h : minfo.sigma_sem_v) : [];
         const isBeamLost = state.god_view.is_lost;
