@@ -16,6 +16,17 @@
 | Gemini 4 Carbon | 0.78 | 1/5 |
 | Gemini 4 Hydrogen | 0.73 | 0/5 |
 
+**Across seeds (Hydrogen, 5 trials each):**
+
+| Seed | Reference | Hydrogen |
+|---|---|---|
+| 42 | 1.00 | 0.73 |
+| 7 | 1.00 | 0.56 |
+| 2026 | 1.00 | 0.64 |
+| **All** | **1.00** | **0.64** (0/15 perfect) |
+
+Details: [notable_results/](notable_results/).
+
 The reference solver (`tasks/falsify/solution/solve.py`) knows only what the agent is told: it enumerates the instruction's formula grammar, prefers shorter formulas, and picks the most informative query per point. Both models mostly fail on `⊞`: they never probe a sum ≥ 256, probe it in a way where another operator hides the result, or explain the wraparound with a wrong rule.
 
 ## Run
