@@ -29,6 +29,14 @@ Details: [notable_results/](notable_results/).
 
 The reference solver (`tasks/falsify/solution/solve.py`) knows only what the agent is told: it enumerates the instruction's formula grammar, prefers shorter formulas, and picks the most informative query per point. Both models mostly fail on `⊞`: they never probe a sum ≥ 256, probe it in a way where another operator hides the result, or explain the wraparound with a wrong rule.
 
+## Reward integrity
+
+- **Baselines score 0.0** (seed 42): doing nothing, answering `"none"` everywhere, or committing familiar operators without experimenting.
+- **Stopping early scores 0** if no answers were written, since `/app/answer.json` starts as `{}`. Answers written before the stop count only if correct.
+- **The budget is enforced by the lab:** a single-threaded server, so retries and parallel requests can't bypass it. Malformed or unaffordable queries are refused for free. Evaluated queries are charged, even if they overflow.
+- **No hidden state leaks:** the true operators exist only in the lab and verifier images, and the puzzles appear only after the model is committed and the lab is locked.
+- **Grading:** any expression that reaches the target is accepted. A wrong `"none"` costs ½, and an expression given for an unsolvable puzzle scores 0.
+
 ## Run
 
 Requires Docker and `uv sync` in the repo root. From the repo root:
