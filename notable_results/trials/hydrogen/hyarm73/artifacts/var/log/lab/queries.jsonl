@@ -1,0 +1,14 @@
+{"expr": "13 ⊕ 6", "result": 20, "cost": 1, "budget_used": 1}
+{"expr": "13 ⊗ 6", "result": 77, "cost": 1, "budget_used": 2}
+{"expr": "13 ◇ 6", "result": 13, "cost": 1, "budget_used": 3}
+{"expr": "13 ▽ 6", "result": 7, "cost": 1, "budget_used": 4}
+{"expr": "13 △ 6", "result": 7, "cost": 1, "budget_used": 5}
+{"expr": "13 ⊘ 6", "result": 20, "cost": 1, "budget_used": 6}
+{"expr": "13 ⊠ 6", "result": 21, "cost": 1, "budget_used": 7}
+{"expr": "13 ⊛ 6", "result": 49, "cost": 1, "budget_used": 8}
+{"expr": "13 ⊞ 6", "result": 19, "cost": 1, "budget_used": 9}
+{"expr": "4 ⊘ 13", "result": -5, "cost": 1, "budget_used": 10}
+{"expr": "(300 ⊠ 503) ⊗ (61 ⊞ 90)", "result": 121856, "cost": 3, "budget_used": 13}
+{"expr": "(211 ◇ 827) ⊗ (4 ⊛ 13)", "result": 143070, "cost": 3, "budget_used": 16}
+{"expr": "4 ⊕ 13 ⊕ 100", "result": 119, "cost": 2, "budget_used": 18}
+{"expr": "(4 ▽ 13) △ 107", "result": 0, "cost": 2, "budget_used": 20}

@@ -1,0 +1,89 @@
+set,trial,puzzle,numbers,target,solvable,given,correct,false_none,false_solution,naive_reading,consistent_with_model,error,reference_solutions
+reference,PiibwEB,P1,4 7 8 6,122,True,((4 △ 7) ⊛ 8) ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+reference,PiibwEB,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+reference,PiibwEB,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+reference,PiibwEB,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+reference,PiibwEB,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+reference,PiibwEB,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+reference,PiibwEB,P7,8 4 8 7,189,True,8 ⊞ (4 ⊛ (8 ⊛ 7)),True,False,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+reference,PiibwEB,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+hydrogen,4M9jGPV,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+hydrogen,4M9jGPV,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+hydrogen,4M9jGPV,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+hydrogen,4M9jGPV,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+hydrogen,4M9jGPV,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+hydrogen,4M9jGPV,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+hydrogen,4M9jGPV,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+hydrogen,4M9jGPV,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+hydrogen,5AZjdXY,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+hydrogen,5AZjdXY,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+hydrogen,5AZjdXY,P3,8 3 8 7,259,True,none,False,True,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+hydrogen,5AZjdXY,P4,8 2 4 7,369,False,8 ⊛ ((2 ⊕ 4) ⊠ 7),False,False,True,False,True,,
+hydrogen,5AZjdXY,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+hydrogen,5AZjdXY,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+hydrogen,5AZjdXY,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+hydrogen,5AZjdXY,P8,7 8 9 8,188,True,7 ⊞ 8 ⊛ 9 ⊘ 8,False,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+hydrogen,QUW7rrM,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+hydrogen,QUW7rrM,P2,7 6 9 5,162,True,7 ▽ (6 ⊛ 9 ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+hydrogen,QUW7rrM,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+hydrogen,QUW7rrM,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+hydrogen,QUW7rrM,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+hydrogen,QUW7rrM,P6,6 4 5 7,186,True,6 ⊛ (4 ⊠ 5) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+hydrogen,QUW7rrM,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+hydrogen,QUW7rrM,P8,7 8 9 8,188,True,7 ⊗ (8 ⊕ 9 ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+hydrogen,hyarm73,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+hydrogen,hyarm73,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,False,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+hydrogen,hyarm73,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+hydrogen,hyarm73,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+hydrogen,hyarm73,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+hydrogen,hyarm73,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+hydrogen,hyarm73,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+hydrogen,hyarm73,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+hydrogen,v6JxQ6v,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+hydrogen,v6JxQ6v,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+hydrogen,v6JxQ6v,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+hydrogen,v6JxQ6v,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+hydrogen,v6JxQ6v,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+hydrogen,v6JxQ6v,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+hydrogen,v6JxQ6v,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+hydrogen,v6JxQ6v,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+carbon,6HpSKEk,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+carbon,6HpSKEk,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+carbon,6HpSKEk,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+carbon,6HpSKEk,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+carbon,6HpSKEk,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+carbon,6HpSKEk,P6,6 4 5 7,186,True,(6 ⊛ (4 ⊠ 5)) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+carbon,6HpSKEk,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+carbon,6HpSKEk,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+carbon,N2rHaxc,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+carbon,N2rHaxc,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+carbon,N2rHaxc,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+carbon,N2rHaxc,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+carbon,N2rHaxc,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+carbon,N2rHaxc,P6,6 4 5 7,186,True,6 ⊛ (4 ⊠ 5) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+carbon,N2rHaxc,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+carbon,N2rHaxc,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+carbon,NV4ZmDi,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+carbon,NV4ZmDi,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+carbon,NV4ZmDi,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+carbon,NV4ZmDi,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+carbon,NV4ZmDi,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+carbon,NV4ZmDi,P6,6 4 5 7,186,True,6 ⊛ (4 ⊠ 5) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+carbon,NV4ZmDi,P7,8 4 8 7,189,True,8 ⊞ (4 ⊛ (8 ⊛ 7)),True,False,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+carbon,NV4ZmDi,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+carbon,QxfCsTw,P1,4 7 8 6,122,True,4 ⊛ (7 ⊘ 8) ⊞ 6,False,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+carbon,QxfCsTw,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+carbon,QxfCsTw,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+carbon,QxfCsTw,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+carbon,QxfCsTw,P5,7 8 8 8,176,False,7 ⊛ ((8 ⊠ 8) △ 8),False,False,True,False,True,,
+carbon,QxfCsTw,P6,6 4 5 7,186,True,(6 ⊕ 4) ⊗ (5 ⊞ 7),False,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+carbon,QxfCsTw,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+carbon,QxfCsTw,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))
+carbon,VPQ5329,P1,4 7 8 6,122,True,4 △ 7 ⊛ 8 ⊘ 6,True,False,False,False,True,,4 △ 7 ⊛ 8 ⊘ 6
+carbon,VPQ5329,P2,7 6 9 5,162,True,7 ▽ ((6 ⊛ 9) ⊘ 5),True,False,False,False,True,,7 ▽ ((6 ⊛ 9) ⊘ 5)
+carbon,VPQ5329,P3,8 3 8 7,259,True,8 ◇ (3 ⊛ (8 ⊕ 7)),True,False,False,False,True,,8 ◇ (3 ⊛ (8 ⊕ 7))
+carbon,VPQ5329,P4,8 2 4 7,369,False,none,True,False,False,False,True,,
+carbon,VPQ5329,P5,7 8 8 8,176,False,none,True,False,False,False,True,,
+carbon,VPQ5329,P6,6 4 5 7,186,True,6 ⊛ (4 ⊠ 5) ⊠ 7,True,False,False,False,True,,(6 ⊛ (4 ⊠ 5)) ⊠ 7
+carbon,VPQ5329,P7,8 4 8 7,189,True,none,False,True,False,False,True,,8 ⊞ (4 ⊛ (8 ⊛ 7))
+carbon,VPQ5329,P8,7 8 9 8,188,True,7 ⊗ ((8 ⊕ 9) ⊕ 8),True,False,False,False,True,,7 ⊗ ((8 ⊕ 9) ⊕ 8) | 7 ⊗ (8 ⊕ (9 ⊕ 8))

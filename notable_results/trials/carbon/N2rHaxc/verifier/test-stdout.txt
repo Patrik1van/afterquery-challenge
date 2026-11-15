@@ -1,0 +1,1 @@
+{"reward": 0.8125, "solved": 7, "total": 8, "queries_used": 13, "budget_spent": 20, "model_committed": true, "model_operators_correct": 8, "answers_inconsistent_with_model": 0, "false_none": 1, "false_solution": 0, "naive_reading": 0, "answer_error": null}

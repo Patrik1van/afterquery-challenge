@@ -1,0 +1,13 @@
+{"expr": "38 ⊕ 7", "result": 46, "cost": 1, "budget_used": 1}
+{"expr": "38 ⊗ 7", "result": 265, "cost": 1, "budget_used": 2}
+{"expr": "38 ◇ 7", "result": 38, "cost": 1, "budget_used": 3}
+{"expr": "38 ▽ 7", "result": 31, "cost": 1, "budget_used": 4}
+{"expr": "38 ⊘ 7", "result": 69, "cost": 1, "budget_used": 5}
+{"expr": "38 ⊛ 7", "result": 87, "cost": 1, "budget_used": 6}
+{"expr": "38 ⊞ 7", "result": 45, "cost": 1, "budget_used": 7}
+{"expr": "38 ⊠ 7", "result": 47, "cost": 1, "budget_used": 8}
+{"expr": "38 △ 7", "result": 31, "cost": 1, "budget_used": 9}
+{"expr": "(601 ⊠ 721) ⊗ (14 ◇ 50)", "result": 66299, "cost": 3, "budget_used": 12}
+{"expr": "(12 ▽ 60) ⊛ (120 ⊕ 200)", "result": 103089, "cost": 3, "budget_used": 15}
+{"expr": "20 △ (410 ⊘ (181 ⊞ 319))", "result": 0, "cost": 3, "budget_used": 18}
+{"expr": "(61 ⊞ 147) ⊘ 537", "result": -121, "cost": 2, "budget_used": 20}

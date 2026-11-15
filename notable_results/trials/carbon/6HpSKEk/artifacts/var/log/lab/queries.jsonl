@@ -1,0 +1,14 @@
+{"expr": "19 ⊕ 5", "result": 25, "cost": 1, "budget_used": 1}
+{"expr": "19 ⊗ 5", "result": 94, "cost": 1, "budget_used": 2}
+{"expr": "19 ◇ 5", "result": 19, "cost": 1, "budget_used": 3}
+{"expr": "23 ▽ 4", "result": 19, "cost": 1, "budget_used": 4}
+{"expr": "23 ⊘ 4", "result": 42, "cost": 1, "budget_used": 5}
+{"expr": "23 ⊛ 4", "result": 39, "cost": 1, "budget_used": 6}
+{"expr": "23 ⊞ 4", "result": 27, "cost": 1, "budget_used": 7}
+{"expr": "23 ⊠ 4", "result": 29, "cost": 1, "budget_used": 8}
+{"expr": "23 △ 4", "result": 19, "cost": 1, "budget_used": 9}
+{"expr": "(4 ⊛ 7) ⊗ (29 ⊘ 42)", "result": 847, "cost": 3, "budget_used": 12}
+{"expr": "(6 ◇ 25) ⊕ 40", "result": 66, "cost": 2, "budget_used": 14}
+{"expr": "103 ▽ (14 ⊞ 125)", "result": 36, "cost": 2, "budget_used": 16}
+{"expr": "79 △ (83 ⊠ 125)", "result": 0, "cost": 2, "budget_used": 18}
+{"expr": "(43 ◇ 9) ⊠ 127", "result": 173, "cost": 2, "budget_used": 20}
