@@ -94,21 +94,27 @@ def format_state_payload(
     done: bool,
     agent_text: str = "",
     agent_stats: Optional[dict[str, Any]] = None,
+    sandbox: bool = False,
 ) -> dict[str, Any]:
     """Build unified WebSocket state payload."""
     score_details = evaluate_env(env)
     traj = get_env_true_trajectory(env)
     info = env.get_machine_info()
 
+    budget_val = None if sandbox else 60
+    shots_rem = None if sandbox else max(0, 60 - env._sim.shots_used)
+    is_done = False if sandbox else (done or env._submitted or (env._sim.shots_used >= 60))
+
     return {
         "type": "state",
         "mode": mode,
         "seed": seed,
         "shot": shot,
-        "budget": 60,
+        "budget": budget_val,
         "shots_used": env._sim.shots_used,
-        "shots_remaining": max(0, 60 - env._sim.shots_used),
-        "done": done or env._submitted or (env._sim.shots_used >= 60),
+        "shots_remaining": shots_rem,
+        "done": is_done,
+        "sandbox": sandbox,
         "theta_h": [float(x) for x in theta_h],
         "theta_v": [float(x) for x in theta_v],
         "obs_h": obs_h,
@@ -158,16 +164,17 @@ class SessionManager:
         self.ws = ws
         self.mode = "human"
         self.seed = 0
+        self.sandbox = False
         self.env: Optional[BeamlineEnv] = None
         self.speed = 1.0
         self.cancel_event = threading.Event()
         self.active_thread: Optional[threading.Thread] = None
         self.loop = asyncio.get_event_loop()
 
-    def reset_env(self, seed: int):
+    def reset_env(self, seed: int, budget: int = 60):
         self.seed = seed
         self.cancel_active_task()
-        self.env = BeamlineEnv(seed=seed, budget=60)
+        self.env = BeamlineEnv(seed=seed, budget=budget)
         return self.env
 
     def cancel_active_task(self):
@@ -223,7 +230,9 @@ async def websocket_endpoint(websocket: WebSocket):
                 session.mode = msg.get("mode", "human")
                 session.seed = int(msg.get("seed", 0))
                 session.speed = float(msg.get("speed", 1.0))
-                env = session.reset_env(session.seed)
+                session.sandbox = bool(msg.get("sandbox", False))
+                budget = 100000 if session.sandbox else 60
+                env = session.reset_env(session.seed, budget=budget)
 
                 payload = format_state_payload(
                     env=env,
@@ -235,11 +244,14 @@ async def websocket_endpoint(websocket: WebSocket):
                     obs_h=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_h],
                     obs_v=[{"ratio": o.ratio, "level": o.level} for o in env._sim.initial_result.obs_v],
                     done=False,
+                    sandbox=session.sandbox,
                 )
                 await session.send_state(payload)
 
             elif msg_type == "fire":
-                if session.env is None or session.env._submitted or session.env._sim.shots_used >= 60:
+                if session.env is None:
+                    continue
+                if not session.sandbox and (session.env._submitted or session.env._sim.shots_used >= 60):
                     continue
                 th_h = msg.get("theta_h", [0.0] * 10)
                 th_v = msg.get("theta_v", [0.0] * 12)
@@ -249,7 +261,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     await session.ws.send_text(json.dumps({"type": "error", "message": str(e)}))
                     continue
 
-                is_done = session.env._sim.shots_used >= 60
+                is_done = False if session.sandbox else (session.env._sim.shots_used >= 60)
                 payload = format_state_payload(
                     env=session.env,
                     mode="human",
@@ -260,6 +272,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     obs_h=obs["h"],
                     obs_v=obs["v"],
                     done=is_done,
+                    sandbox=session.sandbox,
                 )
                 await session.send_state(payload)
 

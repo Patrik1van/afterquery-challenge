@@ -3,74 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CERN TT20 Beam Steering — Live Interactive Demo</title>
+  <title>Steer the Beam — CERN TT20</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #111827;
-      --panel-bg: #151e32;
-      --border: #1f293d;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --primary: #3b82f6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --gold: #eab308;
-      --cyan: #06b6d4;
+      --bg: #0F1A2B;
+      --card-bg: #172740;
+      --panel-bg: #1e3252;
+      --border: #263b5c;
+      --text: #F4F1EA;
+      --text-muted: #8fa2be;
+      --accent: #F2994A;       /* Beam orange */
+      --cyan: #5CC8E6;         /* Secondary cyan */
+      --green: #27AE60;        /* Sensor balanced foil */
+      --danger: #FF5C5C;       /* Lost beam red */
+      --gold: #F2C94C;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .brand h1, .canvas-title, .side-title {
+      font-family: 'Space Grotesk', sans-serif;
     }
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
+      padding: 16px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
     }
-    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
     .brand-logo {
-      width: 32px; height: 32px; border-radius: 8px;
-      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #e07a22);
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 14px; font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 16px; font-family: 'Space Grotesk', sans-serif;
+      color: #fff; box-shadow: 0 4px 12px rgba(242, 153, 74, 0.3);
     }
-    .brand h1 { font-size: 15px; font-weight: 700; }
-    .brand p { font-size: 11px; color: var(--text-muted); }
+    .brand h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
+    .brand p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
     .ws-status {
       display: flex; align-items: center; gap: 6px;
-      font-size: 11px; font-family: 'JetBrains Mono', monospace;
-      padding: 4px 10px; border-radius: 9999px; background: rgba(16, 185, 129, 0.1);
-      color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2);
+      font-size: 12px; font-family: 'JetBrains Mono', monospace;
+      padding: 5px 12px; border-radius: 9999px; background: rgba(39, 174, 96, 0.15);
+      color: var(--green); border: 1px solid rgba(39, 174, 96, 0.3);
     }
     .ws-status.disconnected {
-      background: rgba(239, 68, 68, 0.1); color: var(--danger);
-      border-color: rgba(239, 68, 68, 0.2);
+      background: rgba(255, 92, 92, 0.15); color: var(--danger);
+      border-color: rgba(255, 92, 92, 0.3);
     }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 
+    /* Collapsible Info Boxes */
+    .collapsible-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 12px 28px 0 28px;
+      overflow: hidden;
+    }
+    .collapsible-header {
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      user-select: none;
+      background: rgba(255,255,255,0.02);
+    }
+    .collapsible-header:hover { background: rgba(255,255,255,0.04); }
+    .collapsible-content {
+      padding: 12px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .step-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent);
+      color: #fff; font-size: 12px; font-weight: 700; margin-right: 6px;
+    }
+    .step-title { font-weight: 600; color: var(--text); font-size: 13px; }
+    .step-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+    /* Controls Bar */
     .controls-bar {
       background: var(--card-bg);
+      border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 10px 20px;
+      padding: 12px 28px;
+      margin-top: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
     }
     .btn-group { display: flex; align-items: center; gap: 6px; }
     .label-badge { font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
@@ -78,9 +133,9 @@
       background: var(--panel-bg);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 6px 12px;
+      padding: 7px 14px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
@@ -89,185 +144,238 @@
       transition: all 0.15s ease;
       font-family: inherit;
     }
-    button:hover { background: #1e293b; border-color: #334155; }
+    button:hover { background: #243b61; border-color: #3b5682; }
     button.active {
-      background: #2563eb; border-color: #3b82f6; color: #fff;
+      background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
     }
     button.btn-primary {
-      background: #2563eb; border-color: #3b82f6; color: #fff; font-weight: 600;
+      background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
     }
-    button.btn-primary:hover { background: #1d4ed8; }
-    button.btn-success { background: #059669; border-color: #10b981; color: #fff; }
-    button.btn-danger { background: #dc2626; border-color: #ef4444; color: #fff; }
+    button.btn-primary:hover { background: #e07a22; }
+    button.btn-success { background: #219653; border-color: var(--green); color: #fff; }
+    button.btn-danger { background: #d32f2f; border-color: var(--danger); color: #fff; }
     button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* Submode Toggle: Sandbox vs Challenge */
+    .sandbox-toggle {
+      background: #111e33;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px;
+      display: inline-flex;
+      gap: 2px;
+    }
+    .sandbox-toggle button {
+      border: none; background: transparent; padding: 5px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;
+    }
+    .sandbox-toggle button.active {
+      background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
 
     .toggle-god {
       display: flex; align-items: center; gap: 8px;
-      background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3);
-      color: var(--gold); padding: 5px 10px; border-radius: 6px; cursor: pointer;
+      background: rgba(242, 201, 76, 0.1); border: 1px solid rgba(242, 201, 76, 0.3);
+      color: var(--gold); padding: 6px 12px; border-radius: 6px; cursor: pointer;
       font-size: 12px; font-weight: 600; user-select: none;
     }
     .toggle-god input { cursor: pointer; accent-color: var(--gold); }
 
-
-    .kpi-container { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    /* KPI Cards */
+    .kpi-container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .kpi-card {
       background: var(--panel-bg);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 5px 12px;
+      border-radius: 8px;
+      padding: 6px 14px;
       display: flex;
       flex-direction: column;
-      min-width: 80px;
+      min-width: 90px;
     }
     .kpi-title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
     .kpi-value {
-      font-size: 15px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+      font-size: 16px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
       color: #fff; display: flex; align-items: baseline; gap: 4px;
     }
+    .kpi-value .sub { font-size: 11px; color: var(--text-muted); font-weight: 400; }
 
     .main-grid {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr 390px;
       flex: 1;
       gap: 16px;
-      padding: 16px 20px;
+      padding: 16px 28px;
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1240px) {
       .main-grid { grid-template-columns: 1fr; }
     }
 
-    .viz-col { display: flex; flex-direction: column; gap: 14px; }
+
+    .viz-col { display: flex; flex-direction: column; gap: 16px; }
     .canvas-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 14px 18px;
       position: relative;
     }
     .canvas-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
     }
     .canvas-title {
-      font-size: 13px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px;
     }
     .plane-tag {
-      font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px;
+      font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.04em;
     }
-    .plane-h { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .plane-v { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .plane-h { background: rgba(92, 200, 230, 0.15); color: var(--cyan); border: 1px solid rgba(92, 200, 230, 0.3); }
+    .plane-v { background: rgba(242, 153, 74, 0.15); color: var(--accent); border: 1px solid rgba(242, 153, 74, 0.3); }
     canvas {
       width: 100%;
       height: 200px;
       display: block;
-      background: #060911;
-      border: 1px solid #1a2333;
+      background: #091220;
+      border: 1px solid #1a2a44;
       border-radius: 6px;
     }
 
     .legend {
-      display: flex; align-items: center; gap: 14px; margin-top: 6px;
-      font-size: 11px; color: var(--text-muted); flex-wrap: wrap;
+      display: flex; align-items: center; gap: 16px; margin-top: 6px;
+      font-size: 12px; color: var(--text-muted); flex-wrap: wrap;
     }
     .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-color { width: 10px; height: 6px; border-radius: 2px; }
+    .legend-color { width: 12px; height: 8px; border-radius: 2px; }
 
     /* Sliders Grid */
     .sliders-panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px 16px;
+      border-radius: 10px;
+      padding: 14px 18px;
     }
     .sliders-header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;
     }
-    .slider-tabs { display: flex; gap: 4px; }
+    .slider-tabs { display: flex; gap: 6px; }
     .sliders-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 8px 14px;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 10px 16px;
     }
     .slider-row {
-      display: grid;
-      grid-template-columns: 48px 1fr 65px;
-      align-items: center;
-      gap: 8px;
-      background: #0d1322;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: #111f36;
       border: 1px solid var(--border);
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .slider-row.pending {
+      border-color: var(--accent);
+      background: rgba(242, 153, 74, 0.08);
+    }
+    .slider-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
     }
     .slider-name {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; color: #fff;
+    }
+    .pending-badge {
+      font-size: 10px; font-weight: 600; color: var(--accent);
+      background: rgba(242, 153, 74, 0.15); padding: 1px 6px; border-radius: 4px;
+      display: none;
+    }
+    .slider-row.pending .pending-badge {
+      display: inline-block;
     }
     .slider-val {
       font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: right;
       color: var(--cyan);
     }
+    .slider-row.pending .slider-val {
+      color: var(--accent);
+      font-weight: 700;
+    }
     input[type=range] {
       width: 100%;
-      height: 4px;
-      background: #1f293d;
-      border-radius: 2px;
+      height: 5px;
+      background: #243b61;
+      border-radius: 3px;
       outline: none;
       cursor: pointer;
-      accent-color: #3b82f6;
+      accent-color: var(--accent);
     }
 
     /* Side Panel */
-    .side-col { display: flex; flex-direction: column; gap: 14px; }
+    .side-col { display: flex; flex-direction: column; gap: 16px; }
     .side-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
+      border-radius: 10px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
     .side-title {
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.05em; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.04em; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;
     }
     .transcript-box {
-      height: 320px;
+      height: 260px;
       overflow-y: auto;
-      background: #060911;
-      border: 1px solid #1a2333;
+      background: #091220;
+      border: 1px solid #1a2a44;
       border-radius: 6px;
-      padding: 10px;
+      padding: 12px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       line-height: 1.5;
       color: #cbd5e1;
       white-space: pre-wrap;
     }
-    .scoreboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
+
+    /* Scoreboard 3-Card Layout */
+    .scoreboard-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
-    .scoreboard-table th {
-      text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border);
-      color: var(--text-muted); font-weight: 600;
+    .sb-card {
+      background: #111f36;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
     }
-    .scoreboard-table td {
-      padding: 6px 8px; border-bottom: 1px solid #141d30;
+    .sb-card.active-sb {
+      border-color: var(--accent);
+      background: rgba(242, 153, 74, 0.06);
     }
-    .scoreboard-table tr:last-child td { border-bottom: none; }
-    .highlight-score { color: var(--gold); font-weight: 700; }
+    .sb-name { font-size: 12px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; color: var(--text); }
+    .sb-score { font-size: 20px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
+    .sb-sub { font-size: 10px; color: var(--text-muted); }
+    .sb-table-mini {
+      width: 100%; border-collapse: collapse; font-size: 10px; font-family: 'JetBrains Mono', monospace; margin-top: 4px;
+    }
+    .sb-table-mini td { padding: 3px 2px; border-top: 1px solid #1e3252; }
   </style>
 </head>
 <body>
   <header>
     <div class="brand">
-      <div class="brand-logo">TT20</div>
+      <div class="brand-logo">CERN</div>
       <div>
-        <h1>CERN TT20 Beam Steering — RL &amp; Inference Arena</h1>
-        <p>Proton Transfer Line (SPS &rarr; North Area) | 22 Correctors &bull; 21 SEM Monitors</p>
+        <h1>Steer the Beam</h1>
+        <p>CERN fires protons down a 900 m tube. 22 magnets aim them. Can you thread the beam better than an AI?</p>
       </div>
     </div>
     <div style="display:flex; align-items:center; gap:12px;">
@@ -278,13 +386,46 @@
     </div>
   </header>
 
+  <!-- Collapsible How to play -->
+  <div class="collapsible-box">
+    <div class="collapsible-header" onclick="toggleCollapsible('howToPlayContent', 'howToPlayArrow')">
+      <span>📖 <strong>How to play</strong> (3 simple steps)</span>
+      <span id="howToPlayArrow">▼</span>
+    </div>
+    <div id="howToPlayContent" class="collapsible-content">
+      <div class="steps-row">
+        <div class="step-card">
+          <span class="step-num">1</span>
+          <span class="step-title">Move the magnet sliders</span>
+          <div class="step-desc">Adjust the 22 steering dipole magnets (10 horizontal, 12 vertical) to guide the proton beam.</div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">2</span>
+          <span class="step-title">Fire a shot &amp; watch sensors</span>
+          <div class="step-desc">Sensors show cyan/green bars when beam passes. If it hits the pipe, a red ✗ marks where it died!</div>
+        </div>
+        <div class="step-card">
+          <span class="step-num">3</span>
+          <span class="step-title">Get centred in 60 shots</span>
+          <div class="step-desc">Keep the beam centered through all 21 sensors to reach &ge; 95% centring and beat the AI!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="controls-bar">
-    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
       <div class="btn-group">
         <span class="label-badge">Mode</span>
-        <button id="btnModeHuman" class="active" onclick="setMode('human')">&#128100; Human</button>
-        <button id="btnModeBayes" onclick="setMode('bayes')">&#129504; Bayes (Live)</button>
-        <button id="btnModeGemini" onclick="setMode('gemini')">&#129302; Gemini (Replay)</button>
+        <button id="btnModeHuman" class="active" onclick="setMode('human')">🧑 You</button>
+        <button id="btnModeBayes" onclick="setMode('bayes')">🧠 Algorithm (Bayes)</button>
+        <button id="btnModeGemini" onclick="setMode('gemini')">🤖 Gemini AI (replay)</button>
+      </div>
+
+      <!-- Sandbox vs Challenge toggle for You mode -->
+      <div id="sandboxToggleGroup" class="sandbox-toggle">
+        <button id="btnSubSandbox" onclick="setSubmode('sandbox')">🎮 Sandbox</button>
+        <button id="btnSubChallenge" class="active" onclick="setSubmode('challenge')">🏆 Challenge</button>
       </div>
 
       <div class="btn-group">
@@ -296,9 +437,9 @@
         <button class="btn-seed" data-seed="4" onclick="setSeed(4)">4</button>
       </div>
 
-      <label class="toggle-god" title="Reveal true trajectory and beam envelopes">
+      <label class="toggle-god" title="Reveal true beam trajectory ±3σ">
         <input type="checkbox" id="chkGodView" onchange="toggleGodView()">
-        <span>&#128065; God View</span>
+        <span>👁 Show true beam</span>
       </label>
 
       <div id="speedControlGroup" style="display:none; align-items:center; gap:8px;">
@@ -310,53 +451,54 @@
 
     <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
       <div class="kpi-container">
-        <div class="kpi-card">
-          <span class="kpi-title">Shot</span>
-          <span class="kpi-value"><span id="lblShot">0</span><span class="sub">/60</span></span>
+        <div class="kpi-card" id="cardShot">
+          <span class="kpi-title">Shots</span>
+          <span class="kpi-value"><span id="lblShot">0</span><span class="sub" id="lblBudgetSub">/60</span></span>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Reward</span>
+        <div class="kpi-card" id="cardCentring">
+          <span class="kpi-title">Centring</span>
+          <span class="kpi-value"><span id="lblCentring">0.0%</span><span class="sub">(goal 95%)</span></span>
+        </div>
+        <div class="kpi-card" id="cardReward">
+          <span class="kpi-title">Score</span>
           <span class="kpi-value" id="lblReward" style="color:var(--gold);">0.000</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-title">Mean Ŝ</span>
-          <span class="kpi-value"><span id="lblSf">0.000</span><span class="sub" title="Solved at >= 0.95">&ge;0.95</span></span>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-title">Status</span>
-          <span class="kpi-value" id="lblStatus" style="font-size:12px; color:var(--success);">Ready</span>
+          <span class="kpi-title">Beam Status</span>
+          <span class="kpi-value" id="lblStatus" style="font-size:12px; color:var(--green);">Ready</span>
         </div>
       </div>
 
       <div class="btn-group" id="actionButtons">
-        <button id="btnFire" class="btn-primary" onclick="fireShot()">&#128293; Fire Shot</button>
-        <button id="btnSubmit" class="btn-success" onclick="submitEpisode()">&#127937; Submit</button>
-        <button id="btnPlayPause" class="btn-primary" style="display:none;" onclick="togglePlayPause()">&#9654; Play</button>
-        <button id="btnReset" onclick="resetEpisode()">&#8635; Reset</button>
+        <button id="btnFire" class="btn-primary" onclick="fireShot()">🔥 Fire Shot</button>
+        <button id="btnSubmit" class="btn-success" onclick="submitEpisode()">🏁 Submit</button>
+        <button id="btnPlayPause" class="btn-primary" style="display:none;" onclick="togglePlayPause()">▶ Play</button>
+        <button id="btnReset" onclick="resetEpisode()">↺ Reset</button>
       </div>
     </div>
   </div>
 
+
   <div class="main-grid">
     <div class="viz-col">
-      <!-- Horizontal Canvas Panel -->
+      <!-- Horizontal Canvas Panel: Left-right view -->
       <div class="canvas-panel">
         <div class="canvas-header">
           <div class="canvas-title">
-            <span class="plane-tag plane-h">H-PLANE</span>
-            <span>Horizontal Beamline &amp; SEM Monitors (10 Correctors, 11 SEMs)</span>
+            <span class="plane-tag plane-h">LEFT–RIGHT VIEW</span>
+            <span>Horizontal Plane (10 Magnets, 11 Sensors)</span>
           </div>
           <span id="hStatusBadge" style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">Initial</span>
         </div>
         <canvas id="canvasH" width="1000" height="190"></canvas>
       </div>
 
-      <!-- Vertical Canvas Panel -->
+      <!-- Vertical Canvas Panel: Up-down view -->
       <div class="canvas-panel">
         <div class="canvas-header">
           <div class="canvas-title">
-            <span class="plane-tag plane-v">V-PLANE</span>
-            <span>Vertical Beamline &amp; SEM Monitors (12 Correctors, 10 SEMs)</span>
+            <span class="plane-tag plane-v">UP–DOWN VIEW</span>
+            <span>Vertical Plane (12 Magnets, 10 Sensors)</span>
           </div>
           <span id="vStatusBadge" style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">Initial</span>
         </div>
@@ -365,32 +507,45 @@
 
       <!-- Legend -->
       <div class="legend">
-        <div class="legend-item"><div class="legend-color" style="background:#ef4444;"></div><span>Aperture (&plusmn;a)</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:#06b6d4;"></div><span>Foil 1 (Left/Top)</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:#10b981;"></div><span>Foil 2 (Right/Bottom)</span></div>
-        <div class="legend-item"><span style="color:#ef4444; font-weight:900;">&#10007;</span><span>Lost Beam (Downstream)</span></div>
-        <div class="legend-item"><div class="legend-color" style="background:#eab308;"></div><span>True Trajectory &plusmn;3&sigma; (God View / End)</span></div>
-        <div class="legend-item"><span style="color:#94a3b8; font-weight:600;">&#9650;</span><span>Correctors</span></div>
+        <div class="legend-item"><div class="legend-color" style="background:var(--danger);"></div><span>Vacuum Pipe (&plusmn;a)</span></div>
+        <div class="legend-item"><div class="legend-color" style="background:var(--cyan);"></div><span>Sensor Left/Top</span></div>
+        <div class="legend-item"><div class="legend-color" style="background:var(--green);"></div><span>Sensor Right/Bottom</span></div>
+        <div class="legend-item" title="beam lost before here"><span style="color:var(--danger); font-weight:900;">&#10007;</span><span>Lost beam (beam lost before here)</span></div>
+        <div class="legend-item"><div class="legend-color" style="background:var(--gold);"></div><span>True Beam &plusmn;3&sigma; (Show true beam / End)</span></div>
+        <div class="legend-item"><span style="color:var(--text-muted); font-weight:700;">&#9650;</span><span>Steering Magnets</span></div>
       </div>
 
-      <!-- Corrector Sliders Panel -->
+      <!-- Magnet Sliders Panel -->
       <div class="sliders-panel">
         <div class="sliders-header">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <span style="font-size:13px; font-weight:700;">22 Corrector Sliders (&plusmn;0.450 mrad)</span>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <span style="font-size:14px; font-weight:700;">22 Steering Magnets (&plusmn;0.45 mrad)</span>
             <div class="slider-tabs">
-              <button id="tabH" class="active" onclick="switchSliderTab('h')" style="padding:4px 8px; font-size:11px;">H-Correctors (10)</button>
-              <button id="tabV" onclick="switchSliderTab('v')" style="padding:4px 8px; font-size:11px;">V-Correctors (12)</button>
+              <button id="tabH" class="active" onclick="switchSliderTab('h')" style="padding:4px 10px; font-size:12px;">Left–Right Magnets (H1–H10)</button>
+              <button id="tabV" onclick="switchSliderTab('v')" style="padding:4px 10px; font-size:12px;">Up–Down Magnets (V1–V12)</button>
             </div>
           </div>
           <div style="display:flex; gap:6px;">
-            <button onclick="zeroSliders()" style="padding:3px 8px; font-size:11px;">Zero Plane</button>
-            <button onclick="zeroAllSliders()" style="padding:3px 8px; font-size:11px;">Zero All (22)</button>
+            <button onclick="zeroSliders()" style="padding:4px 10px; font-size:11px;">Zero Plane</button>
+            <button onclick="zeroAllSliders()" style="padding:4px 10px; font-size:11px;">Zero All (22)</button>
           </div>
         </div>
 
         <div id="slidersGridH" class="sliders-grid"></div>
         <div id="slidersGridV" class="sliders-grid" style="display:none;"></div>
+      </div>
+
+      <!-- Collapsible Details for physicists -->
+      <div class="collapsible-box" style="margin: 0;">
+        <div class="collapsible-header" onclick="toggleCollapsible('physicistDetailsContent', 'physicistDetailsArrow')">
+          <span>🔬 <strong>Details for physicists &amp; accelerator operators</strong></span>
+          <span id="physicistDetailsArrow">▶</span>
+        </div>
+        <div id="physicistDetailsContent" class="collapsible-content" style="display:none;">
+          <p><strong>CERN TT20 Transfer Line:</strong> Extracts 400 GeV/c slow-extracted protons from the Super Proton Synchrotron (SPS) to North Area fixed targets over 900 meters.</p>
+          <p style="margin-top:6px;"><strong>Beam Optics &amp; Measurements:</strong> Linear uncoupled FODO optics with 10 horizontal / 12 vertical corrector dipoles and 11 horizontal / 10 vertical Secondary Emission Monitors (SEMs). Each SEM reports noisy foil ratios $r = I_1 / (I_1 + I_2)$ and intensity levels $\ell = (I_1 + I_2) / I_{\max}$ under uniform background noise $\nu = 0.25$. Collision checks are evaluated on checkpoints along rectangular vacuum chambers.</p>
+          <p style="margin-top:6px;"><strong>Algorithm &amp; Reference:</strong> Based on Adam Štafa's CERN report (2026). The Bayesian reference runs a 100,000-particle filter with roughening 0.2 and Thompson-posterior-mean action interpolation.</p>
+        </div>
       </div>
     </div>
 
@@ -398,30 +553,38 @@
     <div class="side-col">
       <div class="side-card">
         <div class="side-title">
-          <span id="sideTitle">Side Panel</span>
-          <span id="sideSub" style="font-size:10px; font-family:'JetBrains Mono',monospace;">Telemetrics</span>
+          <span id="sideTitle">AI Reasoning &amp; Telemetry</span>
+          <span id="sideSub" style="font-size:10px; font-family:'JetBrains Mono',monospace;">Logs</span>
         </div>
-        <div id="transcriptBox" class="transcript-box">Connecting to server...</div>
+        <div id="transcriptBox" class="transcript-box">Ready. Pick a mode or move magnets to start!</div>
       </div>
 
+      <!-- Scoreboard Cards -->
       <div class="side-card">
         <div class="side-title">
           <span>Scoreboard</span>
-          <span style="font-size:10px; color:var(--gold);">Target: &ge;0.95</span>
+          <span style="font-size:11px; color:var(--accent);">Goal: 95% Centring</span>
         </div>
-        <table class="scoreboard-table">
-          <thead>
-            <tr>
-              <th>Seed</th>
-              <th>Human</th>
-              <th>Bayes Ref</th>
-              <th>Gemini 3.8</th>
-            </tr>
-          </thead>
-          <tbody id="scoreboardBody">
-            <!-- Populated dynamically -->
-          </tbody>
-        </table>
+        <div class="scoreboard-cards">
+          <div class="sb-card" id="sbCardYou">
+            <span class="sb-name">🧑 You</span>
+            <span class="sb-score" id="sbScoreYou">—</span>
+            <span class="sb-sub" id="sbSubYou">Best: —</span>
+            <table class="sb-table-mini" id="sbMiniYou"></table>
+          </div>
+          <div class="sb-card" id="sbCardBayes">
+            <span class="sb-name">🧠 Algorithm</span>
+            <span class="sb-score">0.504</span>
+            <span class="sb-sub">Bayes Ref (~0.50)</span>
+            <table class="sb-table-mini" id="sbMiniBayes"></table>
+          </div>
+          <div class="sb-card" id="sbCardGemini">
+            <span class="sb-name">🤖 Gemini AI</span>
+            <span class="sb-score">0.259</span>
+            <span class="sb-sub">3.8 Flash (Pilot)</span>
+            <table class="sb-table-mini" id="sbMiniGemini"></table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -430,6 +593,7 @@
     // Application State
     const state = {
       mode: 'human',        // 'human' | 'bayes' | 'gemini'
+      submode: 'challenge', // 'challenge' | 'sandbox'
       seed: 0,
       shot: 0,
       budget: 60,
@@ -439,6 +603,8 @@
       playing: false,
       theta_h: new Array(10).fill(0),
       theta_v: new Array(12).fill(0),
+      applied_h: new Array(10).fill(0),
+      applied_v: new Array(12).fill(0),
       obs_h: [],
       obs_v: [],
       score: { reward: 0, s0: 0, sf: 0, progress: 0, solved: false, is_lost: false, loss_s: null },
@@ -455,6 +621,16 @@
 
     let ws = null;
     let wsReconnectTimer = null;
+    let sandboxTimer = null;
+
+    function toggleCollapsible(contentId, arrowId) {
+      const el = document.getElementById(contentId);
+      const arr = document.getElementById(arrowId);
+      if (!el) return;
+      const isHidden = el.style.display === 'none';
+      el.style.display = isHidden ? 'block' : 'none';
+      if (arr) arr.textContent = isHidden ? '▼' : '▶';
+    }
 
     function connectWS() {
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -465,8 +641,13 @@
         document.getElementById('wsStatus').className = 'ws-status';
         document.getElementById('wsStatusText').textContent = 'Connected';
         if (wsReconnectTimer) { clearTimeout(wsReconnectTimer); wsReconnectTimer = null; }
-        // Request init state
-        sendWS({ type: 'init', mode: state.mode, seed: state.seed, speed: state.speed });
+        sendWS({
+          type: 'init',
+          mode: state.mode,
+          seed: state.seed,
+          speed: state.speed,
+          sandbox: (state.mode === 'human' && state.submode === 'sandbox')
+        });
       };
 
       ws.onmessage = (event) => {
@@ -504,7 +685,7 @@
 
     function handleServerState(data) {
       state.shot = data.shot;
-      state.budget = data.budget || 60;
+      state.budget = data.budget;
       state.done = data.done;
       state.theta_h = data.theta_h || state.theta_h;
       state.theta_v = data.theta_v || state.theta_v;
@@ -514,6 +695,11 @@
       state.god_view = data.god_view || state.god_view;
       if (data.machine_info) state.machine_info = data.machine_info;
 
+      if (state.mode === 'human' && !data.sandbox) {
+        state.applied_h = [...state.theta_h];
+        state.applied_v = [...state.theta_v];
+      }
+
       // Update transcript
       if (data.agent_text) {
         state.transcript = data.agent_text;
@@ -522,8 +708,8 @@
         box.scrollTop = box.scrollHeight;
       }
 
-      // Record score if done
-      if (state.done) {
+      // Record score if done and in challenge mode
+      if (state.done && state.submode !== 'sandbox') {
         if (!state.scores[state.mode]) state.scores[state.mode] = {};
         state.scores[state.mode][state.seed] = state.score.reward;
         renderScoreboard();
@@ -534,13 +720,19 @@
     }
 
     function updateUI() {
+      const isSandbox = (state.mode === 'human' && state.submode === 'sandbox');
+
       document.getElementById('lblShot').textContent = state.shot;
-      document.getElementById('lblReward').textContent = state.score.reward.toFixed(3);
-      document.getElementById('lblSf').textContent = state.score.sf.toFixed(3);
+      document.getElementById('lblBudgetSub').textContent = isSandbox ? ' (unlimited)' : '/60';
+      document.getElementById('lblReward').textContent = isSandbox ? 'unscored' : state.score.reward.toFixed(3);
+      document.getElementById('lblCentring').textContent = (state.score.sf * 100).toFixed(1) + '%';
 
       const statusEl = document.getElementById('lblStatus');
-      if (state.score.solved) {
-        statusEl.textContent = 'SOLVED!';
+      if (isSandbox) {
+        statusEl.textContent = 'Sandbox: unlimited, unscored';
+        statusEl.style.color = 'var(--cyan)';
+      } else if (state.score.solved) {
+        statusEl.textContent = 'GOAL MET (≥95%)!';
         statusEl.style.color = 'var(--gold)';
       } else if (state.done) {
         statusEl.textContent = 'Completed';
@@ -550,20 +742,22 @@
         statusEl.style.color = 'var(--danger)';
       } else {
         statusEl.textContent = state.shot > 0 ? 'Beam Alive' : 'Ready';
-        statusEl.style.color = 'var(--success)';
+        statusEl.style.color = 'var(--green)';
       }
 
       // Sync slider UI values
       syncSliders();
+      markPendingSliders();
 
       // Button states
-      const isAuto = state.mode !== 'human';
-      document.getElementById('btnFire').style.display = isAuto ? 'none' : 'inline-flex';
-      document.getElementById('btnSubmit').style.display = isAuto ? 'none' : 'inline-flex';
-      document.getElementById('btnPlayPause').style.display = isAuto ? 'inline-flex' : 'none';
-      document.getElementById('speedControlGroup').style.display = isAuto ? 'flex' : 'none';
+      const isYou = state.mode === 'human';
+      document.getElementById('sandboxToggleGroup').style.display = isYou ? 'inline-flex' : 'none';
+      document.getElementById('btnFire').style.display = (isYou && !isSandbox) ? 'inline-flex' : 'none';
+      document.getElementById('btnSubmit').style.display = (isYou && !isSandbox) ? 'inline-flex' : 'none';
+      document.getElementById('btnPlayPause').style.display = !isYou ? 'inline-flex' : 'none';
+      document.getElementById('speedControlGroup').style.display = !isYou ? 'flex' : 'none';
 
-      if (!isAuto) {
+      if (isYou) {
         document.getElementById('btnFire').disabled = state.done;
         document.getElementById('btnSubmit').disabled = state.done;
       } else {
@@ -593,16 +787,38 @@
       }
     }
 
+    function markPendingSliders() {
+      const isChallenge = (state.mode === 'human' && state.submode === 'challenge' && !state.done);
+      for (let i = 0; i < 10; i++) {
+        const row = document.getElementById(`row_h_${i}`);
+        if (row) {
+          const diff = Math.abs((state.theta_h[i] || 0) - (state.applied_h[i] || 0));
+          if (isChallenge && diff > 1e-5) row.classList.add('pending'); else row.classList.remove('pending');
+        }
+      }
+      for (let i = 0; i < 12; i++) {
+        const row = document.getElementById(`row_v_${i}`);
+        if (row) {
+          const diff = Math.abs((state.theta_v[i] || 0) - (state.applied_v[i] || 0));
+          if (isChallenge && diff > 1e-5) row.classList.add('pending'); else row.classList.remove('pending');
+        }
+      }
+    }
+
     function initSliders() {
       const gridH = document.getElementById('slidersGridH');
       gridH.innerHTML = '';
       for (let i = 0; i < 10; i++) {
         const row = document.createElement('div');
         row.className = 'slider-row';
+        row.id = `row_h_${i}`;
         row.innerHTML = `
-          <span class="slider-name">CH${String(i+1).padStart(2, '0')}</span>
+          <div class="slider-row-top">
+            <span class="slider-name">Magnet H${i+1}</span>
+            <span class="pending-badge">takes effect on next shot</span>
+            <span class="slider-val" id="val_h_${i}">+0.00 mrad</span>
+          </div>
           <input type="range" id="sl_h_${i}" min="-0.45" max="0.45" step="0.005" value="0" oninput="onSliderChange('h', ${i}, this.value)">
-          <span class="slider-val" id="val_h_${i}">+0.00 mrad</span>
         `;
         gridH.appendChild(row);
       }
@@ -612,24 +828,39 @@
       for (let i = 0; i < 12; i++) {
         const row = document.createElement('div');
         row.className = 'slider-row';
+        row.id = `row_v_${i}`;
         row.innerHTML = `
-          <span class="slider-name">CV${String(i+1).padStart(2, '0')}</span>
+          <div class="slider-row-top">
+            <span class="slider-name">Magnet V${i+1}</span>
+            <span class="pending-badge">takes effect on next shot</span>
+            <span class="slider-val" id="val_v_${i}">+0.00 mrad</span>
+          </div>
           <input type="range" id="sl_v_${i}" min="-0.45" max="0.45" step="0.005" value="0" oninput="onSliderChange('v', ${i}, this.value)">
-          <span class="slider-val" id="val_v_${i}">+0.00 mrad</span>
         `;
         gridV.appendChild(row);
       }
     }
 
     function onSliderChange(plane, index, valueMrad) {
-      if (state.mode !== 'human' || state.done) return;
+      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
       const rad = parseFloat(valueMrad) / 1000;
       if (plane === 'h') {
         state.theta_h[index] = rad;
-        document.getElementById(`val_h_${index}`).textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
+        const text = document.getElementById(`val_h_${index}`);
+        if (text) text.textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
       } else {
         state.theta_v[index] = rad;
-        document.getElementById(`val_v_${index}`).textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
+        const text = document.getElementById(`val_v_${index}`);
+        if (text) text.textContent = (parseFloat(valueMrad) >= 0 ? '+' : '') + parseFloat(valueMrad).toFixed(2) + ' mrad';
+      }
+
+      if (state.submode === 'sandbox') {
+        if (sandboxTimer) clearTimeout(sandboxTimer);
+        sandboxTimer = setTimeout(() => {
+          sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
+        }, 100);
+      } else {
+        markPendingSliders();
       }
     }
 
@@ -642,20 +873,38 @@
     }
 
     function zeroSliders() {
-      if (state.mode !== 'human' || state.done) return;
+      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
       if (state.activeSliderTab === 'h') {
         state.theta_h.fill(0);
       } else {
         state.theta_v.fill(0);
       }
       syncSliders();
+      if (state.submode === 'sandbox') {
+        sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
+      } else {
+        markPendingSliders();
+      }
     }
 
     function zeroAllSliders() {
-      if (state.mode !== 'human' || state.done) return;
+      if (state.mode !== 'human' || (state.submode === 'challenge' && state.done)) return;
       state.theta_h.fill(0);
       state.theta_v.fill(0);
       syncSliders();
+      if (state.submode === 'sandbox') {
+        sendWS({ type: 'fire', sandbox: true, theta_h: state.theta_h, theta_v: state.theta_v });
+      } else {
+        markPendingSliders();
+      }
+    }
+
+    function setSubmode(sub) {
+      state.submode = sub;
+      document.getElementById('btnSubSandbox').className = sub === 'sandbox' ? 'active' : '';
+      document.getElementById('btnSubChallenge').className = sub === 'challenge' ? 'active' : '';
+      logTranscript(`Switched You mode to: ${sub.toUpperCase()}`);
+      resetEpisode();
     }
 
     function setMode(newMode) {
@@ -667,15 +916,15 @@
       document.getElementById('btnModeGemini').className = newMode === 'gemini' ? 'active' : '';
 
       document.getElementById('sideTitle').textContent =
-        newMode === 'gemini' ? "Gemini's Reasoning Trace" : (newMode === 'bayes' ? "Bayes Telemetrics" : "Operator Log");
+        newMode === 'gemini' ? "Gemini AI Reasoning Trace" : (newMode === 'bayes' ? "Bayes Algorithm Telemetry" : "Operator Actions & Telemetry");
 
       const speedVal = newMode === 'gemini' ? 2.0 : 1.0;
       state.speed = speedVal;
       document.getElementById('speedSlider').value = speedVal;
       document.getElementById('speedVal').textContent = `${speedVal.toFixed(1)}/s`;
 
-      logTranscript(`Switched mode to: ${newMode.toUpperCase()}`);
-      sendWS({ type: 'init', mode: state.mode, seed: state.seed, speed: state.speed });
+      logTranscript(`Mode: ${newMode === 'human' ? 'YOU' : (newMode === 'bayes' ? 'BAYES ALGORITHM' : 'GEMINI AI')}`);
+      resetEpisode();
     }
 
     function setSeed(s) {
@@ -684,8 +933,8 @@
       document.querySelectorAll('.btn-seed').forEach(btn => {
         btn.className = parseInt(btn.dataset.seed) === state.seed ? 'btn-seed active' : 'btn-seed';
       });
-      logTranscript(`Reset episode on SEED ${state.seed}`);
-      sendWS({ type: 'init', mode: state.mode, seed: state.seed, speed: state.speed });
+      logTranscript(`Set puzzle SEED to ${state.seed}`);
+      resetEpisode();
     }
 
     function toggleGodView() {
@@ -701,7 +950,10 @@
 
     function fireShot() {
       if (state.mode !== 'human' || state.done) return;
-      sendWS({ type: 'fire', theta_h: state.theta_h, theta_v: state.theta_v });
+      state.applied_h = [...state.theta_h];
+      state.applied_v = [...state.theta_v];
+      markPendingSliders();
+      sendWS({ type: 'fire', sandbox: false, theta_h: state.theta_h, theta_v: state.theta_v });
     }
 
     function submitEpisode() {
@@ -726,7 +978,13 @@
 
     function resetEpisode() {
       state.playing = false;
-      sendWS({ type: 'init', mode: state.mode, seed: state.seed, speed: state.speed });
+      sendWS({
+        type: 'init',
+        mode: state.mode,
+        seed: state.seed,
+        speed: state.speed,
+        sandbox: (state.mode === 'human' && state.submode === 'sandbox')
+      });
     }
 
     function logTranscript(msg) {
@@ -737,22 +995,41 @@
     }
 
     function renderScoreboard() {
-      const tbody = document.getElementById('scoreboardBody');
-      tbody.innerHTML = '';
-      for (let s = 0; s < 5; s++) {
-        const row = document.createElement('tr');
-        const hVal = state.scores.human[s] !== undefined ? state.scores.human[s].toFixed(3) : '—';
-        const bVal = state.scores.bayes[s] !== undefined ? state.scores.bayes[s].toFixed(3) : '—';
-        const gVal = state.scores.gemini[s] !== undefined ? state.scores.gemini[s].toFixed(3) : '—';
+      // You card
+      const uScores = Object.values(state.scores.human);
+      const uAvg = uScores.length > 0 ? (uScores.reduce((a, b) => a + b, 0) / uScores.length).toFixed(3) : '—';
+      const curUScore = state.scores.human[state.seed] !== undefined ? state.scores.human[state.seed].toFixed(3) : '—';
+      document.getElementById('sbScoreYou').textContent = curUScore;
+      document.getElementById('sbSubYou').textContent = `Avg: ${uAvg} (${uScores.length}/5)`;
+      document.getElementById('sbCardYou').className = state.mode === 'human' ? 'sb-card active-sb' : 'sb-card';
 
-        row.innerHTML = `
-          <td><strong>Seed ${s}</strong></td>
-          <td class="${state.mode === 'human' && state.seed === s ? 'highlight-score' : ''}">${hVal}</td>
-          <td class="${state.mode === 'bayes' && state.seed === s ? 'highlight-score' : ''}">${bVal}</td>
-          <td class="${state.mode === 'gemini' && state.seed === s ? 'highlight-score' : ''}">${gVal}</td>
-        `;
-        tbody.appendChild(row);
+      let uRows = '';
+      for (let s = 0; s < 5; s++) {
+        const val = state.scores.human[s] !== undefined ? state.scores.human[s].toFixed(3) : '—';
+        const isCur = (state.mode === 'human' && state.seed === s);
+        uRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
       }
+      document.getElementById('sbMiniYou').innerHTML = uRows;
+
+      // Bayes card
+      document.getElementById('sbCardBayes').className = state.mode === 'bayes' ? 'sb-card active-sb' : 'sb-card';
+      let bRows = '';
+      for (let s = 0; s < 5; s++) {
+        const val = state.scores.bayes[s] !== undefined ? state.scores.bayes[s].toFixed(3) : '—';
+        const isCur = (state.mode === 'bayes' && state.seed === s);
+        bRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
+      }
+      document.getElementById('sbMiniBayes').innerHTML = bRows;
+
+      // Gemini card
+      document.getElementById('sbCardGemini').className = state.mode === 'gemini' ? 'sb-card active-sb' : 'sb-card';
+      let gRows = '';
+      for (let s = 0; s < 5; s++) {
+        const val = state.scores.gemini[s] !== undefined ? state.scores.gemini[s].toFixed(3) : '—';
+        const isCur = (state.mode === 'gemini' && state.seed === s);
+        gRows += `<tr><td style="color:${isCur ? 'var(--accent)' : 'var(--text-muted)'}; font-weight:${isCur ? '700' : '400'};">Seed ${s}</td><td style="text-align:right; color:${isCur ? 'var(--accent)' : 'inherit'}; font-weight:${isCur ? '700' : '400'};">${val}</td></tr>`;
+      }
+      document.getElementById('sbMiniGemini').innerHTML = gRows;
     }
 
     function renderCanvases() {
@@ -771,8 +1048,8 @@
 
       const padL = 45;
       const padR = 25;
-      const padT = 16;
-      const padB = 22;
+      const padT = 18;
+      const padB = 24;
       const plotW = w - padL - padR;
       const plotH = h - padT - padB;
 
@@ -780,10 +1057,10 @@
       const toY = (yMm) => padT + plotH * (0.5 - yMm / 80.0);
 
       // Background grid
-      ctx.strokeStyle = '#141d30';
+      ctx.strokeStyle = '#1b2b46';
       ctx.lineWidth = 1;
       ctx.font = '9px "JetBrains Mono", monospace';
-      ctx.fillStyle = '#64748b';
+      ctx.fillStyle = '#6d84a3';
 
       for (let s = 0; s <= 900; s += 100) {
         const x = toX(s);
@@ -792,7 +1069,7 @@
         ctx.lineTo(x, padT + plotH);
         ctx.stroke();
         ctx.textAlign = 'center';
-        ctx.fillText(`${s}m`, x, h - 6);
+        ctx.fillText(`${s}m`, x, h - 7);
       }
 
       for (let y = -30; y <= 30; y += 15) {
@@ -805,7 +1082,8 @@
         ctx.fillText(`${y > 0 ? '+' : ''}${y}`, padL - 6, py + 3);
       }
 
-      ctx.strokeStyle = '#28354f';
+      // Centerline y=0
+      ctx.strokeStyle = '#2c4366';
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
       ctx.moveTo(padL, toY(0));
@@ -817,8 +1095,9 @@
       const sAp = minfo ? minfo.s_ap : [];
       const aAp = minfo ? (plane === 'h' ? minfo.a_h_ap : minfo.a_v_ap) : [];
 
+      // Vacuum pipe wall outline (+- a)
       if (sAp.length > 0 && aAp.length > 0) {
-        ctx.strokeStyle = '#ef4444';
+        ctx.strokeStyle = '#FF5C5C';
         ctx.lineWidth = 1.8;
 
         ctx.beginPath();
@@ -838,18 +1117,20 @@
         ctx.stroke();
       }
 
+      // Magnet locations (s_corr)
       const sCorr = minfo ? (plane === 'h' ? minfo.s_corr_h : minfo.s_corr_v) : [];
-      ctx.fillStyle = '#64748b';
+      ctx.fillStyle = '#8fa2be';
       for (let j = 0; j < sCorr.length; j++) {
         const cx = toX(sCorr[j]);
         ctx.beginPath();
         ctx.moveTo(cx, padT + 2);
-        ctx.lineTo(cx - 3, padT - 5);
-        ctx.lineTo(cx + 3, padT - 5);
+        ctx.lineTo(cx - 3, padT - 6);
+        ctx.lineTo(cx + 3, padT - 6);
         ctx.closePath();
         ctx.fill();
       }
 
+      // Sensors (SEMs) with foil readings as bars
       const sSem = minfo ? (plane === 'h' ? minfo.s_sem_h : minfo.s_sem_v) : [];
       const obsList = plane === 'h' ? state.obs_h : state.obs_v;
       const firstLost = plane === 'h' ? state.god_view.first_lost_sem_h : state.god_view.first_lost_sem_v;
@@ -859,7 +1140,8 @@
         const obs = obsList[i] || { ratio: 0.5, level: 0 };
         const isLostHere = (firstLost !== null && firstLost !== undefined && i >= firstLost);
 
-        ctx.strokeStyle = '#334155';
+        // Sensor vertical slot line
+        ctx.strokeStyle = '#324769';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(mx, padT + 4);
@@ -877,14 +1159,14 @@
         const y0 = toY(0);
 
         if (!isLostHere) {
-          ctx.fillStyle = '#06b6d4';
+          ctx.fillStyle = '#5CC8E6'; // Cyan Left/Top
           ctx.fillRect(mx - 4, y0, 3, bar1H);
-          ctx.fillStyle = '#10b981';
+          ctx.fillStyle = '#27AE60'; // Green Right/Bottom
           ctx.fillRect(mx + 1, y0 - bar2H, 3, bar2H);
         }
 
         if (isLostHere) {
-          ctx.strokeStyle = '#ef4444';
+          ctx.strokeStyle = '#FF5C5C';
           ctx.lineWidth = 2.5;
           ctx.beginPath();
           ctx.moveTo(mx - 6, y0 - 8);
@@ -892,12 +1174,21 @@
           ctx.moveTo(mx - 6, y0 + 8);
           ctx.lineTo(mx + 6, y0 - 8);
           ctx.stroke();
+
+          // Tooltip/label at first lost sensor: "beam lost before here"
+          if (i === firstLost) {
+            ctx.fillStyle = '#FF5C5C';
+            ctx.font = 'bold 9px "Space Grotesk", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('beam lost before here', mx, toY(34));
+          }
         }
 
-        ctx.fillStyle = isLostHere ? '#ef4444' : '#94a3b8';
+        // Sensor label: S1..S11
+        ctx.fillStyle = isLostHere ? '#FF5C5C' : '#8fa2be';
         ctx.font = '8px "JetBrains Mono", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText(`M${i+1}`, mx, padT + plotH + 10);
+        ctx.fillText(`S${i+1}`, mx, padT + plotH + 11);
       }
 
       // True Trajectory +- 3sigma (God View toggle or Game Over)
@@ -922,7 +1213,7 @@
         }
 
         if (points.length > 1) {
-          ctx.fillStyle = 'rgba(234, 179, 8, 0.2)';
+          ctx.fillStyle = 'rgba(242, 153, 74, 0.2)';
           ctx.beginPath();
           for (let i = 0; i < points.length; i++) {
             const px = toX(points[i].s);
@@ -937,8 +1228,8 @@
           ctx.closePath();
           ctx.fill();
 
-          ctx.strokeStyle = '#eab308';
-          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#F2994A';
+          ctx.lineWidth = 2.2;
           ctx.beginPath();
           for (let i = 0; i < points.length; i++) {
             const px = toX(points[i].s);
@@ -950,7 +1241,7 @@
           if (isBeamLost && lossS) {
             const lx = toX(lossS);
             const ly = toY(points[points.length - 1].x);
-            ctx.fillStyle = '#ef4444';
+            ctx.fillStyle = '#FF5C5C';
             ctx.beginPath();
             ctx.arc(lx, ly, 5, 0, Math.PI * 2);
             ctx.fill();
@@ -958,10 +1249,10 @@
             ctx.lineWidth = 1.5;
             ctx.stroke();
 
-            ctx.fillStyle = '#ef4444';
-            ctx.font = 'bold 9px "JetBrains Mono", monospace';
+            ctx.fillStyle = '#FF5C5C';
+            ctx.font = 'bold 9px "Space Grotesk", sans-serif';
             ctx.textAlign = 'left';
-            ctx.fillText(`LOSS @ ${lossS.toFixed(0)}m`, lx + 7, ly + 3);
+            ctx.fillText(`BEAM LOST @ ${lossS.toFixed(0)}m`, lx + 7, ly + 3);
           }
         }
       }
