@@ -8,6 +8,21 @@ sees only noisy split-foil monitor readings. It has to **thread the beam through
 The physics and the reference algorithm follow Adam Štafa's CERN report *"Algorithms for
 Steering the CERN TT20 Transfer Line"* (2026), see `docs/tt20_report.md`.
 
+## Live Interactive Demo
+
+Try the live interactive demo deployed publicly on Modal:
+👉 **[https://kvakerik--tt20-beam-steering-webapp-fastapi-app.us-east.modal.run](https://kvakerik--tt20-beam-steering-webapp-fastapi-app.us-east.modal.run)**
+
+- **Human Mode:** Move the 22 corrector dipole sliders, fire shots, and try to thread and center the proton beam.
+- **Bayes Mode:** Watch the live honest reference particle filter (`BayesAgent`, 100,000 particles) solve the line in real time against `BeamlineEnv(seed)`.
+- **Gemini Replay:** Replay recorded OpenCode + Gemini 3.8 Flash benchmark episodes with synchronized reasoning trace transcript in the side panel.
+- **God View:** Toggle to inspect the true beam trajectory $\pm 3\sigma$ and collision loss points (revealed at game end or on toggle).
+
+Run locally:
+```bash
+python -m webapp.server  # serves at http://localhost:8000
+```
+
 ## Why this is hard (and fair)
 
 - **Partial observability.** Each monitor reports only a foil ratio and an intensity level,
