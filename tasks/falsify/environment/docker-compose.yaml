@@ -9,8 +9,7 @@ services:
     build:
       context: ./lab
     environment:
-      # Unset: the fixed puzzles in lab/puzzles.json. Set: a generated puzzle set.
-      FALSIFY_SEED: ${FALSIFY_SEED:-}
+      FALSIFY_SEED: ${FALSIFY_SEED:-42}
       FALSIFY_DIFFICULTY: ${FALSIFY_DIFFICULTY:-3}
     expose:
       - "8000"

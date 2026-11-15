@@ -41,7 +41,7 @@ uv run harbor run -p tasks/falsify -a oracle -e docker   # reference → 1.0
 uv run harbor run -p tasks/falsify -a nop -e docker      # do nothing → 0.0
 ```
 
-Without `FALSIFY_SEED`, the lab poses the fixed puzzles in `tasks/falsify/environment/lab/puzzles.json`. With `FALSIFY_SEED=N`, it generates a puzzle set from that seed. The verifier computes solvability by brute force, so every puzzle set is graded the same way.
+The lab generates its puzzles from `FALSIFY_SEED` (default 42, the set behind the reported results); set `FALSIFY_SEED=N` for another puzzle set. The verifier computes solvability by brute force, so every puzzle set is graded the same way.
 
 ## Files
 

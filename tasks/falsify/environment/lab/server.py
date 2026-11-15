@@ -20,7 +20,7 @@ BUDGET = int(os.environ.get("LAB_BUDGET", "20"))
 QUERY_LOG = os.environ.get("LAB_QUERY_LOG", "/var/log/lab/queries.jsonl")
 MODEL_LOG = os.environ.get("LAB_MODEL_LOG", "/var/log/lab/model.json")
 PUZZLES_LOG = os.environ.get("LAB_PUZZLES_LOG", "/var/log/lab/puzzles.json")
-SEED = os.environ.get("FALSIFY_SEED", "")
+SEED = int(os.environ.get("FALSIFY_SEED") or 42)
 DIFFICULTY = int(os.environ.get("FALSIFY_DIFFICULTY") or 3)
 PORT = int(os.environ.get("LAB_PORT", "8000"))
 
@@ -284,7 +284,6 @@ if __name__ == "__main__":
     open(QUERY_LOG, "a").close()
     with open(MODEL_LOG, "w", encoding="utf-8") as f:
         f.write("null")
-    _puzzles = (generate(SEMANTICS, int(SEED), DIFFICULTY) if SEED
-                else json.loads(Path(__file__).with_name("puzzles.json").read_text(encoding="utf-8")))
+    _puzzles = generate(SEMANTICS, SEED, DIFFICULTY)
     Path(PUZZLES_LOG).write_text(json.dumps(_puzzles, ensure_ascii=False))
     HTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
